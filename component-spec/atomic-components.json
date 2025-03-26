@@ -1,0 +1,493 @@
+{
+  "components": [
+    {
+      "name": "Button",
+      "description": "A customizable button component with multiple variants, sizes, and icon options",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": ["PRIMARY", "SECONDARY", "TERTIARY"],
+          "defaultValue": "PRIMARY",
+          "description": "Determines the button's appearance style"
+        },
+        "size": {
+          "type": "enum",
+          "options": ["SMALL", "MEDIUM", "LARGE"],
+          "defaultValue": "MEDIUM",
+          "description": "Controls the button's size"
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Text to display on the button"
+        },
+        "disabled": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether the button is disabled"
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether the button takes up 100% of container width"
+        },
+        "loading": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Shows loading spinner when true"
+        },
+        "customClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the button"
+        },
+        "customLabelClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the button label"
+        },
+        "leftIconProps": {
+          "type": "object",
+          "description": "Configuration for an icon to display on the left of the label",
+          "subProps": {
+            "imageUrl": {
+              "type": "string",
+              "description": "URL of the icon image"
+            },
+            "width": {
+              "type": "number",
+              "description": "Width of the icon"
+            },
+            "height": {
+              "type": "number",
+              "description": "Height of the icon"
+            }
+          }
+        },
+        "rightIconProps": {
+          "type": "object",
+          "description": "Configuration for an icon to display on the right of the label",
+          "subProps": {
+            "imageUrl": {
+              "type": "string",
+              "description": "URL of the icon image"
+            },
+            "width": {
+              "type": "number",
+              "description": "Width of the icon"
+            },
+            "height": {
+              "type": "number",
+              "description": "Height of the icon"
+            }
+          }
+        },
+        "centerIconProps": {
+          "type": "object",
+          "description": "Configuration for an icon to display next to the label",
+          "subProps": {
+            "imageUrl": {
+              "type": "string",
+              "description": "URL of the icon image"
+            },
+            "width": {
+              "type": "number",
+              "description": "Width of the icon"
+            },
+            "height": {
+              "type": "number",
+              "description": "Height of the icon"
+            }
+          }
+        },
+        "onClick": {
+          "type": "function",
+          "description": "Function to call when button is clicked"
+        }
+      },
+      "styles": {
+        "PRIMARY": {
+          "backgroundColor": "var(--dls-brand-primary-color-500)",
+          "color": "white",
+          "hoverBackgroundColor": "var(--dls-brand-primary-color-400)"
+        },
+        "SECONDARY": {
+          "backgroundColor": "#ffffff",
+          "color": "var(--dls-brand-primary-color-500)",
+          "hoverBackgroundColor": "var(--dls-brand-primary-color-100)"
+        },
+        "TERTIARY": {
+          "backgroundColor": "transparent",
+          "color": "var(--dls-brand-primary-color-500)",
+          "hoverColor": "var(--dls-brand-primary-color-400)",
+          "border": "none"
+        },
+        "SMALL": {
+          "height": "32px",
+          "padding": "6px 16px",
+          "fontSize": "12px"
+        },
+        "MEDIUM": {
+          "height": "40px",
+          "padding": "11px 24px",
+          "fontSize": "14px"
+        },
+        "LARGE": {
+          "height": "48px",
+          "padding": "15px 24px",
+          "fontSize": "18px"
+        }
+      }
+    },
+    {
+      "name": "Typography",
+      "description": "A text component with various predefined styles and variants",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "X_SMALL",
+            "TAG_REGULAR",
+            "TAG_BOLD",
+            "CTA_LABEL_SMALL",
+            "CTA_LABEL_BIG",
+            "BODY_BASE_LIGHT",
+            "BODY_BASE_REGULAR",
+            "BODY_BASE_BOLD",
+            "SUBHEADING_LIGHT",
+            "SUBHEADING_REGULAR",
+            "SUBHEADING_BOLD",
+            "HEADING_SMALL_REGULAR",
+            "HEADING_SMALL_BOLD",
+            "HEADING_MEDIUM_REGULAR",
+            "HEADING_MEDIUM_BOLD",
+            "HEADING_LARGE_REGULAR",
+            "HEADING_LARGE_BOLD",
+            "HEADING_XLARGE_REGULAR",
+            "HEADING_XLARGE_BOLD",
+            "HEADING_2XLARGE_REGULAR",
+            "HEADING_2XLARGE_BOLD",
+            "HEADING_3XLARGE_REGULAR",
+            "HEADING_3XLARGE_BOLD"
+          ],
+          "defaultValue": "BODY_BASE_REGULAR",
+          "description": "Predefined typography style variant"
+        },
+        "size": {
+          "type": "enum",
+          "options": [
+            "X_SMALL",
+            "TAG_REGULAR",
+            "TAG_BOLD",
+            "CTA_LABEL_SMALL",
+            "CTA_LABEL_BIG",
+            "BODY_BASE_LIGHT",
+            "BODY_BASE_REGULAR",
+            "BODY_BASE_BOLD",
+            "SUBHEADING_LIGHT",
+            "SUBHEADING_REGULAR",
+            "SUBHEADING_BOLD",
+            "HEADING_SMALL_REGULAR",
+            "HEADING_SMALL_BOLD",
+            "HEADING_MEDIUM_REGULAR",
+            "HEADING_MEDIUM_BOLD",
+            "HEADING_LARGE_REGULAR",
+            "HEADING_LARGE_BOLD",
+            "HEADING_XLARGE_REGULAR",
+            "HEADING_XLARGE_BOLD",
+            "HEADING_2XLARGE_REGULAR",
+            "HEADING_2XLARGE_BOLD",
+            "HEADING_3XLARGE_REGULAR",
+            "HEADING_3XLARGE_BOLD"
+          ],
+          "description": "Optional size override, defaults to variant"
+        },
+        "color": {
+          "type": "enum",
+          "options": [
+            "TEXT_PRIMARY",
+            "TEXT_SECONDARY",
+            "TEXT_HELPER",
+            "TEXT_PLACEHOLDER",
+            "TEXT_DISABLED",
+            "TEXT_INVERSE",
+            "TEXT_BRAND",
+            "TEXT_ERROR"
+          ],
+          "description": "Text color variant"
+        },
+        "headingLevel": {
+          "type": "enum",
+          "options": [1, 2, 3, 4, 5, 6],
+          "description": "HTML heading level (h1-h6) when appropriate"
+        },
+        "customClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply"
+        },
+        "children": {
+          "type": "string",
+          "required": true,
+          "description": "Text content to display"
+        },
+        "style": {
+          "type": "object",
+          "description": "Additional inline styles to apply"
+        }
+      },
+      "variantStyles": {
+        "mobile": {
+          "X_SMALL": {
+            "fontSize": "var(--dls-font-size-x-small)",
+            "fontWeight": "var(--dls-font-weight-x-small)",
+            "letterSpacing": "var(--dls-letter-spacing-x-small)"
+          },
+          "TAG_REGULAR": {
+            "fontSize": "var(--dls-font-size-tag-regular)",
+            "fontWeight": "var(--dls-font-weight-tag-regular)",
+            "lineHeight": "var(--dls-line-height-135)",
+            "letterSpacing": "var(--dls-letter-spacing-tag-regular)"
+          },
+          "TAG_BOLD": {
+            "fontSize": "var(--dls-font-size-tag-bold)",
+            "fontWeight": "var(--dls-font-weight-tag-bold)",
+            "lineHeight": "var(--dls-line-height-135)",
+            "letterSpacing": "var(--dls-letter-spacing-tag-bold)"
+          },
+          "CTA_LABEL_SMALL": {
+            "fontSize": "var(--dls-font-size-cta-label-sm)",
+            "fontWeight": "var(--dls-font-weight-cta-label-sm)",
+            "lineHeight": "var(--dls-line-height-125)",
+            "letterSpacing": "var(--dls-letter-spacing-cta-label-sm)"
+          },
+          "CTA_LABEL_BIG": {
+            "fontSize": "var(--dls-font-size-cta-label-lg)",
+            "fontWeight": "var(--dls-font-weight-cta-label-lg)",
+            "lineHeight": "var(--dls-line-height-125)",
+            "letterSpacing": "var(--dls-letter-spacing-cta-label-lg)"
+          },
+          "BODY_BASE_REGULAR": {
+            "fontSize": "var(--dls-font-size-body-base-regular)",
+            "fontWeight": "var(--dls-font-weight-body-base-regular)",
+            "lineHeight": "var(--dls-line-height-135)"
+          },
+          "BODY_BASE_LIGHT": {
+            "fontSize": "var(--dls-font-size-body-base-light)",
+            "fontWeight": "var(--dls-font-weight-body-base-light)",
+            "lineHeight": "var(--dls-line-height-135)"
+          },
+          "BODY_BASE_BOLD": {
+            "fontSize": "var(--dls-font-size-body-base-bold)",
+            "fontWeight": "var(--dls-font-weight-body-base-bold)",
+            "lineHeight": "var(--dls-line-height-135)"
+          }
+        },
+        "desktop": {
+          "X_SMALL": {
+            "fontSize": "var(--dls-desktop-font-size-x-small)"
+          },
+          "TAG_REGULAR": {
+            "fontSize": "var(--dls-desktop-font-size-tag-regular)",
+            "letterSpacing": "var(--dls-desktop-letter-spacing-tag-regular)"
+          },
+          "TAG_BOLD": {
+            "fontSize": "var(--dls-desktop-font-size-tag-bold)",
+            "letterSpacing": "var(--dls-desktop-letter-spacing-tag-bold)"
+          },
+          "CTA_LABEL_SMALL": {
+            "fontSize": "var(--dls-desktop-font-size-cta-label-sm)",
+            "letterSpacing": "var(--dls-desktop-letter-spacing-cta-label-sm)"
+          },
+          "CTA_LABEL_BIG": {
+            "fontSize": "var(--dls-desktop-font-size-cta-label-lg)",
+            "letterSpacing": "var(--dls-desktop-letter-spacing-cta-label-lg)"
+          }
+        }
+      },
+      "colorStyles": {
+        "TEXT_PRIMARY": {
+          "color": "var(--dls-text-primary)"
+        },
+        "TEXT_SECONDARY": {
+          "color": "var(--dls-text-secondary)"
+        },
+        "TEXT_HELPER": {
+          "color": "var(--dls-text-helper)"
+        },
+        "TEXT_PLACEHOLDER": {
+          "color": "var(--dls-text-placeholder)"
+        },
+        "TEXT_DISABLED": {
+          "color": "var(--dls-text-disabled)"
+        },
+        "TEXT_INVERSE": {
+          "color": "var(--dls-text-inverse)"
+        },
+        "TEXT_BRAND": {
+          "color": "var(--dls-text-brand)"
+        },
+        "TEXT_ERROR": {
+          "color": "var(--dls-text-error)"
+        }
+      }
+    },
+    {
+      "name": "OptimizedImage",
+      "description": "An image component that automatically optimizes images based on device type and viewport size",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "source": {
+          "type": "string",
+          "required": true,
+          "description": "URL of the image to display"
+        },
+        "aspectWidth": {
+          "type": "string|number",
+          "description": "Width for aspect ratio of the image"
+        },
+        "aspectHeight": {
+          "type": "string|number",
+          "description": "Height for aspect ratio of the image"
+        },
+        "desktopViewWidth": {
+          "type": "enum",
+          "options": ["FULL", "HALF", "THIRD", "SMALL", "TINY"],
+          "defaultValue": "FULL",
+          "description": "Size variant for desktop screens"
+        },
+        "mobileViewWidth": {
+          "type": "enum",
+          "options": ["FULL", "HALF", "THIRD", "SMALL", "TINY"],
+          "defaultValue": "FULL",
+          "description": "Size variant for mobile screens"
+        },
+        "altText": {
+          "type": "string",
+          "defaultValue": "",
+          "description": "Alternative text for accessibility"
+        },
+        "loading": {
+          "type": "enum",
+          "options": ["lazy", "eager"],
+          "defaultValue": "lazy",
+          "description": "Browser loading strategy"
+        },
+        "customClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the image"
+        },
+        "onImageClick": {
+          "type": "function",
+          "description": "Function to call when image is clicked"
+        }
+      },
+      "sizeVariants": {
+        "desktop": {
+          "FULL": { "width": 1080 },
+          "HALF": { "width": 800 },
+          "THIRD": { "width": 500 },
+          "SMALL": { "width": 150 },
+          "TINY": { "width": 50 }
+        },
+        "mobile": {
+          "FULL": { "width": 800 },
+          "HALF": { "width": 500 },
+          "THIRD": { "width": 300 },
+          "SMALL": { "width": 150 },
+          "TINY": { "width": 50 }
+        }
+      }
+    },
+    {
+      "name": "OptimizedVideo",
+      "description": "A video component with optimized loading and playback features including autoplay management based on viewport visibility",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "state": {
+          "type": "object",
+          "required": true,
+          "description": "Configuration object for the video player",
+          "subProps": {
+            "source": {
+              "type": "string",
+              "description": "URL of the video file"
+            },
+            "autoplay": {
+              "type": "boolean",
+              "defaultValue": false,
+              "description": "Whether the video should autoplay when in view"
+            },
+            "muted": {
+              "type": "boolean",
+              "defaultValue": true,
+              "description": "Whether the video is muted"
+            },
+            "loop": {
+              "type": "boolean",
+              "defaultValue": false,
+              "description": "Whether the video should loop"
+            },
+            "playsInline": {
+              "type": "boolean",
+              "defaultValue": false,
+              "description": "Whether the video plays inline on mobile devices"
+            },
+            "controls": {
+              "type": "boolean",
+              "defaultValue": false,
+              "description": "Whether to show video controls"
+            },
+            "preload": {
+              "type": "enum",
+              "options": ["none", "metadata", "auto"],
+              "defaultValue": "metadata",
+              "description": "Browser preload strategy"
+            },
+            "height": {
+              "type": "string|number",
+              "description": "Height of the video"
+            },
+            "width": {
+              "type": "string|number",
+              "description": "Width of the video"
+            },
+            "customClassName": {
+              "type": "string",
+              "description": "Additional CSS class to apply to the video"
+            },
+            "type": {
+              "type": "string",
+              "defaultValue": "video/mp4",
+              "description": "MIME type of the video"
+            },
+            "posterImage": {
+              "type": "string",
+              "description": "URL of the image to display before the video loads"
+            },
+            "disablePictureInPicture": {
+              "type": "boolean",
+              "defaultValue": false,
+              "description": "Whether to disable picture-in-picture mode"
+            }
+          }
+        }
+      },
+      "features": {
+        "autoPlayManagement": {
+          "description": "Automatically pauses video when scrolled out of view, resumes when scrolled back into view",
+          "intersectionThreshold": 0.2
+        },
+        "hlsSupport": {
+          "description": "Automatically detects and supports HLS (.m3u8) video streams using hls.js when needed"
+        },
+        "optimizedPosterImage": {
+          "description": "Automatically optimizes poster images using the same optimization as OptimizedImage"
+        }
+      }
+    }
+  ]
+}

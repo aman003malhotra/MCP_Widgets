@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "widgets": [
+    {
+      "name": "MediaWithList",
+      "description": "A component displaying media alongside a list of items with actions",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaWithList widget",
+          "required": ["media", "items", "tickIcon", "aspectRatio"],
+          "properties": {
+            "media": {
+              "$ref": "./commonWidgets/media.json",
+              "description": "Media content to display"
+            },
+            "aspectRatio": {
+              "type": "number",
+              "description": "Aspect ratio for the media display",
+              "default": 1
+            },
+            "tickIcon": {
+              "type": "string",
+              "description": "URL for the tick/check icon displayed next to list items"
+            },
+            "items": {
+              "type": "array",
+              "description": "Array of list items to display alongside the media",
+              "items": {
+                "type": "object",
+                "required": ["label", "actions", "slug"],
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "description": "Text label for the list item"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "URL slug for the list item link"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "description": "Actions to perform when the item is clicked",
+                    "items": {
+                      "allOf": [
+                        {
+                          "$ref": "./commonWidgets/actions.json"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

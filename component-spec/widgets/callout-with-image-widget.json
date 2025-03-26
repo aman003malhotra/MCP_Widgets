@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Callout With Image Widget",
+  "description": "A callout component that displays text with an optional image and different color variants",
+  "type": "object",
+  "category": "content",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "../common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "URL of the image to display"
+        },
+        "altText": {
+          "type": "string",
+          "defaultValue": "icon",
+          "description": "Alternative text for the image"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text content to display in the callout"
+        },
+        "variant": {
+          "type": "string",
+          "enum": ["INFO", "WARNING", "DANGER", "BRAND"],
+          "description": "Visual variant of the callout. INFO: Green background with darker green text. WARNING: Yellow background with darker yellow text. DANGER: Red background with darker red text. BRAND: Brand primary color background with darker brand primary color text.",
+          "default": "INFO"
+        }
+      }
+    }
+  },
+  "required": ["widgetData"]
+}

@@ -1,0 +1,115 @@
+{
+  "widgets": [
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "name": "MediaWithInfoCards",
+      "description": "A carousel of cards displaying media with testimonials or information content",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaWithInfoCards widget",
+          "required": ["items", "carouselConfig"],
+          "subProps": {
+            "items": {
+              "type": "array",
+              "description": "Array of media cards with information content",
+              "items": {
+                "type": "object",
+                "required": ["media", "content"],
+                "properties": {
+                  "media": {
+                    "$ref": "./commonWidgets/media.json"
+                  },
+                  "content": {
+                    "type": "object",
+                    "description": "Text content to display with the media",
+                    "required": ["info", "bottomContent"],
+                    "properties": {
+                      "info": {
+                        "type": "string",
+                        "description": "Main informational text or testimonial"
+                      },
+                      "bottomContent": {
+                        "type": "object",
+                        "description": "Attribution and identification details",
+                        "required": ["name", "designation", "number"],
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the person attributed to the content"
+                          },
+                          "designation": {
+                            "type": "string",
+                            "description": "Title or designation of the person"
+                          },
+                          "number": {
+                            "type": "string",
+                            "description": "Numerical identifier or sequence number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "carouselConfig": {
+              "type": "object",
+              "description": "Configuration options for the carousel behavior",
+              "subProps": {
+                "aspectRatio": {
+                  "type": "number",
+                  "description": "Aspect ratio for the media items in the carousel",
+                  "defaultValue": 1
+                },
+                "showDots": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation dots",
+                  "defaultValue": false
+                },
+                "showArrows": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation arrows"
+                },
+                "slidesToShow": {
+                  "type": "number",
+                  "description": "Number of slides to show at once on mobile"
+                },
+                "slidesToShowDesktop": {
+                  "type": "number",
+                  "description": "Number of slides to show at once on desktop"
+                },
+                "autoSlide": {
+                  "type": "boolean",
+                  "description": "Whether the carousel should automatically slide"
+                },
+                "autoSlideInterval": {
+                  "type": "number",
+                  "description": "Time interval between auto slides in milliseconds"
+                },
+                "infinite": {
+                  "type": "boolean",
+                  "description": "Whether the carousel should loop infinitely"
+                },
+                "slidesToScroll": {
+                  "type": "number",
+                  "description": "Number of slides to scroll at a time"
+                },
+                "arrowPosition": {
+                  "type": "enum",
+                  "options": ["inside", "outside"],
+                  "description": "Position of the navigation arrows relative to the content",
+                  "defaultValue": "inside"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

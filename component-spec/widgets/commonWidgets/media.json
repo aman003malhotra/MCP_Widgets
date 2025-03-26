@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Media configuration for various content types",
+  "oneOf": [
+    {
+      "type": "object",
+      "description": "Image media configuration",
+      "required": ["mediaType", "source"],
+      "properties": {
+        "mediaType": {
+          "type": "enum",
+          "options": ["image"],
+          "description": "Type of media"
+        },
+        "source": {
+          "type": "string",
+          "description": "URL of the image"
+        },
+        "altText": {
+          "type": "string",
+          "description": "Alternative text for the image for accessibility"
+        },
+        "loading": {
+          "type": "enum",
+          "options": ["lazy", "eager"],
+          "description": "Loading behavior for the image"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "description": "Video media configuration",
+      "required": ["mediaType", "source"],
+      "properties": {
+        "mediaType": {
+          "type": "enum",
+          "options": ["video"],
+          "description": "Type of media"
+        },
+        "source": {
+          "type": "string",
+          "description": "URL of the video"
+        },
+        "autoplay": {
+          "type": "boolean",
+          "description": "Whether the video should autoplay"
+        },
+        "loop": {
+          "type": "boolean",
+          "description": "Whether the video should loop"
+        },
+        "muted": {
+          "type": "boolean",
+          "description": "Whether the video should be muted"
+        },
+        "controls": {
+          "type": "boolean",
+          "description": "Whether to show video controls"
+        },
+        "posterImage": {
+          "type": "string",
+          "description": "URL of the poster image for the video"
+        },
+        "playsInline": {
+          "type": "boolean",
+          "description": "Whether the video should play inline"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "description": "Lottie animation configuration",
+      "required": ["mediaType", "source"],
+      "properties": {
+        "mediaType": {
+          "type": "enum",
+          "options": ["lottie"],
+          "description": "Type of media"
+        },
+        "source": {
+          "type": "string",
+          "description": "URL of the Lottie animation"
+        },
+        "autoplay": {
+          "type": "boolean",
+          "description": "Whether the animation should autoplay"
+        },
+        "loop": {
+          "type": "boolean",
+          "description": "Whether the animation should loop"
+        }
+      }
+    }
+  ]
+}

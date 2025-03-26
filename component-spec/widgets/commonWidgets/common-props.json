@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the widget instance"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type identifier for the widget"
+    },
+    "header": {
+      "type": "object",
+      "description": "Header configuration for the widget",
+      "subProps": {
+        "title": {
+          "type": "string",
+          "description": "Title text to be displayed in the widget header"
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Subtitle text to be displayed below the title"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label text to be displayed in the widget header"
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "description": "Layout configuration for the widget",
+      "subProps": {
+        "type": {
+          "type": "enum",
+          "options": ["CONTAINED", "FLUID"],
+          "defaultValue": "CONTAINED",
+          "description": "Layout type for the widget"
+        },
+        "verticalSpacing": {
+          "type": "object",
+          "description": "Vertical spacing configuration",
+          "subProps": {
+            "top": {
+              "type": "enum",
+              "options": ["NONE", "COMPACT", "GENEROUS"],
+              "defaultValue": "NONE",
+              "description": "Top spacing"
+            },
+            "bottom": {
+              "type": "enum",
+              "options": ["NONE", "COMPACT", "GENEROUS"],
+              "defaultValue": "NONE",
+              "description": "Bottom spacing"
+            }
+          }
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Background color for the widget"
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "Background image URL for the widget"
+        }
+      }
+    }
+  }
+}

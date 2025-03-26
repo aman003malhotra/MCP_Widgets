@@ -1,0 +1,38 @@
+{
+  "name": "pwa-component-spec",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc && node build/index.js",
+    "package": "npm run build && mkdir -p dist && cp -r build cursor-mcp.json package.json README.md assets dist/"
+  },
+  "keywords": ["mcp", "component", "specification", "cursor-mcp"],
+  "author": "",
+  "license": "ISC",
+  "description": "MCP server for PWA Component Specification",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.13",
+    "typescript": "^5.8.2"
+  },
+  "cursorMcp": {
+    "manifest": "cursor-mcp.json",
+    "engines": {
+      "cursor": ">=0.10.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/pwa-component-spec-mcp"
+    }
+  }
+}

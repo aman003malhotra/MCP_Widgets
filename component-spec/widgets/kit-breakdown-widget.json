@@ -1,0 +1,96 @@
+{
+  "widgets": [
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "name": "KitBreakdown",
+      "description": "A slider widget displaying products that are part of a kit with their details",
+      "type": "widget",
+      "category": "product",
+      "version": "1.0.0",
+      "props": {
+        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the KitBreakdown widget",
+          "required": ["products", "sliderConfig"],
+          "subProps": {
+            "products": {
+              "type": "array",
+              "description": "Array of products that are part of the kit",
+              "items": {
+                "type": "object",
+                "required": ["name", "urlKey", "priceLabel", "media"],
+                "subProps": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the product"
+                  },
+                  "urlKey": {
+                    "type": "string",
+                    "description": "URL key or identifier for the product"
+                  },
+                  "priceLabel": {
+                    "type": "string",
+                    "description": "Formatted price label for the product (e.g., '₹849')"
+                  },
+                  "media": {
+                    "$ref": "./commonWidgets/media.json"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "description": "Actions to perform when the product is clicked",
+                    "items": {
+                      "$ref": "./commonWidgets/actions.json"
+                    }
+                  }
+                }
+              }
+            },
+            "sliderConfig": {
+              "type": "object",
+              "description": "Configuration for the slider component",
+              "subProps": {
+                "slidesToShow": {
+                  "type": "number",
+                  "description": "Number of slides to show on mobile",
+                  "defaultValue": 2
+                },
+                "slidesToShowDesktop": {
+                  "type": "number",
+                  "description": "Number of slides to show on desktop",
+                  "defaultValue": 3
+                },
+                "aspectRatio": {
+                  "type": "number",
+                  "description": "Aspect ratio for the product images",
+                  "defaultValue": 1
+                },
+                "showPeek": {
+                  "type": "boolean",
+                  "description": "Whether to show a peek of the next slide",
+                  "defaultValue": true
+                },
+                "peekVariant": {
+                  "type": "enum",
+                  "options": ["SMALL", "MEDIUM", "LARGE"],
+                  "description": "Size of the peek to show",
+                  "defaultValue": "MEDIUM"
+                },
+                "showArrows": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation arrows",
+                  "defaultValue": true
+                },
+                "showDots": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation dots",
+                  "defaultValue": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

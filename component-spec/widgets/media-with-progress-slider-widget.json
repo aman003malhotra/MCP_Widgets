@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "widgets": [
+    {
+      "name": "MediaWithProgressSlider",
+      "description": "A carousel of media items with animated progress indicators",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaWithProgressSlider widget",
+          "required": ["items", "aspectRatio", "carouselConfig"],
+          "properties": {
+            "items": {
+              "type": "array",
+              "description": "Array of media items with progress animations",
+              "items": {
+                "type": "object",
+                "required": ["cardTitle", "media", "animationText"],
+                "properties": {
+                  "cardTitle": {
+                    "type": "string",
+                    "description": "Title text for the card"
+                  },
+                  "cardDescription": {
+                    "type": "string",
+                    "description": "Description text for the card"
+                  },
+                  "media": {
+                    "$ref": "./commonWidgets/media.json",
+                    "description": "Media content to display in the card"
+                  },
+                  "animationText": {
+                    "type": "string",
+                    "description": "Text to display with the progress animation"
+                  }
+                }
+              }
+            },
+            "aspectRatio": {
+              "type": "number",
+              "description": "Aspect ratio for the media items",
+              "default": 1
+            },
+            "carouselConfig": {
+              "type": "object",
+              "description": "Configuration options for the carousel behavior",
+              "properties": {
+                "showDots": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation dots",
+                  "default": false
+                },
+                "showArrows": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation arrows",
+                  "default": true
+                },
+                "slidesToShow": {
+                  "type": "number",
+                  "description": "Number of slides to show at once on mobile",
+                  "default": 1
+                },
+                "slidesToShowDesktop": {
+                  "type": "number",
+                  "description": "Number of slides to show at once on desktop"
+                },
+                "infinite": {
+                  "type": "boolean",
+                  "description": "Whether the carousel should loop infinitely",
+                  "default": true
+                },
+                "arrowPosition": {
+                  "type": "string",
+                  "enum": ["inside", "outside"],
+                  "description": "Position of the navigation arrows relative to the content"
+                },
+                "autoSlide": {
+                  "type": "boolean",
+                  "description": "Whether the carousel should automatically slide",
+                  "default": false
+                },
+                "autoSlideInterval": {
+                  "type": "number",
+                  "description": "Time interval in milliseconds between auto slides",
+                  "default": 5000
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

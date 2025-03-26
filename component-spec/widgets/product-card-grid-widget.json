@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "widgets": [
+    {
+      "name": "ProductCardGrid",
+      "description": "A grid layout of product cards with optional quantity indicators and empty state handling",
+      "type": "widget",
+      "category": "product",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the ProductCardGrid widget",
+          "required": ["products"],
+          "properties": {
+            "products": {
+              "type": "array",
+              "description": "Array of product objects to display in the grid",
+              "items": {
+                "$ref": "./commonWidgets/product.json"
+              }
+            },
+            "enableQuantityIndicator": {
+              "type": "boolean",
+              "description": "Whether to enable quantity selection for products",
+              "default": false
+            },
+            "source": {
+              "type": "string",
+              "description": "Source identifier for analytics tracking"
+            },
+            "showEmptyState": {
+              "type": "boolean",
+              "description": "Whether to show an empty state when no products are available",
+              "default": true
+            },
+            "emptyState": {
+              "type": "object",
+              "description": "Configuration for the empty state display",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Title text for the empty state"
+                },
+                "subtitle": {
+                  "type": "string",
+                  "description": "Subtitle text for the empty state"
+                },
+                "image": {
+                  "type": "string",
+                  "description": "URL for the empty state image"
+                }
+              },
+              "required": ["title", "subtitle", "image"]
+            },
+            "shouldOpenMiniPdp": {
+              "type": "boolean",
+              "description": "Whether clicking a product should open a mini product page modal",
+              "default": false
+            },
+            "miniPdpCta": {
+              "type": "object",
+              "description": "Call-to-action configuration for the mini product page"
+            },
+            "productImageAspectRatio": {
+              "type": "number",
+              "description": "Aspect ratio for product images",
+              "default": 1
+            },
+            "showMobileViewOnDesktop": {
+              "type": "boolean",
+              "description": "Whether to show the mobile view on desktop devices",
+              "default": false
+            },
+            "isCartUpdating": {
+              "type": "boolean",
+              "description": "Whether the cart is currently being updated",
+              "default": false
+            },
+            "itemBeingAddedToCart": {
+              "type": "string",
+              "description": "SKU of the item currently being added to cart"
+            },
+            "cartItems": {
+              "type": "object",
+              "description": "Current items in the cart with quantities",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "qty": {
+                    "type": "number",
+                    "description": "Quantity of the item in cart"
+                  }
+                }
+              }
+            },
+            "handleCardClick": {
+              "type": "function",
+              "description": "Function handler for product card click events that takes a product object as argument"
+            },
+            "handleCtaClick": {
+              "type": "function",
+              "description": "Function handler for product CTA button click events that takes a product object as argument"
+            },
+            "handleUpdateCartItem": {
+              "type": "function",
+              "description": "Function handler for updating cart items that takes a product object as argument"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

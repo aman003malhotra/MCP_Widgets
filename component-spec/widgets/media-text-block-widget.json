@@ -1,0 +1,55 @@
+{
+  "widgets": [
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "name": "MediaTextBlock",
+      "description": "A widget displaying alternating media and text content blocks",
+      "type": "widget",
+      "category": "content",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaTextBlock widget",
+          "required": ["items"],
+          "subProps": {
+            "items": {
+              "type": "array",
+              "description": "Array of media-text content blocks",
+              "items": {
+                "type": "object",
+                "required": ["media", "textContent"],
+                "properties": {
+                  "media": {
+                    "$ref": "./commonWidgets/media.json"
+                  },
+                  "textContent": {
+                    "type": "object",
+                    "description": "Text content to display alongside the media",
+                    "required": ["contentPosition", "heading", "info"],
+                    "properties": {
+                      "contentPosition": {
+                        "type": "enum",
+                        "options": ["left", "right"],
+                        "description": "Position of the text content relative to the media (on desktop)"
+                      },
+                      "heading": {
+                        "type": "string",
+                        "description": "Heading text for the content block"
+                      },
+                      "info": {
+                        "type": "string",
+                        "description": "Informational text content for the block"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

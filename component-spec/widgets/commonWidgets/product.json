@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "media",
+    "name",
+    "urlKey",
+    "price",
+    "priceLabel",
+    "id",
+    "sku",
+    "cta"
+  ],
+  "properties": {
+    "media": {
+      "type": "object",
+      "description": "Media configuration for the product",
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "Image media configuration",
+          "required": ["mediaType", "source"],
+          "subProps": {
+            "mediaType": {
+              "type": "enum",
+              "options": ["image"],
+              "description": "Type of media"
+            },
+            "source": {
+              "type": "string",
+              "description": "URL of the image"
+            },
+            "altText": {
+              "type": "string",
+              "description": "Alternative text for the image"
+            },
+            "loading": {
+              "type": "enum",
+              "options": ["lazy", "eager"],
+              "description": "Loading behavior for the image"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Video media configuration",
+          "required": ["mediaType", "source"],
+          "subProps": {
+            "mediaType": {
+              "type": "enum",
+              "options": ["video"],
+              "description": "Type of media"
+            },
+            "source": {
+              "type": "string",
+              "description": "URL of the video"
+            },
+            "autoplay": {
+              "type": "boolean",
+              "description": "Whether the video should autoplay"
+            },
+            "loop": {
+              "type": "boolean",
+              "description": "Whether the video should loop"
+            },
+            "muted": {
+              "type": "boolean",
+              "description": "Whether the video should be muted"
+            },
+            "controls": {
+              "type": "boolean",
+              "description": "Whether to show video controls"
+            },
+            "posterImage": {
+              "type": "string",
+              "description": "URL of the poster image for the video"
+            },
+            "playsInline": {
+              "type": "boolean",
+              "description": "Whether the video should play inline"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Lottie animation configuration",
+          "required": ["mediaType", "source"],
+          "subProps": {
+            "mediaType": {
+              "type": "enum",
+              "options": ["lottie"],
+              "description": "Type of media"
+            },
+            "source": {
+              "type": "string",
+              "description": "URL of the Lottie animation"
+            },
+            "autoplay": {
+              "type": "boolean",
+              "description": "Whether the animation should autoplay"
+            },
+            "loop": {
+              "type": "boolean",
+              "description": "Whether the animation should loop"
+            }
+          }
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the product"
+    },
+    "urlKey": {
+      "type": "string",
+      "description": "URL key for the product"
+    },
+    "rating": {
+      "type": "string",
+      "description": "Rating of the product"
+    },
+    "price": {
+      "type": "number",
+      "description": "Original price of the product"
+    },
+    "discountedPrice": {
+      "type": "number",
+      "description": "Discounted price of the product"
+    },
+    "priceLabel": {
+      "type": "string",
+      "description": "Formatted original price label (e.g., ₹1398)"
+    },
+    "discountedPriceLabel": {
+      "type": "string",
+      "description": "Formatted discounted price label (e.g., ₹899)"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the product"
+    },
+    "reviewCount": {
+      "type": "string",
+      "description": "Number of reviews for the product"
+    },
+    "sku": {
+      "type": "string",
+      "description": "SKU identifier for the product"
+    },
+    "slugUrl": {
+      "type": "string",
+      "description": "Custom URL slug for the product"
+    },
+    "aspectRatio": {
+      "type": "number",
+      "defaultValue": 1,
+      "description": "Aspect ratio for the product image"
+    },
+    "cta": {
+      "type": "object",
+      "description": "Call-to-action configuration for the product",
+      "subProps": {
+        "actions": {
+          "type": "array",
+          "description": "List of actions to perform when the CTA is clicked",
+          "items": {
+            "type": "object",
+            "required": ["actionName"],
+            "subProps": {
+              "actionName": {
+                "type": "enum",
+                "options": [
+                  "ADD_TO_CART",
+                  "OPEN_PDP",
+                  "APP_NAV",
+                  "TRIGGER_EVENTS_FOR_WEB",
+                  "UPDATE_DATA_LAYER",
+                  "SPA_LINK",
+                  "BOTTOM_TAB",
+                  "CLEAR_APPOINTMENT_DETAILS_CONTEXT",
+                  "GO_BACK",
+                  "SHARE",
+                  "AUTHORIZED_APP_NAV",
+                  "REPLACE_NAV",
+                  "RESET_NAV_STACK",
+                  "ENDPOINT",
+                  "SCROLL_TO_WIDGET",
+                  "OPEN_DEEPLINK",
+                  "HANDLE_OOS_NOTIFY_ME",
+                  "FETCH_WALLET_POINTS",
+                  "SEND_EVENT_TO_ALGOLIA",
+                  "OPEN_MINI_PRODUCT_PAGE_BOTTOM_SHEET",
+                  "LOGIN",
+                  "PROFILE",
+                  "MULTI_ATC"
+                ],
+                "description": "Name of the action to perform"
+              },
+              "params": {
+                "type": "object",
+                "description": "Parameters for the action"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cardClickActions": {
+      "type": "array",
+      "description": "List of actions to perform when the card is clicked",
+      "items": {
+        "type": "object",
+        "required": ["actionName"],
+        "subProps": {
+          "actionName": {
+            "type": "enum",
+            "options": [
+              "ADD_TO_CART",
+              "OPEN_PDP",
+              "APP_NAV",
+              "TRIGGER_EVENTS_FOR_WEB",
+              "UPDATE_DATA_LAYER",
+              "SPA_LINK"
+            ],
+            "description": "Name of the action to perform"
+          },
+          "params": {
+            "type": "object",
+            "description": "Parameters for the action"
+          }
+        }
+      }
+    }
+  }
+}

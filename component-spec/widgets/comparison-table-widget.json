@@ -1,0 +1,71 @@
+{
+  "widgets": [
+    {
+      "name": "ComparisonTable",
+      "description": "A comparison table widget that displays two-column comparison data with customizable icons",
+      "type": "widget",
+      "category": "content",
+      "version": "1.0.0",
+      "props": {
+        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+        "widgetData": {
+          "type": "object",
+          "description": "Specific data for the comparison table widget",
+          "required": ["tableHeader", "tableData", "icons"],
+          "subProps": {
+            "tableHeader": {
+              "type": "object",
+              "description": "Header text for the comparison columns",
+              "required": ["us", "others"],
+              "subProps": {
+                "us": {
+                  "type": "string",
+                  "description": "Header text for the first column (typically represents the company's offerings)",
+                  "defaultValue": "Us"
+                },
+                "others": {
+                  "type": "string",
+                  "description": "Header text for the second column (typically represents competitors' offerings)",
+                  "defaultValue": "Others"
+                }
+              }
+            },
+            "tableData": {
+              "type": "array",
+              "description": "Array of comparison data rows",
+              "items": {
+                "type": "object",
+                "required": ["us", "others"],
+                "subProps": {
+                  "us": {
+                    "type": "string",
+                    "description": "Text for the first column in this row"
+                  },
+                  "others": {
+                    "type": "string",
+                    "description": "Text for the second column in this row"
+                  }
+                }
+              }
+            },
+            "icons": {
+              "type": "object",
+              "description": "Icons to be displayed next to the text in each column",
+              "required": ["checkIcon", "crossIcon"],
+              "subProps": {
+                "checkIcon": {
+                  "type": "string",
+                  "description": "URL for the icon displayed in the first column (typically a checkmark)"
+                },
+                "crossIcon": {
+                  "type": "string",
+                  "description": "URL for the icon displayed in the second column (typically a cross)"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

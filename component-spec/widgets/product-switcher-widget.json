@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Product Switcher Widget",
+  "description": "A widget that displays rows of product options with different display modes for switching between product variants",
+  "type": "object",
+  "category": "Product",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "../common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "required": ["rows", "urlKey"],
+      "properties": {
+        "rows": {
+          "type": "array",
+          "description": "An array of rows, each containing a title and options for product variants",
+          "items": {
+            "type": "object",
+            "required": ["title", "type", "options"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The title of the row"
+              },
+              "type": {
+                "type": "string",
+                "description": "The display type for the options in this row",
+                "enum": [
+                  "TEXT",
+                  "IMAGE",
+                  "IMAGE_WITH_TEXT",
+                  "IMAGE_WITH_FOOTER"
+                ]
+              },
+              "options": {
+                "type": "array",
+                "description": "An array of product options/variants for this row",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "imageUrl",
+                    "label",
+                    "description",
+                    "isSelected",
+                    "actions"
+                  ],
+                  "properties": {
+                    "imageUrl": {
+                      "type": "string",
+                      "description": "The URL of the image for this option",
+                      "format": "uri"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "The label text for this option, can include HTML"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The description text for this option"
+                    },
+                    "isSelected": {
+                      "type": "boolean",
+                      "description": "Whether this option is currently selected"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "The slug/URL for navigating when this option is clicked"
+                    },
+                    "actions": {
+                      "type": "array",
+                      "description": "List of actions to trigger when this option is clicked",
+                      "items": {
+                        "$ref": "./commonWidgets/generic-action.json"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "urlKey": {
+          "type": "string",
+          "description": "The URL key for the base product, used in analytics events"
+        }
+      }
+    }
+  }
+}

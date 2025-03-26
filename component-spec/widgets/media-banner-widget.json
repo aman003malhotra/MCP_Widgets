@@ -1,0 +1,65 @@
+{
+  "widgets": [
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "name": "MediaBanner",
+      "description": "A banner widget that displays media content with an optional call-to-action button",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaBanner widget",
+          "required": ["media"],
+          "subProps": {
+            "media": {
+              "$ref": "./commonWidgets/media.json"
+            },
+            "slug": {
+              "type": "string",
+              "description": "URL path when the media is clicked"
+            },
+            "aspectRatio": {
+              "type": "number",
+              "description": "Aspect ratio for the media content",
+              "defaultValue": 1
+            },
+            "cta": {
+              "type": "object",
+              "description": "Call-to-action button configuration",
+              "subProps": {
+                "label": {
+                  "type": "string",
+                  "description": "Text label for the CTA button"
+                },
+                "variant": {
+                  "type": "enum",
+                  "options": ["PRIMARY", "SECONDARY", "TERTIARY", "GHOST"],
+                  "description": "Visual style of the button"
+                },
+                "size": {
+                  "type": "enum",
+                  "options": ["SMALL", "MEDIUM", "LARGE"],
+                  "description": "Size of the button"
+                },
+                "fullWidth": {
+                  "type": "boolean",
+                  "description": "Whether the button should take up the full width available"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when the CTA button is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

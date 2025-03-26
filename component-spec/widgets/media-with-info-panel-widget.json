@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Media With Info Panel Widget",
+  "description": "A tabbed panel displaying media with detailed information content including icons, details, and accordions",
+  "type": "object",
+  "category": "Content",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "../common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of tab items with associated content",
+          "items": {
+            "type": "object",
+            "required": ["tabName", "imageUrl", "content"],
+            "properties": {
+              "tabName": {
+                "type": "string",
+                "description": "The display name of the tab"
+              },
+              "imageUrl": {
+                "type": "string",
+                "description": "URL for the tab's main media image",
+                "format": "uri"
+              },
+              "content": {
+                "type": "object",
+                "required": [
+                  "heading",
+                  "details",
+                  "iconListContent",
+                  "accordionContent"
+                ],
+                "properties": {
+                  "heading": {
+                    "type": "object",
+                    "required": ["title", "info"],
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Main heading title for the tab content"
+                      },
+                      "info": {
+                        "type": "string",
+                        "description": "Supplementary information for the heading"
+                      }
+                    }
+                  },
+                  "details": {
+                    "type": "array",
+                    "description": "List of detail items with labels and information",
+                    "items": {
+                      "type": "object",
+                      "required": ["label", "info"],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "description": "Label for the detail item"
+                        },
+                        "info": {
+                          "type": "string",
+                          "description": "Information content for the detail item"
+                        }
+                      }
+                    }
+                  },
+                  "iconListContent": {
+                    "type": "object",
+                    "required": ["title", "items"],
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title for the icon list section"
+                      },
+                      "items": {
+                        "type": "array",
+                        "description": "List of items with icons and labels",
+                        "items": {
+                          "type": "object",
+                          "required": ["icon", "label"],
+                          "properties": {
+                            "icon": {
+                              "type": "string",
+                              "description": "URL for the icon image",
+                              "format": "uri"
+                            },
+                            "label": {
+                              "type": "string",
+                              "description": "Label text for the icon item"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "accordionContent": {
+                    "type": "array",
+                    "description": "List of accordion items with expandable content",
+                    "items": {
+                      "type": "object",
+                      "required": ["data", "iconVariant", "initiallyOpen"],
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "required": ["title", "content"],
+                          "properties": {
+                            "title": {
+                              "type": "string",
+                              "description": "Title for the accordion item"
+                            },
+                            "content": {
+                              "type": "string",
+                              "description": "Content text for the accordion item when expanded"
+                            },
+                            "image": {
+                              "type": "string",
+                              "description": "Optional URL for an image associated with the accordion item",
+                              "format": "uri"
+                            }
+                          }
+                        },
+                        "iconVariant": {
+                          "type": "string",
+                          "enum": ["chevron", "plus-minus"],
+                          "description": "The type of icon to use for indicating expanded/collapsed state"
+                        },
+                        "titleFontWeight": {
+                          "type": "string",
+                          "enum": ["light", "bold"],
+                          "description": "Font weight for the accordion title",
+                          "default": "bold"
+                        },
+                        "initiallyOpen": {
+                          "type": "boolean",
+                          "description": "Whether the accordion item should be initially expanded",
+                          "default": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["widgetData"]
+}

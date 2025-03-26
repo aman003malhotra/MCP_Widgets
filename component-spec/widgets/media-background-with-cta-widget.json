@@ -1,0 +1,70 @@
+{
+  "widgets": [
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "name": "MediaBackgroundWithCta",
+      "description": "A banner widget with media background, title overlay and a call-to-action button",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "props": {
+        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaBackgroundWithCta widget",
+          "required": ["title", "media", "aspectRatio", "cta"],
+          "subProps": {
+            "title": {
+              "type": "string",
+              "description": "Title text to display over the media background (supports HTML formatting)"
+            },
+            "altText": {
+              "type": "string",
+              "description": "Alternative text for accessibility purposes"
+            },
+            "media": {
+              "$ref": "./commonWidgets/media.json"
+            },
+            "aspectRatio": {
+              "type": "number",
+              "description": "Aspect ratio for the media background",
+              "defaultValue": 1.5
+            },
+            "cta": {
+              "type": "object",
+              "description": "Call-to-action button configuration",
+              "required": ["label", "actions", "variant"],
+              "subProps": {
+                "label": {
+                  "type": "string",
+                  "description": "Text label for the CTA button"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when the CTA button is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
+                  }
+                },
+                "variant": {
+                  "type": "enum",
+                  "options": ["PRIMARY", "SECONDARY", "TERTIARY", "GHOST"],
+                  "description": "Visual style of the button",
+                  "defaultValue": "PRIMARY"
+                },
+                "icon": {
+                  "type": "string",
+                  "description": "Optional icon to display with the button"
+                },
+                "slugUrl": {
+                  "type": "string",
+                  "description": "Optional URL for the button link"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

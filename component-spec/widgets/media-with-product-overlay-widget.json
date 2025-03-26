@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "widgets": [
+    {
+      "name": "MediaWithProductOverlay",
+      "description": "A slider of media items with product overlays and call-to-action buttons",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaWithProductOverlay widget",
+          "required": ["items", "sliderConfig"],
+          "properties": {
+            "items": {
+              "type": "array",
+              "description": "Array of product items to display in the slider",
+              "items": {
+                "type": "object",
+                "required": ["baseMedia", "overlayMedia", "name", "cta"],
+                "properties": {
+                  "baseMedia": {
+                    "$ref": "./commonWidgets/media.json",
+                    "description": "Background media content (image or video)"
+                  },
+                  "overlayMedia": {
+                    "$ref": "./commonWidgets/media.json",
+                    "description": "Product media to overlay on the base media"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the product"
+                  },
+                  "cta": {
+                    "type": "object",
+                    "description": "Call-to-action button configuration",
+                    "required": ["label", "variant", "size"],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "description": "Text label for the CTA button"
+                      },
+                      "variant": {
+                        "type": "string",
+                        "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
+                        "description": "Visual style of the button"
+                      },
+                      "size": {
+                        "type": "string",
+                        "enum": ["SMALL", "MEDIUM", "LARGE"],
+                        "description": "Size of the button"
+                      },
+                      "fullWidth": {
+                        "type": "boolean",
+                        "description": "Whether the button should take up the full available width",
+                        "default": false
+                      },
+                      "actions": {
+                        "type": "array",
+                        "description": "Actions to perform when the button is clicked",
+                        "items": {
+                          "allOf": [
+                            {
+                              "$ref": "./commonWidgets/actions.json"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "videoMutedIcon": {
+              "type": "string",
+              "description": "URL for the muted icon displayed on videos"
+            },
+            "videoUnMutedIcon": {
+              "type": "string",
+              "description": "URL for the unmuted icon displayed on videos"
+            },
+            "sliderConfig": {
+              "type": "object",
+              "description": "Configuration for the slider behavior",
+              "required": ["aspectRatio"],
+              "properties": {
+                "aspectRatio": {
+                  "type": "number",
+                  "description": "Aspect ratio for the media items in the slider",
+                  "default": 0.56
+                },
+                "slidesToShow": {
+                  "type": "number",
+                  "description": "Number of slides to show at once on mobile",
+                  "default": 2
+                },
+                "slidesToShowDesktop": {
+                  "type": "number",
+                  "description": "Number of slides to show at once on desktop"
+                },
+                "showPeek": {
+                  "type": "boolean",
+                  "description": "Whether to show a peek of the next slide",
+                  "default": true
+                },
+                "peekVariant": {
+                  "type": "string",
+                  "enum": ["SMALL", "MEDIUM", "LARGE"],
+                  "description": "Size of the peek for the next slide",
+                  "default": "LARGE"
+                },
+                "showArrows": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation arrows"
+                },
+                "showDots": {
+                  "type": "boolean",
+                  "description": "Whether to show navigation dots"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

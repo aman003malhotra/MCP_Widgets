@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["actionName"],
+  "properties": {
+    "actionName": {
+      "type": "enum",
+      "options": [
+        "SPA_LINK",
+        "APP_NAV",
+        "TRIGGER_EVENTS_FOR_WEB",
+        "OPEN_PDP",
+        "UPDATE_DATA_LAYER",
+        "BOTTOM_TAB",
+        "CLEAR_APPOINTMENT_DETAILS_CONTEXT",
+        "GO_BACK",
+        "SHARE",
+        "AUTHORIZED_APP_NAV",
+        "REPLACE_NAV",
+        "RESET_NAV_STACK",
+        "ENDPOINT",
+        "SCROLL_TO_WIDGET",
+        "OPEN_DEEPLINK",
+        "HANDLE_OOS_NOTIFY_ME",
+        "FETCH_WALLET_POINTS",
+        "SEND_EVENT_TO_ALGOLIA",
+        "OPEN_MINI_PRODUCT_PAGE_BOTTOM_SHEET",
+        "LOGIN",
+        "PROFILE",
+        "MULTI_ATC",
+        "ADD_TO_CART"
+      ],
+      "description": "Name of the action to perform"
+    },
+    "params": {
+      "type": "object",
+      "description": "Parameters for the action"
+    }
+  }
+}

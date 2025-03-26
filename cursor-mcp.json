@@ -1,0 +1,36 @@
+{
+  "name": "pwa-component-spec",
+  "version": "1.0.0",
+  "displayName": "PWA Component Specification",
+  "description": "Access to PWA component specifications and widgets for UI development",
+  "publisher": "Your Organization",
+  "main": "build/index.js",
+  "icon": "assets/icon.png",
+  "categories": ["UI Components", "Design System"],
+  "capabilities": {
+    "resources": [
+      {
+        "path": "/components/atomic",
+        "description": "Retrieve all atomic components"
+      },
+      {
+        "path": "/components/widgets",
+        "description": "Retrieve all widget components"
+      },
+      {
+        "path": "/components/widgets/:widgetName",
+        "description": "Retrieve a specific widget by name"
+      }
+    ],
+    "tools": [
+      {
+        "name": "searchComponents",
+        "description": "Search for UI components by name, description, or properties"
+      },
+      {
+        "name": "getComponentProperties",
+        "description": "Get detailed properties of a specific component"
+      }
+    ]
+  }
+} 

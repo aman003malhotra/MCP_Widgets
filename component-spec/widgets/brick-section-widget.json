@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Brick Section Widget",
+  "description": "A section component that displays content with media, text, and a call-to-action button",
+  "type": "object",
+  "category": "layout",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "../common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "required": [
+        "title",
+        "heading",
+        "description",
+        "textField",
+        "media",
+        "cta"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title text for the section"
+        },
+        "heading": {
+          "type": "string",
+          "description": "Heading text for the section (supports HTML)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description text for the section"
+        },
+        "textField": {
+          "type": "string",
+          "enum": ["list", "text"],
+          "description": "Type of text content to display"
+        },
+        "variant": {
+          "type": "string",
+          "enum": ["PRIMARY", "SECONDARY"],
+          "description": "Visual variant of the section. PRIMARY: Brand primary color background with white text. SECONDARY: Transparent background with brand primary color text.",
+          "default": "PRIMARY"
+        },
+        "aspectRatio": {
+          "type": "number",
+          "description": "Aspect ratio for the media content",
+          "default": 1
+        },
+        "media": {
+          "$ref": "./commonWidgets/media.json"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of items to display when textField is 'list'",
+          "items": {
+            "type": "object",
+            "required": ["label", "icon"],
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Text label for the item"
+              },
+              "icon": {
+                "type": "object",
+                "required": ["source"],
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "URL of the icon image"
+                  },
+                  "altText": {
+                    "type": "string",
+                    "description": "Alternative text for the icon"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "cta": {
+          "type": "object",
+          "required": ["label", "actions"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "description": "Text label for the CTA button"
+            },
+            "variant": {
+              "type": "string",
+              "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
+              "description": "Visual variant of the CTA button"
+            },
+            "actions": {
+              "type": "array",
+              "description": "List of actions to perform when clicked",
+              "items": {
+                "$ref": "./commonWidgets/generic-action.json"
+              }
+            },
+            "slugUrl": {
+              "type": "string",
+              "description": "URL slug for the CTA button"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Subscription Call To Action Widget",
+  "description": "A widget that displays product information with subscription options and call-to-action",
+  "type": "object",
+  "category": "Product",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "../common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "required": ["productInfo", "subscriptionInfo"],
+      "properties": {
+        "productInfo": {
+          "type": "object",
+          "required": [
+            "sku",
+            "name",
+            "actualPriceLabel",
+            "discountedPriceLabel"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the product"
+            },
+            "subtitle": {
+              "type": "string",
+              "description": "Subtitle or short description of the product"
+            },
+            "rating": {
+              "type": "string",
+              "description": "Rating of the product"
+            },
+            "sku": {
+              "type": "string",
+              "description": "Stock keeping unit identifier"
+            },
+            "recommendation": {
+              "type": "string",
+              "description": "Recommendation text for the product"
+            },
+            "reviews": {
+              "type": "string",
+              "description": "Reviews summary or count"
+            },
+            "discountText": {
+              "type": "string",
+              "description": "Text describing the discount"
+            },
+            "actualPrice": {
+              "type": "number",
+              "description": "Original price of the product"
+            },
+            "discountedPrice": {
+              "type": ["number", "null"],
+              "description": "Discounted price of the product, if applicable"
+            },
+            "currentlyViewing": {
+              "type": "object",
+              "required": ["currentlyViewingBase", "noiseRange"],
+              "properties": {
+                "currentlyViewingBase": {
+                  "type": "string",
+                  "description": "Base number of people currently viewing the product"
+                },
+                "noiseRange": {
+                  "type": "string",
+                  "description": "Range for randomizing the current viewer count"
+                }
+              }
+            },
+            "preorder": {
+              "type": "object",
+              "required": ["status", "label", "subtitle"],
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "description": "Whether the product is available for pre-order"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label text for pre-order"
+                },
+                "subtitle": {
+                  "type": "string",
+                  "description": "Subtitle text for pre-order"
+                }
+              }
+            },
+            "headingLevel": {
+              "type": "number",
+              "description": "Heading level for the product name (1-6)"
+            },
+            "subHeadingLevel": {
+              "type": "number",
+              "description": "Heading level for the subtitle (1-6)"
+            },
+            "priceLabel": {
+              "type": "string",
+              "description": "Label for the price"
+            },
+            "discountedPriceLabel": {
+              "type": ["string", "null"],
+              "description": "Label for the discounted price, if applicable"
+            },
+            "actualPriceLabel": {
+              "type": ["string", "null"],
+              "description": "Label for the actual price, if applicable"
+            },
+            "urlKey": {
+              "type": "string",
+              "description": "URL key for the product"
+            },
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the product"
+            },
+            "reviewCount": {
+              "type": "string",
+              "description": "Number of reviews for the product"
+            },
+            "unitsSold": {
+              "type": "string",
+              "description": "Number of units sold"
+            },
+            "stampedId": {
+              "type": "string",
+              "description": "Identifier for Stamped.io reviews"
+            },
+            "concern": {
+              "type": "string",
+              "description": "Health concern that the product addresses"
+            },
+            "rxType": {
+              "type": "string",
+              "description": "Type of prescription, if applicable"
+            },
+            "productFor": {
+              "type": "string",
+              "description": "Target audience for the product"
+            },
+            "category": {
+              "type": "string",
+              "description": "Product category"
+            },
+            "types": {
+              "type": "object",
+              "required": ["kits", "single"],
+              "properties": {
+                "kits": {
+                  "type": "boolean",
+                  "description": "Whether the product is available as a kit"
+                },
+                "single": {
+                  "type": "boolean",
+                  "description": "Whether the product is available as a single item"
+                }
+              }
+            },
+            "isRx": {
+              "type": "boolean",
+              "description": "Whether the product requires a prescription"
+            },
+            "slugUrl": {
+              "type": "string",
+              "description": "Slug URL for the product"
+            },
+            "productUrl": {
+              "type": "string",
+              "description": "Complete URL for the product page"
+            },
+            "allReviewsUrl": {
+              "type": "string",
+              "description": "URL for viewing all reviews"
+            },
+            "diagnosisConcern": {
+              "type": "string",
+              "description": "Diagnosis concern related to the product"
+            },
+            "diagnosisStage": {
+              "type": "string",
+              "description": "Stage of diagnosis related to the product"
+            },
+            "diagnosisSeverity": {
+              "type": "string",
+              "description": "Severity level of the diagnosis"
+            },
+            "outOfStock": {
+              "type": "boolean",
+              "description": "Whether the product is out of stock"
+            },
+            "isVirtual": {
+              "type": "boolean",
+              "description": "Whether the product is a virtual/digital product"
+            },
+            "cashbackInfo": {
+              "type": ["string", "null"],
+              "description": "Information about cashback offers, if applicable"
+            },
+            "availableDays": {
+              "type": ["string", "null"],
+              "description": "Information about product availability by days, if applicable"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "description": "Title for the widget"
+        },
+        "subscriptionInfo": {
+          "type": "object",
+          "required": ["title", "options", "toolTip"],
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Title for the subscription section"
+            },
+            "options": {
+              "type": "object",
+              "required": ["inputLabel", "items"],
+              "properties": {
+                "inputLabel": {
+                  "type": "string",
+                  "description": "Label for the subscription options input"
+                },
+                "items": {
+                  "type": "array",
+                  "description": "Available subscription options",
+                  "items": {
+                    "type": "object",
+                    "required": ["text", "frequency", "discountLabel", "price"],
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Display text for the subscription option"
+                      },
+                      "frequency": {
+                        "type": "string",
+                        "description": "Frequency of the subscription (e.g., '1 month', '3 months')"
+                      },
+                      "discountLabel": {
+                        "type": "string",
+                        "description": "Label showing discount percentage or amount"
+                      },
+                      "price": {
+                        "type": "string",
+                        "description": "Price for this subscription option"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "toolTip": {
+              "type": "object",
+              "required": ["label", "content"],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "description": "Label for the tooltip trigger"
+                },
+                "content": {
+                  "type": "object",
+                  "required": ["title", "textItems"],
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "Title for the tooltip content"
+                    },
+                    "textItems": {
+                      "type": "array",
+                      "description": "Array of text items to display in the tooltip",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "oneTimeOrderCta": {
+          "type": "object",
+          "description": "Call-to-action configuration for one-time order option",
+          "properties": {
+            "label": {
+              "type": "string",
+              "description": "Label text for the one-time order button"
+            },
+            "actions": {
+              "type": "array",
+              "description": "Actions to trigger when the one-time order button is clicked",
+              "items": {
+                "$ref": "./commonWidgets/generic-action.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

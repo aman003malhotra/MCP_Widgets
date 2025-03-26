@@ -1,0 +1,337 @@
+{
+  "widgets": [
+    {
+      "name": "BaseWidget",
+      "description": "A standardized structure for all widgets that provides consistent layout and functionality",
+      "type": "widget",
+      "category": "base",
+      "version": "1.0.0",
+      "props": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "Unique identifier for the widget instance"
+        },
+        "type": {
+          "type": "string",
+          "required": true,
+          "description": "Type identifier for the widget"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title text to be displayed in the widget header"
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Subtitle text to be displayed below the title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional description text for the widget"
+        },
+        "showTitle": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to display the widget title"
+        },
+        "showSubtitle": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to display the widget subtitle"
+        },
+        "showDescription": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to display the widget description"
+        },
+        "backgroundType": {
+          "type": "enum",
+          "options": ["TRANSPARENT", "COLOR", "GRADIENT", "IMAGE"],
+          "defaultValue": "TRANSPARENT",
+          "description": "Type of background to display for the widget"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Background color when backgroundType is COLOR"
+        },
+        "backgroundGradient": {
+          "type": "string",
+          "description": "CSS gradient value when backgroundType is GRADIENT"
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "URL of background image when backgroundType is IMAGE"
+        },
+        "padding": {
+          "type": "object",
+          "description": "Padding configuration for the widget",
+          "subProps": {
+            "top": {
+              "type": "string",
+              "defaultValue": "var(--dls-spacing-lg)",
+              "description": "Top padding"
+            },
+            "right": {
+              "type": "string",
+              "defaultValue": "var(--dls-spacing-lg)",
+              "description": "Right padding"
+            },
+            "bottom": {
+              "type": "string",
+              "defaultValue": "var(--dls-spacing-lg)",
+              "description": "Bottom padding"
+            },
+            "left": {
+              "type": "string",
+              "defaultValue": "var(--dls-spacing-lg)",
+              "description": "Left padding"
+            }
+          }
+        },
+        "margin": {
+          "type": "object",
+          "description": "Margin configuration for the widget",
+          "subProps": {
+            "top": {
+              "type": "string",
+              "defaultValue": "var(--dls-spacing-md)",
+              "description": "Top margin"
+            },
+            "right": {
+              "type": "string",
+              "defaultValue": "0",
+              "description": "Right margin"
+            },
+            "bottom": {
+              "type": "string",
+              "defaultValue": "var(--dls-spacing-md)",
+              "description": "Bottom margin"
+            },
+            "left": {
+              "type": "string",
+              "defaultValue": "0",
+              "description": "Left margin"
+            }
+          }
+        },
+        "borderRadius": {
+          "type": "string",
+          "defaultValue": "var(--dls-border-radius-md)",
+          "description": "Border radius for the widget"
+        },
+        "boxShadow": {
+          "type": "string",
+          "description": "Box shadow for the widget"
+        },
+        "titleTypographyVariant": {
+          "type": "string",
+          "defaultValue": "HEADING_MEDIUM_BOLD",
+          "description": "Typography variant for the widget title"
+        },
+        "subtitleTypographyVariant": {
+          "type": "string",
+          "defaultValue": "BODY_BASE_REGULAR",
+          "description": "Typography variant for the widget subtitle"
+        },
+        "descriptionTypographyVariant": {
+          "type": "string",
+          "defaultValue": "BODY_BASE_LIGHT",
+          "description": "Typography variant for the widget description"
+        },
+        "layout": {
+          "type": "enum",
+          "options": ["DEFAULT", "STACKED", "GRID", "HORIZONTAL", "VERTICAL"],
+          "defaultValue": "DEFAULT",
+          "description": "Layout type for the widget content"
+        },
+        "contentAlignment": {
+          "type": "enum",
+          "options": ["START", "CENTER", "END", "SPACE_BETWEEN", "SPACE_AROUND", "SPACE_EVENLY"],
+          "defaultValue": "START",
+          "description": "Alignment of content within the widget"
+        },
+        "isLoading": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether the widget is in a loading state"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether the widget is hidden"
+        },
+        "loadingComponent": {
+          "type": "component",
+          "description": "Component to display when isLoading is true"
+        },
+        "errorComponent": {
+          "type": "component",
+          "description": "Component to display when there's an error"
+        },
+        "emptyComponent": {
+          "type": "component",
+          "description": "Component to display when there's no content"
+        },
+        "headerRightComponent": {
+          "type": "component",
+          "description": "Component to display at the right side of the widget header"
+        },
+        "footerComponent": {
+          "type": "component",
+          "description": "Component to display at the footer of the widget"
+        },
+        "contentProps": {
+          "type": "object",
+          "description": "Custom props to pass to the content component"
+        },
+        "customClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the widget"
+        },
+        "customHeaderClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the widget header"
+        },
+        "customContentClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the widget content"
+        },
+        "customFooterClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the widget footer"
+        },
+        "onMount": {
+          "type": "function",
+          "description": "Function to call when widget is mounted"
+        },
+        "onUnmount": {
+          "type": "function",
+          "description": "Function to call when widget is unmounted"
+        },
+        "onError": {
+          "type": "function",
+          "description": "Function to call when widget encounters an error"
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "List of data sources to fetch data from",
+          "items": {
+            "type": "object",
+            "subProps": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the data source"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of data source"
+              },
+              "endpoint": {
+                "type": "string",
+                "description": "Endpoint to fetch data from"
+              },
+              "method": {
+                "type": "string",
+                "defaultValue": "GET",
+                "description": "HTTP method to use for fetching data"
+              },
+              "params": {
+                "type": "object",
+                "description": "Parameters to send with the request"
+              },
+              "headers": {
+                "type": "object",
+                "description": "Headers to send with the request"
+              },
+              "transformResponse": {
+                "type": "function",
+                "description": "Function to transform the response data"
+              }
+            }
+          }
+        },
+        "children": {
+          "type": "array",
+          "description": "Child components or widgets to render within this widget"
+        }
+      },
+      "layouts": {
+        "DEFAULT": {
+          "description": "Standard layout with header, content, and footer sections vertically stacked"
+        },
+        "STACKED": {
+          "description": "Content items stacked vertically",
+          "contentStyle": "display: flex; flex-direction: column;"
+        },
+        "GRID": {
+          "description": "Content items arranged in a responsive grid",
+          "contentStyle": "display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--dls-spacing-md);"
+        },
+        "HORIZONTAL": {
+          "description": "Content items arranged horizontally",
+          "contentStyle": "display: flex; flex-direction: row; overflow-x: auto;"
+        },
+        "VERTICAL": {
+          "description": "Content items arranged vertically with specific spacing",
+          "contentStyle": "display: flex; flex-direction: column; gap: var(--dls-spacing-md);"
+        }
+      },
+      "responsiveBreakpoints": {
+        "mobile": {
+          "maxWidth": "767px",
+          "defaultPadding": {
+            "top": "var(--dls-spacing-md)",
+            "right": "var(--dls-spacing-md)",
+            "bottom": "var(--dls-spacing-md)",
+            "left": "var(--dls-spacing-md)"
+          }
+        },
+        "tablet": {
+          "minWidth": "768px",
+          "maxWidth": "1023px"
+        },
+        "desktop": {
+          "minWidth": "1024px"
+        }
+      },
+      "defaultErrorState": {
+        "titleText": "Something went wrong",
+        "descriptionText": "We're having trouble loading this content. Please try again later.",
+        "retryButtonText": "Retry"
+      },
+      "defaultEmptyState": {
+        "titleText": "No content",
+        "descriptionText": "There is no content to display at this time."
+      },
+      "defaultLoadingState": {
+        "type": "skeleton",
+        "lines": 3
+      },
+      "theming": {
+        "lightMode": {
+          "backgroundColor": "var(--dls-surface-background)",
+          "textColor": "var(--dls-text-primary)",
+          "borderColor": "var(--dls-border-color)",
+          "boxShadow": "var(--dls-shadow-sm)"
+        },
+        "darkMode": {
+          "backgroundColor": "var(--dls-surface-background-dark)",
+          "textColor": "var(--dls-text-primary-dark)",
+          "borderColor": "var(--dls-border-color-dark)",
+          "boxShadow": "var(--dls-shadow-sm-dark)"
+        }
+      },
+      "accessibility": {
+        "role": "region",
+        "labelledBy": "widget-title",
+        "keyboardNavigation": true,
+        "focusable": true,
+        "ariaProps": {
+          "expanded": true,
+          "live": "polite",
+          "atomic": true
+        }
+      }
+    }
+  ]
+}

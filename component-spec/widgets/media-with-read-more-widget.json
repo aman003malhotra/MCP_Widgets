@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "widgets": [
+    {
+      "name": "MediaWithReadMore",
+      "description": "A grid of media cards with titles, descriptions, and read more links",
+      "type": "widget",
+      "category": "media",
+      "version": "1.0.0",
+      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+      "props": {
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MediaWithReadMore widget",
+          "required": ["items"],
+          "properties": {
+            "items": {
+              "type": "array",
+              "description": "Array of media cards with content and links",
+              "items": {
+                "type": "object",
+                "required": ["media", "content", "slug"],
+                "properties": {
+                  "media": {
+                    "$ref": "./commonWidgets/media.json",
+                    "description": "Media content to display in the card"
+                  },
+                  "content": {
+                    "type": "object",
+                    "description": "Text content to display with the media",
+                    "required": ["title", "info", "cta"],
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title text for the card"
+                      },
+                      "info": {
+                        "type": "string",
+                        "description": "Descriptive text or summary for the card"
+                      },
+                      "cta": {
+                        "type": "object",
+                        "description": "Call-to-action configuration",
+                        "required": ["label", "actions"],
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "description": "Text label for the CTA link",
+                            "default": "READ MORE"
+                          },
+                          "actions": {
+                            "type": "array",
+                            "description": "Actions to perform when the CTA is clicked",
+                            "items": {
+                              "allOf": [
+                                {
+                                  "$ref": "./commonWidgets/actions.json"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "URL path for the read more link"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

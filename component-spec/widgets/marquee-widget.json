@@ -1,0 +1,30 @@
+{
+  "widgets": [
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "name": "MarqueeWidget",
+      "description": "A horizontally scrolling ticker/marquee displaying a series of text items in a continuous loop",
+      "type": "widget",
+      "category": "content",
+      "version": "1.0.0",
+      "props": {
+        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
+        "widgetData": {
+          "type": "object",
+          "description": "Data specific to the MarqueeWidget",
+          "required": ["items"],
+          "subProps": {
+            "items": {
+              "type": "array",
+              "description": "Array of text items to display in the scrolling marquee",
+              "items": {
+                "type": "string",
+                "description": "Text content to display in the marquee"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
