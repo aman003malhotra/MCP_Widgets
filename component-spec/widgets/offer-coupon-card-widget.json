@@ -1,56 +1,59 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "widgets": [
+  "title": "Offer-coupon-card Widget",
+  "description": "A card displaying promotional offer details with a copyable coupon code",
+  "type": "object",
+  "category": "promotion",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "OfferCouponCard",
-      "description": "A card displaying promotional offer details with a copyable coupon code",
-      "type": "widget",
-      "category": "promotion",
-      "version": "1.0.0",
-      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-      "props": {
-        "widgetData": {
-          "type": "object",
-          "description": "Data specific to the OfferCouponCard widget",
-          "required": [
-            "offerText",
-            "subText",
-            "couponCode",
-            "useCodeText",
-            "buttonText",
-            "copiedButtonText"
-          ],
-          "properties": {
-            "offerText": {
-              "type": "string",
-              "description": "Primary offer text displayed prominently on the card"
-            },
-            "subText": {
-              "type": "string",
-              "description": "Secondary text providing additional details about the offer"
-            },
-            "couponCode": {
-              "type": "string",
-              "description": "The coupon code to be copied by the user"
-            },
-            "useCodeText": {
-              "type": "string",
-              "description": "Label text displayed before the coupon code",
-              "default": "Use Code:"
-            },
-            "buttonText": {
-              "type": "string",
-              "description": "Text displayed on the copy button before copying",
-              "default": "COPY"
-            },
-            "copiedButtonText": {
-              "type": "string",
-              "description": "Text displayed on the copy button after successful copying",
-              "default": "COPIED !"
-            }
-          }
-        }
-      }
+      "$ref": "./commonWidgets/common-props.json"
     }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "offerText": {
+          "type": "string",
+          "description": "Primary offer text displayed prominently on the card"
+        },
+        "subText": {
+          "type": "string",
+          "description": "Secondary text providing additional details about the offer"
+        },
+        "couponCode": {
+          "type": "string",
+          "description": "The coupon code to be copied by the user"
+        },
+        "useCodeText": {
+          "type": "string",
+          "description": "Label text displayed before the coupon code",
+          "default": "Use Code:"
+        },
+        "buttonText": {
+          "type": "string",
+          "description": "Text displayed on the copy button before copying",
+          "default": "COPY"
+        },
+        "copiedButtonText": {
+          "type": "string",
+          "description": "Text displayed on the copy button after successful copying",
+          "default": "COPIED !"
+        }
+      },
+      "required": [
+        "offerText",
+        "subText",
+        "couponCode",
+        "useCodeText",
+        "buttonText",
+        "copiedButtonText"
+      ]
+    }
+  },
+  "required": [
+    "widgetData"
   ]
 }

@@ -1,108 +1,125 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "widgets": [
+  "title": "Multi-product-selector Widget",
+  "description": "A widget that allows users to select multiple products for adding to cart together",
+  "type": "object",
+  "category": "product",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "MultiProductSelector",
-      "description": "A widget that allows users to select multiple products for adding to cart together",
-      "type": "widget",
-      "category": "product",
-      "version": "1.0.0",
-      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-      "props": {
-        "widgetData": {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "products": {
+          "type": "array",
+          "description": "Array of products to display for selection",
+          "items": {
+            "$ref": "./commonWidgets/product.json"
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "Source identifier for analytics tracking"
+        },
+        "totalPriceText": {
+          "type": "string",
+          "description": "Text label for the total price section",
+          "default": "Total Price"
+        },
+        "cta": {
           "type": "object",
-          "description": "Data specific to the MultiProductSelector widget",
-          "required": ["products", "cta"],
+          "description": "Call-to-action button configuration",
+          "required": [
+            "label",
+            "variant"
+          ],
           "properties": {
-            "products": {
+            "label": {
+              "type": "string",
+              "description": "Text label for the CTA button",
+              "default": "Add To Cart"
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "PRIMARY",
+                "SECONDARY",
+                "TERTIARY"
+              ],
+              "description": "Visual style of the button",
+              "default": "PRIMARY"
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "SMALL",
+                "MEDIUM",
+                "LARGE"
+              ],
+              "description": "Size of the button",
+              "default": "MEDIUM"
+            },
+            "fullWidth": {
+              "type": "boolean",
+              "description": "Whether the button should take up the full available width",
+              "default": true
+            },
+            "disabled": {
+              "type": "boolean",
+              "description": "Whether the button should be disabled",
+              "default": false
+            },
+            "customClassName": {
+              "type": "string",
+              "description": "Custom CSS class name for the button"
+            },
+            "customLabelClassName": {
+              "type": "string",
+              "description": "Custom CSS class name for the button label"
+            },
+            "loading": {
+              "type": "boolean",
+              "description": "Whether to show a loading state on the button",
+              "default": false
+            },
+            "leftIconProps": {
+              "$ref": "./commonWidgets/image-animation-props.json",
+              "description": "Configuration for an icon displayed on the left side of the button"
+            },
+            "rightIconProps": {
+              "$ref": "./commonWidgets/image-animation-props.json",
+              "description": "Configuration for an icon displayed on the right side of the button"
+            },
+            "centerIconProps": {
+              "$ref": "./commonWidgets/image-animation-props.json",
+              "description": "Configuration for an icon displayed in the center of the button"
+            },
+            "actions": {
               "type": "array",
-              "description": "Array of products to display for selection",
+              "description": "Custom actions to perform when the button is clicked (default is MULTI_ATC)",
               "items": {
-                "$ref": "./commonWidgets/product.json"
-              }
-            },
-            "source": {
-              "type": "string",
-              "description": "Source identifier for analytics tracking"
-            },
-            "totalPriceText": {
-              "type": "string",
-              "description": "Text label for the total price section",
-              "default": "Total Price"
-            },
-            "cta": {
-              "type": "object",
-              "description": "Call-to-action button configuration",
-              "required": ["label", "variant"],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Text label for the CTA button",
-                  "default": "Add To Cart"
-                },
-                "variant": {
-                  "type": "string",
-                  "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
-                  "description": "Visual style of the button",
-                  "default": "PRIMARY"
-                },
-                "size": {
-                  "type": "string",
-                  "enum": ["SMALL", "MEDIUM", "LARGE"],
-                  "description": "Size of the button",
-                  "default": "MEDIUM"
-                },
-                "fullWidth": {
-                  "type": "boolean",
-                  "description": "Whether the button should take up the full available width",
-                  "default": true
-                },
-                "disabled": {
-                  "type": "boolean",
-                  "description": "Whether the button should be disabled",
-                  "default": false
-                },
-                "customClassName": {
-                  "type": "string",
-                  "description": "Custom CSS class name for the button"
-                },
-                "customLabelClassName": {
-                  "type": "string",
-                  "description": "Custom CSS class name for the button label"
-                },
-                "loading": {
-                  "type": "boolean",
-                  "description": "Whether to show a loading state on the button",
-                  "default": false
-                },
-                "leftIconProps": {
-                  "$ref": "./commonWidgets/image-animation-props.json",
-                  "description": "Configuration for an icon displayed on the left side of the button"
-                },
-                "rightIconProps": {
-                  "$ref": "./commonWidgets/image-animation-props.json",
-                  "description": "Configuration for an icon displayed on the right side of the button"
-                },
-                "centerIconProps": {
-                  "$ref": "./commonWidgets/image-animation-props.json",
-                  "description": "Configuration for an icon displayed in the center of the button"
-                },
-                "actions": {
-                  "type": "array",
-                  "description": "Custom actions to perform when the button is clicked (default is MULTI_ATC)",
-                  "items": {
-                    "allOf": [
-                      {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    ]
+                "allOf": [
+                  {
+                    "$ref": "./commonWidgets/actions.json"
                   }
-                }
+                ]
               }
             }
           }
         }
-      }
+      },
+      "required": [
+        "products",
+        "cta"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

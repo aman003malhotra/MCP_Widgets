@@ -7,20 +7,25 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["price"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "price": {
           "type": "number",
           "description": "The product price used to calculate the Tabby payment installments"
         }
-      }
+      },
+      "required": [
+        "price"
+      ]
     }
   },
-  "required": ["widgetData"]
+  "required": [
+    "widgetData"
+  ]
 }

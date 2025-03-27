@@ -1,201 +1,210 @@
 {
-  "widgets": [
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Category-card-grid Widget",
+  "description": "A grid of category cards that displays category information with images and actions",
+  "type": "object",
+  "category": "navigation",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "CategoryCardGrid",
-      "description": "A grid of category cards that displays category information with images and actions",
-      "type": "widget",
-      "category": "navigation",
-      "version": "1.0.0",
-      "props": {
-        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-        "widgetData": {
-          "type": "object",
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "aspectRatio": {
+          "type": "number",
+          "description": "Aspect ratio for the media content in the category cards",
+          "default": 1
+        },
+        "items": {
+          "type": "array",
           "required": true,
-          "description": "Widget data configuration",
-          "subProps": {
-            "aspectRatio": {
-              "type": "number",
-              "defaultValue": 1,
-              "description": "Aspect ratio for the media content in the category cards"
-            },
-            "items": {
-              "type": "array",
-              "required": true,
-              "description": "List of category items to display in the grid",
-              "items": {
+          "description": "List of category items to display in the grid",
+          "items": {
+            "type": "object",
+            "subProps": {
+              "media": {
                 "type": "object",
-                "subProps": {
-                  "media": {
+                "required": true,
+                "description": "Media configuration for the category",
+                "oneOf": [
+                  {
                     "type": "object",
-                    "required": true,
-                    "description": "Media configuration for the category",
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "description": "Image media configuration",
-                        "subProps": {
-                          "mediaType": {
-                            "type": "enum",
-                            "options": ["image"],
-                            "required": true,
-                            "description": "Type of media"
-                          },
-                          "source": {
-                            "type": "string",
-                            "required": true,
-                            "description": "URL of the image"
-                          },
-                          "altText": {
-                            "type": "string",
-                            "required": false,
-                            "description": "Alternative text for the image"
-                          },
-                          "loading": {
-                            "type": "enum",
-                            "required": false,
-                            "options": ["lazy", "eager"],
-                            "description": "Loading behavior for the image"
-                          }
-                        }
+                    "description": "Image media configuration",
+                    "subProps": {
+                      "mediaType": {
+                        "type": "enum",
+                        "options": [
+                          "image"
+                        ],
+                        "required": true,
+                        "description": "Type of media"
                       },
-                      {
-                        "type": "object",
-                        "description": "Video media configuration",
-                        "subProps": {
-                          "mediaType": {
-                            "type": "enum",
-                            "options": ["video"],
-                            "required": true,
-                            "description": "Type of media"
-                          },
-                          "source": {
-                            "type": "string",
-                            "required": true,
-                            "description": "URL of the video"
-                          },
-                          "autoplay": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should autoplay"
-                          },
-                          "loop": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should loop"
-                          },
-                          "muted": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should be muted"
-                          },
-                          "controls": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether to show video controls"
-                          },
-                          "posterImage": {
-                            "type": "string",
-                            "required": false,
-                            "description": "URL of the poster image for the video"
-                          },
-                          "playsInline": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should play inline"
-                          }
-                        }
+                      "source": {
+                        "type": "string",
+                        "required": true,
+                        "description": "URL of the image"
                       },
-                      {
-                        "type": "object",
-                        "description": "Lottie animation configuration",
-                        "subProps": {
-                          "mediaType": {
-                            "type": "enum",
-                            "options": ["lottie"],
-                            "required": true,
-                            "description": "Type of media"
-                          },
-                          "source": {
-                            "type": "string",
-                            "required": true,
-                            "description": "URL of the Lottie animation"
-                          },
-                          "autoplay": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the animation should autoplay"
-                          },
-                          "loop": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the animation should loop"
-                          }
-                        }
+                      "altText": {
+                        "type": "string",
+                        "required": false,
+                        "description": "Alternative text for the image"
+                      },
+                      "loading": {
+                        "type": "enum",
+                        "required": false,
+                        "options": [
+                          "lazy",
+                          "eager"
+                        ],
+                        "description": "Loading behavior for the image"
                       }
-                    ]
+                    }
                   },
-                  "backgroundColor": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Background color for the category card"
+                  {
+                    "type": "object",
+                    "description": "Video media configuration",
+                    "subProps": {
+                      "mediaType": {
+                        "type": "enum",
+                        "options": [
+                          "video"
+                        ],
+                        "required": true,
+                        "description": "Type of media"
+                      },
+                      "source": {
+                        "type": "string",
+                        "required": true,
+                        "description": "URL of the video"
+                      },
+                      "autoplay": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should autoplay"
+                      },
+                      "loop": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should loop"
+                      },
+                      "muted": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should be muted"
+                      },
+                      "controls": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether to show video controls"
+                      },
+                      "posterImage": {
+                        "type": "string",
+                        "required": false,
+                        "description": "URL of the poster image for the video"
+                      },
+                      "playsInline": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should play inline"
+                      }
+                    }
                   },
-                  "categoryName": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Name of the category to display"
-                  },
-                  "description": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Description text for the category, typically listing related topics or concerns"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "required": false,
-                    "description": "URL slug for the category card link"
-                  },
-                  "actions": {
-                    "type": "array",
-                    "required": true,
-                    "description": "List of actions to perform when the card is clicked",
-                    "items": {
+                  {
+                    "type": "object",
+                    "description": "Lottie animation configuration",
+                    "subProps": {
+                      "mediaType": {
+                        "type": "enum",
+                        "options": [
+                          "lottie"
+                        ],
+                        "required": true,
+                        "description": "Type of media"
+                      },
+                      "source": {
+                        "type": "string",
+                        "required": true,
+                        "description": "URL of the Lottie animation"
+                      },
+                      "autoplay": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the animation should autoplay"
+                      },
+                      "loop": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the animation should loop"
+                      }
+                    }
+                  }
+                ]
+              },
+              "backgroundColor": {
+                "type": "string",
+                "required": true,
+                "description": "Background color for the category card"
+              },
+              "categoryName": {
+                "type": "string",
+                "required": true,
+                "description": "Name of the category to display"
+              },
+              "description": {
+                "type": "string",
+                "required": true,
+                "description": "Description text for the category, typically listing related topics or concerns"
+              },
+              "slug": {
+                "type": "string",
+                "required": false,
+                "description": "URL slug for the category card link"
+              },
+              "actions": {
+                "type": "array",
+                "required": true,
+                "description": "List of actions to perform when the card is clicked",
+                "items": {
+                  "type": "object",
+                  "subProps": {
+                    "actionName": {
+                      "type": "enum",
+                      "options": [
+                        "ADD_TO_CART",
+                        "OPEN_PDP",
+                        "APP_NAV",
+                        "TRIGGER_EVENTS_FOR_WEB",
+                        "UPDATE_DATA_LAYER",
+                        "SPA_LINK",
+                        "BOTTOM_TAB",
+                        "CLEAR_APPOINTMENT_DETAILS_CONTEXT",
+                        "GO_BACK",
+                        "SHARE",
+                        "AUTHORIZED_APP_NAV",
+                        "REPLACE_NAV",
+                        "RESET_NAV_STACK",
+                        "ENDPOINT",
+                        "SCROLL_TO_WIDGET",
+                        "OPEN_DEEPLINK",
+                        "HANDLE_OOS_NOTIFY_ME",
+                        "FETCH_WALLET_POINTS",
+                        "SEND_EVENT_TO_ALGOLIA",
+                        "OPEN_MINI_PRODUCT_PAGE_BOTTOM_SHEET",
+                        "LOGIN",
+                        "PROFILE",
+                        "MULTI_ATC"
+                      ],
+                      "required": true,
+                      "description": "Name of the action to perform"
+                    },
+                    "params": {
                       "type": "object",
-                      "subProps": {
-                        "actionName": {
-                          "type": "enum",
-                          "options": [
-                            "ADD_TO_CART",
-                            "OPEN_PDP",
-                            "APP_NAV",
-                            "TRIGGER_EVENTS_FOR_WEB",
-                            "UPDATE_DATA_LAYER",
-                            "SPA_LINK",
-                            "BOTTOM_TAB",
-                            "CLEAR_APPOINTMENT_DETAILS_CONTEXT",
-                            "GO_BACK",
-                            "SHARE",
-                            "AUTHORIZED_APP_NAV",
-                            "REPLACE_NAV",
-                            "RESET_NAV_STACK",
-                            "ENDPOINT",
-                            "SCROLL_TO_WIDGET",
-                            "OPEN_DEEPLINK",
-                            "HANDLE_OOS_NOTIFY_ME",
-                            "FETCH_WALLET_POINTS",
-                            "SEND_EVENT_TO_ALGOLIA",
-                            "OPEN_MINI_PRODUCT_PAGE_BOTTOM_SHEET",
-                            "LOGIN",
-                            "PROFILE",
-                            "MULTI_ATC"
-                          ],
-                          "required": true,
-                          "description": "Name of the action to perform"
-                        },
-                        "params": {
-                          "type": "object",
-                          "description": "Parameters for the action"
-                        }
-                      }
+                      "description": "Parameters for the action"
                     }
                   }
                 }
@@ -203,7 +212,11 @@
             }
           }
         }
-      }
+      },
+      "required": true
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

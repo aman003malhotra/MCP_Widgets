@@ -7,20 +7,23 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["tags", "categoryProducts"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "tags": {
           "type": "array",
           "description": "Array of tabs/categories to display as navigation",
           "items": {
             "type": "object",
-            "required": ["name", "keyName"],
+            "required": [
+              "name",
+              "keyName"
+            ],
             "properties": {
               "name": {
                 "type": "string",
@@ -38,7 +41,9 @@
           "description": "Map of category key names to their products",
           "additionalProperties": {
             "type": "object",
-            "required": ["products"],
+            "required": [
+              "products"
+            ],
             "properties": {
               "products": {
                 "type": "array",
@@ -113,7 +118,10 @@
                       "description": "List of reasons why the product works well",
                       "items": {
                         "type": "object",
-                        "required": ["label", "text"],
+                        "required": [
+                          "label",
+                          "text"
+                        ],
                         "properties": {
                           "label": {
                             "type": "string",
@@ -136,7 +144,12 @@
                     },
                     "media": {
                       "type": "object",
-                      "required": ["mediaType", "source", "loading", "altText"],
+                      "required": [
+                        "mediaType",
+                        "source",
+                        "loading",
+                        "altText"
+                      ],
                       "properties": {
                         "mediaType": {
                           "type": "string",
@@ -150,7 +163,10 @@
                         "loading": {
                           "type": "string",
                           "description": "Loading behavior for the media (lazy, eager)",
-                          "enum": ["lazy", "eager"]
+                          "enum": [
+                            "lazy",
+                            "eager"
+                          ]
                         },
                         "altText": {
                           "type": "string",
@@ -164,7 +180,9 @@
                     },
                     "cta": {
                       "type": "object",
-                      "required": ["action"],
+                      "required": [
+                        "action"
+                      ],
                       "properties": {
                         "action": {
                           "type": "string",
@@ -214,7 +232,11 @@
               "format": "uri"
             }
           },
-          "required": ["title", "subtitle", "image"]
+          "required": [
+            "title",
+            "subtitle",
+            "image"
+          ]
         },
         "shouldOpenMiniPdp": {
           "type": "boolean",
@@ -269,8 +291,14 @@
           "type": "function",
           "description": "Function handler for updating cart items that takes a product object as argument"
         }
-      }
+      },
+      "required": [
+        "tags",
+        "categoryProducts"
+      ]
     }
   },
-  "required": ["widgetData"]
+  "required": [
+    "widgetData"
+  ]
 }

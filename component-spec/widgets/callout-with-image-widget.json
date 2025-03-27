@@ -7,13 +7,13 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["text"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "image": {
           "type": "string",
@@ -21,8 +21,8 @@
         },
         "altText": {
           "type": "string",
-          "defaultValue": "icon",
-          "description": "Alternative text for the image"
+          "description": "Alternative text for the image",
+          "default": "icon"
         },
         "text": {
           "type": "string",
@@ -30,12 +30,22 @@
         },
         "variant": {
           "type": "string",
-          "enum": ["INFO", "WARNING", "DANGER", "BRAND"],
+          "enum": [
+            "INFO",
+            "WARNING",
+            "DANGER",
+            "BRAND"
+          ],
           "description": "Visual variant of the callout. INFO: Green background with darker green text. WARNING: Yellow background with darker yellow text. DANGER: Red background with darker red text. BRAND: Brand primary color background with darker brand primary color text.",
           "default": "INFO"
         }
-      }
+      },
+      "required": [
+        "text"
+      ]
     }
   },
-  "required": ["widgetData"]
+  "required": [
+    "widgetData"
+  ]
 }

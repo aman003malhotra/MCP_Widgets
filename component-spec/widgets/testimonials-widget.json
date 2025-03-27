@@ -7,13 +7,13 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["items"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "labelColor": {
           "type": "string",
@@ -70,7 +70,11 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": ["SMALL", "MEDIUM", "LARGE"],
+              "enum": [
+                "SMALL",
+                "MEDIUM",
+                "LARGE"
+              ],
               "description": "Size of the peek for the next slide",
               "default": "MEDIUM"
             },
@@ -90,7 +94,11 @@
           "description": "Array of testimonial items to display",
           "items": {
             "type": "object",
-            "required": ["media", "title", "testimonialBody"],
+            "required": [
+              "media",
+              "title",
+              "testimonialBody"
+            ],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json",
@@ -119,7 +127,13 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     }
-  }
+  },
+  "required": [
+    "widgetData"
+  ]
 }

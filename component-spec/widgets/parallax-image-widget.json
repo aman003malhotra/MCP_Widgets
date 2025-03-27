@@ -1,107 +1,124 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "widgets": [
+  "title": "Parallax-image Widget",
+  "description": "An interactive component that displays images with parallax scrolling effects and tab navigation",
+  "type": "object",
+  "category": "media",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "ParallaxImage",
-      "description": "An interactive component that displays images with parallax scrolling effects and tab navigation",
-      "type": "widget",
-      "category": "media",
-      "version": "1.0.0",
-      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-      "props": {
-        "widgetData": {
-          "type": "object",
-          "description": "Data specific to the ParallaxImage widget",
-          "required": ["items"],
-          "properties": {
-            "items": {
-              "type": "array",
-              "description": "Array of tab items with associated images and text",
-              "items": {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of tab items with associated images and text",
+          "items": {
+            "type": "object",
+            "required": [
+              "tabName",
+              "color",
+              "item1",
+              "item2",
+              "item3",
+              "item4"
+            ],
+            "properties": {
+              "tabName": {
+                "type": "string",
+                "description": "Name of the tab to be displayed in navigation"
+              },
+              "color": {
+                "type": "string",
+                "description": "Color code for the tab and associated elements (hex or CSS color)"
+              },
+              "item1": {
                 "type": "object",
+                "description": "First image item with text",
                 "required": [
-                  "tabName",
-                  "color",
-                  "item1",
-                  "item2",
-                  "item3",
-                  "item4"
+                  "img",
+                  "text"
                 ],
                 "properties": {
-                  "tabName": {
+                  "img": {
                     "type": "string",
-                    "description": "Name of the tab to be displayed in navigation"
+                    "description": "URL for the image"
                   },
-                  "color": {
+                  "text": {
                     "type": "string",
-                    "description": "Color code for the tab and associated elements (hex or CSS color)"
+                    "description": "Text label associated with the image"
+                  }
+                }
+              },
+              "item2": {
+                "type": "object",
+                "description": "Second image item with text",
+                "required": [
+                  "img",
+                  "text"
+                ],
+                "properties": {
+                  "img": {
+                    "type": "string",
+                    "description": "URL for the image"
                   },
-                  "item1": {
-                    "type": "object",
-                    "description": "First image item with text",
-                    "required": ["img", "text"],
-                    "properties": {
-                      "img": {
-                        "type": "string",
-                        "description": "URL for the image"
-                      },
-                      "text": {
-                        "type": "string",
-                        "description": "Text label associated with the image"
-                      }
-                    }
+                  "text": {
+                    "type": "string",
+                    "description": "Text label associated with the image"
+                  }
+                }
+              },
+              "item3": {
+                "type": "object",
+                "description": "Third image item with text",
+                "required": [
+                  "img",
+                  "text"
+                ],
+                "properties": {
+                  "img": {
+                    "type": "string",
+                    "description": "URL for the image"
                   },
-                  "item2": {
-                    "type": "object",
-                    "description": "Second image item with text",
-                    "required": ["img", "text"],
-                    "properties": {
-                      "img": {
-                        "type": "string",
-                        "description": "URL for the image"
-                      },
-                      "text": {
-                        "type": "string",
-                        "description": "Text label associated with the image"
-                      }
-                    }
+                  "text": {
+                    "type": "string",
+                    "description": "Text label associated with the image"
+                  }
+                }
+              },
+              "item4": {
+                "type": "object",
+                "description": "Fourth image item with text",
+                "required": [
+                  "img",
+                  "text"
+                ],
+                "properties": {
+                  "img": {
+                    "type": "string",
+                    "description": "URL for the image"
                   },
-                  "item3": {
-                    "type": "object",
-                    "description": "Third image item with text",
-                    "required": ["img", "text"],
-                    "properties": {
-                      "img": {
-                        "type": "string",
-                        "description": "URL for the image"
-                      },
-                      "text": {
-                        "type": "string",
-                        "description": "Text label associated with the image"
-                      }
-                    }
-                  },
-                  "item4": {
-                    "type": "object",
-                    "description": "Fourth image item with text",
-                    "required": ["img", "text"],
-                    "properties": {
-                      "img": {
-                        "type": "string",
-                        "description": "URL for the image"
-                      },
-                      "text": {
-                        "type": "string",
-                        "description": "Text label associated with the image"
-                      }
-                    }
+                  "text": {
+                    "type": "string",
+                    "description": "Text label associated with the image"
                   }
                 }
               }
             }
           }
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

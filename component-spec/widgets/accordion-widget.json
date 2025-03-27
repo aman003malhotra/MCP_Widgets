@@ -1,62 +1,72 @@
 {
-  "widgets": [
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Accordion Widget",
+  "description": "A collapsible accordion component that displays a list of expandable items with optional images",
+  "type": "object",
+  "category": "interactive",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "Accordion",
-      "description": "A collapsible accordion component that displays a list of expandable items with optional images",
-      "type": "widget",
-      "category": "interactive",
-      "version": "1.0.0",
-      "props": {
-        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-        "widgetData": {
-          "type": "object",
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "titleFontWeight": {
+          "type": "string",
+          "description": "Font weight for the accordion item titles",
+          "default": "bold",
+          "enum": [
+            "light",
+            "bold"
+          ]
+        },
+        "iconVariant": {
+          "type": "string",
+          "description": "Type of icon to use for expand/collapse",
+          "default": "chevron",
+          "enum": [
+            "chevron",
+            "plus-minus"
+          ]
+        },
+        "isInitiallyOpen": {
+          "type": "boolean",
+          "description": "Whether all accordion items should be initially expanded",
+          "default": false
+        },
+        "list": {
+          "type": "array",
           "required": true,
-          "description": "Widget data configuration",
-          "subProps": {
-            "titleFontWeight": {
-              "type": "enum",
-              "options": ["light", "bold"],
-              "defaultValue": "bold",
-              "description": "Font weight for the accordion item titles"
-            },
-            "iconVariant": {
-              "type": "enum",
-              "options": ["chevron", "plus-minus"],
-              "defaultValue": "chevron",
-              "description": "Type of icon to use for expand/collapse"
-            },
-            "isInitiallyOpen": {
-              "type": "boolean",
-              "defaultValue": false,
-              "description": "Whether all accordion items should be initially expanded"
-            },
-            "list": {
-              "type": "array",
-              "required": true,
-              "description": "List of accordion items",
-              "items": {
-                "type": "object",
-                "subProps": {
-                  "title": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Title text for the accordion item"
-                  },
-                  "content": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Content text for the accordion item"
-                  },
-                  "image": {
-                    "type": "string",
-                    "description": "URL of the image to display with the accordion item"
-                  }
-                }
+          "description": "List of accordion items",
+          "items": {
+            "type": "object",
+            "subProps": {
+              "title": {
+                "type": "string",
+                "required": true,
+                "description": "Title text for the accordion item"
+              },
+              "content": {
+                "type": "string",
+                "required": true,
+                "description": "Content text for the accordion item"
+              },
+              "image": {
+                "type": "string",
+                "description": "URL of the image to display with the accordion item"
               }
             }
           }
         }
-      }
+      },
+      "required": true
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

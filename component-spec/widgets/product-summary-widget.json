@@ -7,13 +7,13 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["productSummary", "onRatingsClick"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "productSummary": {
           "type": "object",
@@ -88,7 +88,9 @@
               "description": "A list of product highlights or key features",
               "items": {
                 "type": "object",
-                "required": ["text"],
+                "required": [
+                  "text"
+                ],
                 "properties": {
                   "text": {
                     "type": "string",
@@ -101,7 +103,9 @@
         },
         "onRatingsClick": {
           "type": "object",
-          "required": ["actions"],
+          "required": [
+            "actions"
+          ],
           "properties": {
             "slugUrl": {
               "type": "string",
@@ -116,7 +120,14 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "productSummary",
+        "onRatingsClick"
+      ]
     }
-  }
+  },
+  "required": [
+    "widgetData"
+  ]
 }

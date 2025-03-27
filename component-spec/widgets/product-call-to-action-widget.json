@@ -1,117 +1,133 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "widgets": [
+  "title": "Product-call-to-action Widget",
+  "description": "A sticky product call-to-action widget with quantity selection and add to cart functionality",
+  "type": "object",
+  "category": "product",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "ProductCallToAction",
-      "description": "A sticky product call-to-action widget with quantity selection and add to cart functionality",
-      "type": "widget",
-      "category": "product",
-      "version": "1.0.0",
-      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-      "props": {
-        "widgetData": {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "productInfo": {
           "type": "object",
-          "description": "Data specific to the ProductCallToAction widget",
-          "required": ["productInfo"],
+          "description": "Product information for the call to action",
+          "required": [
+            "name",
+            "sku",
+            "actualPrice",
+            "priceLabel"
+          ],
           "properties": {
-            "productInfo": {
-              "type": "object",
-              "description": "Product information for the call to action",
-              "required": ["name", "sku", "actualPrice", "priceLabel"],
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of the product"
-                },
-                "subtitle": {
-                  "type": "string",
-                  "description": "Subtitle or short description of the product"
-                },
-                "rating": {
-                  "type": "string",
-                  "description": "Product rating value"
-                },
-                "sku": {
-                  "type": "string",
-                  "description": "Stock keeping unit identifier for the product"
-                },
-                "recommendation": {
-                  "type": "string",
-                  "description": "Percentage of recommendation for the product"
-                },
-                "reviews": {
-                  "type": "string",
-                  "description": "Number of reviews for the product, formatted as a string"
-                },
-                "discountText": {
-                  "type": "string",
-                  "description": "Text describing any discount offered"
-                },
-                "actualPrice": {
-                  "type": "number",
-                  "description": "Original price of the product"
-                },
-                "discountedPrice": {
-                  "type": ["number", "null"],
-                  "description": "Discounted price of the product, if applicable"
-                },
-                "priceLabel": {
-                  "type": "string",
-                  "description": "Formatted price label for display"
-                },
-                "discountedPriceLabel": {
-                  "type": ["string", "null"],
-                  "description": "Formatted discounted price label for display, if applicable"
-                },
-                "urlKey": {
-                  "type": "string",
-                  "description": "URL key for the product"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "Unique identifier for the product"
-                },
-                "reviewCount": {
-                  "type": "string",
-                  "description": "Number of reviews for the product"
-                },
-                "unitsSold": {
-                  "type": "string",
-                  "description": "Number of units sold"
-                },
-                "concern": {
-                  "type": "string",
-                  "description": "Health concern addressed by the product"
-                },
-                "rxType": {
-                  "type": "string",
-                  "description": "Type of prescription requirement"
-                },
-                "productFor": {
-                  "type": "string",
-                  "description": "Condition the product is designed for"
-                },
-                "category": {
-                  "type": "string",
-                  "description": "Product category"
-                },
-                "isRx": {
-                  "type": "boolean",
-                  "description": "Whether the product requires a prescription"
-                },
-                "slugUrl": {
-                  "type": "string",
-                  "description": "URL slug for the product"
-                },
-                "outOfStock": {
-                  "type": "boolean",
-                  "description": "Whether the product is out of stock"
-                }
-              }
+            "name": {
+              "type": "string",
+              "description": "Name of the product"
+            },
+            "subtitle": {
+              "type": "string",
+              "description": "Subtitle or short description of the product"
+            },
+            "rating": {
+              "type": "string",
+              "description": "Product rating value"
+            },
+            "sku": {
+              "type": "string",
+              "description": "Stock keeping unit identifier for the product"
+            },
+            "recommendation": {
+              "type": "string",
+              "description": "Percentage of recommendation for the product"
+            },
+            "reviews": {
+              "type": "string",
+              "description": "Number of reviews for the product, formatted as a string"
+            },
+            "discountText": {
+              "type": "string",
+              "description": "Text describing any discount offered"
+            },
+            "actualPrice": {
+              "type": "number",
+              "description": "Original price of the product"
+            },
+            "discountedPrice": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Discounted price of the product, if applicable"
+            },
+            "priceLabel": {
+              "type": "string",
+              "description": "Formatted price label for display"
+            },
+            "discountedPriceLabel": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Formatted discounted price label for display, if applicable"
+            },
+            "urlKey": {
+              "type": "string",
+              "description": "URL key for the product"
+            },
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the product"
+            },
+            "reviewCount": {
+              "type": "string",
+              "description": "Number of reviews for the product"
+            },
+            "unitsSold": {
+              "type": "string",
+              "description": "Number of units sold"
+            },
+            "concern": {
+              "type": "string",
+              "description": "Health concern addressed by the product"
+            },
+            "rxType": {
+              "type": "string",
+              "description": "Type of prescription requirement"
+            },
+            "productFor": {
+              "type": "string",
+              "description": "Condition the product is designed for"
+            },
+            "category": {
+              "type": "string",
+              "description": "Product category"
+            },
+            "isRx": {
+              "type": "boolean",
+              "description": "Whether the product requires a prescription"
+            },
+            "slugUrl": {
+              "type": "string",
+              "description": "URL slug for the product"
+            },
+            "outOfStock": {
+              "type": "boolean",
+              "description": "Whether the product is out of stock"
             }
           }
         }
-      }
+      },
+      "required": [
+        "productInfo"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

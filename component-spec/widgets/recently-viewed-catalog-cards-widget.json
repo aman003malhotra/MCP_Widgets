@@ -1,18 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Recently Viewed Catalog Cards Widget",
+  "description": "This widget automatically fetches and displays products that the user has recently viewed. The products array is populated dynamically based on the user's browsing history and the current product page. The widget reuses the CatalogCards component to render the UI.",
   "type": "object",
   "category": "Product",
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["sliderConfig"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "products": {
           "type": "array",
@@ -136,7 +137,11 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": ["SMALL", "MEDIUM", "LARGE"],
+              "enum": [
+                "SMALL",
+                "MEDIUM",
+                "LARGE"
+              ],
               "description": "Size of the peek for the next slide"
             },
             "showArrows": {
@@ -145,7 +150,12 @@
             },
             "arrowPosition": {
               "type": "string",
-              "enum": ["inside", "outside", "top", "bottom"],
+              "enum": [
+                "inside",
+                "outside",
+                "top",
+                "bottom"
+              ],
               "description": "Position of the navigation arrows relative to the carousel content",
               "default": "inside"
             },
@@ -177,8 +187,13 @@
           "type": "string",
           "description": "SKU of the item currently being added to cart"
         }
-      }
+      },
+      "required": [
+        "sliderConfig"
+      ]
     }
   },
-  "description": "This widget automatically fetches and displays products that the user has recently viewed. The products array is populated dynamically based on the user's browsing history and the current product page. The widget reuses the CatalogCards component to render the UI."
+  "required": [
+    "widgetData"
+  ]
 }

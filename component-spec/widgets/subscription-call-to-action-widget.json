@@ -7,13 +7,13 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["productInfo", "subscriptionInfo"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "productInfo": {
           "type": "object",
@@ -57,12 +57,18 @@
               "description": "Original price of the product"
             },
             "discountedPrice": {
-              "type": ["number", "null"],
+              "type": [
+                "number",
+                "null"
+              ],
               "description": "Discounted price of the product, if applicable"
             },
             "currentlyViewing": {
               "type": "object",
-              "required": ["currentlyViewingBase", "noiseRange"],
+              "required": [
+                "currentlyViewingBase",
+                "noiseRange"
+              ],
               "properties": {
                 "currentlyViewingBase": {
                   "type": "string",
@@ -76,7 +82,11 @@
             },
             "preorder": {
               "type": "object",
-              "required": ["status", "label", "subtitle"],
+              "required": [
+                "status",
+                "label",
+                "subtitle"
+              ],
               "properties": {
                 "status": {
                   "type": "boolean",
@@ -105,11 +115,17 @@
               "description": "Label for the price"
             },
             "discountedPriceLabel": {
-              "type": ["string", "null"],
+              "type": [
+                "string",
+                "null"
+              ],
               "description": "Label for the discounted price, if applicable"
             },
             "actualPriceLabel": {
-              "type": ["string", "null"],
+              "type": [
+                "string",
+                "null"
+              ],
               "description": "Label for the actual price, if applicable"
             },
             "urlKey": {
@@ -150,7 +166,10 @@
             },
             "types": {
               "type": "object",
-              "required": ["kits", "single"],
+              "required": [
+                "kits",
+                "single"
+              ],
               "properties": {
                 "kits": {
                   "type": "boolean",
@@ -199,11 +218,17 @@
               "description": "Whether the product is a virtual/digital product"
             },
             "cashbackInfo": {
-              "type": ["string", "null"],
+              "type": [
+                "string",
+                "null"
+              ],
               "description": "Information about cashback offers, if applicable"
             },
             "availableDays": {
-              "type": ["string", "null"],
+              "type": [
+                "string",
+                "null"
+              ],
               "description": "Information about product availability by days, if applicable"
             }
           }
@@ -214,7 +239,11 @@
         },
         "subscriptionInfo": {
           "type": "object",
-          "required": ["title", "options", "toolTip"],
+          "required": [
+            "title",
+            "options",
+            "toolTip"
+          ],
           "properties": {
             "title": {
               "type": "string",
@@ -222,7 +251,10 @@
             },
             "options": {
               "type": "object",
-              "required": ["inputLabel", "items"],
+              "required": [
+                "inputLabel",
+                "items"
+              ],
               "properties": {
                 "inputLabel": {
                   "type": "string",
@@ -233,7 +265,12 @@
                   "description": "Available subscription options",
                   "items": {
                     "type": "object",
-                    "required": ["text", "frequency", "discountLabel", "price"],
+                    "required": [
+                      "text",
+                      "frequency",
+                      "discountLabel",
+                      "price"
+                    ],
                     "properties": {
                       "text": {
                         "type": "string",
@@ -258,7 +295,10 @@
             },
             "toolTip": {
               "type": "object",
-              "required": ["label", "content"],
+              "required": [
+                "label",
+                "content"
+              ],
               "properties": {
                 "label": {
                   "type": "string",
@@ -266,7 +306,10 @@
                 },
                 "content": {
                   "type": "object",
-                  "required": ["title", "textItems"],
+                  "required": [
+                    "title",
+                    "textItems"
+                  ],
                   "properties": {
                     "title": {
                       "type": "string",
@@ -302,7 +345,14 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "productInfo",
+        "subscriptionInfo"
+      ]
     }
-  }
+  },
+  "required": [
+    "widgetData"
+  ]
 }

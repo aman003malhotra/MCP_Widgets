@@ -1,45 +1,53 @@
 {
-  "widgets": [
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Information-grid-strip Widget",
+  "description": "A grid strip displaying information items with labels and values",
+  "type": "object",
+  "category": "information",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "name": "InformationGridStrip",
-      "description": "A grid strip displaying information items with labels and values",
-      "type": "widget",
-      "category": "information",
-      "version": "1.0.0",
-      "props": {
-        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-        "widgetData": {
-          "type": "object",
-          "description": "Data specific to the InformationGridStrip widget",
-          "required": ["items"],
-          "subProps": {
-            "category": {
-              "type": "string",
-              "description": "Category identifier for the strip styling",
-              "defaultValue": "hair"
-            },
-            "items": {
-              "type": "array",
-              "description": "Array of information items to display in the grid",
-              "items": {
-                "type": "object",
-                "required": ["label", "value"],
-                "subProps": {
-                  "label": {
-                    "type": "string",
-                    "description": "Label text for the information item, typically displayed in bold"
-                  },
-                  "value": {
-                    "type": "string",
-                    "description": "Value text for the information item, typically displayed in regular font"
-                  }
-                }
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Category identifier for the strip styling",
+          "default": "hair"
+        },
+        "items": {
+          "type": "array",
+          "description": "Array of information items to display in the grid",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "subProps": {
+              "label": {
+                "type": "string",
+                "description": "Label text for the information item, typically displayed in bold"
+              },
+              "value": {
+                "type": "string",
+                "description": "Value text for the information item, typically displayed in regular font"
               }
             }
           }
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

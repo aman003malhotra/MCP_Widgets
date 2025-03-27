@@ -1,180 +1,222 @@
 {
-  "widgets": [
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Image-cta-grid Widget",
+  "description": "A grid layout featuring image-based CTAs arranged in left, center, and right sections",
+  "type": "object",
+  "category": "media",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "name": "ImageCtaGridView",
-      "description": "A grid layout featuring image-based CTAs arranged in left, center, and right sections",
-      "type": "widget",
-      "category": "media",
-      "version": "1.0.0",
-      "props": {
-        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-        "widgetData": {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "leftSection": {
           "type": "object",
-          "description": "Data specific to the ImageCtaGridView widget",
-          "required": ["leftSection", "centerSection", "rightSection"],
-          "subProps": {
-            "leftSection": {
+          "description": "Configuration for the left section of the grid",
+          "required": [
+            "card1",
+            "card2",
+            "card3"
+          ],
+          "properties": {
+            "card1": {
               "type": "object",
-              "description": "Configuration for the left section of the grid",
-              "required": ["card1", "card2", "card3"],
-              "subProps": {
-                "card1": {
-                  "type": "object",
-                  "required": ["imageUrl", "label", "actions"],
-                  "subProps": {
-                    "imageUrl": {
-                      "type": "string",
-                      "description": "URL of the image for card 1"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Text label for card 1"
-                    },
-                    "actions": {
-                      "type": "array",
-                      "description": "Actions to perform when card 1 is clicked",
-                      "items": {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    }
-                  }
-                },
-                "card2": {
-                  "type": "object",
-                  "required": ["imageUrl", "label", "actions"],
-                  "subProps": {
-                    "imageUrl": {
-                      "type": "string",
-                      "description": "URL of the image for card 2"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Text label for card 2"
-                    },
-                    "actions": {
-                      "type": "array",
-                      "description": "Actions to perform when card 2 is clicked",
-                      "items": {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    }
-                  }
-                },
-                "card3": {
-                  "type": "object",
-                  "required": ["imageUrl", "label", "actions"],
-                  "subProps": {
-                    "imageUrl": {
-                      "type": "string",
-                      "description": "URL of the image for card 3"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Text label for card 3"
-                    },
-                    "actions": {
-                      "type": "array",
-                      "description": "Actions to perform when card 3 is clicked",
-                      "items": {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "centerSection": {
-              "type": "object",
-              "description": "Configuration for the center section of the grid",
-              "required": ["imageUrl", "actions"],
-              "subProps": {
+              "required": [
+                "imageUrl",
+                "label",
+                "actions"
+              ],
+              "properties": {
                 "imageUrl": {
                   "type": "string",
-                  "description": "URL of the image for the center section"
+                  "description": "URL of the image for card 1"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Text label for card 1"
                 },
                 "actions": {
                   "type": "array",
-                  "description": "Actions to perform when the center section is clicked",
+                  "description": "Actions to perform when card 1 is clicked",
                   "items": {
                     "$ref": "./commonWidgets/actions.json"
                   }
                 }
               }
             },
-            "rightSection": {
+            "card2": {
               "type": "object",
-              "description": "Configuration for the right section of the grid",
-              "required": ["card1", "card2", "card3"],
-              "subProps": {
-                "card1": {
-                  "type": "object",
-                  "required": ["imageUrl", "label", "actions"],
-                  "subProps": {
-                    "imageUrl": {
-                      "type": "string",
-                      "description": "URL of the image for card 1"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Text label for card 1"
-                    },
-                    "actions": {
-                      "type": "array",
-                      "description": "Actions to perform when card 1 is clicked",
-                      "items": {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    }
-                  }
+              "required": [
+                "imageUrl",
+                "label",
+                "actions"
+              ],
+              "properties": {
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image for card 2"
                 },
-                "card2": {
-                  "type": "object",
-                  "required": ["imageUrl", "label", "actions"],
-                  "subProps": {
-                    "imageUrl": {
-                      "type": "string",
-                      "description": "URL of the image for card 2"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Text label for card 2"
-                    },
-                    "actions": {
-                      "type": "array",
-                      "description": "Actions to perform when card 2 is clicked",
-                      "items": {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    }
-                  }
+                "label": {
+                  "type": "string",
+                  "description": "Text label for card 2"
                 },
-                "card3": {
-                  "type": "object",
-                  "required": ["imageUrl", "label", "actions"],
-                  "subProps": {
-                    "imageUrl": {
-                      "type": "string",
-                      "description": "URL of the image for card 3"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Text label for card 3"
-                    },
-                    "actions": {
-                      "type": "array",
-                      "description": "Actions to perform when card 3 is clicked",
-                      "items": {
-                        "$ref": "./commonWidgets/actions.json"
-                      }
-                    }
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when card 2 is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
+                  }
+                }
+              }
+            },
+            "card3": {
+              "type": "object",
+              "required": [
+                "imageUrl",
+                "label",
+                "actions"
+              ],
+              "properties": {
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image for card 3"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Text label for card 3"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when card 3 is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "centerSection": {
+          "type": "object",
+          "description": "Configuration for the center section of the grid",
+          "required": [
+            "imageUrl",
+            "actions"
+          ],
+          "properties": {
+            "imageUrl": {
+              "type": "string",
+              "description": "URL of the image for the center section"
+            },
+            "actions": {
+              "type": "array",
+              "description": "Actions to perform when the center section is clicked",
+              "items": {
+                "$ref": "./commonWidgets/actions.json"
+              }
+            }
+          }
+        },
+        "rightSection": {
+          "type": "object",
+          "description": "Configuration for the right section of the grid",
+          "required": [
+            "card1",
+            "card2",
+            "card3"
+          ],
+          "properties": {
+            "card1": {
+              "type": "object",
+              "required": [
+                "imageUrl",
+                "label",
+                "actions"
+              ],
+              "properties": {
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image for card 1"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Text label for card 1"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when card 1 is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
+                  }
+                }
+              }
+            },
+            "card2": {
+              "type": "object",
+              "required": [
+                "imageUrl",
+                "label",
+                "actions"
+              ],
+              "properties": {
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image for card 2"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Text label for card 2"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when card 2 is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
+                  }
+                }
+              }
+            },
+            "card3": {
+              "type": "object",
+              "required": [
+                "imageUrl",
+                "label",
+                "actions"
+              ],
+              "properties": {
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image for card 3"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Text label for card 3"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when card 3 is clicked",
+                  "items": {
+                    "$ref": "./commonWidgets/actions.json"
                   }
                 }
               }
             }
           }
         }
-      }
+      },
+      "required": [
+        "leftSection",
+        "centerSection",
+        "rightSection"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

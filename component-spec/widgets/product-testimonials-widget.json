@@ -7,13 +7,13 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["products"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "products": {
           "type": "array",
@@ -82,7 +82,10 @@
                 "description": "List of reasons why the product works well",
                 "items": {
                   "type": "object",
-                  "required": ["label", "text"],
+                  "required": [
+                    "label",
+                    "text"
+                  ],
                   "properties": {
                     "label": {
                       "type": "string",
@@ -179,14 +182,24 @@
             },
             "arrowPosition": {
               "type": "string",
-              "enum": ["inside", "outside", "top", "bottom"],
+              "enum": [
+                "inside",
+                "outside",
+                "top",
+                "bottom"
+              ],
               "description": "Position of the navigation arrows relative to the carousel content",
               "default": "outside"
             }
           }
         }
-      }
+      },
+      "required": [
+        "products"
+      ]
     }
   },
-  "required": ["widgetData"]
+  "required": [
+    "widgetData"
+  ]
 }

@@ -7,20 +7,24 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["items"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "items": {
           "type": "array",
           "description": "Array of tab items with associated content",
           "items": {
             "type": "object",
-            "required": ["tabName", "imageUrl", "content"],
+            "required": [
+              "tabName",
+              "imageUrl",
+              "content"
+            ],
             "properties": {
               "tabName": {
                 "type": "string",
@@ -42,7 +46,10 @@
                 "properties": {
                   "heading": {
                     "type": "object",
-                    "required": ["title", "info"],
+                    "required": [
+                      "title",
+                      "info"
+                    ],
                     "properties": {
                       "title": {
                         "type": "string",
@@ -59,7 +66,10 @@
                     "description": "List of detail items with labels and information",
                     "items": {
                       "type": "object",
-                      "required": ["label", "info"],
+                      "required": [
+                        "label",
+                        "info"
+                      ],
                       "properties": {
                         "label": {
                           "type": "string",
@@ -74,7 +84,10 @@
                   },
                   "iconListContent": {
                     "type": "object",
-                    "required": ["title", "items"],
+                    "required": [
+                      "title",
+                      "items"
+                    ],
                     "properties": {
                       "title": {
                         "type": "string",
@@ -85,7 +98,10 @@
                         "description": "List of items with icons and labels",
                         "items": {
                           "type": "object",
-                          "required": ["icon", "label"],
+                          "required": [
+                            "icon",
+                            "label"
+                          ],
                           "properties": {
                             "icon": {
                               "type": "string",
@@ -106,11 +122,18 @@
                     "description": "List of accordion items with expandable content",
                     "items": {
                       "type": "object",
-                      "required": ["data", "iconVariant", "initiallyOpen"],
+                      "required": [
+                        "data",
+                        "iconVariant",
+                        "initiallyOpen"
+                      ],
                       "properties": {
                         "data": {
                           "type": "object",
-                          "required": ["title", "content"],
+                          "required": [
+                            "title",
+                            "content"
+                          ],
                           "properties": {
                             "title": {
                               "type": "string",
@@ -129,12 +152,18 @@
                         },
                         "iconVariant": {
                           "type": "string",
-                          "enum": ["chevron", "plus-minus"],
+                          "enum": [
+                            "chevron",
+                            "plus-minus"
+                          ],
                           "description": "The type of icon to use for indicating expanded/collapsed state"
                         },
                         "titleFontWeight": {
                           "type": "string",
-                          "enum": ["light", "bold"],
+                          "enum": [
+                            "light",
+                            "bold"
+                          ],
                           "description": "Font weight for the accordion title",
                           "default": "bold"
                         },
@@ -151,8 +180,13 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     }
   },
-  "required": ["widgetData"]
+  "required": [
+    "widgetData"
+  ]
 }

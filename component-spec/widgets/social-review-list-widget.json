@@ -7,20 +7,25 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["reviews", "cta"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "reviews": {
           "type": "array",
           "description": "Array of review items to be displayed",
           "items": {
             "type": "object",
-            "required": ["rating", "title", "subTitle", "publishDetails"],
+            "required": [
+              "rating",
+              "title",
+              "subTitle",
+              "publishDetails"
+            ],
             "properties": {
               "rating": {
                 "type": "number",
@@ -74,7 +79,10 @@
         "cta": {
           "type": "object",
           "description": "Call-to-action button configuration",
-          "required": ["variant", "size"],
+          "required": [
+            "variant",
+            "size"
+          ],
           "properties": {
             "variant": {
               "type": "string",
@@ -102,7 +110,14 @@
           "description": "Whether to show the CTA button",
           "default": true
         }
-      }
+      },
+      "required": [
+        "reviews",
+        "cta"
+      ]
     }
-  }
+  },
+  "required": [
+    "widgetData"
+  ]
 }

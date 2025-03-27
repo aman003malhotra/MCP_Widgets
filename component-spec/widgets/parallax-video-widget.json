@@ -1,44 +1,53 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "widgets": [
+  "title": "Parallax-video Widget",
+  "description": "A tabbed video component with parallax effects",
+  "type": "object",
+  "category": "media",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "ParallaxVideo",
-      "description": "A tabbed video component with parallax effects",
-      "type": "widget",
-      "category": "media",
-      "version": "1.0.0",
-      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-      "props": {
-        "widgetData": {
-          "type": "object",
-          "description": "Data specific to the ParallaxVideo widget",
-          "required": ["items"],
-          "properties": {
-            "items": {
-              "type": "array",
-              "description": "Array of video items with tab navigation",
-              "items": {
-                "type": "object",
-                "required": ["tabName", "video", "color"],
-                "properties": {
-                  "tabName": {
-                    "type": "string",
-                    "description": "Name of the tab to be displayed in navigation"
-                  },
-                  "video": {
-                    "type": "string",
-                    "description": "URL for the video to be displayed"
-                  },
-                  "color": {
-                    "type": "string",
-                    "description": "Color code for the tab and associated elements (hex or CSS color)"
-                  }
-                }
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of video items with tab navigation",
+          "items": {
+            "type": "object",
+            "required": [
+              "tabName",
+              "video",
+              "color"
+            ],
+            "properties": {
+              "tabName": {
+                "type": "string",
+                "description": "Name of the tab to be displayed in navigation"
+              },
+              "video": {
+                "type": "string",
+                "description": "URL for the video to be displayed"
+              },
+              "color": {
+                "type": "string",
+                "description": "Color code for the tab and associated elements (hex or CSS color)"
               }
             }
           }
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

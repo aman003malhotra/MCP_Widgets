@@ -1,195 +1,220 @@
 {
-  "widgets": [
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Expanded-media Widget",
+  "description": "A widget that displays media items in an expandable gallery format with a preview modal",
+  "type": "object",
+  "category": "media",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "name": "ExpandedMedia",
-      "description": "A widget that displays media items in an expandable gallery format with a preview modal",
-      "type": "widget",
-      "category": "media",
-      "version": "1.0.0",
-      "props": {
-        "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-        "widgetData": {
-          "type": "object",
-          "description": "Specific data for the expanded media widget",
-          "required": ["items", "sliderConfig"],
-          "subProps": {
-            "items": {
-              "type": "array",
-              "description": "Array of media items to display in the expanded gallery",
-              "items": {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of media items to display in the expanded gallery",
+          "items": {
+            "type": "object",
+            "required": [
+              "media"
+            ],
+            "subProps": {
+              "media": {
                 "type": "object",
-                "required": ["media"],
-                "subProps": {
-                  "media": {
+                "description": "Media configuration for this item",
+                "required": [
+                  "mediaType",
+                  "source"
+                ],
+                "oneOf": [
+                  {
                     "type": "object",
-                    "description": "Media configuration for this item",
-                    "required": ["mediaType", "source"],
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "subProps": {
-                          "mediaType": {
-                            "type": "enum",
-                            "options": ["image"],
-                            "description": "Type of media content (image)"
-                          },
-                          "source": {
-                            "type": "string",
-                            "description": "URL or path to the image source"
-                          },
-                          "altText": {
-                            "type": "string",
-                            "required": false,
-                            "description": "Alternative text for the image for accessibility"
-                          },
-                          "loading": {
-                            "type": "enum",
-                            "required": false,
-                            "options": ["lazy", "eager"],
-                            "description": "Loading strategy for the image"
-                          }
-                        }
+                    "subProps": {
+                      "mediaType": {
+                        "type": "enum",
+                        "options": [
+                          "image"
+                        ],
+                        "description": "Type of media content (image)"
                       },
-                      {
-                        "type": "object",
-                        "subProps": {
-                          "mediaType": {
-                            "type": "enum",
-                            "options": ["video"],
-                            "description": "Type of media content (video)"
-                          },
-                          "source": {
-                            "type": "string",
-                            "description": "URL or path to the video source"
-                          },
-                          "autoplay": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should start playing automatically"
-                          },
-                          "loop": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should loop when it reaches the end"
-                          },
-                          "muted": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should be muted"
-                          },
-                          "controls": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether to show video controls"
-                          },
-                          "posterImage": {
-                            "type": "string",
-                            "required": false,
-                            "description": "URL or path to the poster image to show before video plays"
-                          },
-                          "playsInline": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the video should play inline or in fullscreen on mobile devices"
-                          }
-                        }
+                      "source": {
+                        "type": "string",
+                        "description": "URL or path to the image source"
                       },
-                      {
-                        "type": "object",
-                        "subProps": {
-                          "mediaType": {
-                            "type": "enum",
-                            "options": ["lottie"],
-                            "description": "Type of media content (Lottie animation)"
-                          },
-                          "source": {
-                            "type": "string",
-                            "description": "URL or path to the Lottie animation JSON"
-                          },
-                          "autoplay": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the animation should start playing automatically"
-                          },
-                          "loop": {
-                            "type": "boolean",
-                            "required": false,
-                            "description": "Whether the animation should loop when it reaches the end"
-                          }
-                        }
+                      "altText": {
+                        "type": "string",
+                        "required": false,
+                        "description": "Alternative text for the image for accessibility"
+                      },
+                      "loading": {
+                        "type": "enum",
+                        "required": false,
+                        "options": [
+                          "lazy",
+                          "eager"
+                        ],
+                        "description": "Loading strategy for the image"
                       }
-                    ]
+                    }
                   },
-                  "aspectRatio": {
-                    "type": "number",
-                    "description": "Aspect ratio for the media item"
+                  {
+                    "type": "object",
+                    "subProps": {
+                      "mediaType": {
+                        "type": "enum",
+                        "options": [
+                          "video"
+                        ],
+                        "description": "Type of media content (video)"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "URL or path to the video source"
+                      },
+                      "autoplay": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should start playing automatically"
+                      },
+                      "loop": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should loop when it reaches the end"
+                      },
+                      "muted": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should be muted"
+                      },
+                      "controls": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether to show video controls"
+                      },
+                      "posterImage": {
+                        "type": "string",
+                        "required": false,
+                        "description": "URL or path to the poster image to show before video plays"
+                      },
+                      "playsInline": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the video should play inline or in fullscreen on mobile devices"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "subProps": {
+                      "mediaType": {
+                        "type": "enum",
+                        "options": [
+                          "lottie"
+                        ],
+                        "description": "Type of media content (Lottie animation)"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "URL or path to the Lottie animation JSON"
+                      },
+                      "autoplay": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the animation should start playing automatically"
+                      },
+                      "loop": {
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Whether the animation should loop when it reaches the end"
+                      }
+                    }
                   }
-                }
-              }
-            },
-            "sliderConfig": {
-              "type": "object",
-              "description": "Configuration for the slider component that displays the thumbnails",
-              "subProps": {
-                "aspectRatio": {
-                  "type": "number",
-                  "required": false,
-                  "description": "Aspect ratio for the slider items"
-                },
-                "slidesToShow": {
-                  "type": "integer",
-                  "required": false,
-                  "description": "Number of slider items to show on mobile"
-                },
-                "slidesToShowDesktop": {
-                  "type": "integer",
-                  "required": false,
-                  "description": "Number of slider items to show on desktop"
-                },
-                "showPeek": {
-                  "type": "boolean",
-                  "required": false,
-                  "description": "Whether to show a peek of the next/previous items"
-                },
-                "peekVariant": {
-                  "type": "enum",
-                  "options": ["SMALL", "MEDIUM", "LARGE"],
-                  "required": false,
-                  "description": "Size of the peek when showPeek is true"
-                },
-                "showArrows": {
-                  "type": "boolean",
-                  "required": false,
-                  "description": "Whether to show navigation arrows"
-                },
-                "showDots": {
-                  "type": "boolean",
-                  "required": false,
-                  "description": "Whether to show navigation dots"
-                }
-              }
-            },
-            "previewModal": {
-              "type": "object",
-              "description": "Configuration for the preview modal that appears when media is clicked",
-              "subProps": {
-                "headerTitle": {
-                  "type": "string",
-                  "description": "Title to display in the modal header"
-                },
-                "carouselConfig": {
-                  "type": "object",
-                  "description": "Configuration for the carousel in the preview modal"
-                },
-                "sliderConfig": {
-                  "type": "object",
-                  "description": "Configuration for the slider in the preview modal"
-                }
+                ]
+              },
+              "aspectRatio": {
+                "type": "number",
+                "description": "Aspect ratio for the media item"
               }
             }
           }
+        },
+        "sliderConfig": {
+          "type": "object",
+          "description": "Configuration for the slider component that displays the thumbnails",
+          "properties": {
+            "aspectRatio": {
+              "type": "number",
+              "required": false,
+              "description": "Aspect ratio for the slider items"
+            },
+            "slidesToShow": {
+              "type": "integer",
+              "required": false,
+              "description": "Number of slider items to show on mobile"
+            },
+            "slidesToShowDesktop": {
+              "type": "integer",
+              "required": false,
+              "description": "Number of slider items to show on desktop"
+            },
+            "showPeek": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show a peek of the next/previous items"
+            },
+            "peekVariant": {
+              "type": "string",
+              "required": false,
+              "description": "Size of the peek when showPeek is true",
+              "enum": [
+                "SMALL",
+                "MEDIUM",
+                "LARGE"
+              ]
+            },
+            "showArrows": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show navigation arrows"
+            },
+            "showDots": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show navigation dots"
+            }
+          }
+        },
+        "previewModal": {
+          "type": "object",
+          "description": "Configuration for the preview modal that appears when media is clicked",
+          "properties": {
+            "headerTitle": {
+              "type": "string",
+              "description": "Title to display in the modal header"
+            },
+            "carouselConfig": {
+              "type": "object",
+              "description": "Configuration for the carousel in the preview modal"
+            },
+            "sliderConfig": {
+              "type": "object",
+              "description": "Configuration for the slider in the preview modal"
+            }
+          }
         }
-      }
+      },
+      "required": [
+        "items",
+        "sliderConfig"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

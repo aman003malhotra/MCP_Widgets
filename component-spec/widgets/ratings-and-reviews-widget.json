@@ -1,25 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Ratings And Reviews Widget",
-  "description": "A widget that displays product ratings overview and top customer reviews",
+  "description": "A widget that displays product ratings overview and customer reviews",
   "type": "object",
   "category": "Product",
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": [
-        "topReviews",
-        "ratingOverview",
-        "allReviewsCtaLabel",
-        "allReviewsCta",
-        "topReviewsLabel"
-      ],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "topReviews": {
           "type": "array",
@@ -175,7 +169,15 @@
           "type": "string",
           "description": "Label for the top reviews section"
         }
-      }
+      },
+      "required": [
+        "topReviews",
+        "ratingOverview",
+        "allReviewsCtaLabel",
+        "allReviewsCta",
+        "topReviewsLabel"
+      ]
     }
-  }
+  },
+  "required": ["widgetData"]
 }

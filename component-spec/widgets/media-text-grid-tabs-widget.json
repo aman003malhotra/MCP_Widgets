@@ -1,66 +1,77 @@
 {
-  "widgets": [
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Media-text-grid-tabs Widget",
+  "description": "A tabbed widget displaying media with textual content and a grid of feature items",
+  "type": "object",
+  "category": "content",
+  "version": "1.0.0",
+  "allOf": [
     {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "name": "MediaTextGridTabs",
-      "description": "A tabbed widget displaying media with textual content and a grid of feature items",
-      "type": "widget",
-      "category": "content",
-      "version": "1.0.0",
-      "allOf": [{"$ref": "./commonWidgets/common-props.json"}],
-      "props": {
-        "widgetData": {
-          "type": "object",
-          "description": "Data specific to the MediaTextGridTabs widget",
-          "required": ["items"],
-          "subProps": {
-            "items": {
-              "type": "array",
-              "description": "Array of tabbed content items with media and text grid",
-              "items": {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of tabbed content items with media and text grid",
+          "items": {
+            "type": "object",
+            "required": [
+              "tabName",
+              "media",
+              "content"
+            ],
+            "properties": {
+              "tabName": {
+                "type": "string",
+                "description": "Name to display in the tab navigation"
+              },
+              "media": {
+                "$ref": "./commonWidgets/media.json"
+              },
+              "content": {
                 "type": "object",
-                "required": ["tabName", "media", "content"],
+                "description": "Textual content and grid items to display",
+                "required": [
+                  "heading",
+                  "info",
+                  "items"
+                ],
                 "properties": {
-                  "tabName": {
+                  "heading": {
                     "type": "string",
-                    "description": "Name to display in the tab navigation"
+                    "description": "Main heading text for the content"
                   },
-                  "media": {
-                    "$ref": "./commonWidgets/media.json"
+                  "info": {
+                    "type": "string",
+                    "description": "Subheading or descriptive text for the content"
                   },
-                  "content": {
-                    "type": "object",
-                    "description": "Textual content and grid items to display",
-                    "required": ["heading", "info", "items"],
-                    "properties": {
-                      "heading": {
-                        "type": "string",
-                        "description": "Main heading text for the content"
-                      },
-                      "info": {
-                        "type": "string",
-                        "description": "Subheading or descriptive text for the content"
-                      },
-                      "items": {
-                        "type": "array",
-                        "description": "Grid of feature items to display",
-                        "items": {
-                          "type": "object",
-                          "required": ["image", "title", "description"],
-                          "properties": {
-                            "image": {
-                              "type": "string",
-                              "description": "URL of the icon or image for the grid item"
-                            },
-                            "title": {
-                              "type": "string",
-                              "description": "Title text for the grid item"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "Descriptive text for the grid item"
-                            }
-                          }
+                  "items": {
+                    "type": "array",
+                    "description": "Grid of feature items to display",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "image",
+                        "title",
+                        "description"
+                      ],
+                      "properties": {
+                        "image": {
+                          "type": "string",
+                          "description": "URL of the icon or image for the grid item"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Title text for the grid item"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Descriptive text for the grid item"
                         }
                       }
                     }
@@ -70,7 +81,13 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     }
+  },
+  "required": [
+    "widgetData"
   ]
 }

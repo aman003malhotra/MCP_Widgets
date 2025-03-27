@@ -5,6 +5,8 @@ import * as fs from "fs";
 import * as path from "path";
 import express from "express";
 import cors from "cors";
+import { BASE_WIDGET_MAP_TYPES } from "./WidgetMap.js";
+import { FigmaComponentInputSchema } from './FigmaSchemas.js';
 // Define paths to component specs
 const COMPONENT_SPEC_DIR = path.resolve(process.cwd(), "component-spec");
 const ATOMIC_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "atomic-components.json");
@@ -34,6 +36,33 @@ const WidgetSchema = z.object({
     category: z.string(),
     version: z.string(),
     props: z.record(ComponentPropSchema),
+});
+// Add new schema for widget configuration
+const MediaConfigSchema = z.object({
+    mediaType: z.enum(['image', 'video']),
+    source: z.string().url(),
+    altText: z.string(),
+    loading: z.enum(['lazy', 'eager']).default('lazy')
+});
+const LayoutConfigSchema = z.object({
+    type: z.enum(['FLUID', 'FIXED']),
+    verticalSpacing: z.object({
+        top: z.enum(['COMPACT', 'NORMAL', 'LOOSE']),
+        bottom: z.enum(['COMPACT', 'NORMAL', 'LOOSE'])
+    })
+});
+const HeaderConfigSchema = z.object({
+    subtitle: z.string().optional(),
+    subtileType: z.enum(['PRIMARY', 'SECONDARY']).optional(),
+    label: z.string().optional(),
+    desktopTextAlign: z.enum(['left', 'center', 'right']).optional()
+});
+const SliderConfigSchema = z.object({
+    aspectRatio: z.number(),
+    slidesToShow: z.number(),
+    slidesToShowDesktop: z.number(),
+    showPeek: z.boolean(),
+    showDots: z.boolean()
 });
 class PwaComponentMcpServer {
     sseTransport = null;
@@ -215,6 +244,282 @@ class PwaComponentMcpServer {
                 };
             }
         });
+        this.server.tool("getWidgetMap", {
+            category: z.enum(['all', 'media', 'product', 'layout', 'social']).optional().default('all')
+        }, async ({ category }) => {
+            try {
+                const widgetMap = new Map();
+                // Read all widget files to get their descriptions
+                const widgetFiles = fs.readdirSync(WIDGETS_DIR)
+                    .filter(file => file.endsWith(".json") && !file.includes(".bak"));
+                const widgetDescriptions = new Map();
+                // Read widget files for basic metadata
+                for (const file of widgetFiles) {
+                    const filePath = path.join(WIDGETS_DIR, file);
+                    try {
+                        const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+                        const key = file.replace("-widget.json", "").toUpperCase().replace(/-/g, '_');
+                        widgetDescriptions.set(key, {
+                            description: data.description || "No description available",
+                            category: data.category || "unknown",
+                            version: data.version,
+                            title: data.title
+                        });
+                    }
+                    catch (error) {
+                        console.warn(`Could not read widget file ${file}:`, error);
+                    }
+                }
+                // Map widget types with their descriptions
+                for (const [key, value] of Object.entries(BASE_WIDGET_MAP_TYPES)) {
+                    const widgetInfo = widgetDescriptions.get(key) || {
+                        description: "No description available",
+                        category: "unknown"
+                    };
+                    if (category === 'all' ||
+                        (category === 'media' && key.includes('MEDIA')) ||
+                        (category === 'product' && key.includes('PRODUCT')) ||
+                        (category === 'layout' && ['GRID', 'SECTION', 'STRIP'].some(term => key.includes(term))) ||
+                        (category === 'social' && key.includes('SOCIAL'))) {
+                        widgetMap.set(key, {
+                            type: value,
+                            description: widgetInfo.description,
+                            category: widgetInfo.category,
+                            version: widgetInfo.version,
+                            title: widgetInfo.title,
+                            fileName: key.toLowerCase().replace(/_/g, '-') + '-widget.json'
+                        });
+                    }
+                }
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify({
+                                total: widgetMap.size,
+                                widgets: Object.fromEntries(widgetMap)
+                            }, null, 2)
+                        }]
+                };
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: `Failed to get widget map: ${errorMessage}`
+                        }],
+                    isError: true
+                };
+            }
+        });
+        // Add new tools after existing tools
+        this.server.tool("createWidgetConfig", {
+            widgetName: z.string(),
+            widgetType: z.enum(Object.values(BASE_WIDGET_MAP_TYPES)),
+            layout: LayoutConfigSchema.optional(),
+            header: HeaderConfigSchema.optional(),
+            sliderConfig: SliderConfigSchema.optional(),
+            mediaItems: z.array(MediaConfigSchema).optional()
+        }, async ({ widgetName, widgetType, layout, header, sliderConfig, mediaItems }) => {
+            try {
+                const widgetConfig = {
+                    name: widgetName,
+                    widgets: [
+                        {
+                            type: widgetType,
+                            ...(layout && { layout }),
+                            ...(header && { header }),
+                            ...(sliderConfig || mediaItems) && {
+                                widgetData: {
+                                    ...(sliderConfig && { sliderConfig }),
+                                    showBorder: false,
+                                    ...(mediaItems && {
+                                        items: mediaItems.map(media => ({ media }))
+                                    })
+                                }
+                            }
+                        }
+                    ]
+                };
+                const configPath = path.join(COMPONENT_SPEC_DIR, 'widget-configs', `${widgetName}.json`);
+                fs.writeFileSync(configPath, JSON.stringify(widgetConfig, null, 2));
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify(widgetConfig, null, 2)
+                        }]
+                };
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: `Failed to create widget config: ${errorMessage}`
+                        }],
+                    isError: true
+                };
+            }
+        });
+        this.server.tool("validateWidgetConfig", {
+            widgetName: z.string()
+        }, async ({ widgetName }) => {
+            try {
+                const configPath = path.join(COMPONENT_SPEC_DIR, 'widget-configs', `${widgetName}.json`);
+                if (!fs.existsSync(configPath)) {
+                    throw new Error(`Widget config '${widgetName}' not found`);
+                }
+                const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+                const validationResults = [];
+                // Validate basic structure
+                if (!config.name || !config.widgets || !Array.isArray(config.widgets)) {
+                    validationResults.push("Invalid basic structure: must have 'name' and 'widgets' array");
+                }
+                // Validate each widget
+                config.widgets.forEach((widget, index) => {
+                    if (!widget.type || !Object.values(BASE_WIDGET_MAP_TYPES).includes(widget.type)) {
+                        validationResults.push(`Widget ${index}: Invalid or missing type`);
+                    }
+                    if (widget.layout && !LayoutConfigSchema.safeParse(widget.layout).success) {
+                        validationResults.push(`Widget ${index}: Invalid layout configuration`);
+                    }
+                    if (widget.header && !HeaderConfigSchema.safeParse(widget.header).success) {
+                        validationResults.push(`Widget ${index}: Invalid header configuration`);
+                    }
+                    if (widget.widgetData?.sliderConfig &&
+                        !SliderConfigSchema.safeParse(widget.widgetData.sliderConfig).success) {
+                        validationResults.push(`Widget ${index}: Invalid slider configuration`);
+                    }
+                    if (widget.widgetData?.items) {
+                        widget.widgetData.items.forEach((item, itemIndex) => {
+                            if (!MediaConfigSchema.safeParse(item.media).success) {
+                                validationResults.push(`Widget ${index}, Item ${itemIndex}: Invalid media configuration`);
+                            }
+                        });
+                    }
+                });
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify({
+                                isValid: validationResults.length === 0,
+                                validationErrors: validationResults,
+                                config: validationResults.length === 0 ? config : undefined
+                            }, null, 2)
+                        }]
+                };
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: `Validation failed: ${errorMessage}`
+                        }],
+                    isError: true
+                };
+            }
+        });
+        this.server.tool("updateWidgetConfig", {
+            widgetName: z.string(),
+            updates: z.object({
+                layout: LayoutConfigSchema.optional(),
+                header: HeaderConfigSchema.optional(),
+                sliderConfig: SliderConfigSchema.optional(),
+                mediaItems: z.array(MediaConfigSchema).optional()
+            })
+        }, async ({ widgetName, updates }) => {
+            try {
+                const configPath = path.join(COMPONENT_SPEC_DIR, 'widget-configs', `${widgetName}.json`);
+                if (!fs.existsSync(configPath)) {
+                    throw new Error(`Widget config '${widgetName}' not found`);
+                }
+                const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+                if (!config.widgets?.[0]) {
+                    throw new Error('Invalid widget configuration structure');
+                }
+                const widget = config.widgets[0];
+                if (updates.layout)
+                    widget.layout = updates.layout;
+                if (updates.header)
+                    widget.header = updates.header;
+                if (updates.sliderConfig || updates.mediaItems) {
+                    widget.widgetData = widget.widgetData || {};
+                    if (updates.sliderConfig)
+                        widget.widgetData.sliderConfig = updates.sliderConfig;
+                    if (updates.mediaItems) {
+                        widget.widgetData.items = updates.mediaItems.map(media => ({ media }));
+                    }
+                }
+                fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify(config, null, 2)
+                        }]
+                };
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: `Failed to update widget config: ${errorMessage}`
+                        }],
+                    isError: true
+                };
+            }
+        });
+        this.server.tool("convertFigmaToWidget", {
+            figmaInput: FigmaComponentInputSchema
+        }, async ({ figmaInput }) => {
+            try {
+                const { node, componentName } = figmaInput;
+                // Detect widget type
+                const detectedType = detectWidgetTypeFromFigma(node);
+                // Extract common configurations
+                const layout = convertFigmaToLayout(node);
+                const header = extractHeaderFromFigma(node);
+                const widgetData = extractWidgetDataFromFigma(node, detectedType);
+                // Construct widget configuration
+                const widgetConfig = {
+                    name: componentName,
+                    type: detectedType,
+                    layout,
+                    header,
+                    ...widgetData
+                };
+                // Validate configuration
+                const validationResult = validateWidgetConfig(widgetConfig, detectedType);
+                if (validationResult.isValid) {
+                    return {
+                        content: [{
+                                type: "text",
+                                text: JSON.stringify(widgetConfig, null, 2)
+                            }]
+                    };
+                }
+                else {
+                    return {
+                        content: [{
+                                type: "text",
+                                text: `Validation failed: ${validationResult.errors.join(', ')}`
+                            }],
+                        isError: true
+                    };
+                }
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: `Failed to convert Figma to widget: ${errorMessage}`
+                        }],
+                    isError: true
+                };
+            }
+        });
     }
     async connect(transport) {
         await this.server.connect(transport);
@@ -254,3 +559,164 @@ main().catch((error) => {
     console.error("Fatal error in main():", error);
     process.exit(1);
 });
+// Helper functions for Figma conversion
+function detectWidgetTypeFromFigma(node) {
+    // Detect widget type based on node structure and naming
+    if (node.name.toLowerCase().includes('slider')) {
+        return 'MEDIA_SLIDER';
+    }
+    if (node.name.toLowerCase().includes('grid')) {
+        return 'PRODUCT_CARD_GRID';
+    }
+    // Add more detection logic
+    return 'MEDIA_SLIDER'; // Default fallback
+}
+function convertFigmaToLayout(node) {
+    if (!node.layout)
+        return null;
+    return {
+        type: node.layout.layoutMode === 'NONE' ? 'FIXED' : 'FLUID',
+        verticalSpacing: {
+            top: convertFigmaSpacing(node.layout.padding?.top),
+            bottom: convertFigmaSpacing(node.layout.padding?.bottom)
+        }
+    };
+}
+function convertFigmaSpacing(spacing) {
+    if (!spacing)
+        return 'NORMAL';
+    if (spacing <= 16)
+        return 'COMPACT';
+    if (spacing >= 32)
+        return 'LOOSE';
+    return 'NORMAL';
+}
+function extractHeaderFromFigma(node) {
+    // Look for text nodes that might be headers
+    const textNodes = findTextNodes(node);
+    if (textNodes.length === 0)
+        return null;
+    const header = {};
+    // Find subtitle and label
+    textNodes.forEach(textNode => {
+        if (textNode.textStyle?.fontSize >= 24) {
+            header.label = textNode.characters;
+        }
+        else if (textNode.textStyle?.fontSize >= 16) {
+            header.subtitle = textNode.characters;
+        }
+    });
+    if (Object.keys(header).length === 0)
+        return null;
+    // Get text alignment
+    const mainTextNode = textNodes[0];
+    header.desktopTextAlign = convertFigmaTextAlign(mainTextNode.textStyle?.textAlignHorizontal);
+    return header;
+}
+function extractWidgetDataFromFigma(node, widgetType) {
+    switch (widgetType) {
+        case 'MEDIA_SLIDER':
+            return extractMediaSliderData(node);
+        case 'PRODUCT_CARD_GRID':
+            return extractProductGridData(node);
+        // Add more widget type handlers
+        default:
+            return null;
+    }
+}
+function extractMediaSliderData(node) {
+    const imageNodes = findImageNodes(node);
+    const aspectRatio = imageNodes[0]?.width / imageNodes[0]?.height || 1;
+    return {
+        sliderConfig: {
+            aspectRatio,
+            slidesToShow: 1,
+            slidesToShowDesktop: Math.min(imageNodes.length, 3),
+            showPeek: true,
+            showDots: imageNodes.length > 3
+        },
+        showBorder: false,
+        items: imageNodes.map(imgNode => ({
+            media: {
+                mediaType: 'image',
+                source: extractImageUrl(imgNode),
+                altText: imgNode.name,
+                loading: 'lazy'
+            }
+        }))
+    };
+}
+function findTextNodes(node) {
+    const textNodes = [];
+    if (node.type === 'TEXT') {
+        textNodes.push(node);
+    }
+    if (node.children) {
+        node.children.forEach((child) => {
+            textNodes.push(...findTextNodes(child));
+        });
+    }
+    return textNodes;
+}
+function findImageNodes(node) {
+    const imageNodes = [];
+    if (node.type === 'RECTANGLE' && node.style?.fills?.some((fill) => fill.type === 'IMAGE')) {
+        imageNodes.push(node);
+    }
+    if (node.children) {
+        node.children.forEach((child) => {
+            imageNodes.push(...findImageNodes(child));
+        });
+    }
+    return imageNodes;
+}
+function convertFigmaTextAlign(align) {
+    switch (align) {
+        case 'LEFT':
+            return 'left';
+        case 'CENTER':
+            return 'center';
+        case 'RIGHT':
+            return 'right';
+        default:
+            return 'left';
+    }
+}
+function extractImageUrl(node) {
+    const imageFill = node.style?.fills?.find((fill) => fill.type === 'IMAGE');
+    return imageFill?.imageRef || '';
+}
+function validateWidgetConfig(config, widgetType) {
+    // Add validation logic based on widget type
+    const errors = [];
+    if (!config.name) {
+        errors.push('Widget name is required');
+    }
+    if (!config.widgets || !Array.isArray(config.widgets) || config.widgets.length === 0) {
+        errors.push('Widget configuration must contain at least one widget');
+    }
+    return {
+        isValid: errors.length === 0,
+        errors
+    };
+}
+function extractProductGridData(node) {
+    const items = findImageNodes(node).map(imageNode => {
+        const textNodes = findTextNodes(imageNode.parent);
+        return {
+            title: textNodes[0]?.characters || '',
+            description: textNodes[1]?.characters,
+            imageUrl: extractImageUrl(imageNode),
+            price: parseFloat(textNodes.find(n => n.name.toLowerCase().includes('price'))?.characters || '0'),
+            currency: textNodes.find(n => n.name.toLowerCase().includes('currency'))?.characters,
+            link: imageNode.parent.link?.url
+        };
+    });
+    return {
+        items,
+        layout: {
+            columns: Math.min(4, items.length),
+            gap: node.itemSpacing || 16
+        }
+    };
+}

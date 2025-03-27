@@ -7,20 +7,24 @@
   "version": "1.0.0",
   "allOf": [
     {
-      "$ref": "../common-props.json"
+      "$ref": "./commonWidgets/common-props.json"
     }
   ],
   "properties": {
     "widgetData": {
       "type": "object",
-      "required": ["rows", "urlKey"],
+      "description": "Widget-specific data and configuration",
       "properties": {
         "rows": {
           "type": "array",
           "description": "An array of rows, each containing a title and options for product variants",
           "items": {
             "type": "object",
-            "required": ["title", "type", "options"],
+            "required": [
+              "title",
+              "type",
+              "options"
+            ],
             "properties": {
               "title": {
                 "type": "string",
@@ -87,7 +91,14 @@
           "type": "string",
           "description": "The URL key for the base product, used in analytics events"
         }
-      }
+      },
+      "required": [
+        "rows",
+        "urlKey"
+      ]
     }
-  }
+  },
+  "required": [
+    "widgetData"
+  ]
 }
