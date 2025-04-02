@@ -386,18 +386,18 @@
       },
       "sizeVariants": {
         "desktop": {
-          "FULL": { "width": 1080 },
-          "HALF": { "width": 800 },
-          "THIRD": { "width": 500 },
-          "SMALL": { "width": 150 },
-          "TINY": { "width": 50 }
+          "FULL": {"width": 1080},
+          "HALF": {"width": 800},
+          "THIRD": {"width": 500},
+          "SMALL": {"width": 150},
+          "TINY": {"width": 50}
         },
         "mobile": {
-          "FULL": { "width": 800 },
-          "HALF": { "width": 500 },
-          "THIRD": { "width": 300 },
-          "SMALL": { "width": 150 },
-          "TINY": { "width": 50 }
+          "FULL": {"width": 800},
+          "HALF": {"width": 500},
+          "THIRD": {"width": 300},
+          "SMALL": {"width": 150},
+          "TINY": {"width": 50}
         }
       }
     },
@@ -486,6 +486,1408 @@
         },
         "optimizedPosterImage": {
           "description": "Automatically optimizes poster images using the same optimization as OptimizedImage"
+        }
+      }
+    },
+    {
+      "name": "RatingStars",
+      "description": "A component that displays rating in the form of stars with customizable appearance and optional interactive selection",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the rating stars container"
+        },
+        "count": {
+          "type": "number",
+          "description": "Number of stars to display",
+          "defaultValue": 5
+        },
+        "value": {
+          "type": "number",
+          "description": "Current rating value to display (e.g., 4.5)",
+          "defaultValue": 0
+        },
+        "color": {
+          "type": "string",
+          "description": "Color of empty stars",
+          "defaultValue": "var(--dls-rating-stars-light-color)"
+        },
+        "activeColor": {
+          "type": "string",
+          "description": "Color of filled stars",
+          "defaultValue": "var(--dls-rating-stars-light-color)"
+        },
+        "size": {
+          "type": "number",
+          "description": "Size of the stars in pixels",
+          "defaultValue": 24
+        },
+        "isHalf": {
+          "type": "boolean",
+          "description": "Whether to support half-star ratings",
+          "defaultValue": true
+        },
+        "emptyIcon": {
+          "type": "React.ReactElement",
+          "description": "Custom icon for empty stars",
+          "defaultValue": "<EmptyStar />"
+        },
+        "halfIcon": {
+          "type": "React.ReactElement",
+          "description": "Custom icon for half-filled stars",
+          "defaultValue": "<HalfStar />"
+        },
+        "fullIcon": {
+          "type": "React.ReactElement",
+          "description": "Custom icon for fully filled stars",
+          "defaultValue": "<FullStar />"
+        }
+      },
+      "usage": {
+        "basic": "<RatingStars value={4.5} count={5} />",
+        "customized": "<RatingStars value={3.5} size={32} color=\"#cccccc\" activeColor=\"#ffcc00\" />",
+        "withCustomIcons": "<RatingStars value={4} emptyIcon={<CustomEmptyIcon />} fullIcon={<CustomFilledIcon />} />"
+      }
+    },
+    {
+      "name": "Spacer",
+      "description": "A utility component that creates vertical spacing between elements",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "xx-small",
+            "x-small",
+            "small",
+            "medium",
+            "large",
+            "x-large",
+            "xx-large"
+          ],
+          "description": "Predefined spacing variants",
+          "required": true
+        },
+        "customClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply"
+        }
+      },
+      "variantSizes": {
+        "xx-small": {
+          "height": "2px"
+        },
+        "x-small": {
+          "height": "4px"
+        },
+        "small": {
+          "height": "8px"
+        },
+        "medium": {
+          "height": "12px"
+        },
+        "large": {
+          "height": "16px"
+        },
+        "x-large": {
+          "height": "24px"
+        },
+        "xx-large": {
+          "height": "32px"
+        }
+      },
+      "implementation": {
+        "description": "A styled div that applies different heights based on the variant prop using data attributes",
+        "technology": "styled-components"
+      },
+      "usage": {
+        "basic": "<Spacer variant=\"medium\" />",
+        "examples": [
+          "Between form fields: <Input /><Spacer variant=\"small\" /><Input />",
+          "Minimal spacing: <Spacer variant=\"xx-small\" />",
+          "Large section separation: <Spacer variant=\"xx-large\" />"
+        ]
+      }
+    },
+    {
+      "name": "HSpacer",
+      "description": "A utility component that creates horizontal spacing between elements",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "xx-small",
+            "x-small",
+            "small",
+            "medium",
+            "large",
+            "x-large",
+            "xx-large"
+          ],
+          "description": "Predefined spacing variants",
+          "required": true
+        },
+        "customClassName": {
+          "type": "string",
+          "description": "Additional CSS class to apply"
+        }
+      },
+      "variantSizes": {
+        "xx-small": {
+          "width": "2px"
+        },
+        "x-small": {
+          "width": "4px"
+        },
+        "small": {
+          "width": "8px"
+        },
+        "medium": {
+          "width": "12px"
+        },
+        "large": {
+          "width": "16px"
+        },
+        "x-large": {
+          "width": "24px"
+        },
+        "xx-large": {
+          "width": "32px"
+        }
+      },
+      "implementation": {
+        "description": "A styled div that applies different widths based on the variant prop using data attributes",
+        "technology": "styled-components"
+      },
+      "usage": {
+        "basic": "<HSpacer variant=\"medium\" />",
+        "examples": [
+          "Use in flex layouts: <Row><Component /><HSpacer variant=\"small\" /><Component /></Row>",
+          "In tight layouts: <HSpacer variant=\"xx-small\" />",
+          "For large gaps: <HSpacer variant=\"xx-large\" />"
+        ]
+      }
+    },
+    {
+      "name": "Input",
+      "description": "A styled input component with optional label",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Label text for the input field"
+        }
+      },
+      "extends": {
+        "description": "Extends React.InputHTMLAttributes<HTMLInputElement>, inheriting all standard HTML input attributes such as type, value, placeholder, onChange, disabled, etc.",
+        "inheritedProps": {
+          "type": {
+            "type": "string",
+            "options": [
+              "text",
+              "password",
+              "email",
+              "number",
+              "tel",
+              "url",
+              "search",
+              "date",
+              "time",
+              "datetime-local",
+              "month",
+              "week",
+              "color",
+              "file",
+              "hidden",
+              "radio",
+              "checkbox",
+              "range"
+            ],
+            "defaultValue": "text",
+            "description": "Type of the input field"
+          },
+          "value": {
+            "type": "string | number | readonly string[] | undefined",
+            "description": "Current value of the input"
+          },
+          "placeholder": {
+            "type": "string",
+            "description": "Placeholder text displayed when the input is empty"
+          },
+          "onChange": {
+            "type": "function",
+            "description": "Event handler called when the input value changes"
+          },
+          "onFocus": {
+            "type": "function",
+            "description": "Event handler called when the input receives focus"
+          },
+          "onBlur": {
+            "type": "function",
+            "description": "Event handler called when the input loses focus"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name attribute for the input field, important for form submissions"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the input element"
+          },
+          "disabled": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input is disabled"
+          },
+          "required": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input is required in a form"
+          },
+          "readOnly": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input value is read-only"
+          },
+          "autoComplete": {
+            "type": "string",
+            "options": [
+              "on",
+              "off",
+              "name",
+              "email",
+              "username",
+              "new-password",
+              "current-password",
+              "tel",
+              "street-address",
+              "country",
+              "postal-code"
+            ],
+            "description": "Hint for form autofill feature"
+          },
+          "autoFocus": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input should automatically get focus when the page loads"
+          },
+          "maxLength": {
+            "type": "number",
+            "description": "Maximum number of characters allowed in the input"
+          },
+          "minLength": {
+            "type": "number",
+            "description": "Minimum number of characters required in the input"
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Regular expression pattern the input's value must match"
+          },
+          "min": {
+            "type": "number | string",
+            "description": "Minimum value for numeric inputs"
+          },
+          "max": {
+            "type": "number | string",
+            "description": "Maximum value for numeric inputs"
+          },
+          "step": {
+            "type": "number | string",
+            "description": "Stepping interval for numeric inputs"
+          },
+          "aria-*": {
+            "type": "string",
+            "description": "Various ARIA attributes for accessibility"
+          },
+          "data-*": {
+            "type": "string",
+            "description": "Custom data attributes"
+          }
+        }
+      },
+      "styles": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "column",
+          "width": "100%"
+        },
+        "label": {
+          "color": "var(--brand-light-secondary-text-color)",
+          "fontVariant": "TypographyVariants.TAG_REGULAR"
+        },
+        "input": {
+          "height": "48px",
+          "border": "1px solid var(--dls-divider-light-color)",
+          "borderRadius": "8px",
+          "width": "100%",
+          "fontSize": "16px",
+          "padding": "0 16px"
+        },
+        "inputFocus": {
+          "border": "1px solid var(--dls-divider-light-color)"
+        }
+      },
+      "implementation": {
+        "description": "A styled input component with a label rendered using Typography component",
+        "technology": "styled-components with React functional component"
+      },
+      "usage": {
+        "basic": "<Input label=\"Email\" type=\"email\" placeholder=\"Enter your email\" />",
+        "examples": [
+          "Text input: <Input label=\"Name\" type=\"text\" onChange={handleChange} />",
+          "Password input: <Input label=\"Password\" type=\"password\" />",
+          "Number input with constraints: <Input label=\"Age\" type=\"number\" min={18} max={100} />",
+          "Required field: <Input label=\"Username\" required />",
+          "With pattern validation: <Input label=\"Phone\" type=\"tel\" pattern=\"[0-9]{10}\" />",
+          "With autocomplete: <Input label=\"Credit Card\" type=\"text\" autoComplete=\"cc-number\" />",
+          "With readonly attribute: <Input label=\"ID\" value=\"1234\" readOnly />"
+        ]
+      },
+      "accessibility": {
+        "features": [
+          "Label is properly associated with input for screen readers",
+          "Inherits all HTML input accessibility attributes like aria-* properties",
+          "Support for keyboard navigation"
+        ],
+        "bestPractices": [
+          "Always provide meaningful label text",
+          "Use appropriate input types for the data being collected",
+          "Include validation attributes when necessary",
+          "Consider using aria-describedby for additional instructions"
+        ]
+      }
+    },
+    {
+      "name": "Flex",
+      "description": "A simple flex container component with a FlexOne variant that takes up remaining space",
+      "type": "component",
+      "category": "atomic",
+      "variants": {
+        "FlexOne": {
+          "description": "A flex item that takes up the remaining space (flex: 1)",
+          "props": {}
+        }
+      },
+      "implementation": {
+        "description": "A styled div with flex: 1 property",
+        "technology": "styled-components"
+      }
+    },
+    {
+      "name": "Grid",
+      "description": "A CSS Grid layout container for organizing content in a two-dimensional grid",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to be placed in the grid"
+        }
+      },
+      "styles": {
+        "defaultStyles": {
+          "display": "grid",
+          "gap": "16px"
+        }
+      },
+      "implementation": {
+        "description": "A styled div with CSS Grid layout",
+        "technology": "styled-components"
+      }
+    },
+    {
+      "name": "Loader",
+      "description": "A spinning loader animation to indicate loading states",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "height": {
+          "type": "number",
+          "required": false,
+          "default": 48,
+          "description": "Height of the loader in pixels"
+        },
+        "width": {
+          "type": "number",
+          "required": false,
+          "default": 48,
+          "description": "Width of the loader in pixels"
+        }
+      },
+      "styles": {
+        "defaultStyles": {
+          "border": "16px solid var(--dls-brand-primary-color-200)",
+          "borderTop": "16px solid var(--dls-brand-primary-color-500)",
+          "borderRadius": "50%",
+          "animation": "spin 1s linear infinite"
+        }
+      },
+      "implementation": {
+        "description": "A styled div with spinning animation",
+        "technology": "styled-components"
+      }
+    },
+    {
+      "name": "Row",
+      "description": "A flex container with row direction for horizontal layout of child elements",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "customStyles": {
+          "type": "string | Record<string, string>",
+          "required": false,
+          "description": "Custom CSS styles to apply to the row"
+        },
+        "children": {
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Content to be placed in the row"
+        }
+      },
+      "styles": {
+        "defaultStyles": {
+          "display": "flex",
+          "flexDirection": "row"
+        }
+      },
+      "implementation": {
+        "description": "A styled div with horizontal flex layout",
+        "technology": "styled-components"
+      }
+    },
+    {
+      "name": "Show",
+      "description": "A utility component that conditionally renders its children based on provided condition",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "show": {
+          "type": "boolean",
+          "required": true,
+          "description": "Condition that determines whether to render the children"
+        },
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to render when the condition is true"
+        }
+      },
+      "implementation": {
+        "description": "A component that uses JavaScript conditional rendering with React.Fragment to avoid unnecessary DOM nodes",
+        "technology": "functional component with TypeScript"
+      },
+      "usage": {
+        "basic": "<Show show={isLoggedIn}><UserProfile /></Show>",
+        "examples": [
+          "With null checks: <Show show={user !== null}><UserDetails user={user} /></Show>",
+          "For feature flags: <Show show={features.newUI}><NewInterface /></Show>",
+          "For conditional rendering in lists: {items.map(item => <Show show={item.isVisible} key={item.id}><ListItem item={item} /></Show>)}",
+          "For accessibility features: <Show show={isScreenReaderEnabled}><A11yInstructions /></Show>",
+          "With logical expressions: <Show show={isValid && isSubmitted}><SuccessMessage /></Show>"
+        ]
+      },
+      "bestPractices": [
+        "Use when you need to conditionally render content without ternary operators in JSX",
+        "Prefer Show over manually writing {condition && <Component/>} for better readability",
+        "For complex conditions, compute the boolean value before passing to Show",
+        "Avoid deep nesting of multiple Show components as it can reduce code readability"
+      ]
+    },
+    {
+      "name": "SearchInput",
+      "description": "A versatile input component designed for search functionality with support for icons, prefix/suffix text, and labels",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "inputData": {
+          "type": "React.InputHTMLAttributes<HTMLInputElement>",
+          "required": true,
+          "description": "HTML input attributes including value, onChange, placeholder, name, etc."
+        },
+        "leftIcon": {
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Icon element to display on the left side of the input"
+        },
+        "rightIcon": {
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Icon element to display on the right side of the input"
+        },
+        "leftIconAction": {
+          "type": "function",
+          "required": false,
+          "description": "Function to call when the left icon is clicked"
+        },
+        "rightIconAction": {
+          "type": "function",
+          "required": false,
+          "description": "Function to call when the right icon is clicked"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text to display above the input"
+        },
+        "assistiveText": {
+          "type": "string",
+          "required": false,
+          "description": "Helper text to display below the input (e.g., validation messages)"
+        },
+        "prefixText": {
+          "type": "string",
+          "required": false,
+          "description": "Text to display before the input value"
+        },
+        "suffixText": {
+          "type": "string",
+          "required": false,
+          "description": "Text to display after the input value"
+        },
+        "suffixTextAction": {
+          "type": "function",
+          "required": false,
+          "description": "Function to call when the suffix text is clicked (when isSuffixCta is true)"
+        },
+        "isSuffixCta": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Makes the suffix text clickable and styled as a call-to-action"
+        },
+        "isError": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Indicates an error state with red borders and text"
+        },
+        "inputRef": {
+          "type": "React.Ref<HTMLInputElement>",
+          "required": false,
+          "description": "Ref to access the HTML input element directly"
+        },
+        "customClassName": {
+          "type": "string",
+          "required": false,
+          "description": "Additional CSS class to apply to the input container"
+        }
+      },
+      "extends": {
+        "description": "The inputData prop accepts all standard HTML input attributes through React.InputHTMLAttributes<HTMLInputElement>",
+        "inheritedProps": {
+          "type": {
+            "type": "string",
+            "options": [
+              "text",
+              "password",
+              "email",
+              "number",
+              "tel",
+              "url",
+              "search",
+              "date",
+              "time"
+            ],
+            "defaultValue": "text",
+            "description": "Type of the input field"
+          },
+          "value": {
+            "type": "string | number",
+            "description": "Current value of the input"
+          },
+          "placeholder": {
+            "type": "string",
+            "description": "Placeholder text displayed when the input is empty"
+          },
+          "onChange": {
+            "type": "function",
+            "description": "Event handler called when the input value changes"
+          },
+          "onFocus": {
+            "type": "function",
+            "description": "Event handler called when the input receives focus"
+          },
+          "onBlur": {
+            "type": "function",
+            "description": "Event handler called when the input loses focus"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name attribute for the input field, important for form submissions"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the input element"
+          },
+          "required": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Specifies that the input field must be filled before submitting the form"
+          },
+          "readOnly": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input value is read-only"
+          },
+          "autoComplete": {
+            "type": "string",
+            "options": [
+              "on",
+              "off",
+              "name",
+              "email",
+              "username",
+              "current-password",
+              "tel"
+            ],
+            "description": "Hint for form autofill feature"
+          },
+          "autoFocus": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input should automatically get focus when the page loads"
+          },
+          "maxLength": {
+            "type": "number",
+            "description": "Maximum number of characters allowed in the input"
+          },
+          "minLength": {
+            "type": "number",
+            "description": "Minimum number of characters required in the input"
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Regular expression pattern the input's value must match"
+          },
+          "min": {
+            "type": "number | string",
+            "description": "Minimum value for numeric inputs"
+          },
+          "max": {
+            "type": "number | string",
+            "description": "Maximum value for numeric inputs"
+          },
+          "step": {
+            "type": "number | string",
+            "description": "Stepping interval for numeric inputs"
+          },
+          "aria-label": {
+            "type": "string",
+            "description": "Accessible label for the input when no visible label is used"
+          },
+          "aria-describedby": {
+            "type": "string",
+            "description": "ID of an element that describes the input (often used with error messages)"
+          },
+          "disabled": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the input is disabled"
+          }
+        }
+      },
+      "styles": {
+        "container": {
+          "position": "relative",
+          "border": "1px solid var(--brand-neutral-text-color)",
+          "borderRadius": "8px",
+          "display": "flex",
+          "alignItems": "center"
+        },
+        "input": {
+          "width": "100%",
+          "border": "none",
+          "outline": "none",
+          "fontSize": "16px",
+          "color": "var(--dls-primary-text-colors)",
+          "padding": "16px 8px",
+          "borderRadius": "8px"
+        },
+        "label": {
+          "backgroundColor": "var(--brand-primary-white-color)",
+          "position": "absolute",
+          "top": "0",
+          "transform": "translateY(-50%)",
+          "left": "16px",
+          "padding": "0 4px",
+          "color": "var(--brand-light-secondary-text-color)"
+        },
+        "assistiveText": {
+          "paddingTop": "4px",
+          "paddingLeft": "16px",
+          "color": "var(--brand-light-secondary-text-color)"
+        },
+        "errorState": {
+          "borderColor": "var(--dls-error-color-500)",
+          "assistiveTextColor": "var(--dls-error-color-500)"
+        },
+        "disabledState": {
+          "borderColor": "var(--dls-divider-light-color)",
+          "cursor": "not-allowed",
+          "textColor": "var(--dls-disabled-text-colors)",
+          "backgroundColor": "var(--brand-primary-white-color)"
+        }
+      },
+      "implementation": {
+        "description": "A versatile input component built with styled-components that supports multiple configurations including icons, prefix/suffix text, and label",
+        "technology": "React with styled-components"
+      },
+      "usage": {
+        "basic": "<SearchInput inputData={{ placeholder: 'Search...', value: searchTerm, onChange: handleChange }} />",
+        "examples": [
+          "With search icon: <SearchInput inputData={{ placeholder: 'Search' }} leftIcon={<SearchIcon />} />",
+          "With clear button: <SearchInput inputData={{ value: searchTerm, onChange: handleChange }} rightIcon={<ClearIcon />} rightIconAction={handleClear} />",
+          "With label and error: <SearchInput label=\"Search\" isError={true} assistiveText=\"Please enter a valid search term\" inputData={{ value: searchTerm, onChange: handleChange }} />",
+          "With prefix and suffix: <SearchInput prefixText=\"$\" suffixText=\"USD\" inputData={{ type: 'number', value: amount, onChange: handleAmountChange }} />",
+          "With suffix CTA: <SearchInput inputData={{ placeholder: 'Enter code' }} suffixText=\"Apply\" isSuffixCta={true} suffixTextAction={handleApplyCode} />"
+        ]
+      }
+    },
+    {
+      "name": "SelectInput",
+      "description": "A customizable dropdown select component for selecting options from a list",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "options": {
+          "type": "array",
+          "required": true,
+          "description": "Array of options to display in the select dropdown",
+          "arrayOf": {
+            "label": {
+              "type": "string",
+              "required": true,
+              "description": "Display text for the option"
+            },
+            "value": {
+              "type": "string",
+              "required": true,
+              "description": "Value of the option"
+            }
+          }
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed above the select input"
+        }
+      },
+      "extends": {
+        "description": "Extends React.SelectHTMLAttributes<HTMLSelectElement>, inheriting all standard HTML select attributes",
+        "inheritedProps": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the select element"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name attribute for the select element, important for form submissions"
+          },
+          "value": {
+            "type": "string",
+            "description": "Current selected value"
+          },
+          "defaultValue": {
+            "type": "string",
+            "description": "Default selected value when uncontrolled"
+          },
+          "onChange": {
+            "type": "function",
+            "description": "Event handler called when selection changes"
+          },
+          "onFocus": {
+            "type": "function",
+            "description": "Event handler called when select receives focus"
+          },
+          "onBlur": {
+            "type": "function",
+            "description": "Event handler called when select loses focus"
+          },
+          "required": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Specifies that an option must be selected"
+          },
+          "disabled": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the select input is disabled"
+          },
+          "multiple": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Allows multiple selections"
+          },
+          "size": {
+            "type": "number",
+            "description": "Number of visible options in the dropdown"
+          },
+          "autoFocus": {
+            "type": "boolean",
+            "defaultValue": false,
+            "description": "Whether the select should get focus when rendered"
+          },
+          "form": {
+            "type": "string",
+            "description": "Form ID that the select belongs to"
+          },
+          "className": {
+            "type": "string",
+            "description": "Additional CSS class to apply to the select element"
+          }
+        }
+      },
+      "styles": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "column",
+          "width": "100%"
+        },
+        "label": {
+          "marginBottom": "8px",
+          "color": "var(--brand-light-secondary-text-color)",
+          "fontVariant": "TypographyVariants.TAG_REGULAR"
+        },
+        "select": {
+          "height": "48px",
+          "width": "100%",
+          "padding": "0 16px",
+          "fontSize": "16px",
+          "borderRadius": "8px",
+          "border": "1px solid var(--dls-divider-light-color)",
+          "appearance": "none",
+          "backgroundImage": "url('data:image/svg+xml;utf8,<svg fill=\"%23000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>')",
+          "backgroundRepeat": "no-repeat",
+          "backgroundPosition": "right 8px center",
+          "backgroundSize": "24px"
+        },
+        "selectFocus": {
+          "border": "1px solid var(--dls-divider-light-color)"
+        }
+      },
+      "implementation": {
+        "description": "A styled select component with a custom dropdown arrow and optional label using Typography component",
+        "technology": "React with styled-components"
+      },
+      "usage": {
+        "basic": "<SelectInput options={[{value: 'option1', label: 'Option 1'}]} onChange={handleChange} />",
+        "examples": [
+          "With label: <SelectInput label=\"Choose an option\" options={options} />",
+          "Controlled: <SelectInput value={selectedValue} onChange={handleChange} options={options} />",
+          "Disabled: <SelectInput disabled options={options} />",
+          "Required: <SelectInput required label=\"Required field\" options={options} />",
+          "With form: <form onSubmit={handleSubmit}><SelectInput name=\"selection\" options={options} /></form>"
+        ]
+      },
+      "accessibility": {
+        "features": [
+          "Properly associates label with select element",
+          "Inherits all standard HTML select accessibility attributes",
+          "Uses semantic HTML for better screen reader support"
+        ],
+        "guidelines": [
+          "Always provide descriptive labels",
+          "Group related select inputs with fieldset and legend when appropriate",
+          "Ensure sufficient color contrast for text and borders"
+        ]
+      }
+    },
+    {
+      "name": "RadioButton",
+      "description": "A customizable radio button component for single selection options",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "selected": {
+          "type": "boolean",
+          "required": true,
+          "defaultValue": false,
+          "description": "Whether the radio button is selected"
+        },
+        "color": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "var(--brand-primary-color)",
+          "description": "Color of the radio button when selected"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Background color of the radio button"
+        }
+      },
+      "styles": {
+        "container": {
+          "display": "inline-block",
+          "position": "relative",
+          "cursor": "pointer"
+        },
+        "radioButton": {
+          "width": "18px",
+          "height": "18px",
+          "borderRadius": "50%",
+          "border": "2px solid",
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "center"
+        },
+        "selected": {
+          "borderColor": "var(--brand-primary-color)",
+          "position": "relative"
+        },
+        "innerCircle": {
+          "width": "10px",
+          "height": "10px",
+          "borderRadius": "50%",
+          "backgroundColor": "var(--brand-primary-color)"
+        }
+      },
+      "implementation": {
+        "description": "A simple styled radio button component that can be customized with colors",
+        "technology": "styled-components with React functional component"
+      },
+      "usage": {
+        "basic": "<RadioButton selected={isSelected} />",
+        "examples": [
+          "Default: <RadioButton selected={isSelected} />",
+          "Custom color: <RadioButton selected={isSelected} color=\"#ff0000\" />",
+          "With background: <RadioButton selected={isSelected} backgroundColor=\"#f5f5f5\" />"
+        ]
+      }
+    },
+    {
+      "name": "LoadingState",
+      "description": "A shimmer loading indicator component that displays placeholder cards while content is loading",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "numberOfCards": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Number of loading placeholder cards to display"
+        },
+        "cardHeight": {
+          "type": "number",
+          "defaultValue": 20,
+          "description": "Height of each loading card in pixels"
+        },
+        "cardWidth": {
+          "type": "string|number",
+          "defaultValue": "100%",
+          "description": "Width of each loading card (CSS value or number of pixels)"
+        },
+        "customClassName": {
+          "type": "string",
+          "defaultValue": "",
+          "description": "Additional CSS class to apply to the loading container"
+        }
+      },
+      "styles": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "column",
+          "gap": "16px",
+          "width": "100%"
+        },
+        "loadingCard": {
+          "borderRadius": "8px",
+          "height": "variable (based on props)",
+          "width": "variable (based on props)",
+          "backgroundColor": "#f0f0f0",
+          "overflow": "hidden",
+          "position": "relative"
+        },
+        "shimmer": {
+          "animation": "shimmer 1.5s infinite linear",
+          "background": "linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%)",
+          "position": "absolute",
+          "top": "0",
+          "left": "-100%",
+          "width": "100%",
+          "height": "100%"
+        }
+      },
+      "implementation": {
+        "description": "A loading placeholder component that creates a shimmer effect on cards to indicate content loading",
+        "technology": "React functional component with styled-components"
+      },
+      "usage": {
+        "basic": "<LoadingState />",
+        "examples": [
+          "Single placeholder: <LoadingState />",
+          "Multiple placeholders: <LoadingState numberOfCards={3} />",
+          "Custom size: <LoadingState cardHeight={100} cardWidth=\"200px\" />",
+          "List placeholder: <LoadingState numberOfCards={5} cardHeight={40} />"
+        ]
+      }
+    },
+    {
+      "name": "LottiePlayer",
+      "description": "A component for playing and controlling Lottie animations",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "src": {
+          "type": "string | object",
+          "required": true,
+          "description": "The animation source - can be a URL to a Lottie JSON file or the animation data object"
+        },
+        "autoplay": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether the animation should play automatically"
+        },
+        "loop": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether the animation should loop"
+        },
+        "style": {
+          "type": "React.CSSProperties",
+          "defaultValue": "{ height: '200px', width: '200px' }",
+          "description": "CSS styles to apply to the animation container"
+        },
+        "controlsVisible": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether to show animation controls"
+        },
+        "controlsButtons": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether to show buttons in the controls (pause, play, stop)"
+        },
+        "renderer": {
+          "type": "string",
+          "options": ["svg", "canvas", "html"],
+          "defaultValue": "svg",
+          "description": "The renderer to use for the animation"
+        },
+        "onEvent": {
+          "type": "function",
+          "description": "Callback function for animation events"
+        },
+        "onStateChange": {
+          "type": "function",
+          "description": "Callback function for animation state changes"
+        },
+        "speed": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Playback speed of the animation (1 is normal speed)"
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional CSS class to apply to the component"
+        }
+      },
+      "dependencies": {
+        "required": ["@lottiefiles/react-lottie-player"],
+        "version": "^3.5.0"
+      },
+      "implementation": {
+        "description": "A wrapper around @lottiefiles/react-lottie-player that provides simplified props and defaults",
+        "technology": "React functional component with @lottiefiles/react-lottie-player"
+      },
+      "usage": {
+        "basic": "<LottiePlayer src=\"https://assets1.lottiefiles.com/packages/lf20_UJNc2t.json\" />",
+        "examples": [
+          "With controls: <LottiePlayer src={animationData} controlsVisible={true} controlsButtons={true} />",
+          "Without autoplay: <LottiePlayer src=\"animation.json\" autoplay={false} />",
+          "Custom styling: <LottiePlayer src={animationData} style={{ height: '400px', width: '100%' }} />",
+          "Event handling: <LottiePlayer src=\"animation.json\" onEvent={(event) => console.log(event)} />"
+        ]
+      },
+      "accessibility": {
+        "considerations": [
+          "Animation can be distracting or problematic for some users",
+          "Consider providing controls to pause animations",
+          "Respect user preferences for reduced motion when appropriate"
+        ]
+      }
+    },
+    {
+      "name": "Image",
+      "description": "A simple image component with support for standard HTML image attributes",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "src": {
+          "type": "string",
+          "required": true,
+          "description": "URL of the image to display"
+        },
+        "alt": {
+          "type": "string",
+          "defaultValue": "image",
+          "description": "Alternative text for the image for accessibility"
+        },
+        "customClassName": {
+          "type": "string",
+          "defaultValue": "",
+          "description": "Additional CSS class to apply to the image"
+        }
+      },
+      "extends": {
+        "description": "Extends React.ImgHTMLAttributes<HTMLImageElement>, inheriting all standard HTML image attributes",
+        "inheritedProps": {
+          "width": {
+            "type": "number | string",
+            "description": "Width of the image"
+          },
+          "height": {
+            "type": "number | string",
+            "description": "Height of the image"
+          },
+          "loading": {
+            "type": "string",
+            "options": ["eager", "lazy"],
+            "defaultValue": "lazy",
+            "description": "Image loading behavior"
+          },
+          "onClick": {
+            "type": "function",
+            "description": "Function to call when the image is clicked"
+          },
+          "style": {
+            "type": "object",
+            "description": "Inline styles to apply to the image"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title attribute for the image (shown on hover)"
+          },
+          "crossOrigin": {
+            "type": "string",
+            "options": ["anonymous", "use-credentials"],
+            "description": "CORS setting for the image"
+          },
+          "decoding": {
+            "type": "string",
+            "options": ["async", "auto", "sync"],
+            "description": "Image decoding hint"
+          },
+          "draggable": {
+            "type": "boolean",
+            "description": "Whether the image can be dragged"
+          }
+        }
+      },
+      "implementation": {
+        "description": "A simple wrapper around the HTML img element with null-safety for the src prop",
+        "technology": "React functional component with styled-components"
+      },
+      "usage": {
+        "basic": "<Image src=\"/path/to/image.jpg\" alt=\"Description of image\" />",
+        "examples": [
+          "Basic usage: <Image src=\"/images/product.jpg\" alt=\"Product image\" />",
+          "With custom class: <Image src=\"/logo.png\" alt=\"Logo\" customClassName=\"header-logo\" />",
+          "With dimensions: <Image src=\"/banner.jpg\" alt=\"Banner\" width={1200} height={400} />",
+          "With lazy loading: <Image src=\"/large-image.jpg\" alt=\"Large image\" loading=\"lazy\" />"
+        ]
+      },
+      "accessibility": {
+        "importance": "High",
+        "guidelines": [
+          "Always provide meaningful alt text that describes the image content",
+          "Use empty alt text (alt=\"\") for decorative images",
+          "Ensure sufficient color contrast for images containing text"
+        ]
+      }
+    },
+    {
+      "name": "CTACircle",
+      "description": "A circular call-to-action button that wraps content in a clickable circle",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to display inside the circle (typically an icon)"
+        },
+        "onClick": {
+          "type": "function",
+          "defaultValue": "noop",
+          "description": "Function to call when the circle is clicked"
+        },
+        "disabled": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether the CTA circle is disabled"
+        }
+      },
+
+      "implementation": {
+        "description": "A simple circular button implemented with styled-components that handles click events and disabled state",
+        "technology": "React functional component with styled-components"
+      },
+      "usage": {
+        "basic": "<CTACircle onClick={handleClick}><IconComponent /></CTACircle>",
+        "examples": [
+          "With icon: <CTACircle onClick={handleClick}><SearchIcon /></CTACircle>",
+          "Disabled state: <CTACircle disabled><EditIcon /></CTACircle>",
+          "With custom styling: <CTACircle onClick={handleShare} style={{backgroundColor: '#3f51b5', color: 'white'}}><ShareIcon /></CTACircle>"
+        ]
+      },
+      "accessibility": {
+        "considerations": [
+          "When used with icons, ensure the icon has appropriate aria-label or title",
+          "Maintain sufficient color contrast between the circle background and its content",
+          "Consider including a tooltip for icon-only buttons to clarify their purpose"
+        ]
+      }
+    },
+    {
+      "name": "DropdownList",
+      "description": "A dropdown menu component that supports both single and multi-select options with checkbox or radio button indicators",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "suggestions": {
+          "type": "array",
+          "required": true,
+          "description": "Array of options to display in the dropdown",
+          "arrayOf": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "required": true,
+                "description": "Display text for the option"
+              },
+              "value": {
+                "type": "string",
+                "required": true,
+                "description": "Unique identifier for the option"
+              }
+            }
+          }
+        },
+        "selectedSuggestions": {
+          "type": "array",
+          "required": false,
+          "defaultValue": "[]",
+          "description": "Array of selected option values (strings)"
+        },
+        "handleSelection": {
+          "type": "function",
+          "required": true,
+          "defaultValue": "noop",
+          "description": "Callback function called when an option is selected, receives the selected option object"
+        },
+        "multiSelect": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether multiple options can be selected (uses checkboxes instead of radio buttons)"
+        }
+      },
+      "implementation": {
+        "description": "A dropdown list component that renders options with either radio buttons or checkboxes based on multiSelect prop",
+        "technology": "React functional component with styled-components",
+        "dependencies": ["Typography", "CheckBox", "RadioButton"]
+      },
+      "usage": {
+        "basic": "<DropdownList suggestions={options} handleSelection={handleSelect} />",
+        "examples": [
+          "Single select: <DropdownList suggestions={options} selectedSuggestions={[selectedValue]} handleSelection={handleSelect} />",
+          "Multi select: <DropdownList suggestions={options} selectedSuggestions={selectedValues} handleSelection={handleSelect} multiSelect />",
+          "With custom options: <DropdownList suggestions={[{ label: 'Option 1', value: 'opt1' }, { label: 'Option 2', value: 'opt2' }]} handleSelection={handleSelect} />"
+        ]
+      },
+      "accessibility": {
+        "features": [
+          "Uses semantic HTML structure",
+          "Supports keyboard navigation",
+          "Visual indicators (checkbox/radio) for selection state",
+          "Uses Typography component for consistent text styling"
+        ],
+        "considerations": [
+          "Ensure sufficient color contrast for text and backgrounds",
+          "Consider adding aria-labels for better screen reader support",
+          "Implement keyboard navigation for option selection"
+        ]
+      }
+    },
+    {
+      "name": "CTAWithAnimation",
+      "description": "An animated call-to-action button with hover effects and variant styles",
+      "type": "component",
+      "category": "atomic",
+      "props": {
+        "children": {
+          "type": "string",
+          "required": true,
+          "description": "Text content of the button"
+        },
+        "onClick": {
+          "type": "function",
+          "defaultValue": "noop",
+          "description": "Function to call when the button is clicked"
+        },
+        "variant": {
+          "type": "enum",
+          "options": ["PRIMARY", "SECONDARY", "TERTIARY"],
+          "defaultValue": "TERTIARY",
+          "description": "Style variant of the button"
+        },
+        "icon": {
+          "type": "string",
+          "description": "URL of an icon to display instead of the default arrow"
+        },
+        "slugUrl": {
+          "type": "string",
+          "defaultValue": "",
+          "description": "URL for the button's anchor tag href attribute"
+        }
+      },
+      "styles": {
+        "variants": {
+          "PRIMARY": {
+            "arrowColor": "var(--dls-brand-primary-color-500)",
+            "color": "var(--dls-white-color)",
+            "bgColor": "var(--dls-brand-primary-color-500)",
+            "arrowBgColor": "var(--dls-white-color)",
+            "borderColor": "var(--dls-brand-primary-color-500)"
+          },
+          "SECONDARY": {
+            "arrowColor": "var(--dls-white-color)",
+            "color": "var(--dls-brand-primary-color-500)",
+            "bgColor": "transparent",
+            "arrowBgColor": "var(--dls-brand-primary-color-500)",
+            "borderColor": "var(--dls-brand-primary-color-500)"
+          },
+          "TERTIARY": {
+            "arrowColor": "var(--dls-white-color)",
+            "color": "var(--dls-brand-primary-color-500)",
+            "bgColor": "var(--dls-white-color)",
+            "arrowBgColor": "var(--dls-brand-primary-color-500)",
+            "borderColor": "var(--dls-white-color)"
+          }
+        },
+        "implementation": {
+          "description": "A styled anchor tag with animated arrow icons or custom icon, using styled-components for styling and animations",
+          "technology": "React functional component with styled-components",
+          "dependencies": ["Typography", "RightTiltedArrow", "OptimizedImage"]
+        },
+        "usage": {
+          "basic": "<CTAWithAnimation variant=\"PRIMARY\">Click me</CTAWithAnimation>",
+          "examples": [
+            "Primary button: <CTAWithAnimation variant=\"PRIMARY\">Learn More</CTAWithAnimation>",
+            "With custom icon: <CTAWithAnimation variant=\"SECONDARY\" icon=\"/path/to/icon.svg\">View Details</CTAWithAnimation>",
+            "With URL: <CTAWithAnimation variant=\"TERTIARY\" slugUrl=\"/products\">Browse Products</CTAWithAnimation>",
+            "With click handler: <CTAWithAnimation onClick={() => handleClick()}>Submit</CTAWithAnimation>"
+          ]
         }
       }
     }

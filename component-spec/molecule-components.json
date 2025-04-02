@@ -1,0 +1,2674 @@
+{
+  "components": [
+    {
+      "name": "AlertMessage",
+      "description": "A message component that displays an icon, title, and subtitle in an alert-style layout",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "message": {
+          "type": "object",
+          "required": true,
+          "description": "The message configuration object",
+          "properties": {
+            "icon": {
+              "type": "string",
+              "required": false,
+              "description": "URL of the icon to display"
+            },
+            "title": {
+              "type": "string",
+              "required": false,
+              "description": "Main message text"
+            },
+            "subtitle": {
+              "type": "string",
+              "required": false,
+              "description": "Secondary message text"
+            }
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "OptimizedImage",
+          "usage": "Displays the alert icon with optimized loading"
+        },
+        {
+          "name": "Typography",
+          "usage": "Renders the title and subtitle text with consistent styling"
+        }
+      ],
+      "implementation": {
+        "description": "A flexible alert message component that combines an icon with title and subtitle text",
+        "technology": "React functional component with styled-components"
+      },
+      "usage": {
+        "basic": "<AlertMessage message={{ title: 'Success', subtitle: 'Operation completed', icon: '/icons/success.svg' }} />",
+        "examples": [
+          "Basic alert: <AlertMessage message={{ title: 'Error', subtitle: 'Something went wrong' }} />",
+          "With icon: <AlertMessage message={{ icon: '/icons/warning.svg', title: 'Warning', subtitle: 'Please check your input' }} />",
+          "Title only: <AlertMessage message={{ title: 'Information' }} />"
+        ]
+      },
+      "accessibility": {
+        "considerations": [
+          "Uses semantic HTML structure",
+          "Icon should have appropriate alt text",
+          "Text uses Typography component for consistent styling and readability"
+        ]
+      }
+    },
+    {
+      "name": "Carousel",
+      "description": "A responsive carousel/slider component with support for multiple slides, autoplay, and navigation controls",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to be displayed in the carousel slides"
+        },
+        "autoSlide": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether the carousel should automatically cycle through slides"
+        },
+        "autoSlideInterval": {
+          "type": "number",
+          "defaultValue": 3000,
+          "description": "Time in milliseconds between auto-slides"
+        },
+        "showDots": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to show navigation dots"
+        },
+        "showArrows": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to show navigation arrows"
+        },
+        "infinite": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether the carousel should loop infinitely"
+        },
+        "slidesToShow": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Number of slides to show at once on mobile"
+        },
+        "slidesToShowDesktop": {
+          "type": "number",
+          "description": "Number of slides to show at once on desktop"
+        },
+        "slidesToScroll": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Number of slides to scroll at a time"
+        },
+        "arrowPosition": {
+          "type": "enum",
+          "options": ["inside", "outside"],
+          "description": "Position of navigation arrows relative to the carousel"
+        },
+        "aspectRatio": {
+          "type": "number",
+          "description": "Aspect ratio for the carousel container"
+        },
+        "customSlideContainerClassName": {
+          "type": "string",
+          "description": "Additional CSS class for the slide container"
+        },
+        "activeSlide": {
+          "type": "number",
+          "description": "Index of the currently active slide"
+        },
+        "handleSlideUpdate": {
+          "type": "function",
+          "description": "Callback function called when the active slide changes"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "ArrowLeftWhite",
+          "usage": "Navigation arrow for previous slide"
+        },
+        {
+          "name": "ArrowRightWhite",
+          "usage": "Navigation arrow for next slide"
+        }
+      ],
+      "features": {
+        "touch": {
+          "swipe": "Supports touch swipe gestures",
+          "drag": "Supports mouse drag interaction"
+        },
+        "responsive": {
+          "mobile": "Adjusts slides and controls for mobile view",
+          "desktop": "Configurable desktop layout"
+        },
+        "autoplay": {
+          "interval": "Configurable autoplay interval",
+          "pauseOnHover": "Pauses on mouse hover"
+        }
+      },
+      "implementation": {
+        "description": "A feature-rich carousel component with touch support, responsive design, and customizable navigation",
+        "technology": "React functional component with styled-components and custom hooks"
+      },
+      "usage": {
+        "basic": "<Carousel><div>Slide 1</div><div>Slide 2</div></Carousel>",
+        "examples": [
+          "Multiple slides: <Carousel slidesToShow={3}>{slides}</Carousel>",
+          "Custom navigation: <Carousel showDots={false} arrowPosition=\"outside\">{slides}</Carousel>",
+          "Autoplay configuration: <Carousel autoSlide={true} autoSlideInterval={5000}>{slides}</Carousel>",
+          "Responsive: <Carousel slidesToShow={1} slidesToShowDesktop={3}>{slides}</Carousel>"
+        ]
+      }
+    },
+    {
+      "name": "Modal",
+      "description": "A responsive modal dialog component with customizable content, backdrop, and close button",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "onClose": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function called when the modal is closed"
+        },
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to be displayed inside the modal"
+        },
+        "showModal": {
+          "type": "boolean",
+          "required": true,
+          "description": "Controls the visibility of the modal"
+        },
+        "additionalContentClass": {
+          "type": "string",
+          "required": false,
+          "description": "Additional CSS class for the modal content container"
+        },
+        "additionalModalClass": {
+          "type": "string",
+          "required": false,
+          "description": "Additional CSS class for the modal backdrop"
+        },
+        "hideCloseButton": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to hide the close button"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "CloseIcon",
+          "usage": "Icon for the close button"
+        }
+      ],
+      "usage": {
+        "basic": "<Modal showModal={isOpen} onClose={handleClose}><div>Modal content</div></Modal>",
+        "examples": [
+          "Basic modal: <Modal showModal={isOpen} onClose={handleClose}><div>Content</div></Modal>",
+          "Custom classes: <Modal showModal={isOpen} onClose={handleClose} additionalContentClass=\"custom-content\" additionalModalClass=\"custom-modal\"><div>Content</div></Modal>",
+          "Without close button: <Modal showModal={isOpen} onClose={handleClose} hideCloseButton><div>Content</div></Modal>"
+        ]
+      }
+    },
+    {
+      "name": "ProductCard",
+      "description": "A comprehensive product card component displaying product information with add to cart functionality",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "product": {
+          "type": "object",
+          "required": true,
+          "$ref": "commonWidgets/product.json",
+          "description": "Product information object"
+        },
+        "handleCardClick": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function when the card is clicked"
+        },
+        "handleCtaClick": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function when the CTA button is clicked"
+        },
+        "handleUpdateCartItem": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function to update cart item quantity"
+        },
+        "enableQuantityIndicator": {
+          "type": "boolean",
+          "required": true,
+          "description": "Whether to show quantity controls"
+        },
+        "showImageBorder": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to show border around product image"
+        },
+        "productImageAspectRatio": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Aspect ratio for product image"
+        },
+        "isCartUpdating": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether cart is currently being updated"
+        },
+        "itemBeingAddedToCart": {
+          "type": "string",
+          "required": true,
+          "description": "SKU of item being added to cart"
+        },
+        "cartItems": {
+          "type": "object",
+          "required": true,
+          "description": "Current cart items with quantities",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Cart item indexed by SKU",
+            "properties": {
+              "qty": {
+                "type": "number",
+                "description": "Quantity of the item in cart"
+              }
+            },
+            "required": ["qty"]
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "ReviewRatingStar",
+          "usage": "Displays product rating"
+        },
+        {
+          "name": "Typography",
+          "usage": "Renders text content with consistent styling"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "Media",
+          "usage": "Displays product images and media content"
+        }
+      ],
+      "features": {
+        "responsive": {
+          "mobile": "Compact layout with minimal borders",
+          "desktop": "Enhanced layout with borders and larger text"
+        },
+        "interaction": {
+          "cardClick": "Navigates to product detail",
+          "ctaClick": "Adds product to cart",
+          "quantityControls": "Increment/decrement product quantity"
+        },
+        "visual": {
+          "outOfStock": "Grayed out appearance",
+          "discountedPrice": "Strikethrough original price",
+          "rating": "Star rating display",
+          "overlayTags": "Customizable overlay indicators"
+        }
+      },
+      "usage": {
+        "basic": "<ProductCard product={productData} handleCardClick={onCardClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={true} cartItems={cartItems} />",
+        "examples": [
+          "Basic card: <ProductCard product={product} handleCardClick={onClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={false} cartItems={{}} />",
+          "With quantity controls: <ProductCard product={product} enableQuantityIndicator={true} cartItems={cartItems} {...handlers} />",
+          "Out of stock: <ProductCard product={{...product, outOfStock: true}} {...props} />",
+          "With overlay tag: <ProductCard product={{...product, overlayTag: {label: 'New', labelColor: '#fff', bgColor: '#000'}}} {...props} />"
+        ]
+      }
+    },
+    {
+      "name": "Slider",
+      "description": "A responsive slider/carousel component with customizable navigation, peek views, and slide controls",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "slidesToShow": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Number of slides to show at once on mobile"
+        },
+        "slidesToShowDesktop": {
+          "type": "number",
+          "required": false,
+          "description": "Number of slides to show at once on desktop"
+        },
+        "aspectRatio": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Aspect ratio for slide content"
+        },
+        "onSlideChange": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function when active slide changes"
+        },
+        "children": {
+          "type": "function",
+          "required": true,
+          "description": "Render function that receives image dimensions and returns slide content"
+        },
+        "showArrows": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show navigation arrows"
+        },
+        "showPeek": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to show a peek of adjacent slides"
+        },
+        "peekVariant": {
+          "type": "enum",
+          "options": ["SMALL", "MEDIUM", "LARGE"],
+          "defaultValue": "SMALL",
+          "description": "Size of the peek view"
+        },
+        "itemCount": {
+          "type": "number",
+          "required": true,
+          "description": "Total number of slides"
+        },
+        "arrowPosition": {
+          "type": "enum",
+          "options": ["outside", "inside"],
+          "defaultValue": "outside",
+          "description": "Position of navigation arrows relative to the slider"
+        },
+        "isMobileView": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Force mobile view styling"
+        },
+        "activeSlide": {
+          "type": "number",
+          "required": false,
+          "description": "Index of the currently active slide"
+        },
+        "customOuterContainerClassName": {
+          "type": "string",
+          "defaultValue": "",
+          "description": "Additional CSS class for the outer container"
+        },
+        "showDots": {
+          "type": "boolean",
+          "required": true,
+          "description": "Whether to show navigation dots"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "ArrowLeftWhite",
+          "usage": "Navigation arrow for previous slide"
+        },
+        {
+          "name": "ArrowRightWhite",
+          "usage": "Navigation arrow for next slide"
+        }
+      ],
+      "features": {
+        "responsive": {
+          "mobile": "Optimized for touch devices with appropriate spacing",
+          "desktop": "Enhanced layout with larger controls"
+        },
+        "navigation": {
+          "arrows": "Customizable position and visibility",
+          "dots": "Optional dot indicators",
+          "touch": "Smooth touch scrolling support"
+        },
+        "layout": {
+          "peek": "Configurable peek view of adjacent slides",
+          "multiSlide": "Support for showing multiple slides",
+          "aspectRatio": "Maintained aspect ratio for slides"
+        }
+      },
+      "implementation": {
+        "description": "A flexible slider component with rich navigation options and responsive design",
+        "technology": "React functional component with styled-components and custom hooks",
+        "features": [
+          "Smooth scrolling behavior",
+          "Touch device support",
+          "Responsive layout",
+          "Customizable navigation",
+          "Peek view options"
+        ]
+      },
+      "usage": {
+        "basic": "<Slider itemCount={5} showDots>{({imageDimensions}) => <div>Slide content</div>}</Slider>",
+        "examples": [
+          "Basic slider: <Slider itemCount={3} showDots>{renderSlides}</Slider>",
+          "Multiple slides: <Slider slidesToShow={2} slidesToShowDesktop={4} itemCount={6} showDots>{renderSlides}</Slider>",
+          "Custom navigation: <Slider showArrows arrowPosition=\"inside\" showDots={false} itemCount={4}>{renderSlides}</Slider>",
+          "With peek: <Slider showPeek peekVariant=\"MEDIUM\" itemCount={5} showDots>{renderSlides}</Slider>"
+        ]
+      }
+    },
+    {
+      "name": "Tabs",
+      "description": "A responsive tabbed interface component with customizable tab content and styling",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "tabs": {
+          "type": "array",
+          "required": true,
+          "description": "Array of tab configurations",
+          "arrayOf": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": true,
+                "description": "Display name of the tab"
+              },
+              "component": {
+                "type": "React.ComponentType",
+                "required": true,
+                "description": "Component to render when tab is active"
+              }
+            }
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders tab names with consistent styling"
+        }
+      ],
+      "usage": {
+        "basic": "<Tabs tabs={[{ name: 'Tab 1', component: Component1 }, { name: 'Tab 2', component: Component2 }]} />",
+        "examples": [
+          "Basic tabs: <Tabs tabs={[{ name: 'Info', component: InfoComponent }, { name: 'Details', component: DetailsComponent }]} />",
+          "Multiple tabs: <Tabs tabs={[{ name: 'Tab 1', component: Tab1 }, { name: 'Tab 2', component: Tab2 }, { name: 'Tab 3', component: Tab3 }]} />"
+        ]
+      }
+    },
+    {
+      "name": "CatalogCard",
+      "description": "A product catalog card component that displays product information with quick add to cart functionality",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "product": {
+          "type": "object",
+          "required": true,
+          "description": "Product information object containing details like name, price, media, and actions",
+          "$ref": "commonWidgets/product.json",
+          "additionalProperties": false
+        },
+        "media": {
+          "$ref": "commonWidgets/media.json",
+          "description": "Media configuration using common media spec"
+        },
+        "handleCtaClick": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function triggered when the CTA button (quick add) is clicked. Commonly used to handle actions like adding to cart, tracking analytics events, etc.",
+          "$ref": "commonWidgets/actions.json"
+        },
+        "handleCardClick": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function triggered when the entire card is clicked. Commonly used for navigation to product detail page or tracking click events.",
+          "returnValue": "void",
+          "$ref": "commonWidgets/actions.json"
+        },
+        "isCartUpdating": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Flag indicating whether cart is currently being updated. Used to show loading state in the UI."
+        },
+        "itemBeingAddedToCart": {
+          "type": "string",
+          "required": false,
+          "description": "SKU of item being added to cart. Used to show loading state for the specific card."
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Media",
+          "usage": "Displays product media content"
+        },
+        {
+          "name": "OptimizedImage",
+          "usage": "Renders optimized product images"
+        },
+        {
+          "name": "Typography",
+          "usage": "Renders text content with consistent styling"
+        },
+        {
+          "name": "AddIconCircle",
+          "usage": "Quick add to cart button icon"
+        },
+        {
+          "name": "Spinner",
+          "usage": "Loading indicator for cart updates"
+        }
+      ],
+      "implementation": {
+        "description": "A comprehensive catalog card component with quick add functionality",
+        "technology": "React functional component with styled-components",
+        "features": [
+          "Responsive design",
+          "Quick add to cart",
+          "Loading states",
+          "Price comparison display",
+          "Flexible media support"
+        ]
+      },
+      "usage": {
+        "basic": "<CatalogCard product={productData} />",
+        "examples": [
+          "Basic card: <CatalogCard product={product} />",
+          "With handlers: <CatalogCard product={product} handleCardClick={onCardClick} handleCtaClick={onCtaClick} />",
+          "Loading state: <CatalogCard product={product} isCartUpdating itemBeingAddedToCart={product.sku} />",
+          "With discounted price: <CatalogCard product={{...product, discountedPriceLabel: '₹499', priceLabel: '₹999'}} />"
+        ]
+      }
+    },
+    {
+      "name": "CompletionScreen",
+      "description": "A component that displays a completion screen with an image or animation, title, and subtitle",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Main title text to display"
+        },
+        "subTitle": {
+          "type": "string",
+          "required": true,
+          "description": "Secondary text displayed below the title"
+        },
+        "animationWidth": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "104",
+          "description": "Width of the animation or image in pixels or percentage"
+        },
+        "width": {
+          "type": ["string", "number"],
+          "required": false,
+          "description": "Width of the component in pixels, percentage, or numeric value"
+        },
+        "imageUrl": {
+          "type": "string",
+          "required": false,
+          "description": "URL of the image to display (from ImageOrAnimationBannerProps)"
+        },
+        "animationUrl": {
+          "type": "string",
+          "required": false,
+          "description": "URL of the animation (lottie) to display (from ImageOrAnimationBannerProps)"
+        },
+        "aspectRatio": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 1,
+          "description": "Aspect ratio of the image or animation (from ImageOrAnimationBannerProps)"
+        },
+        "animationProps": {
+          "type": "object",
+          "required": false,
+          "description": "Additional properties for the animation player (from ImageOrAnimationBannerProps)"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle text with consistent styling"
+        },
+        {
+          "name": "Spacer",
+          "usage": "Creates consistent spacing between elements"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "ImageOrAnimationBanner",
+          "usage": "Handles the display of images or animations with configurable dimensions and aspect ratio"
+        }
+      ],
+      "usage": {
+        "basic": "<CompletionScreen title=\"Thank you!\" subTitle=\"Your submission has been received.\" animationUrl=\"https://example.com/success.json\" />",
+        "examples": [
+          "With animation: <CompletionScreen title=\"Success!\" subTitle=\"Your order has been placed.\" animationUrl=\"https://example.com/success.json\" />",
+          "With image: <CompletionScreen title=\"Thank you\" subTitle=\"We've received your feedback.\" imageUrl=\"https://example.com/thankyou.png\" />",
+          "Custom width: <CompletionScreen title=\"Complete\" subTitle=\"Profile updated successfully.\" animationUrl=\"https://example.com/complete.json\" animationWidth=\"150\" />"
+        ]
+      }
+    },
+    {
+      "name": "ConfirmationModalWIthInput",
+      "description": "A modal component that displays a confirmation dialog with optional input field, title, subtitle, and action buttons",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Main title text of the confirmation modal"
+        },
+        "subTitle": {
+          "type": "string",
+          "required": false,
+          "description": "Secondary text displayed below the title"
+        },
+        "footerCta": {
+          "type": "array",
+          "required": true,
+          "description": "Array of button configurations for the footer actions",
+          "arrayOf": {
+            "type": "object",
+            "description": "Button configuration for footer actions",
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Text label for the CTA button",
+                "default": "Add To Cart"
+              },
+              "variant": {
+                "type": "string",
+                "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
+                "description": "Visual style of the button",
+                "default": "PRIMARY"
+              },
+              "size": {
+                "type": "string",
+                "enum": ["SMALL", "MEDIUM", "LARGE"],
+                "description": "Size of the button",
+                "default": "MEDIUM"
+              },
+              "fullWidth": {
+                "type": "boolean",
+                "description": "Whether the button should take up the full available width",
+                "default": true
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the button should be disabled",
+                "default": false
+              },
+              "customClassName": {
+                "type": "string",
+                "description": "Custom CSS class name for the button"
+              },
+              "customLabelClassName": {
+                "type": "string",
+                "description": "Custom CSS class name for the button label"
+              },
+              "loading": {
+                "type": "boolean",
+                "description": "Whether to show a loading state on the button",
+                "default": false
+              },
+              "leftIconProps": {
+                "$ref": "commonWidgets/image-animation-props.json",
+                "description": "Configuration for an icon displayed on the left side of the button"
+              },
+              "rightIconProps": {
+                "$ref": "commonWidgets/image-animation-props.json",
+                "description": "Configuration for an icon displayed on the right side of the button"
+              },
+              "centerIconProps": {
+                "$ref": "commonWidgets/image-animation-props.json",
+                "description": "Configuration for an icon displayed in the center of the button"
+              },
+              "actions": {
+                "type": "array",
+                "description": "Custom actions to perform when the button is clicked (default is MULTI_ATC)",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "commonWidgets/actions.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "showClose": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "description": "Whether to show the close button in the header"
+        },
+        "onClose": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function triggered when close button is clicked",
+          "parameters": [],
+          "returnValue": "void"
+        },
+        "isInputEnabled": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to show the input field"
+        },
+        "inputData": {
+          "type": "object",
+          "required": false,
+          "description": "Configuration for the input field when enabled",
+          "$ref": "LabelSearchInputWithTags component props"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle text with consistent styling"
+        },
+        {
+          "name": "Spacer",
+          "usage": "Creates consistent spacing between elements"
+        },
+        {
+          "name": "Button",
+          "usage": "Renders action buttons in the footer"
+        },
+        {
+          "name": "Close",
+          "usage": "Renders the close icon button"
+        },
+        {
+          "name": "LabelSearchInputWithTags",
+          "usage": "Provides input functionality when enabled"
+        }
+      ],
+
+      "usage": {
+        "basic": "<ConfirmationModalWIthInput title=\"Confirm Action\" footerCta={[{ label: 'Cancel', variant: 'SECONDARY', onClick: handleCancel }, { label: 'Confirm', variant: 'PRIMARY', onClick: handleConfirm }]} />",
+        "examples": [
+          "Basic confirmation: <ConfirmationModalWIthInput title=\"Delete Item?\" subTitle=\"This action cannot be undone\" footerCta={[cancelButton, confirmButton]} />",
+          "With input: <ConfirmationModalWIthInput title=\"Add Tags\" isInputEnabled inputData={inputConfig} footerCta={[cancelButton, submitButton]} />",
+          "Without close button: <ConfirmationModalWIthInput title=\"Required Action\" showClose={false} footerCta={[confirmButton]} />"
+        ]
+      },
+      "accessibility": {
+        "features": ["Semantic HTML structure", "Keyboard navigation support"],
+        "considerations": [
+          "Ensure sufficient color contrast for text",
+          "Make sure modal is properly announced to screen readers",
+          "Support keyboard navigation for closing and interacting with buttons",
+          "Trap focus within modal when open"
+        ]
+      }
+    },
+    {
+      "name": "ExpandableSection",
+      "description": "A collapsible section component with header, expandable content, and optional subtitle",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Title text displayed in the header"
+        },
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to be displayed when section is expanded"
+        },
+        "isCollapsible": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "description": "Whether the section can be collapsed/expanded"
+        },
+        "openByDefault": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the section is expanded by default"
+        },
+        "wrapperClassName": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Additional CSS class for the wrapper element"
+        },
+        "variant": {
+          "type": "enum",
+          "options": "TypographyVariants",
+          "required": false,
+          "defaultValue": "TypographyVariants.BODY_BASE_REGULAR",
+          "description": "Typography variant to use for title and subtitle"
+        },
+        "customTitleClassName": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Additional CSS class for the title text"
+        },
+        "headerClassName": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Additional CSS class for the header section"
+        },
+        "customSubTitleClassName": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Additional CSS class for the subtitle text"
+        },
+        "subTitle": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Subtitle text displayed next to the title"
+        },
+        "subTitleAmountColor": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Custom color for the subtitle text"
+        },
+        "onListToggle": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function triggered when section is expanded/collapsed",
+          "parameters": ["{ sectionName: string, action: 'open' | 'close' }"],
+          "returnValue": "void"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle with consistent styling"
+        },
+        {
+          "name": "DropdownArrow",
+          "usage": "Indicates collapsed/expanded state"
+        }
+      ],
+      "styles": {
+        "wrapper": {
+          "padding": "8px 10px",
+          "borderRadius": "4px",
+          "border": "1px solid divider-light-color"
+        },
+        "header": {
+          "display": "flex",
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "cursor": "pointer (when collapsible)"
+        },
+        "title": {
+          "maxWidth": "90%",
+          "color": "brand-light-secondary-text-color"
+        },
+        "subtitle": {
+          "color": "configurable or brand-primary-text-color"
+        }
+      },
+      "features": {
+        "interaction": {
+          "collapsible": "Can be toggled between expanded and collapsed states",
+          "alwaysOpen": "Can be configured to be always expanded"
+        },
+        "visual": {
+          "arrow": "Visual indicator of collapsed/expanded state",
+          "customizable": "Extensive style customization through CSS classes"
+        },
+        "content": {
+          "dynamic": "Can contain any React elements as children",
+          "responsive": "Adapts to different screen sizes"
+        }
+      },
+      "implementation": {
+        "description": "A flexible expandable section component with customizable styling",
+        "technology": "React functional component with styled-components and custom hooks",
+        "features": [
+          "Custom hook for state management",
+          "Memoized to prevent unnecessary re-renders",
+          "Configurable default state",
+          "Optional collapse functionality",
+          "Extensive CSS customization options"
+        ]
+      },
+      "usage": {
+        "basic": "<ExpandableSection title=\"FAQ\"><div>Content goes here</div></ExpandableSection>",
+        "examples": [
+          "Basic usage: <ExpandableSection title=\"Section Title\"><p>Expandable content here</p></ExpandableSection>",
+          "With subtitle: <ExpandableSection title=\"Price Breakdown\" subTitle=\"₹1,499\"><ul><li>Item 1: ₹499</li><li>Item 2: ₹1,000</li></ul></ExpandableSection>",
+          "Always expanded: <ExpandableSection title=\"Important Information\" isCollapsible={false}><p>This content is always visible</p></ExpandableSection>",
+          "Open by default: <ExpandableSection title=\"Details\" openByDefault><p>Initially expanded content</p></ExpandableSection>"
+        ]
+      },
+      "accessibility": {
+        "features": [
+          "Semantic HTML structure",
+          "Clear visual indicators for interactive elements"
+        ],
+        "considerations": [
+          "Ensure sufficient color contrast for text",
+          "Provide keyboard navigation for expanding/collapsing",
+          "Use ARIA attributes to indicate expanded state",
+          "Consider screen reader announcements for state changes"
+        ]
+      }
+    },
+    {
+      "name": "GenericCarousel",
+      "description": "A flexible carousel component for displaying a collection of items with navigation controls",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "isInfinite": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the carousel should loop infinitely"
+        },
+        "isAutoSlide": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the carousel should automatically cycle through slides"
+        },
+        "autoSlideInterval": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 3000,
+          "description": "Time in milliseconds between auto-slides"
+        },
+        "pauseAutoSlideDuration": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 5000,
+          "description": "Duration in milliseconds to pause auto-sliding after user interaction"
+        },
+        "isTransitionEnabled": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "description": "Whether slide transitions should be animated"
+        },
+        "slidesToShow": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 1,
+          "description": "Number of slides visible at once"
+        },
+        "showDots": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to show navigation dots"
+        },
+        "slideGap": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 8,
+          "description": "Gap between slides in pixels"
+        },
+        "cardData": {
+          "type": "array",
+          "required": true,
+          "description": "Array of data objects to be passed to the slide component"
+        },
+        "Component": {
+          "type": "React.ComponentType",
+          "required": true,
+          "description": "Component to render for each slide, receives widgetData prop"
+        },
+        "enableOverflow": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to enable overflow for the carousel container"
+        },
+        "LeftArrowIcon": {
+          "type": "React.ComponentType",
+          "required": false,
+          "description": "Custom component for the left navigation arrow"
+        },
+        "RightArrowIcon": {
+          "type": "React.ComponentType",
+          "required": false,
+          "description": "Custom component for the right navigation arrow"
+        },
+        "arrowPositionY": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 50,
+          "description": "Vertical position of arrows in percentage"
+        },
+        "arrowGap": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 0,
+          "description": "Gap between arrows and carousel edge in pixels"
+        }
+      },
+      "atomicComponents": [],
+      "implementation": {
+        "description": "A comprehensive carousel component with extensive customization options",
+        "technology": "React functional component with styled-components and custom hooks",
+        "features": [
+          "Custom hook for carousel state management",
+          "Touch and mouse event handling",
+          "Automatic slide cycling",
+          "Optimized rendering",
+          "Flexible layout configuration"
+        ]
+      },
+      "usage": {
+        "basic": "<GenericCarousel cardData={items} Component={CardComponent} />",
+        "examples": [
+          "Basic carousel: <GenericCarousel cardData={products} Component={ProductCard} />",
+          "Auto-sliding: <GenericCarousel cardData={banners} Component={BannerSlide} isAutoSlide autoSlideInterval={5000} />",
+          "Multiple slides: <GenericCarousel cardData={items} Component={ItemCard} slidesToShow={3} slideGap={16} />",
+          "Custom navigation: <GenericCarousel cardData={images} Component={ImageSlide} LeftArrowIcon={CustomLeftArrow} RightArrowIcon={CustomRightArrow} arrowPositionY={40} />"
+        ]
+      }
+    },
+    {
+      "name": "GenericSlider",
+      "description": "A responsive slider component for displaying content with navigation arrows and custom layout",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "textAlign": {
+          "type": "enum",
+          "options": ["LEFT", "CENTER", "RIGHT"],
+          "required": false,
+          "defaultValue": "LEFT",
+          "description": "Text alignment within slides"
+        },
+        "noOfSlides": {
+          "type": "number",
+          "required": true,
+          "description": "Total number of slides"
+        },
+        "aspectRatio": {
+          "type": "number",
+          "required": true,
+          "description": "Aspect ratio for slide content (width/height)"
+        },
+        "startFromSlide": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 0,
+          "description": "Index of the initial active slide"
+        },
+        "noOfSlidesDesktop": {
+          "type": "number",
+          "required": false,
+          "description": "Number of slides visible on desktop (defaults to mobile value if not specified)"
+        },
+        "onSlideChange": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function triggered when active slide changes",
+          "parameters": ["index: number"],
+          "returnValue": "void"
+        },
+        "children": {
+          "type": "React.ReactNode",
+          "required": true,
+          "description": "Content to render in slides"
+        },
+        "slideGap": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 8,
+          "description": "Gap between slides in pixels"
+        },
+        "arrowPositionY": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 50,
+          "description": "Vertical position of arrows in percentage"
+        },
+        "LeftArrowIcon": {
+          "type": "React.ComponentType",
+          "required": false,
+          "description": "Custom component for the left navigation arrow"
+        },
+        "RightArrowIcon": {
+          "type": "React.ComponentType",
+          "required": false,
+          "description": "Custom component for the right navigation arrow"
+        },
+        "arrowGap": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 0,
+          "description": "Gap between arrows and slider edge in pixels"
+        },
+        "isShowArrows": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "description": "Whether to show navigation arrows"
+        }
+      },
+      "atomicComponents": [],
+      "usage": {
+        "basic": "<GenericSlider noOfSlides={5} aspectRatio={1.5}>{slides}</GenericSlider>",
+        "examples": [
+          "Basic slider: <GenericSlider noOfSlides={3} aspectRatio={1}>{images}</GenericSlider>",
+          "Desktop configuration: <GenericSlider noOfSlides={1} noOfSlidesDesktop={3} aspectRatio={1.5}>{cards}</GenericSlider>",
+          "Custom navigation: <GenericSlider noOfSlides={4} aspectRatio={2} LeftArrowIcon={CustomLeftArrow} RightArrowIcon={CustomRightArrow} arrowPositionY={40}>{banners}</GenericSlider>",
+          "Text alignment: <GenericSlider noOfSlides={2} aspectRatio={1} textAlign=\"CENTER\">{textContent}</GenericSlider>"
+        ]
+      }
+    },
+    {
+      "name": "ImageOrAnimationBanner",
+      "description": "A versatile component that can display either an image or a Lottie animation with configurable dimensions",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "imageUrl": {
+          "type": "string",
+          "required": false,
+          "description": "URL of the image to display"
+        },
+        "animationUrl": {
+          "type": "string",
+          "required": false,
+          "description": "URL of the Lottie animation to display"
+        },
+        "aspectRatio": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 1,
+          "description": "Aspect ratio to maintain for the media content"
+        },
+        "width": {
+          "type": ["string", "number"],
+          "required": false,
+          "description": "Width of the banner in pixels, percentage, or numeric value"
+        },
+        "animationProps": {
+          "type": "object",
+          "required": false,
+          "description": "Additional properties for the Lottie animation player"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "OptimizedImage",
+          "usage": "Renders optimized images with proper loading"
+        },
+        {
+          "name": "LottiePlayer",
+          "usage": "Renders Lottie animations with configurable properties"
+        }
+      ],
+      "usage": {
+        "basic": "<ImageOrAnimationBanner imageUrl=\"https://example.com/banner.jpg\" aspectRatio={1.5} />",
+        "examples": [
+          "With image: <ImageOrAnimationBanner imageUrl=\"https://example.com/banner.jpg\" width=\"100%\" aspectRatio={1.5} />",
+          "With animation: <ImageOrAnimationBanner animationUrl=\"https://example.com/animation.json\" width={300} />",
+          "With animation props: <ImageOrAnimationBanner animationUrl=\"https://example.com/animation.json\" animationProps={{ loop: true, autoplay: true }} />"
+        ]
+      }
+    },
+    {
+      "name": "HorizontalProductCard",
+      "description": "A horizontal layout product card component displaying product information with add to cart functionality",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "product": {
+          "type": "object",
+          "required": true,
+          "$ref": "commonWidgets/product.json",
+          "description": "Product information object"
+        },
+        "handleCardClick": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function when the card is clicked",
+          "parameters": ["product: Product"],
+          "returnValue": "void"
+        },
+        "handleCtaClick": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function when the CTA button is clicked",
+          "parameters": ["product: Product"],
+          "returnValue": "void"
+        },
+        "handleUpdateCartItem": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function to update cart item quantity",
+          "parameters": ["id: number", "sku: string", "quantity: number"],
+          "returnValue": "void"
+        },
+        "enableQuantityIndicator": {
+          "type": "boolean",
+          "required": true,
+          "description": "Whether to show quantity controls"
+        },
+        "showImageBorder": {
+          "type": "boolean",
+          "defaultValue": true,
+          "description": "Whether to show border around product image"
+        },
+        "productImageAspectRatio": {
+          "type": "number",
+          "defaultValue": 1,
+          "description": "Aspect ratio for product image"
+        },
+        "isCartUpdating": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Whether cart is currently being updated"
+        },
+        "itemBeingAddedToCart": {
+          "type": "string",
+          "required": true,
+          "description": "SKU of item being added to cart"
+        },
+        "cartItems": {
+          "type": "object",
+          "required": true,
+          "description": "Current cart items with quantities",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Cart item indexed by SKU",
+            "properties": {
+              "qty": {
+                "type": "number",
+                "description": "Quantity of the item in cart"
+              }
+            },
+            "required": ["qty"]
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders text content with consistent styling"
+        },
+        {
+          "name": "Media",
+          "usage": "Displays product image"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "ProductCardButton",
+          "usage": "Handles add to cart and quantity controls"
+        },
+        {
+          "name": "ProductOverlayTag",
+          "usage": "Displays overlay tags like 'Out of Stock'"
+        }
+      ],
+      "implementation": {
+        "description": "A horizontal product card component for efficient space usage with rich interaction features",
+        "technology": "React functional component with styled-components",
+        "features": [
+          "Horizontal layout for space efficiency",
+          "Cart integration",
+          "Quantity management",
+          "Loading states",
+          "Out of stock handling"
+        ]
+      },
+      "usage": {
+        "basic": "<HorizontalProductCard product={productData} handleCardClick={onCardClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={true} cartItems={cartItems} itemBeingAddedToCart=\"\" />",
+        "examples": [
+          "Basic card: <HorizontalProductCard product={product} handleCardClick={onClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={false} cartItems={{}} itemBeingAddedToCart=\"\" />",
+          "With quantity controls: <HorizontalProductCard product={product} enableQuantityIndicator={true} cartItems={cartItems} itemBeingAddedToCart=\"\" {...handlers} />",
+          "Out of stock: <HorizontalProductCard product={{...product, outOfStock: true}} itemBeingAddedToCart=\"\" {...props} />",
+          "With overlay tag: <HorizontalProductCard product={{...product, overlayTag: {label: 'New', labelColor: '#fff', bgColor: '#000', borderColor: '#000'}}} itemBeingAddedToCart=\"\" {...props} />"
+        ]
+      }
+    },
+    {
+      "name": "InfoBanner",
+      "description": "A component that displays an informational or warning banner with title and subtitle",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Main title text to display"
+        },
+        "subTitle": {
+          "type": "string",
+          "required": true,
+          "description": "Secondary text displayed below the title"
+        },
+        "variant": {
+          "type": "enum",
+          "options": ["warning", "error"],
+          "required": false,
+          "defaultValue": "warning",
+          "description": "Visual style variant of the banner"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle text with consistent styling"
+        }
+      ],
+      "usage": {
+        "basic": "<InfoBanner title=\"Note\" subTitle=\"This is informational\" variant=\"warning\" />",
+        "examples": [
+          "Warning banner: <InfoBanner title=\"Caution\" subTitle=\"Please verify your information\" variant=\"warning\" />",
+          "Error banner: <InfoBanner title=\"Error\" subTitle=\"Something went wrong\" variant=\"error\" />"
+        ]
+      }
+    },
+    {
+      "name": "LabelDropdown",
+      "description": "A dropdown component with a label that allows selecting from a list of options",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Label text displayed above the dropdown"
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Current selected value"
+        },
+        "options": {
+          "type": "array",
+          "required": true,
+          "description": "Array of options to display in the dropdown",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Display text for the option"
+              },
+              "value": {
+                "type": "string",
+                "description": "Value associated with the option"
+              }
+            }
+          }
+        },
+        "onChange": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function triggered when a new value is selected",
+          "parameters": ["value: string"],
+          "returnValue": "void"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "select",
+          "description": "Placeholder text when no value is selected"
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the field is mandatory (adds asterisk to label)"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders label text with consistent styling"
+        },
+        {
+          "name": "DropdownArrow",
+          "usage": "Visual indicator for dropdown functionality"
+        },
+        {
+          "name": "DropdownList",
+          "usage": "Displays the list of selectable options"
+        }
+      ],
+      "usage": {
+        "basic": "<LabelDropdown label=\"Select Option\" value=\"option1\" options={[{label: 'Option 1', value: 'option1'}, {label: 'Option 2', value: 'option2'}]} onChange={handleChange} />",
+        "examples": [
+          "Basic dropdown: <LabelDropdown label=\"Country\" value=\"india\" options={countryOptions} onChange={handleCountryChange} />",
+          "With placeholder: <LabelDropdown label=\"City\" value=\"\" options={cityOptions} placeholder=\"Select a city\" onChange={handleCityChange} />",
+          "Mandatory field: <LabelDropdown label=\"Category\" value=\"cat1\" options={categoryOptions} onChange={handleCategoryChange} isMandatory />",
+          "Empty options: <LabelDropdown label=\"Subcategory\" value=\"\" options={[]} placeholder=\"No subcategories available\" onChange={handleSubcategoryChange} />"
+        ]
+      }
+    },
+    {
+      "name": "LabelRadioSelect",
+      "description": "A component that displays a group of radio buttons with a label",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Label text displayed above the radio buttons"
+        },
+        "options": {
+          "type": "array",
+          "required": true,
+          "description": "Array of options to display as radio buttons",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Display text for the option"
+              },
+              "value": {
+                "type": "string",
+                "description": "Value associated with the option"
+              }
+            }
+          }
+        },
+        "selectedOption": {
+          "type": "string",
+          "required": true,
+          "description": "Value of the currently selected option"
+        },
+        "onChange": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function that returns a function to handle selection changes",
+          "parameters": ["option: DropdownOption"],
+          "returnValue": "() => void"
+        },
+        "color": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "var(--brand-primary-color)",
+          "description": "Color of the radio buttons"
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the field is mandatory (adds asterisk to label)"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders label and option text with consistent styling"
+        },
+        {
+          "name": "RadioButton",
+          "usage": "Individual radio button controls"
+        },
+        {
+          "name": "Spacer",
+          "usage": "Creates consistent spacing between elements"
+        }
+      ],
+      "usage": {
+        "basic": "<LabelRadioSelect label=\"Gender\" options={[{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}]} selectedOption=\"female\" onChange={handleGenderChange} />",
+        "examples": [
+          "Basic radio select: <LabelRadioSelect label=\"Size\" options={sizeOptions} selectedOption=\"medium\" onChange={handleSizeChange} />",
+          "Custom colored: <LabelRadioSelect label=\"Variant\" options={variantOptions} selectedOption=\"a\" onChange={handleVariantChange} color=\"#00bcd4\" />",
+          "Mandatory field: <LabelRadioSelect label=\"Payment Method\" options={paymentOptions} selectedOption=\"card\" onChange={handlePaymentChange} isMandatory />"
+        ]
+      }
+    },
+    {
+      "name": "LabelSearchInputWithTags",
+      "description": "A search input component with a label that allows adding and removing tags",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Label text displayed above the input"
+        },
+        "searchValue": {
+          "type": "string",
+          "required": false,
+          "description": "Current input value"
+        },
+        "suggestions": {
+          "type": "array",
+          "required": true,
+          "description": "Array of available suggestions for the dropdown",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectedSuggestions": {
+          "type": "array",
+          "required": true,
+          "description": "Array of selected tags",
+          "items": {
+            "type": "string"
+          }
+        },
+        "submitSelectedSuggestions": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function to handle changes to selected suggestions",
+          "parameters": ["suggestions: string[]"],
+          "returnValue": "void"
+        },
+        "handleSearchChange": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function to handle search input changes",
+          "parameters": ["event: React.ChangeEvent<HTMLInputElement>"],
+          "returnValue": "void"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Placeholder text for the input"
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the field is mandatory (adds asterisk to label)"
+        },
+        "allowCustom": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to allow custom tags that are not in the suggestions"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders label text with consistent styling"
+        },
+        {
+          "name": "Close",
+          "usage": "Icon to clear input or remove tags"
+        },
+        {
+          "name": "DropdownList",
+          "usage": "Displays the list of selectable suggestions"
+        },
+        {
+          "name": "Spacer",
+          "usage": "Creates consistent spacing between elements"
+        }
+      ],
+      "usage": {
+        "basic": "<LabelSearchInputWithTags label=\"Skills\" suggestions={allSkills} selectedSuggestions={selectedSkills} submitSelectedSuggestions={handleSkillsUpdate} />",
+        "examples": [
+          "Basic search with tags: <LabelSearchInputWithTags label=\"Programming Languages\" suggestions={languages} selectedSuggestions={selectedLanguages} submitSelectedSuggestions={updateLanguages} />",
+          "With custom tags: <LabelSearchInputWithTags label=\"Interests\" suggestions={commonInterests} selectedSuggestions={userInterests} submitSelectedSuggestions={updateInterests} allowCustom />",
+          "Mandatory field: <LabelSearchInputWithTags label=\"Categories\" suggestions={categories} selectedSuggestions={selectedCategories} submitSelectedSuggestions={updateCategories} isMandatory />"
+        ]
+      }
+    },
+    {
+      "name": "LabelTextInput",
+      "description": "A text input component with a label and optional number controls",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Label text displayed above the input"
+        },
+        "type": {
+          "type": "string",
+          "required": true,
+          "description": "HTML input type (e.g., 'text', 'number', 'email')"
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Current input value"
+        },
+        "onChange": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function to handle input changes",
+          "parameters": ["event: React.ChangeEvent<HTMLInputElement>"],
+          "returnValue": "void"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text for the input"
+        },
+        "showNumberControl": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to show increment/decrement controls for number inputs"
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether the field is mandatory (adds asterisk to label)"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders label text with consistent styling"
+        }
+      ],
+      "usage": {
+        "basic": "<LabelTextInput label=\"Name\" type=\"text\" value={name} onChange={handleNameChange} placeholder=\"Enter your name\" />",
+        "examples": [
+          "Text input: <LabelTextInput label=\"Email\" type=\"email\" value={email} onChange={handleEmailChange} placeholder=\"Enter your email\" />",
+          "Number input: <LabelTextInput label=\"Age\" type=\"number\" value={age} onChange={handleAgeChange} showNumberControl />",
+          "Mandatory field: <LabelTextInput label=\"Phone\" type=\"tel\" value={phone} onChange={handlePhoneChange} placeholder=\"Enter your phone number\" isMandatory />"
+        ]
+      }
+    },
+    {
+      "name": "Marquee",
+      "description": "A component that displays a continuously scrolling set of text items",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "items": {
+          "type": "array",
+          "required": true,
+          "description": "Array of text items to display in the marquee",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders text content with consistent styling"
+        }
+      ],
+      "usage": {
+        "basic": "<Marquee items={['Free shipping on orders above ₹499', 'New arrivals', 'Special offers', 'Sale ending soon']} />",
+        "examples": [
+          "Simple marquee: <Marquee items={announcements} />",
+          "Empty marquee (renders null): <Marquee items={[]} />"
+        ]
+      }
+    },
+    {
+      "name": "Media",
+      "description": "A versatile component for displaying different types of media (image, video, or lottie animation)",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "media": {
+          "type": "object",
+          "required": true,
+          "description": "Media configuration object",
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mediaType": {
+                  "type": "string",
+                  "enum": ["image"],
+                  "description": "Type of media"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "URL of the image"
+                },
+                "altText": {
+                  "type": "string",
+                  "description": "Alt text for the image"
+                },
+                "loading": {
+                  "type": "string",
+                  "enum": ["lazy", "eager"],
+                  "description": "Image loading strategy"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mediaType": {
+                  "type": "string",
+                  "enum": ["video"],
+                  "description": "Type of media"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "URL of the video"
+                },
+                "autoplay": {
+                  "type": "boolean",
+                  "description": "Whether to autoplay the video"
+                },
+                "loop": {
+                  "type": "boolean",
+                  "description": "Whether to loop the video"
+                },
+                "muted": {
+                  "type": "boolean",
+                  "description": "Whether to mute the video"
+                },
+                "controls": {
+                  "type": "boolean",
+                  "description": "Whether to show video controls"
+                },
+                "posterImage": {
+                  "type": "string",
+                  "description": "URL of the poster image"
+                },
+                "playsInline": {
+                  "type": "boolean",
+                  "description": "Whether the video plays inline"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mediaType": {
+                  "type": "string",
+                  "enum": ["lottie"],
+                  "description": "Type of media"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "URL of the lottie animation"
+                },
+                "autoplay": {
+                  "type": "boolean",
+                  "description": "Whether to autoplay the animation"
+                },
+                "loop": {
+                  "type": "boolean",
+                  "description": "Whether to loop the animation"
+                }
+              }
+            }
+          ]
+        },
+        "aspectRatio": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 1,
+          "description": "Aspect ratio for the media container"
+        },
+        "desktopViewWidth": {
+          "type": "string",
+          "required": false,
+          "description": "Width of the media on desktop view"
+        },
+        "mobileViewWidth": {
+          "type": "string",
+          "required": false,
+          "description": "Width of the media on mobile view"
+        },
+        "customClassName": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Custom CSS class for the media element"
+        },
+        "onClick": {
+          "type": "function",
+          "required": false,
+          "description": "Click handler for the media element"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "OptimizedImage",
+          "usage": "Renders optimized images with proper loading"
+        },
+        {
+          "name": "OptimizedVideo",
+          "usage": "Renders optimized video content"
+        },
+        {
+          "name": "LottiePlayer",
+          "usage": "Renders Lottie animations"
+        }
+      ],
+      "usage": {
+        "basic": "<Media media={{ mediaType: 'image', source: 'https://example.com/image.jpg' }} />",
+        "examples": [
+          "Image: <Media media={{ mediaType: 'image', source: 'https://example.com/image.jpg', altText: 'Example Image' }} aspectRatio={1.5} />",
+          "Video: <Media media={{ mediaType: 'video', source: 'https://example.com/video.mp4', autoplay: true, loop: true, muted: true }} />",
+          "Lottie: <Media media={{ mediaType: 'lottie', source: 'https://example.com/animation.json', autoplay: true, loop: true }} />",
+          "With custom class: <Media media={{ mediaType: 'image', source: 'https://example.com/image.jpg' }} customClassName=\"custom-media\" />"
+        ]
+      }
+    },
+    {
+      "name": "MediaPreviewModal",
+      "description": "A modal component for previewing media items with zoom and carousel navigation",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "showModal": {
+          "type": "boolean",
+          "required": true,
+          "description": "Controls the visibility of the modal"
+        },
+        "onClose": {
+          "type": "function",
+          "required": true,
+          "description": "Callback function called when the modal is closed"
+        },
+        "items": {
+          "type": "array",
+          "required": true,
+          "description": "Array of media items to display in the preview",
+          "items": {
+            "type": "object",
+            "$ref": "commonWidgets/media.json"
+          }
+        },
+        "carouselConfig": {
+          "type": "object",
+          "required": true,
+          "description": "Configuration for the carousel component",
+          "properties": {
+            "autoSlide": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether the carousel should automatically slide"
+            },
+            "autoSlideInterval": {
+              "type": "number",
+              "required": false,
+              "description": "Interval between auto slides in milliseconds"
+            },
+            "showDots": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show navigation dots"
+            },
+            "showArrows": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show navigation arrows"
+            },
+            "infinite": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether the carousel should loop infinitely"
+            },
+            "slidesToShow": {
+              "type": "number",
+              "required": false,
+              "description": "Number of slides to show at once (mobile)"
+            },
+            "slidesToShowDesktop": {
+              "type": "number",
+              "required": false,
+              "description": "Number of slides to show at once (desktop)"
+            },
+            "slidesToScroll": {
+              "type": "number",
+              "required": false,
+              "description": "Number of slides to scroll at once"
+            },
+            "isMobile": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to use mobile view configuration"
+            },
+            "arrowPosition": {
+              "type": "string",
+              "enum": ["inside", "outside"],
+              "required": false,
+              "description": "Position of the navigation arrows"
+            },
+            "aspectRatio": {
+              "type": "number",
+              "required": false,
+              "description": "Aspect ratio for the carousel slides"
+            },
+            "customSlideContainerClassName": {
+              "type": "string",
+              "required": false,
+              "description": "Custom class name for the slide container"
+            },
+            "activeSlide": {
+              "type": "number",
+              "required": false,
+              "description": "Index of the active slide"
+            },
+            "handleSlideUpdate": {
+              "type": "function",
+              "required": false,
+              "description": "Callback function when slide changes",
+              "parameters": ["index: number"],
+              "returnValue": "void"
+            }
+          }
+        },
+        "sliderConfig": {
+          "type": "object",
+          "required": true,
+          "description": "Configuration for the slider component",
+          "properties": {
+            "textAlign": {
+              "type": "string",
+              "enum": ["LEFT", "CENTER", "RIGHT"],
+              "required": false,
+              "description": "Text alignment within slides"
+            },
+            "slidesToShow": {
+              "type": "number",
+              "required": false,
+              "description": "Number of slides to show at once"
+            },
+            "aspectRatio": {
+              "type": "number",
+              "required": false,
+              "description": "Aspect ratio for the slider slides"
+            },
+            "slidesToShowDesktop": {
+              "type": "number",
+              "required": false,
+              "description": "Number of slides to show at once on desktop"
+            },
+            "onSlideChange": {
+              "type": "function",
+              "required": false,
+              "description": "Callback function when slide changes",
+              "parameters": ["index: number"],
+              "returnValue": "void"
+            },
+            "showArrows": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show navigation arrows"
+            },
+            "showPeek": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to show a peek of adjacent slides"
+            },
+            "peekVariant": {
+              "type": "string",
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
+              "required": false,
+              "description": "Size of the peek for adjacent slides"
+            },
+            "itemCount": {
+              "type": "number",
+              "required": true,
+              "description": "Total number of items in the slider"
+            },
+            "arrowPosition": {
+              "type": "string",
+              "enum": ["inside", "outside"],
+              "required": false,
+              "description": "Position of the navigation arrows"
+            },
+            "isMobileView": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether to use mobile view configuration"
+            },
+            "activeSlide": {
+              "type": "number",
+              "required": false,
+              "description": "Index of the active slide"
+            },
+            "customOuterContainerClassName": {
+              "type": "string",
+              "required": false,
+              "description": "Custom class name for the outer container"
+            },
+            "showDots": {
+              "type": "boolean",
+              "required": true,
+              "description": "Whether to show navigation dots"
+            }
+          }
+        },
+        "defaultSlide": {
+          "type": "number",
+          "required": false,
+          "description": "Index of the default slide to show"
+        },
+        "headerTitle": {
+          "type": "string",
+          "required": false,
+          "description": "Title to display in the modal header"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "CloseIcon",
+          "usage": "Close button icon for the modal"
+        },
+        {
+          "name": "Typography",
+          "usage": "Renders text with consistent styling"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "Media",
+          "usage": "Displays individual media items"
+        },
+        {
+          "name": "Carousel",
+          "usage": "Navigation between media items"
+        },
+        {
+          "name": "Slider",
+          "usage": "Thumbnail navigation"
+        },
+        {
+          "name": "Modal",
+          "usage": "Container for the preview content"
+        }
+      ],
+      "usage": {
+        "basic": "<MediaPreviewModal showModal={isOpen} onClose={handleClose} items={mediaItems} carouselConfig={{...}} sliderConfig={{...}} />",
+        "examples": [
+          "Basic preview: <MediaPreviewModal showModal={isOpen} onClose={handleClose} items={mediaItems} carouselConfig={{...}} sliderConfig={{...}} />",
+          "With header title: <MediaPreviewModal showModal={isOpen} onClose={handleClose} items={mediaItems} carouselConfig={{...}} sliderConfig={{...}} headerTitle=\"Product Images\" />",
+          "Default slide: <MediaPreviewModal showModal={isOpen} onClose={handleClose} items={mediaItems} carouselConfig={{...}} sliderConfig={{...}} defaultSlide={2} />"
+        ]
+      }
+    },
+    {
+      "name": "MediaWithCta",
+      "description": "A component that displays media content with an optional call-to-action button overlay",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "data": {
+          "type": "object",
+          "required": true,
+          "description": "Data for the component including media and CTA configuration",
+          "properties": {
+            "media": {
+              "type": "object",
+              "$ref": "commonWidgets/media.json",
+              "description": "Media configuration"
+            },
+            "slug": {
+              "type": "string",
+              "required": false,
+              "defaultValue": "#",
+              "description": "URL for the link wrapper"
+            },
+            "cta": {
+              "type": "object",
+              "required": false,
+              "description": "Configuration for the CTA button",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "description": "Text label for the button"
+                },
+                "variant": {
+                  "type": "string",
+                  "description": "Button variant (PRIMARY, SECONDARY, etc.)"
+                },
+                "size": {
+                  "type": "string",
+                  "description": "Button size (SMALL, MEDIUM, LARGE)"
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Actions to perform when the button is clicked"
+                }
+              }
+            }
+          }
+        },
+        "aspectRatio": {
+          "type": "number",
+          "required": false,
+          "description": "Aspect ratio for the media content"
+        },
+        "onClickActions": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function for handling CTA actions"
+        },
+        "isActive": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "description": "Whether the component is interactive"
+        },
+        "customClass": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Custom CSS class for the component"
+        },
+        "desktopViewWidth": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "FULL",
+          "description": "Width of the media on desktop view"
+        },
+        "mobileViewWidth": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "FULL",
+          "description": "Width of the media on mobile view"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Button",
+          "usage": "Call-to-action button overlay"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "Media",
+          "usage": "Displays the media content"
+        }
+      ],
+      "usage": {
+        "basic": "<MediaWithCta data={{ media: { mediaType: 'image', source: 'https://example.com/image.jpg' } }} />",
+        "examples": [
+          "With CTA: <MediaWithCta data={{ media: { mediaType: 'image', source: 'https://example.com/image.jpg' }, cta: { label: 'View Details', variant: 'PRIMARY', size: 'SMALL' } }} />",
+          "With actions: <MediaWithCta data={{ media: { mediaType: 'video', source: 'https://example.com/video.mp4' }, cta: { label: 'Watch Now', actions: [{...}] } }} onClickActions={handleActions} />",
+          "Custom aspect ratio: <MediaWithCta data={{ media: { mediaType: 'image', source: 'https://example.com/banner.jpg' } }} aspectRatio={2.5} />"
+        ]
+      }
+    },
+    {
+      "name": "MenuRowItem",
+      "description": "A row item component for menus and lists with icon, title, subtitle, and optional navigation arrow",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "icon": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "URL of the icon to display"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Main title text"
+        },
+        "subTitle": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Subtitle or description text"
+        },
+        "hideRightArrow": {
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "description": "Whether to hide the right navigation arrow"
+        },
+        "onClick": {
+          "type": "function",
+          "required": false,
+          "description": "Click handler for the menu item"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "OptimizedImage",
+          "usage": "Displays the icon image"
+        },
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle text with consistent styling"
+        },
+        {
+          "name": "AccordionRight",
+          "usage": "Right navigation arrow icon"
+        }
+      ],
+      "usage": {
+        "basic": "<MenuRowItem title=\"Settings\" subTitle=\"Configure your preferences\" icon=\"/icons/settings.png\" onClick={handleClick} />",
+        "examples": [
+          "Basic item: <MenuRowItem title=\"Account\" subTitle=\"Manage your account\" icon=\"/icons/account.png\" onClick={openAccount} />",
+          "Without arrow: <MenuRowItem title=\"Information\" subTitle=\"About this app\" icon=\"/icons/info.png\" hideRightArrow onClick={showInfo} />",
+          "Minimal: <MenuRowItem title=\"Logout\" onClick={logout} />"
+        ]
+      }
+    },
+    {
+      "name": "NoProductsFound",
+      "description": "A component that displays an empty state message when no products are available",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "emptyState": {
+          "type": "object",
+          "required": false,
+          "description": "Configuration for the empty state display",
+          "properties": {
+            "title": {
+              "type": "string",
+              "defaultValue": "Stay Tuned!",
+              "description": "Main title text"
+            },
+            "subtitle": {
+              "type": "string",
+              "defaultValue": "We're adding exciting new items to this category soon. Thank you for your interest!",
+              "description": "Subtitle or description text"
+            },
+            "image": {
+              "type": "string",
+              "defaultValue": "https://i.mscwlns.co/media/misc/others/empty_79da2x.png?tr=w-600",
+              "description": "URL of the empty state image"
+            }
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "OptimizedImage",
+          "usage": "Displays the empty state image"
+        },
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle text with consistent styling"
+        }
+      ],
+      "implementation": {
+        "description": "A simple empty state component for displaying when no products are found",
+        "technology": "React functional component with styled-components",
+        "features": [
+          "Customizable title and subtitle",
+          "Configurable image",
+          "Centered layout",
+          "Responsive design"
+        ]
+      }
+    },
+    {
+      "name": "RatingFeedback",
+      "description": "A component for collecting star-based rating feedback from users",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Title text above the rating stars"
+        },
+        "subTitle": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Subtitle text above the rating stars"
+        },
+        "rating": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 0,
+          "description": "Current rating value"
+        },
+        "totalRating": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 5,
+          "description": "Maximum possible rating value"
+        },
+        "onRatingSelect": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function when a rating is selected"
+        },
+        "selectedStarIcon": {
+          "type": "string",
+          "required": false,
+          "description": "Custom icon for selected star rating"
+        },
+        "width": {
+          "type": "number",
+          "required": false,
+          "description": "Width of the rating stars"
+        },
+        "height": {
+          "type": "number",
+          "required": false,
+          "description": "Height of the rating stars"
+        },
+        "gap": {
+          "type": "string",
+          "required": false,
+          "description": "Gap between rating stars"
+        },
+        "selectedStarIconProps": {
+          "type": "object",
+          "required": false,
+          "description": "Props for the selected star icon image or animation"
+        },
+        "showCross": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show a close icon"
+        },
+        "handleCrossClick": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function when close icon is clicked"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "Typography",
+          "usage": "Renders title and subtitle text with consistent styling"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "RatingStarSelector",
+          "usage": "Displays the interactive star rating interface"
+        }
+      ],
+      "usage": {
+        "basic": "<RatingFeedback title=\"Rate your experience\" subTitle=\"How was your shopping experience?\" onRatingSelect={handleRating} />",
+        "examples": [
+          "Basic rating: <RatingFeedback title=\"Feedback\" subTitle=\"Please rate our service\" />",
+          "With initial rating: <RatingFeedback title=\"Product Rating\" subTitle=\"Rate this product\" rating={3} />",
+          "Custom scale: <RatingFeedback title=\"Satisfaction\" subTitle=\"How satisfied are you?\" totalRating={10} />"
+        ]
+      },
+      "accessibility": {
+        "considerations": [
+          "Ensure interactive stars are accessible via keyboard",
+          "Provide clear visual feedback for selected rating",
+          "Include appropriate ARIA labels for screen readers"
+        ]
+      }
+    },
+    {
+      "name": "RatingStarSelector",
+      "description": "A component for selecting and displaying star ratings",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "rating": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 0,
+          "description": "Current rating value"
+        },
+        "totalRating": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 5,
+          "description": "Maximum possible rating value"
+        },
+        "onRatingSelect": {
+          "type": "function",
+          "required": false,
+          "description": "Callback function when a rating is selected"
+        },
+        "selectedStarIcon": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "description": "Custom icon URL for the selected star"
+        },
+        "width": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 40,
+          "description": "Width of each star in pixels"
+        },
+        "height": {
+          "type": "number",
+          "required": false,
+          "defaultValue": 40,
+          "description": "Height of each star in pixels"
+        },
+        "gap": {
+          "type": "string",
+          "required": false,
+          "defaultValue": "var(--dls-size-8)",
+          "description": "Gap between stars"
+        },
+        "selectedStarIconProps": {
+          "type": "object",
+          "required": false,
+          "description": "Props for custom selected star using ImageOrAnimationBanner"
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "RatingStar",
+          "usage": "Displays individual star icons"
+        },
+        {
+          "name": "OptimizedImage",
+          "usage": "Displays custom star image when provided"
+        }
+      ],
+      "moleculeComponents": [
+        {
+          "name": "ImageOrAnimationBanner",
+          "usage": "Displays custom star animation when provided"
+        }
+      ],
+      "usage": {
+        "basic": "<RatingStarSelector rating={3} onRatingSelect={handleRatingChange} />",
+        "examples": [
+          "Basic rating: <RatingStarSelector />",
+          "With initial value: <RatingStarSelector rating={4} />",
+          "Custom scale: <RatingStarSelector totalRating={10} />",
+          "Custom star size: <RatingStarSelector width={24} height={24} />",
+          "Custom selected star: <RatingStarSelector selectedStarIcon=\"/icons/gold-star.png\" />"
+        ]
+      }
+    },
+    {
+      "name": "SearchDropdown",
+      "description": "A search input with dropdown suggestions component",
+      "type": "component",
+      "category": "molecule",
+      "props": {
+        "inputData": {
+          "type": "object",
+          "required": true,
+          "description": "Configuration for the search input",
+          "properties": {
+            "leftIcon": {
+              "type": "node",
+              "required": false,
+              "description": "Icon to display on the left side of the input"
+            },
+            "rightIcon": {
+              "type": "node",
+              "required": false,
+              "description": "Icon to display on the right side of the input"
+            },
+            "assistiveText": {
+              "type": "string",
+              "required": false,
+              "description": "Helper text for the input field"
+            },
+            "disabled": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether the input is disabled"
+            },
+            "rightIconAction": {
+              "type": "function",
+              "required": false,
+              "description": "Callback when right icon is clicked"
+            },
+            "leftIconAction": {
+              "type": "function",
+              "required": false,
+              "description": "Callback when left icon is clicked"
+            },
+            "inputData": {
+              "type": "object",
+              "required": true,
+              "description": "HTML input attributes",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "Current value of the search input"
+                },
+                "onChange": {
+                  "type": "function",
+                  "description": "Callback when input value changes"
+                },
+                "placeholder": {
+                  "type": "string",
+                  "description": "Placeholder text for the input"
+                }
+              }
+            },
+            "inputRef": {
+              "type": "object",
+              "required": false,
+              "description": "Ref for the input element"
+            },
+            "label": {
+              "type": "string",
+              "required": false,
+              "description": "Label text for the input"
+            },
+            "prefixText": {
+              "type": "string",
+              "required": false,
+              "description": "Text to display before the input"
+            },
+            "suffixText": {
+              "type": "string",
+              "required": false,
+              "description": "Text to display after the input"
+            },
+            "suffixTextAction": {
+              "type": "function",
+              "required": false,
+              "description": "Callback when suffix text is clicked"
+            },
+            "isSuffixCta": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether the suffix text is a call to action"
+            },
+            "isError": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether the input has an error"
+            },
+            "customClassName": {
+              "type": "string",
+              "required": false,
+              "description": "Custom class name for the input"
+            }
+          }
+        },
+        "dropdownData": {
+          "type": "object",
+          "required": true,
+          "description": "Configuration for the dropdown list",
+          "properties": {
+            "suggestions": {
+              "type": "array",
+              "required": true,
+              "description": "List of suggestions to display",
+              "items": {
+                "type": "object",
+                "description": "Dropdown option",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Unique identifier for the option"
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "Display text for the option"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value of the option"
+                  }
+                }
+              }
+            },
+            "selectedSuggestions": {
+              "type": "array",
+              "required": false,
+              "description": "List of selected suggestion IDs",
+              "items": {
+                "type": "string"
+              }
+            },
+            "handleSelection": {
+              "type": "function",
+              "required": true,
+              "description": "Callback when a suggestion is selected"
+            },
+            "multiSelect": {
+              "type": "boolean",
+              "required": false,
+              "description": "Whether multiple options can be selected"
+            }
+          }
+        }
+      },
+      "atomicComponents": [
+        {
+          "name": "SearchInput",
+          "usage": "Input field for search queries"
+        },
+        {
+          "name": "DropdownArrow",
+          "usage": "Visual indicator for dropdown state"
+        },
+        {
+          "name": "DropdownList",
+          "usage": "Displays the list of selectable options"
+        }
+      ],
+      "usage": {
+        "basic": "<SearchDropdown inputData={inputConfig} dropdownData={dropdownConfig} />",
+        "examples": [
+          "Basic search dropdown: <SearchDropdown inputData={{ inputData: { placeholder: 'Search...' } }} dropdownData={{ suggestions: ['Option 1', 'Option 2'] }} />",
+          "With selected values: <SearchDropdown inputData={inputConfig} dropdownData={{ suggestions: options, selectedSuggestions: [selectedOption] }} />"
+        ]
+      }
+    }
+  ]
+}
