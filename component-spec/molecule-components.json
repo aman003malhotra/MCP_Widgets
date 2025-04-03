@@ -5,6 +5,8 @@
       "description": "A message component that displays an icon, title, and subtitle in an alert-style layout",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/AlertMessage",
+      "importPath": "@web-components",
       "properties": {
         "message": {
           "type": "object",
@@ -53,6 +55,8 @@
       "description": "A responsive carousel/slider component with support for multiple slides, autoplay, and navigation controls",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/Carousel",
+      "importPath": "@web-components",
       "properties": {
         "children": {
           "type": "React.ReactNode",
@@ -159,6 +163,8 @@
       "description": "A responsive modal dialog component with customizable content, backdrop, and close button",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/Modal",
+      "importPath": "@web-components",
       "properties": {
         "onClose": {
           "type": "function",
@@ -212,6 +218,8 @@
       "description": "A comprehensive product card component displaying product information with add to cart functionality",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/ProductCard",
+      "importPath": "@web-components",
       "properties": {
         "product": {
           "type": "object",
@@ -323,6 +331,8 @@
       "description": "A responsive slider/carousel component with customizable navigation, peek views, and slide controls",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/Slider",
+      "importPath": "@web-components",
       "properties": {
         "slidesToShow": {
           "type": "number",
@@ -438,6 +448,8 @@
       "description": "A responsive tabbed interface component with customizable tab content and styling",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/Tabs",
+      "importPath": "@web-components",
       "properties": {
         "tabs": {
           "type": "array",
@@ -479,6 +491,8 @@
       "description": "A product catalog card component that displays product information with quick add to cart functionality",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/CatalogCard",
+      "importPath": "@web-components",
       "properties": {
         "product": {
           "type": "object",
@@ -553,6 +567,8 @@
       "description": "A component that displays a completion screen with an image or animation, title, and subtitle",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/CompletionScreen",
+      "importPath": "@web-components",
       "properties": {
         "title": {
           "type": "string",
@@ -627,6 +643,8 @@
       "description": "A modal component that displays a confirmation dialog with optional input field, title, subtitle, and action buttons",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/ConfirmationModalWIthInput",
+      "importPath": "@web-components",
       "properties": {
         "title": {
           "type": "string",
@@ -775,6 +793,8 @@
       "description": "A collapsible section component with header, expandable content, and optional subtitle",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/ExpandableSection",
+      "importPath": "@web-components",
       "properties": {
         "title": {
           "type": "string",
@@ -874,6 +894,8 @@
       "description": "A flexible carousel component for displaying a collection of items with navigation controls",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/GenericCarousel",
+      "importPath": "@web-components",
       "properties": {
         "isInfinite": {
           "type": "boolean",
@@ -978,6 +1000,8 @@
       "description": "A responsive slider component for displaying content with navigation arrows and custom layout",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/GenericSlider",
+      "importPath": "@web-components",
       "properties": {
         "textAlign": {
           "type": "enum",
@@ -1070,6 +1094,8 @@
       "description": "A versatile component that can display either an image or a Lottie animation with configurable dimensions",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/ImageOrAnimationBanner",
+      "importPath": "@web-components",
       "properties": {
         "imageUrl": {
           "type": "string",
@@ -1122,6 +1148,8 @@
       "description": "A horizontal layout product card component displaying product information with add to cart functionality",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/HorizontalProductCard",
+      "importPath": "@web-components",
       "properties": {
         "product": {
           "type": "object",
@@ -1227,6 +1255,8 @@
       "description": "A component that displays an informational or warning banner with title and subtitle",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/InfoBanner",
+      "importPath": "@web-components",
       "properties": {
         "title": {
           "type": "string",
@@ -1265,6 +1295,8 @@
       "description": "A dropdown component with a label that allows selecting from a list of options",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/LabelDropdown",
+      "importPath": "@web-components",
       "properties": {
         "label": {
           "type": "string",
@@ -1343,6 +1375,8 @@
       "description": "A component that displays a group of radio buttons with a label",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/LabelRadioSelect",
+      "importPath": "@web-components",
       "properties": {
         "label": {
           "type": "string",
@@ -1420,6 +1454,8 @@
       "description": "A search input component with a label that allows adding and removing tags",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/LabelSearchInputWithTags",
+      "importPath": "@web-components",
       "properties": {
         "label": {
           "type": "string",
@@ -1512,6 +1548,8 @@
       "description": "A text input component with a label and optional number controls",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/LabelTextInput",
+      "importPath": "@web-components",
       "properties": {
         "label": {
           "type": "string",
@@ -1573,6 +1611,8 @@
       "description": "A component that displays a continuously scrolling set of text items",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/Marquee",
+      "importPath": "@web-components",
       "properties": {
         "items": {
           "type": "array",
@@ -1602,6 +1642,8 @@
       "description": "A versatile component for displaying different types of media (image, video, or lottie animation)",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/Media",
+      "importPath": "@web-components",
       "properties": {
         "media": {
           "type": "object",
@@ -1750,6 +1792,8 @@
       "description": "A modal component for previewing media items with zoom and carousel navigation",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/MediaPreviewModal",
+      "importPath": "@web-components",
       "properties": {
         "showModal": {
           "type": "boolean",
@@ -1985,6 +2029,8 @@
       "description": "A component that displays media content with an optional call-to-action button overlay",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/MediaWithCta",
+      "importPath": "@web-components",
       "properties": {
         "data": {
           "type": "object",
@@ -2088,6 +2134,8 @@
       "description": "A row item component for menus and lists with icon, title, subtitle, and optional navigation arrow",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/MenuRowItem",
+      "importPath": "@web-components",
       "properties": {
         "icon": {
           "type": "string",
@@ -2147,6 +2195,8 @@
       "description": "A component that displays an empty state message when no products are available",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/NoProductsFound",
+      "importPath": "@web-components",
       "properties": {
         "emptyState": {
           "type": "object",
@@ -2177,7 +2227,7 @@
           "usage": "Renders title and description text with consistent styling"
         },
         {
-          "name": "OptimizedImage", 
+          "name": "OptimizedImage",
           "usage": "Displays the empty state image with optimized loading"
         }
       ],
@@ -2194,6 +2244,8 @@
       "description": "A component for collecting star-based rating feedback from users",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/RatingFeedback",
+      "importPath": "@web-components",
       "properties": {
         "title": {
           "type": "string",
@@ -2286,6 +2338,8 @@
       "description": "A component for selecting and displaying star ratings",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/RatingStarSelector",
+      "importPath": "@web-components",
       "properties": {
         "rating": {
           "type": "number",
@@ -2366,6 +2420,8 @@
       "description": "A search input with dropdown suggestions component",
       "type": "component",
       "category": "molecule",
+      "relativePath": "src/mono/web-components/components/molecules/SearchDropdown",
+      "importPath": "@web-components",
       "properties": {
         "inputData": {
           "type": "object",

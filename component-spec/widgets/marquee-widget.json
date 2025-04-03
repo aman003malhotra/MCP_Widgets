@@ -4,6 +4,7 @@
   "description": "A horizontally scrolling ticker/marquee displaying a series of text items in a continuous loop",
   "type": "object",
   "category": "content",
+  "relativePath": "src/mono/web-core/auditedWidgets/Marquee",
   "version": "1.0.0",
   "allOf": [
     {
@@ -24,12 +25,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

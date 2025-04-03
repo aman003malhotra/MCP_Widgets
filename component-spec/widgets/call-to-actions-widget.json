@@ -4,6 +4,7 @@
   "description": "A widget that displays one or more call-to-action buttons with customizable appearance and behavior",
   "type": "object",
   "category": "interaction",
+  "relativePath": "src/mono/web-core/auditedWidgets/CallToActions",
   "version": "1.0.0",
   "allOf": [
     {
@@ -32,10 +33,7 @@
         },
         "stickyFooterVariant": {
           "type": "string",
-          "enum": [
-            "PRIMARY",
-            "SECONDARY"
-          ],
+          "enum": ["PRIMARY", "SECONDARY"],
           "description": "Visual variant for the sticky footer"
         },
         "items": {
@@ -43,10 +41,7 @@
           "description": "List of call-to-action buttons to display",
           "items": {
             "type": "object",
-            "required": [
-              "label",
-              "actions"
-            ],
+            "required": ["label", "actions"],
             "properties": {
               "label": {
                 "type": "string",
@@ -54,20 +49,12 @@
               },
               "variant": {
                 "type": "string",
-                "enum": [
-                  "PRIMARY",
-                  "SECONDARY",
-                  "TERTIARY"
-                ],
+                "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
                 "description": "Visual variant of the button. PRIMARY: Brand color with white text. SECONDARY: White with brand color text. TERTIARY: Transparent with brand color text."
               },
               "size": {
                 "type": "string",
-                "enum": [
-                  "SMALL",
-                  "MEDIUM",
-                  "LARGE"
-                ],
+                "enum": ["SMALL", "MEDIUM", "LARGE"],
                 "description": "Size of the button. SMALL: 32px height. MEDIUM: 40px height. LARGE: 48px height.",
                 "default": "LARGE"
               },
@@ -78,10 +65,7 @@
               },
               "customType": {
                 "type": "string",
-                "enum": [
-                  "ROUNDED",
-                  "SQUARED"
-                ],
+                "enum": ["ROUNDED", "SQUARED"],
                 "description": "Custom button shape. ROUNDED: Full rounded corners. SQUARED: Minimal rounded corners."
               },
               "loading": {
@@ -109,12 +93,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

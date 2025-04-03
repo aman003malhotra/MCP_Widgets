@@ -4,6 +4,7 @@
   "description": "A slider widget that displays catalog product cards with information and actions. Automatically connects to cart context for handling cart updates.",
   "type": "object",
   "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/CatalogCards",
   "version": "1.0.0",
   "allOf": [
     {
@@ -33,9 +34,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "image"
-                        ],
+                        "options": ["image"],
                         "required": true,
                         "description": "Type of media"
                       },
@@ -50,10 +49,7 @@
                       },
                       "loading": {
                         "type": "enum",
-                        "options": [
-                          "lazy",
-                          "eager"
-                        ],
+                        "options": ["lazy", "eager"],
                         "description": "Loading behavior for the image"
                       }
                     }
@@ -64,9 +60,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "video"
-                        ],
+                        "options": ["video"],
                         "required": true,
                         "description": "Type of media"
                       },
@@ -107,9 +101,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "lottie"
-                        ],
+                        "options": ["lottie"],
                         "required": true,
                         "description": "Type of media"
                       },
@@ -292,11 +284,7 @@
               "type": "string",
               "description": "Size of the peek shown for the next slide",
               "default": "SMALL",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "showArrows": {
               "type": "boolean",
@@ -307,10 +295,7 @@
               "type": "string",
               "description": "Position of the navigation arrows relative to the slider content",
               "default": "inside",
-              "enum": [
-                "inside",
-                "outside"
-              ]
+              "enum": ["inside", "outside"]
             },
             "showDots": {
               "type": "boolean",
@@ -336,7 +321,5 @@
       "required": true
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

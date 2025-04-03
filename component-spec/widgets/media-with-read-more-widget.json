@@ -4,6 +4,7 @@
   "description": "A grid of media cards with titles, descriptions, and read more links",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaWithReadMore",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,11 +21,7 @@
           "description": "Array of media cards with content and links",
           "items": {
             "type": "object",
-            "required": [
-              "media",
-              "content",
-              "slug"
-            ],
+            "required": ["media", "content", "slug"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json",
@@ -33,11 +30,7 @@
               "content": {
                 "type": "object",
                 "description": "Text content to display with the media",
-                "required": [
-                  "title",
-                  "info",
-                  "cta"
-                ],
+                "required": ["title", "info", "cta"],
                 "properties": {
                   "title": {
                     "type": "string",
@@ -50,10 +43,7 @@
                   "cta": {
                     "type": "object",
                     "description": "Call-to-action configuration",
-                    "required": [
-                      "label",
-                      "actions"
-                    ],
+                    "required": ["label", "actions"],
                     "properties": {
                       "label": {
                         "type": "string",
@@ -83,12 +73,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

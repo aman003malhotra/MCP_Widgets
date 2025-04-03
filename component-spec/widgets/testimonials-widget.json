@@ -4,6 +4,7 @@
   "description": "A widget that displays a collection of customer testimonials with optional slider functionality",
   "type": "object",
   "category": "Content",
+  "relativePath": "src/mono/web-core/auditedWidgets/Testimonials",
   "version": "1.0.0",
   "allOf": [
     {
@@ -70,11 +71,7 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the peek for the next slide",
               "default": "MEDIUM"
             },
@@ -94,11 +91,7 @@
           "description": "Array of testimonial items to display",
           "items": {
             "type": "object",
-            "required": [
-              "media",
-              "title",
-              "testimonialBody"
-            ],
+            "required": ["media", "title", "testimonialBody"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json",
@@ -128,12 +121,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

@@ -4,6 +4,7 @@
   "description": "A slider of media cards with header text and optional styling options",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaWithHeaderSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,9 +21,7 @@
           "description": "Array of media cards with header text to display in the slider",
           "items": {
             "type": "object",
-            "required": [
-              "media"
-            ],
+            "required": ["media"],
             "properties": {
               "header": {
                 "type": "string",
@@ -74,11 +73,7 @@
             "peekVariant": {
               "type": "string",
               "description": "Size of the peek when showPeek is enabled",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "showDots": {
               "type": "boolean",
@@ -102,25 +97,15 @@
           "type": "string",
           "description": "Visual style for the slider cards",
           "default": "FLAT",
-          "enum": [
-            "FLAT",
-            "SHADOWED",
-            "SOLID"
-          ]
+          "enum": ["FLAT", "SHADOWED", "SOLID"]
         },
         "cardBackground": {
           "type": "string",
           "description": "Background color or gradient for the cards"
         }
       },
-      "required": [
-        "items",
-        "sliderConfig",
-        "slidesUiType"
-      ]
+      "required": ["items", "sliderConfig", "slidesUiType"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

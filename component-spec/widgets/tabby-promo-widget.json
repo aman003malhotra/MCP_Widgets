@@ -4,6 +4,7 @@
   "description": "A widget that displays Tabby payment promotion information for a product",
   "type": "object",
   "category": "Payment",
+  "relativePath": "src/mono/web-core/auditedWidgets/TabbyPromo",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,12 +21,8 @@
           "description": "The product price used to calculate the Tabby payment installments"
         }
       },
-      "required": [
-        "price"
-      ]
+      "required": ["price"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

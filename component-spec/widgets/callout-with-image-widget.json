@@ -4,6 +4,7 @@
   "description": "A callout component that displays text with an optional image and different color variants",
   "type": "object",
   "category": "content",
+  "relativePath": "src/mono/web-core/auditedWidgets/CalloutWithImage",
   "version": "1.0.0",
   "allOf": [
     {
@@ -30,22 +31,13 @@
         },
         "variant": {
           "type": "string",
-          "enum": [
-            "INFO",
-            "WARNING",
-            "DANGER",
-            "BRAND"
-          ],
+          "enum": ["INFO", "WARNING", "DANGER", "BRAND"],
           "description": "Visual variant of the callout. INFO: Green background with darker green text. WARNING: Yellow background with darker yellow text. DANGER: Red background with darker red text. BRAND: Brand primary color background with darker brand primary color text.",
           "default": "INFO"
         }
       },
-      "required": [
-        "text"
-      ]
+      "required": ["text"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

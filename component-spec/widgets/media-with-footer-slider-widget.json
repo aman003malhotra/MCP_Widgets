@@ -4,6 +4,7 @@
   "description": "A slider of media cards with text footer and optional interactive elements",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaWithFooterSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,10 +21,7 @@
           "description": "Array of media cards with footer text to display in the slider",
           "items": {
             "type": "object",
-            "required": [
-              "description",
-              "media"
-            ],
+            "required": ["description", "media"],
             "properties": {
               "header": {
                 "type": "string",
@@ -45,10 +43,7 @@
                 "description": "Small icon-based call-to-action buttons",
                 "items": {
                   "type": "object",
-                  "required": [
-                    "icon",
-                    "actions"
-                  ],
+                  "required": ["icon", "actions"],
                   "properties": {
                     "icon": {
                       "type": "string",
@@ -90,11 +85,7 @@
               "type": "string",
               "description": "Size of the peek when showPeek is enabled",
               "default": "LARGE",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "showDots": {
               "type": "boolean",
@@ -108,13 +99,8 @@
           "default": false
         }
       },
-      "required": [
-        "items",
-        "sliderConfig"
-      ]
+      "required": ["items", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

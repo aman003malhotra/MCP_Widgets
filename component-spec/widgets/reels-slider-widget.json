@@ -4,6 +4,7 @@
   "description": "A widget that displays a slider of media content with different visual styles and optional modal preview",
   "type": "object",
   "category": "Media",
+  "relativePath": "src/mono/web-core/auditedWidgets/ReelsSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,9 +21,7 @@
           "description": "Array of media items to be displayed in the slider",
           "items": {
             "type": "object",
-            "required": [
-              "media"
-            ],
+            "required": ["media"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json",
@@ -37,11 +36,7 @@
         },
         "variant": {
           "type": "string",
-          "enum": [
-            "default",
-            "3D",
-            "circular"
-          ],
+          "enum": ["default", "3D", "circular"],
           "description": "Visual style variant for the slider",
           "default": "default"
         },
@@ -66,11 +61,7 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the peek for the next slide",
               "default": "MEDIUM"
             },
@@ -88,10 +79,7 @@
         "bottomCta": {
           "type": "object",
           "description": "Optional call-to-action button displayed at the bottom of the slider",
-          "required": [
-            "label",
-            "actions"
-          ],
+          "required": ["label", "actions"],
           "properties": {
             "label": {
               "type": "string",
@@ -107,14 +95,8 @@
           }
         }
       },
-      "required": [
-        "items",
-        "variant",
-        "sliderConfig"
-      ]
+      "required": ["items", "variant", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

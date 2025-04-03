@@ -5,6 +5,8 @@
       "description": "A customizable button component with multiple variants, sizes, and icon options",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Button",
+      "importPath": "@web-components",
       "properties": {
         "variant": {
           "type": "enum",
@@ -111,6 +113,8 @@
       "description": "A text component with various predefined styles and variants",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Typography",
+      "importPath": "@web-components",
       "properties": {
         "variant": {
           "type": "enum",
@@ -210,6 +214,8 @@
       "description": "An image component that automatically optimizes images based on device type and viewport size",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/OptimizedImage",
+      "importPath": "@web-components",
       "properties": {
         "source": {
           "type": "string",
@@ -262,6 +268,8 @@
       "description": "A video component with optimized loading and playback features including autoplay management based on viewport visibility",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/OptimizedVideo",
+      "importPath": "@web-components",
       "properties": {
         "state": {
           "type": "object",
@@ -338,6 +346,8 @@
       "description": "A component that displays rating in the form of stars with customizable appearance and optional interactive selection",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/RatingStars",
+      "importPath": "@web-components",
       "properties": {
         "className": {
           "type": "string",
@@ -395,6 +405,8 @@
       "description": "A utility component that creates vertical spacing between elements",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Spacer",
+      "importPath": "@web-components",
       "properties": {
         "variant": {
           "type": "enum",
@@ -421,6 +433,8 @@
       "description": "A utility component that creates horizontal spacing between elements",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/HSpacer",
+      "importPath": "@web-components",
       "properties": {
         "variant": {
           "type": "enum",
@@ -447,6 +461,8 @@
       "description": "A styled input component with optional label",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Input",
+      "importPath": "@web-components",
       "properties": {
         "label": {
           "type": "string",
@@ -621,6 +637,8 @@
       "description": "A simple flex container component with a FlexOne variant that takes up remaining space",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Flex",
+      "importPath": "@web-components",
       "variants": {
         "FlexOne": {
           "description": "A flex item that takes up the remaining space (flex: 1)",
@@ -633,6 +651,8 @@
       "description": "A CSS Grid layout container for organizing content in a two-dimensional grid",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Grid",
+      "importPath": "@web-components",
       "properties": {
         "children": {
           "type": "React.ReactNode",
@@ -646,6 +666,8 @@
       "description": "A spinning loader animation to indicate loading states",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Loader",
+      "importPath": "@web-components",
       "properties": {
         "height": {
           "type": "number",
@@ -666,6 +688,8 @@
       "description": "A flex container with row direction for horizontal layout of child elements",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Row",
+      "importPath": "@web-components",
       "properties": {
         "customStyles": {
           "type": "string | Record<string, string>",
@@ -684,6 +708,8 @@
       "description": "A utility component that conditionally renders its children based on provided condition",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/Show",
+      "importPath": "@web-components",
       "properties": {
         "show": {
           "type": "boolean",
@@ -702,6 +728,8 @@
       "description": "A versatile input component designed for search functionality with support for icons, prefix/suffix text, and labels",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/SearchInput",
+      "importPath": "@web-components",
       "properties": {
         "inputData": {
           "type": "React.InputHTMLAttributes<HTMLInputElement>",
@@ -948,6 +976,8 @@
       "description": "A customizable dropdown select component for selecting options from a list",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/SelectInput",
+      "importPath": "@web-components",
       "properties": {
         "options": {
           "type": "array",
@@ -1081,6 +1111,8 @@
       "description": "A customizable radio button component for single selection options",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/RadioButton",
+      "importPath": "@web-components",
       "properties": {
         "selected": {
           "type": "boolean",
@@ -1115,6 +1147,8 @@
       "description": "A shimmer loading indicator component that displays placeholder cards while content is loading",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/LoadingState",
+      "importPath": "@web-components",
       "properties": {
         "numberOfCards": {
           "type": "number",
@@ -1152,6 +1186,8 @@
       "description": "A component for playing and controlling Lottie animations",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/LottiePlayer",
+      "importPath": "@web-components",
       "properties": {
         "src": {
           "type": "string | object",
@@ -1226,6 +1262,8 @@
       "description": "A circular call-to-action button that wraps content in a clickable circle",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/CTACircle",
+      "importPath": "@web-components",
       "properties": {
         "children": {
           "type": "React.ReactNode",
@@ -1257,6 +1295,8 @@
       "description": "A dropdown menu component that supports both single and multi-select options with checkbox or radio button indicators",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/DropdownList",
+      "importPath": "@web-components",
       "properties": {
         "suggestions": {
           "type": "array",
@@ -1311,6 +1351,8 @@
       "description": "An animated call-to-action button with hover effects and variant styles",
       "type": "component",
       "category": "atomic",
+      "relativePath": "src/mono/web-components/components/atomic/CTAWithAnimation",
+      "importPath": "@web-components",
       "properties": {
         "children": {
           "type": "string",
@@ -1339,14 +1381,14 @@
         }
       },
       "usage": {
-          "basic": "<CTAWithAnimation variant=\"PRIMARY\">Click me</CTAWithAnimation>",
-          "examples": [
-            "Primary button: <CTAWithAnimation variant=\"PRIMARY\">Learn More</CTAWithAnimation>",
-            "With custom icon: <CTAWithAnimation variant=\"SECONDARY\" icon=\"/path/to/icon.svg\">View Details</CTAWithAnimation>",
-            "With URL: <CTAWithAnimation variant=\"TERTIARY\" slugUrl=\"/products\">Browse Products</CTAWithAnimation>",
-            "With click handler: <CTAWithAnimation onClick={() => handleClick()}>Submit</CTAWithAnimation>"
-          ]
-        }
+        "basic": "<CTAWithAnimation variant=\"PRIMARY\">Click me</CTAWithAnimation>",
+        "examples": [
+          "Primary button: <CTAWithAnimation variant=\"PRIMARY\">Learn More</CTAWithAnimation>",
+          "With custom icon: <CTAWithAnimation variant=\"SECONDARY\" icon=\"/path/to/icon.svg\">View Details</CTAWithAnimation>",
+          "With URL: <CTAWithAnimation variant=\"TERTIARY\" slugUrl=\"/products\">Browse Products</CTAWithAnimation>",
+          "With click handler: <CTAWithAnimation onClick={() => handleClick()}>Submit</CTAWithAnimation>"
+        ]
       }
-    ]
+    }
+  ]
 }

@@ -1,9 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Horizontal-product-card-grid Widget",
-  "description": "A grid of horizontal product cards displaying product information with cart functionality",
+  "title": "Horizontal Product Card Grid Widget",
+  "description": "A grid layout of horizontal product cards displaying product information in a compact format",
   "type": "object",
   "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/HorizontalProductCardGrid",
   "version": "1.0.0",
   "allOf": [
     {
@@ -64,9 +65,7 @@
           "description": "Current items in the cart, indexed by SKU. Keys are product SKUs, values are objects with qty property.",
           "additionalProperties": {
             "type": "object",
-            "required": [
-              "qty"
-            ],
+            "required": ["qty"],
             "additionalProperties": false,
             "properties": {
               "qty": {
@@ -129,7 +128,5 @@
       ]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

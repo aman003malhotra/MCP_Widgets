@@ -4,6 +4,7 @@
   "description": "A widget that displays media items in an expandable gallery format with a preview modal",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/ExpandedMedia",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,26 +21,19 @@
           "description": "Array of media items to display in the expanded gallery",
           "items": {
             "type": "object",
-            "required": [
-              "media"
-            ],
+            "required": ["media"],
             "subProps": {
               "media": {
                 "type": "object",
                 "description": "Media configuration for this item",
-                "required": [
-                  "mediaType",
-                  "source"
-                ],
+                "required": ["mediaType", "source"],
                 "oneOf": [
                   {
                     "type": "object",
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "image"
-                        ],
+                        "options": ["image"],
                         "description": "Type of media content (image)"
                       },
                       "source": {
@@ -54,10 +48,7 @@
                       "loading": {
                         "type": "enum",
                         "required": false,
-                        "options": [
-                          "lazy",
-                          "eager"
-                        ],
+                        "options": ["lazy", "eager"],
                         "description": "Loading strategy for the image"
                       }
                     }
@@ -67,9 +58,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "video"
-                        ],
+                        "options": ["video"],
                         "description": "Type of media content (video)"
                       },
                       "source": {
@@ -113,9 +102,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "lottie"
-                        ],
+                        "options": ["lottie"],
                         "description": "Type of media content (Lottie animation)"
                       },
                       "source": {
@@ -171,11 +158,7 @@
               "type": "string",
               "required": false,
               "description": "Size of the peek when showPeek is true",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "showArrows": {
               "type": "boolean",
@@ -208,13 +191,8 @@
           }
         }
       },
-      "required": [
-        "items",
-        "sliderConfig"
-      ]
+      "required": ["items", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

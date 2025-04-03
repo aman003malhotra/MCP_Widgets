@@ -4,6 +4,7 @@
   "description": "A widget that displays product ratings overview and customer reviews",
   "type": "object",
   "category": "Product",
+  "relativePath": "src/mono/web-core/auditedWidgets/RatingsAndReviews",
   "version": "1.0.0",
   "allOf": [
     {

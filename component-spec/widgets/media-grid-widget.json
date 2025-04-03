@@ -4,6 +4,7 @@
   "description": "A grid display of media items that can be organized in customizable columns",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaGrid",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,9 +21,7 @@
           "description": "Array of media items to display in the grid",
           "items": {
             "type": "object",
-            "required": [
-              "media"
-            ],
+            "required": ["media"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json"
@@ -66,14 +65,8 @@
           "default": false
         }
       },
-      "required": [
-        "items",
-        "noOfColumnsForMobile",
-        "noOfColumnsForDesktop"
-      ]
+      "required": ["items", "noOfColumnsForMobile", "noOfColumnsForDesktop"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

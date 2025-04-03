@@ -4,6 +4,7 @@
   "description": "A grid layout featuring image-based CTAs arranged in left, center, and right sections",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/ImageCtaGrid",
   "version": "1.0.0",
   "allOf": [
     {
@@ -18,19 +19,11 @@
         "leftSection": {
           "type": "object",
           "description": "Configuration for the left section of the grid",
-          "required": [
-            "card1",
-            "card2",
-            "card3"
-          ],
+          "required": ["card1", "card2", "card3"],
           "properties": {
             "card1": {
               "type": "object",
-              "required": [
-                "imageUrl",
-                "label",
-                "actions"
-              ],
+              "required": ["imageUrl", "label", "actions"],
               "properties": {
                 "imageUrl": {
                   "type": "string",
@@ -51,11 +44,7 @@
             },
             "card2": {
               "type": "object",
-              "required": [
-                "imageUrl",
-                "label",
-                "actions"
-              ],
+              "required": ["imageUrl", "label", "actions"],
               "properties": {
                 "imageUrl": {
                   "type": "string",
@@ -76,11 +65,7 @@
             },
             "card3": {
               "type": "object",
-              "required": [
-                "imageUrl",
-                "label",
-                "actions"
-              ],
+              "required": ["imageUrl", "label", "actions"],
               "properties": {
                 "imageUrl": {
                   "type": "string",
@@ -104,10 +89,7 @@
         "centerSection": {
           "type": "object",
           "description": "Configuration for the center section of the grid",
-          "required": [
-            "imageUrl",
-            "actions"
-          ],
+          "required": ["imageUrl", "actions"],
           "properties": {
             "imageUrl": {
               "type": "string",
@@ -125,19 +107,11 @@
         "rightSection": {
           "type": "object",
           "description": "Configuration for the right section of the grid",
-          "required": [
-            "card1",
-            "card2",
-            "card3"
-          ],
+          "required": ["card1", "card2", "card3"],
           "properties": {
             "card1": {
               "type": "object",
-              "required": [
-                "imageUrl",
-                "label",
-                "actions"
-              ],
+              "required": ["imageUrl", "label", "actions"],
               "properties": {
                 "imageUrl": {
                   "type": "string",
@@ -158,11 +132,7 @@
             },
             "card2": {
               "type": "object",
-              "required": [
-                "imageUrl",
-                "label",
-                "actions"
-              ],
+              "required": ["imageUrl", "label", "actions"],
               "properties": {
                 "imageUrl": {
                   "type": "string",
@@ -183,11 +153,7 @@
             },
             "card3": {
               "type": "object",
-              "required": [
-                "imageUrl",
-                "label",
-                "actions"
-              ],
+              "required": ["imageUrl", "label", "actions"],
               "properties": {
                 "imageUrl": {
                   "type": "string",
@@ -209,14 +175,8 @@
           }
         }
       },
-      "required": [
-        "leftSection",
-        "centerSection",
-        "rightSection"
-      ]
+      "required": ["leftSection", "centerSection", "rightSection"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

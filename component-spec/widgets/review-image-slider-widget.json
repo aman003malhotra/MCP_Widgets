@@ -4,6 +4,7 @@
   "description": "A widget that displays a slider of customer reviews with images, ratings, and testimonials",
   "type": "object",
   "category": "Review",
+  "relativePath": "src/mono/web-core/auditedWidgets/ReviewImageSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -31,11 +32,7 @@
               "description": "Array of avatar images for customers",
               "items": {
                 "type": "object",
-                "required": [
-                  "source",
-                  "aspectRatio",
-                  "altText"
-                ],
+                "required": ["source", "aspectRatio", "altText"],
                 "properties": {
                   "source": {
                     "type": "string",
@@ -77,12 +74,7 @@
           "description": "Array of review items with images and testimonials",
           "items": {
             "type": "object",
-            "required": [
-              "quoteImage",
-              "media",
-              "bgImage",
-              "content"
-            ],
+            "required": ["quoteImage", "media", "bgImage", "content"],
             "properties": {
               "quoteImage": {
                 "type": "string",
@@ -100,10 +92,7 @@
               },
               "content": {
                 "type": "object",
-                "required": [
-                  "info",
-                  "bottomContent"
-                ],
+                "required": ["info", "bottomContent"],
                 "properties": {
                   "info": {
                     "type": "string",
@@ -111,10 +100,7 @@
                   },
                   "bottomContent": {
                     "type": "object",
-                    "required": [
-                      "name",
-                      "designation"
-                    ],
+                    "required": ["name", "designation"],
                     "properties": {
                       "name": {
                         "type": "string",
@@ -152,11 +138,7 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the peek for the next slide",
               "default": "MEDIUM"
             },
@@ -172,14 +154,8 @@
           }
         }
       },
-      "required": [
-        "customerRating",
-        "items",
-        "sliderConfig"
-      ]
+      "required": ["customerRating", "items", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

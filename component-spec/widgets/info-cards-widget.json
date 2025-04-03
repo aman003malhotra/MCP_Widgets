@@ -4,6 +4,7 @@
   "description": "A slider widget displaying cards with media, title, content, and a CTA button",
   "type": "object",
   "category": "content",
+  "relativePath": "src/mono/web-core/auditedWidgets/InfoCards",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,12 +21,7 @@
           "description": "Array of info card items to display",
           "items": {
             "type": "object",
-            "required": [
-              "title",
-              "content",
-              "media",
-              "slug"
-            ],
+            "required": ["title", "content", "media", "slug"],
             "subProps": {
               "title": {
                 "type": "string",
@@ -49,22 +45,13 @@
                   },
                   "variant": {
                     "type": "enum",
-                    "options": [
-                      "PRIMARY",
-                      "SECONDARY",
-                      "TERTIARY",
-                      "GHOST"
-                    ],
+                    "options": ["PRIMARY", "SECONDARY", "TERTIARY", "GHOST"],
                     "description": "Visual style of the button",
                     "defaultValue": "PRIMARY"
                   },
                   "size": {
                     "type": "enum",
-                    "options": [
-                      "SMALL",
-                      "MEDIUM",
-                      "LARGE"
-                    ],
+                    "options": ["SMALL", "MEDIUM", "LARGE"],
                     "description": "Size of the button",
                     "defaultValue": "SMALL"
                   },
@@ -111,11 +98,7 @@
             "peekVariant": {
               "type": "string",
               "description": "Type of peek to show",
-              "enum": [
-                "LEFT",
-                "RIGHT",
-                "BOTH"
-              ]
+              "enum": ["LEFT", "RIGHT", "BOTH"]
             },
             "showArrows": {
               "type": "boolean",
@@ -131,21 +114,13 @@
               "type": "string",
               "description": "Position of the navigation arrows",
               "default": "inside",
-              "enum": [
-                "inside",
-                "outside",
-                "top"
-              ]
+              "enum": ["inside", "outside", "top"]
             }
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

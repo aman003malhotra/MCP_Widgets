@@ -27,7 +27,7 @@ const ComponentSchema = z.object({
     description: z.string(),
     type: z.string(),
     category: z.string(),
-    props: z.record(ComponentPropSchema),
+    properties: z.record(ComponentPropSchema),
     styles: z.record(z.any()).optional(),
     variantStyles: z.record(z.any()).optional(),
 });
@@ -37,7 +37,7 @@ const WidgetSchema = z.object({
     type: z.string(),
     category: z.string(),
     version: z.string(),
-    props: z.record(ComponentPropSchema),
+    properties: z.record(ComponentPropSchema),
 });
 // Add new schema for widget configuration
 const MediaConfigSchema = z.object({
@@ -145,7 +145,7 @@ class PwaComponentMcpServer {
                     atomicData.components.forEach((component) => {
                         if (component.name.toLowerCase().includes(searchTerm) ||
                             component.description.toLowerCase().includes(searchTerm) ||
-                            Object.keys(component.props || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
+                            Object.keys(component.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
                             results.push({
                                 type: "atomic",
                                 name: component.name,
@@ -160,7 +160,7 @@ class PwaComponentMcpServer {
                     moleculeData.components.forEach((component) => {
                         if (component.name.toLowerCase().includes(searchTerm) ||
                             component.description.toLowerCase().includes(searchTerm) ||
-                            Object.keys(component.props || {}).some(prop => prop.toLowerCase().includes(searchTerm)) ||
+                            Object.keys(component.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm)) ||
                             (component.atomicDependencies &&
                                 component.atomicDependencies.some(dep => dep.toLowerCase().includes(searchTerm)))) {
                             results.push({
@@ -205,7 +205,7 @@ class PwaComponentMcpServer {
                                 widgetData.widgets.forEach((widget) => {
                                     if (widget.name.toLowerCase().includes(searchTerm) ||
                                         widget.description.toLowerCase().includes(searchTerm) ||
-                                        Object.keys(widget.props || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
+                                        Object.keys(widget.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
                                         results.push({
                                             type: "widget",
                                             name: widget.name,
@@ -255,7 +255,7 @@ class PwaComponentMcpServer {
                     description: c.description,
                     category: c.category,
                     type: c.type,
-                    numProps: Object.keys(c.props || {}).length
+                    numProps: Object.keys(c.properties || {}).length
                 }));
                 // Get all molecule components
                 const allMoleculeComponents = moleculeData.components.map((c) => ({
@@ -264,7 +264,7 @@ class PwaComponentMcpServer {
                     category: c.category,
                     type: c.type,
                     atomicDependencies: c.atomicDependencies || [],
-                    numProps: Object.keys(c.props || {}).length
+                    numProps: Object.keys(c.properties || {}).length
                 }));
                 // Group atomic components by category for better reference
                 const atomicComponentsByCategory = {};
@@ -303,7 +303,7 @@ class PwaComponentMcpServer {
                                     description: w.description,
                                     category: w.category,
                                     type: w.type,
-                                    numProps: Object.keys(w.props || {}).length,
+                                    numProps: Object.keys(w.properties || {}).length,
                                     file: file
                                 });
                             });
@@ -332,10 +332,6 @@ class PwaComponentMcpServer {
                     });
                     // Find molecules that use this atomic component
                     const moleculesUsingComponent = allMoleculeComponents.filter(m => m.atomicDependencies.includes(componentName));
-                    // Find similar atomic components that might be alternatives
-                    const similarComponents = allAtomicComponents
-                        .filter(c => c.category === component.category && c.name !== componentName)
-                        .slice(0, 5);
                     return {
                         content: [{
                                 type: "text",
@@ -345,20 +341,15 @@ class PwaComponentMcpServer {
                                         description: component.description,
                                         category: component.category,
                                         type: component.type,
-                                        props: component.props
+                                        properties: component.properties,
+                                        relativePath: component.relativePath,
+                                        importPath: component.importPath
                                     },
                                     context: {
                                         usedByWidgets: widgetsUsingComponent,
                                         usedByMolecules: moleculesUsingComponent,
-                                        similarComponents,
                                         recommendedCombinations: moleculesUsingComponent.map(m => m.name)
                                     },
-                                    allAtomicComponents: {
-                                        byCategory: atomicComponentsByCategory,
-                                        total: allAtomicComponents.length
-                                    },
-                                    allMoleculeComponents: allMoleculeComponents,
-                                    allWidgetSummaries: allWidgetSummaries
                                 }, null, 2)
                             }]
                     };
@@ -387,13 +378,11 @@ class PwaComponentMcpServer {
                             name: comp.name,
                             description: comp.description,
                             category: comp.category,
-                            props: comp.props
+                            properties: comp.properties,
+                            relativePath: comp.relativePath,
+                            importPath: comp.importPath
                         } : { name, error: "Component details not found" };
                     });
-                    // Find similar molecules
-                    const similarMolecules = allMoleculeComponents
-                        .filter(c => c.category === component.category && c.name !== componentName)
-                        .slice(0, 5);
                     return {
                         content: [{
                                 type: "text",
@@ -404,20 +393,13 @@ class PwaComponentMcpServer {
                                         category: component.category,
                                         type: component.type,
                                         atomicDependencies: component.atomicDependencies,
-                                        props: component.props
+                                        properties: component.properties
                                     },
                                     context: {
                                         usedByWidgets: widgetsUsingComponent,
                                         usedAtomicComponents,
                                         atomicComponentDetails,
-                                        similarMolecules
-                                    },
-                                    allAtomicComponents: {
-                                        byCategory: atomicComponentsByCategory,
-                                        total: allAtomicComponents.length
-                                    },
-                                    allMoleculeComponents: allMoleculeComponents,
-                                    allWidgetSummaries: allWidgetSummaries
+                                    }
                                 }, null, 2)
                             }]
                     };
@@ -439,7 +421,8 @@ class PwaComponentMcpServer {
                                     category: widgetData.category || 'other',
                                     type: widgetData.type || 'object',
                                     version: widgetData.version || '1.0.0',
-                                    props: widgetData.properties?.widgetData?.properties || {}
+                                    properties: widgetData.properties?.widgetData?.properties || {},
+                                    relativePath: widgetData.relativePath,
                                 };
                                 widgetFile = file;
                                 break;
@@ -480,10 +463,6 @@ class PwaComponentMcpServer {
                     catch (e) {
                         console.warn(`Error extracting atomic components for ${componentName}:`, e);
                     }
-                    // Find similar widgets by category
-                    const similarWidgets = allWidgetSummaries
-                        .filter(w => w.category === targetWidget.category && w.name !== componentName)
-                        .slice(0, 5);
                     // Get detailed info about the atomic components this widget uses
                     const atomicComponentDetails = usedAtomicComponents.map(name => {
                         const comp = atomicData.components.find((c) => c.name === name);
@@ -491,7 +470,9 @@ class PwaComponentMcpServer {
                             name: comp.name,
                             description: comp.description,
                             category: comp.category,
-                            props: comp.props
+                            properties: comp.properties,
+                            relativePath: comp.relativePath,
+                            importPath: comp.importPath
                         } : { name, error: "Component details not found" };
                     });
                     return {
@@ -503,23 +484,18 @@ class PwaComponentMcpServer {
                                         description: targetWidget.description,
                                         category: targetWidget.category,
                                         type: targetWidget.type,
-                                        props: targetWidget.props,
+                                        properties: targetWidget.properties,
+                                        relativePath: targetWidget.relativePath,
+                                        importPath: targetWidget.importPath,
                                         file: widgetFile
                                     },
                                     context: {
                                         usedAtomicComponents,
                                         atomicComponentDetails,
-                                        similarWidgets,
                                         recommendedAtomicComponents: allAtomicComponents
                                             .filter(c => c.category === targetWidget.category || usedAtomicComponents.includes(c.name))
                                             .map(c => c.name)
-                                    },
-                                    allAtomicComponents: {
-                                        byCategory: atomicComponentsByCategory,
-                                        total: allAtomicComponents.length
-                                    },
-                                    allMoleculeComponents: allMoleculeComponents,
-                                    allWidgetSummaries: allWidgetSummaries
+                                    }
                                 }, null, 2)
                             }]
                     };
@@ -615,31 +591,71 @@ class PwaComponentMcpServer {
             mediaItems: z.array(MediaConfigSchema).optional()
         }, async ({ widgetName, widgetType, layout, header, sliderConfig, mediaItems }) => {
             try {
-                const widgetConfig = {
-                    name: widgetName,
-                    widgets: [
-                        {
-                            type: widgetType,
-                            ...(layout && { layout }),
-                            ...(header && { header }),
-                            ...(sliderConfig || mediaItems) && {
-                                widgetData: {
-                                    ...(sliderConfig && { sliderConfig }),
-                                    showBorder: false,
-                                    ...(mediaItems && {
-                                        items: mediaItems.map(media => ({ media }))
-                                    })
-                                }
-                            }
+                // First get the base config using getWidgetBaseConfig
+                const baseConfigResponse = await this.getWidgetBaseConfig({
+                    widgetName,
+                    widgetType,
+                    category: 'information', // Default category, can be enhanced based on widgetType
+                    description: `A ${widgetName} widget for displaying content`,
+                    layoutType: layout?.type || 'FLUID',
+                    verticalSpacingTop: layout?.verticalSpacing?.top || 'COMPACT',
+                    verticalSpacingBottom: layout?.verticalSpacing?.bottom || 'COMPACT'
+                });
+                if (!baseConfigResponse.success) {
+                    throw new Error(`Failed to get base config: ${baseConfigResponse.message}`);
+                }
+                const baseConfig = baseConfigResponse.baseConfig;
+                // Try to find widget specification in component-spec folder
+                const widgetSpecPath = path.join(COMPONENT_SPEC_DIR, 'widgets', `${widgetType.toLowerCase()}-widget.json`);
+                let widgetData = {};
+                if (fs.existsSync(widgetSpecPath)) {
+                    // If widget spec exists, use it as template
+                    const widgetSpec = JSON.parse(fs.readFileSync(widgetSpecPath, 'utf-8'));
+                    widgetData = {
+                        ...widgetSpec.widgetData,
+                        // Override with provided values if any
+                        ...(mediaItems && { items: mediaItems.map(media => ({ media })) }),
+                        ...(sliderConfig && { sliderConfig })
+                    };
+                }
+                else {
+                    // For new widgets, provide base structure
+                    widgetData = {
+                        content: "Widget content goes here",
+                        settings: {
+                            showBorder: false
                         }
-                    ]
+                    };
+                }
+                // Enhance the base config with provided parameters
+                const enhancedConfig = {
+                    id: baseConfig.id,
+                    type: widgetType,
+                    header: {
+                        ...baseConfig.header,
+                        ...header
+                    },
+                    layout: {
+                        ...baseConfig.layout,
+                        ...layout
+                    },
+                    widgetData
                 };
-                const configPath = path.join(COMPONENT_SPEC_DIR, 'widget-configs', `${widgetName}.json`);
-                fs.writeFileSync(configPath, JSON.stringify(widgetConfig, null, 2));
+                // Create widget-configs directory if it doesn't exist
+                const configDir = path.join(COMPONENT_SPEC_DIR, 'widget-configs');
+                if (!fs.existsSync(configDir)) {
+                    fs.mkdirSync(configDir, { recursive: true });
+                }
+                const configPath = path.join(configDir, `${widgetName}.json`);
+                fs.writeFileSync(configPath, JSON.stringify(enhancedConfig, null, 2));
                 return {
                     content: [{
                             type: "text",
-                            text: JSON.stringify(widgetConfig, null, 2)
+                            text: JSON.stringify({
+                                success: true,
+                                message: `Widget config created successfully at ${configPath}`,
+                                config: enhancedConfig
+                            }, null, 2)
                         }]
                 };
             }
@@ -819,6 +835,228 @@ class PwaComponentMcpServer {
                 };
             }
         });
+        this.server.tool("getWidgetBaseConfig", {
+            widgetName: z.string().min(3),
+            widgetType: z.string(),
+            category: z.enum(['product', 'media', 'layout', 'information', 'navigation', 'social']).default('information'),
+            description: z.string().optional(),
+            layoutType: z.enum(['CONTAINED', 'FLUID']).optional().default('FLUID'),
+            verticalSpacingTop: z.enum(['NONE', 'COMPACT', 'GENEROUS']).optional().default('COMPACT'),
+            verticalSpacingBottom: z.enum(['NONE', 'COMPACT', 'GENEROUS']).optional().default('COMPACT')
+        }, async ({ widgetName, widgetType, category, description, layoutType = 'FLUID', verticalSpacingTop = 'COMPACT', verticalSpacingBottom = 'COMPACT' }) => {
+            try {
+                // Normalize widgetType if needed
+                const normalizedType = widgetType.toUpperCase().replace(/-/g, '_');
+                // Create basic config structure based on BaseWidget interface
+                const baseConfig = {
+                    id: `${widgetName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`,
+                    name: widgetName,
+                    type: normalizedType,
+                    category,
+                    description: description || `${widgetName} widget for displaying ${category} content`,
+                    header: {
+                        title: `${widgetName} Title`,
+                        subtitle: `${widgetName} Subtitle`
+                    },
+                    layout: {
+                        type: layoutType, // 'CONTAINED' or 'FLUID'
+                        verticalSpacing: {
+                            top: verticalSpacingTop, // 'NONE', 'COMPACT', or 'GENEROUS'
+                            bottom: verticalSpacingBottom // 'NONE', 'COMPACT', or 'GENEROUS'
+                        },
+                        backgroundColor: '#FFFFFF',
+                        backgroundImage: '' // Empty by default
+                    },
+                    widgetData: {}
+                };
+                // Add different template data based on category
+                switch (category) {
+                    case 'product':
+                        baseConfig.widgetData = {
+                            items: [
+                                {
+                                    id: 'product-1',
+                                    title: 'Product 1',
+                                    description: 'Product 1 description',
+                                    imageUrl: 'https://example.com/product1.jpg',
+                                    price: 99.99,
+                                    currency: 'USD',
+                                    link: 'https://example.com/product1'
+                                },
+                                {
+                                    id: 'product-2',
+                                    title: 'Product 2',
+                                    description: 'Product 2 description',
+                                    imageUrl: 'https://example.com/product2.jpg',
+                                    price: 149.99,
+                                    currency: 'USD',
+                                    link: 'https://example.com/product2'
+                                }
+                            ],
+                            settings: {
+                                columns: 2,
+                                showBorder: true,
+                                theme: 'light'
+                            }
+                        };
+                        break;
+                    case 'media':
+                        baseConfig.widgetData = {
+                            items: [
+                                {
+                                    mediaType: 'image',
+                                    source: 'https://example.com/image1.jpg',
+                                    altText: 'Example image 1',
+                                    loading: 'lazy'
+                                },
+                                {
+                                    mediaType: 'video',
+                                    source: 'https://example.com/video1.mp4',
+                                    altText: 'Example video 1',
+                                    loading: 'lazy'
+                                }
+                            ],
+                            sliderConfig: {
+                                aspectRatio: 16 / 9,
+                                slidesToShow: 1,
+                                slidesToShowDesktop: 1,
+                                showPeek: false,
+                                showDots: true
+                            }
+                        };
+                        break;
+                    case 'layout':
+                        baseConfig.widgetData = {
+                            sections: [
+                                {
+                                    id: 'section-1',
+                                    title: 'Section 1',
+                                    content: 'Section 1 content goes here'
+                                },
+                                {
+                                    id: 'section-2',
+                                    title: 'Section 2',
+                                    content: 'Section 2 content goes here'
+                                }
+                            ],
+                            settings: {
+                                sectionGap: 16,
+                                showDividers: true
+                            }
+                        };
+                        break;
+                    case 'information':
+                        baseConfig.widgetData = {
+                            title: 'Information Title',
+                            body: 'This is the main information content for this widget.',
+                            icon: 'info',
+                            style: 'card',
+                            actions: [
+                                {
+                                    label: 'Learn More',
+                                    url: 'https://example.com/info'
+                                }
+                            ]
+                        };
+                        break;
+                    case 'navigation':
+                        baseConfig.widgetData = {
+                            links: [
+                                {
+                                    label: 'Home',
+                                    url: '/',
+                                    icon: 'home'
+                                },
+                                {
+                                    label: 'Products',
+                                    url: '/products',
+                                    icon: 'shopping-bag'
+                                },
+                                {
+                                    label: 'About',
+                                    url: '/about',
+                                    icon: 'info'
+                                }
+                            ],
+                            settings: {
+                                orientation: 'horizontal',
+                                style: 'tabs'
+                            }
+                        };
+                        break;
+                    case 'social':
+                        baseConfig.widgetData = {
+                            platforms: [
+                                {
+                                    name: 'Twitter',
+                                    icon: 'twitter',
+                                    url: 'https://twitter.com/example'
+                                },
+                                {
+                                    name: 'Instagram',
+                                    icon: 'instagram',
+                                    url: 'https://instagram.com/example'
+                                },
+                                {
+                                    name: 'Facebook',
+                                    icon: 'facebook',
+                                    url: 'https://facebook.com/example'
+                                }
+                            ],
+                            showLabels: true,
+                            iconSize: 'medium'
+                        };
+                        break;
+                }
+                // Generate TypeScript interface from the structure
+                const interfaceDefinition = `// TypeScript interface for ${widgetName}
+export type WidgetLayoutType = 'CONTAINED' | 'FLUID';
+export type VerticalSpacing = 'NONE' | 'COMPACT' | 'GENEROUS';
+
+export interface ${widgetName.replace(/\s+/g, '')}Data {
+${generateInterfaceFromStructure(baseConfig.widgetData, '  ')}
+}
+
+export interface ${widgetName.replace(/\s+/g, '')}Props extends BaseWidgetProps<${widgetName.replace(/\s+/g, '')}Data> {
+  // Add any additional props here
+}`;
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify({
+                                success: true,
+                                widgetName,
+                                widgetType: normalizedType,
+                                baseConfig,
+                                interfaceDefinition,
+                                howToUse: {
+                                    description: "This config provides a basic structure for your widget based on the BaseWidget interface.",
+                                    step1: "Copy and customize the widget configuration according to your needs.",
+                                    step2: "Use the TypeScript interface in your widget component file.",
+                                    step3: "Implement your widget component using the props structure."
+                                },
+                                layoutOptions: {
+                                    types: ['CONTAINED', 'FLUID'],
+                                    verticalSpacing: ['NONE', 'COMPACT', 'GENEROUS']
+                                }
+                            }, null, 2)
+                        }]
+                };
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify({
+                                success: false,
+                                message: `Failed to generate widget base config: ${errorMessage}`
+                            }, null, 2)
+                        }],
+                    isError: true
+                };
+            }
+        });
         this.server.tool("addWidgetToMap", {
             widgetName: z.string().min(3),
             widgetType: z.string().min(3)
@@ -945,7 +1183,7 @@ class PwaComponentMcpServer {
                     description: c.description,
                     category: c.category,
                     type: c.type,
-                    numProps: Object.keys(c.props || {}).length
+                    numProps: Object.keys(c.properties || {}).length
                 }));
                 const moleculeSummary = moleculeComponents.map(c => ({
                     name: c.name,
@@ -953,7 +1191,7 @@ class PwaComponentMcpServer {
                     category: c.category,
                     type: c.type,
                     atomicDependencies: c.atomicDependencies || [],
-                    numProps: Object.keys(c.props || {}).length
+                    numProps: Object.keys(c.properties || {}).length
                 }));
                 const widgetSummary = allWidgets.map(w => ({
                     name: w.name,
@@ -962,7 +1200,7 @@ class PwaComponentMcpServer {
                     type: w.type,
                     version: w.version,
                     file: w.file,
-                    numProps: Object.keys(w.props || {}).length
+                    numProps: Object.keys(w.properties || {}).length
                 }));
                 // Group components by category
                 const groupByCategory = (components) => {
@@ -1072,6 +1310,42 @@ class PwaComponentMcpServer {
                 };
             }
         });
+    }
+    async getWidgetBaseConfig(params) {
+        try {
+            // Create basic config structure based on BaseWidget interface
+            const baseConfig = {
+                id: `${params.widgetName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`,
+                name: params.widgetName,
+                type: params.widgetType,
+                category: params.category,
+                description: params.description,
+                header: {
+                    title: `${params.widgetName} Title`,
+                    subtitle: `${params.widgetName} Subtitle`
+                },
+                layout: {
+                    type: params.layoutType,
+                    verticalSpacing: {
+                        top: params.verticalSpacingTop,
+                        bottom: params.verticalSpacingBottom
+                    },
+                    backgroundColor: '#FFFFFF',
+                    backgroundImage: ''
+                },
+                widgetData: {}
+            };
+            return {
+                success: true,
+                baseConfig
+            };
+        }
+        catch (error) {
+            return {
+                success: false,
+                message: error instanceof Error ? error.message : 'Unknown error occurred'
+            };
+        }
     }
     async connect(transport) {
         await this.server.connect(transport);
@@ -1195,12 +1469,91 @@ function generateInterfaceFromStructure(structure, indent = "  ") {
     }
     return result;
 }
+// Helper function to create default structure based on category
+function createDefaultStructureByCategory(category) {
+    switch (category) {
+        case 'product':
+            return {
+                items: [{
+                        title: "Product Title",
+                        description: "Product description...",
+                        imageUrl: "https://example.com/image.jpg",
+                        price: 99.99,
+                        currency: "USD"
+                    }],
+                layout: {
+                    columns: 3,
+                    gap: 16
+                }
+            };
+        case 'media':
+            return {
+                items: [{
+                        mediaType: "image",
+                        source: "https://example.com/image.jpg",
+                        altText: "Media description",
+                        caption: "Optional caption"
+                    }],
+                sliderConfig: {
+                    aspectRatio: 1.78,
+                    slidesToShow: 1,
+                    slidesToShowDesktop: 3,
+                    showPeek: true,
+                    showDots: true
+                }
+            };
+        case 'navigation':
+            return {
+                items: [{
+                        label: "Navigation Link",
+                        url: "/page",
+                        isExternal: false,
+                        icon: "arrow-right"
+                    }],
+                layout: {
+                    direction: "horizontal",
+                    alignment: "center"
+                }
+            };
+        default:
+            return {
+                // Generic structure for other categories
+                content: "Widget content goes here",
+                settings: {
+                    showBorder: false
+                }
+            };
+    }
+}
 // Helper function to convert string to Title Case
 function toTitleCase(str) {
     return str
         .split(' ')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
+}
+// Helper function to generate default value based on prop type
+function getDefaultValueForType(type) {
+    switch (type.toLowerCase()) {
+        case 'string':
+            return '"value"';
+        case 'number':
+            return '0';
+        case 'boolean':
+            return 'true';
+        case 'function':
+            return '() => {}';
+        case 'array':
+            return '[]';
+        case 'object':
+            return '{}';
+        case 'enum':
+            return '"option"';
+        case 'react.reactnode':
+            return '<div>Content</div>';
+        default:
+            return '{}';
+    }
 }
 function convertFigmaToLayout(node) {
     if (!node.layout)
@@ -1350,60 +1703,4 @@ function extractProductGridData(node) {
             gap: node.itemSpacing || 16
         }
     };
-}
-// Helper function to create default structure based on category
-function createDefaultStructureByCategory(category) {
-    switch (category) {
-        case 'product':
-            return {
-                items: [{
-                        title: "Product Title",
-                        description: "Product description...",
-                        imageUrl: "https://example.com/image.jpg",
-                        price: 99.99,
-                        currency: "USD"
-                    }],
-                layout: {
-                    columns: 3,
-                    gap: 16
-                }
-            };
-        case 'media':
-            return {
-                items: [{
-                        mediaType: "image",
-                        source: "https://example.com/image.jpg",
-                        altText: "Media description",
-                        caption: "Optional caption"
-                    }],
-                sliderConfig: {
-                    aspectRatio: 1.78,
-                    slidesToShow: 1,
-                    slidesToShowDesktop: 3,
-                    showPeek: true,
-                    showDots: true
-                }
-            };
-        case 'navigation':
-            return {
-                items: [{
-                        label: "Navigation Link",
-                        url: "/page",
-                        isExternal: false,
-                        icon: "arrow-right"
-                    }],
-                layout: {
-                    direction: "horizontal",
-                    alignment: "center"
-                }
-            };
-        default:
-            return {
-                // Generic structure for other categories
-                content: "Widget content goes here",
-                settings: {
-                    showBorder: false
-                }
-            };
-    }
 }

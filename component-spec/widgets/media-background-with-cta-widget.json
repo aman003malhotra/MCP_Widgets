@@ -4,6 +4,7 @@
   "description": "A banner widget with media background, title overlay and a call-to-action button",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaBackgroundWithCta",
   "version": "1.0.0",
   "allOf": [
     {
@@ -34,11 +35,7 @@
         "cta": {
           "type": "object",
           "description": "Call-to-action button configuration",
-          "required": [
-            "label",
-            "actions",
-            "variant"
-          ],
+          "required": ["label", "actions", "variant"],
           "properties": {
             "label": {
               "type": "string",
@@ -55,12 +52,7 @@
               "type": "string",
               "description": "Visual style of the button",
               "default": "PRIMARY",
-              "enum": [
-                "PRIMARY",
-                "SECONDARY",
-                "TERTIARY",
-                "GHOST"
-              ]
+              "enum": ["PRIMARY", "SECONDARY", "TERTIARY", "GHOST"]
             },
             "icon": {
               "type": "string",
@@ -73,15 +65,8 @@
           }
         }
       },
-      "required": [
-        "title",
-        "media",
-        "aspectRatio",
-        "cta"
-      ]
+      "required": ["title", "media", "aspectRatio", "cta"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

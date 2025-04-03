@@ -4,6 +4,7 @@
   "description": "A component displaying media alongside a list of items with actions",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaWithList",
   "version": "1.0.0",
   "allOf": [
     {
@@ -33,11 +34,7 @@
           "description": "Array of list items to display alongside the media",
           "items": {
             "type": "object",
-            "required": [
-              "label",
-              "actions",
-              "slug"
-            ],
+            "required": ["label", "actions", "slug"],
             "properties": {
               "label": {
                 "type": "string",
@@ -62,15 +59,8 @@
           }
         }
       },
-      "required": [
-        "media",
-        "items",
-        "tickIcon",
-        "aspectRatio"
-      ]
+      "required": ["media", "items", "tickIcon", "aspectRatio"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

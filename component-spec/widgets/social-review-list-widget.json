@@ -4,6 +4,7 @@
   "description": "A widget that displays a list of social media-style reviews with ratings and publication details",
   "type": "object",
   "category": "Review",
+  "relativePath": "src/mono/web-core/auditedWidgets/SocialReviewList",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,12 +21,7 @@
           "description": "Array of review items to be displayed",
           "items": {
             "type": "object",
-            "required": [
-              "rating",
-              "title",
-              "subTitle",
-              "publishDetails"
-            ],
+            "required": ["rating", "title", "subTitle", "publishDetails"],
             "properties": {
               "rating": {
                 "type": "number",
@@ -79,10 +75,7 @@
         "cta": {
           "type": "object",
           "description": "Call-to-action button configuration",
-          "required": [
-            "variant",
-            "size"
-          ],
+          "required": ["variant", "size"],
           "properties": {
             "variant": {
               "type": "string",
@@ -111,13 +104,8 @@
           "default": true
         }
       },
-      "required": [
-        "reviews",
-        "cta"
-      ]
+      "required": ["reviews", "cta"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

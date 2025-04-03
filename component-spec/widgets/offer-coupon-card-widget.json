@@ -4,6 +4,7 @@
   "description": "A card displaying promotional offer details with a copyable coupon code",
   "type": "object",
   "category": "promotion",
+  "relativePath": "src/mono/web-core/auditedWidgets/OfferCouponCard",
   "version": "1.0.0",
   "allOf": [
     {
@@ -53,7 +54,5 @@
       ]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

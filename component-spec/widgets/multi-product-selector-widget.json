@@ -4,6 +4,7 @@
   "description": "A widget that allows users to select multiple products for adding to cart together",
   "type": "object",
   "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/MultiProductSelector",
   "version": "1.0.0",
   "allOf": [
     {
@@ -34,10 +35,7 @@
         "cta": {
           "type": "object",
           "description": "Call-to-action button configuration",
-          "required": [
-            "label",
-            "variant"
-          ],
+          "required": ["label", "variant"],
           "properties": {
             "label": {
               "type": "string",
@@ -46,21 +44,13 @@
             },
             "variant": {
               "type": "string",
-              "enum": [
-                "PRIMARY",
-                "SECONDARY",
-                "TERTIARY"
-              ],
+              "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
               "description": "Visual style of the button",
               "default": "PRIMARY"
             },
             "size": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the button",
               "default": "MEDIUM"
             },
@@ -113,13 +103,8 @@
           }
         }
       },
-      "required": [
-        "products",
-        "cta"
-      ]
+      "required": ["products", "cta"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

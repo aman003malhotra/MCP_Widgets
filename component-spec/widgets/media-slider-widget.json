@@ -4,6 +4,7 @@
   "description": "A horizontal slider component displaying media items with optional call-to-action buttons",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,9 +21,7 @@
           "description": "Array of media items to display in the slider",
           "items": {
             "type": "object",
-            "required": [
-              "media"
-            ],
+            "required": ["media"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json"
@@ -75,11 +74,7 @@
             "peekVariant": {
               "type": "string",
               "description": "Size of the peek when showPeek is enabled",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "showArrows": {
               "type": "boolean",
@@ -98,13 +93,8 @@
           "default": true
         }
       },
-      "required": [
-        "items",
-        "sliderConfig"
-      ]
+      "required": ["items", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

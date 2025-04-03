@@ -4,7 +4,7 @@
   "description": "A collapsible accordion component that displays a list of expandable items with optional images",
   "type": "object",
   "category": "interactive",
-  "version": "1.0.0",
+  "relativePath": "src/mono/web-core/auditedWidgets/Accordion",
   "allOf": [
     {
       "$ref": "./commonWidgets/common-props.json"
@@ -19,19 +19,13 @@
           "type": "string",
           "description": "Font weight for the accordion item titles",
           "default": "bold",
-          "enum": [
-            "light",
-            "bold"
-          ]
+          "enum": ["light", "bold"]
         },
         "iconVariant": {
           "type": "string",
           "description": "Type of icon to use for expand/collapse",
           "default": "chevron",
-          "enum": [
-            "chevron",
-            "plus-minus"
-          ]
+          "enum": ["chevron", "plus-minus"]
         },
         "isInitiallyOpen": {
           "type": "boolean",
@@ -66,7 +60,5 @@
       "required": true
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

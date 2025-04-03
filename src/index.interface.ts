@@ -21,10 +21,12 @@ export interface Component {
   description: string;
   type: string;
   category: string;
-  props: Record<string, ComponentProp>;
+  properties: Record<string, ComponentProp>;
   styles?: Record<string, any>;
   variantStyles?: Record<string, any>;
   atomicDependencies?: string[]; // List of atomic components this component depends on
+  relativePath?: string; // Path relative to the project root
+  importPath?: string; // Import path for the component
 }
 
 // Widget Type
@@ -34,7 +36,7 @@ export interface Widget {
   type: string;
   category: string;
   version: string;
-  props: Record<string, ComponentProp>;
+  properties: Record<string, ComponentProp>;
 }
 
 // Atomic Components Data

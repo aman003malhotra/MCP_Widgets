@@ -4,6 +4,7 @@
   "description": "An interactive component that displays images with parallax scrolling effects and tab navigation",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/ParallaxImage",
   "version": "1.0.0",
   "allOf": [
     {
@@ -40,10 +41,7 @@
               "item1": {
                 "type": "object",
                 "description": "First image item with text",
-                "required": [
-                  "img",
-                  "text"
-                ],
+                "required": ["img", "text"],
                 "properties": {
                   "img": {
                     "type": "string",
@@ -58,10 +56,7 @@
               "item2": {
                 "type": "object",
                 "description": "Second image item with text",
-                "required": [
-                  "img",
-                  "text"
-                ],
+                "required": ["img", "text"],
                 "properties": {
                   "img": {
                     "type": "string",
@@ -76,10 +71,7 @@
               "item3": {
                 "type": "object",
                 "description": "Third image item with text",
-                "required": [
-                  "img",
-                  "text"
-                ],
+                "required": ["img", "text"],
                 "properties": {
                   "img": {
                     "type": "string",
@@ -94,10 +86,7 @@
               "item4": {
                 "type": "object",
                 "description": "Fourth image item with text",
-                "required": [
-                  "img",
-                  "text"
-                ],
+                "required": ["img", "text"],
                 "properties": {
                   "img": {
                     "type": "string",
@@ -113,12 +102,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

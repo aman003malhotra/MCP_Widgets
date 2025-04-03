@@ -4,6 +4,7 @@
   "description": "A banner widget that displays media content with an optional call-to-action button",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaBanner",
   "version": "1.0.0",
   "allOf": [
     {
@@ -38,21 +39,12 @@
             "variant": {
               "type": "string",
               "description": "Visual style of the button",
-              "enum": [
-                "PRIMARY",
-                "SECONDARY",
-                "TERTIARY",
-                "GHOST"
-              ]
+              "enum": ["PRIMARY", "SECONDARY", "TERTIARY", "GHOST"]
             },
             "size": {
               "type": "string",
               "description": "Size of the button",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "fullWidth": {
               "type": "boolean",
@@ -68,12 +60,8 @@
           }
         }
       },
-      "required": [
-        "media"
-      ]
+      "required": ["media"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

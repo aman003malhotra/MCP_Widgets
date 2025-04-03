@@ -4,6 +4,7 @@
   "description": "A tabbed widget displaying media with textual content and a grid of feature items",
   "type": "object",
   "category": "content",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaTextGridTabs",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,11 +21,7 @@
           "description": "Array of tabbed content items with media and text grid",
           "items": {
             "type": "object",
-            "required": [
-              "tabName",
-              "media",
-              "content"
-            ],
+            "required": ["tabName", "media", "content"],
             "properties": {
               "tabName": {
                 "type": "string",
@@ -36,11 +33,7 @@
               "content": {
                 "type": "object",
                 "description": "Textual content and grid items to display",
-                "required": [
-                  "heading",
-                  "info",
-                  "items"
-                ],
+                "required": ["heading", "info", "items"],
                 "properties": {
                   "heading": {
                     "type": "string",
@@ -55,11 +48,7 @@
                     "description": "Grid of feature items to display",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "image",
-                        "title",
-                        "description"
-                      ],
+                      "required": ["image", "title", "description"],
                       "properties": {
                         "image": {
                           "type": "string",
@@ -82,12 +71,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

@@ -4,6 +4,7 @@
   "description": "This widget automatically fetches and displays products that the user has recently viewed. The products array is populated dynamically based on the user's browsing history and the current product page. The widget reuses the CatalogCards component to render the UI.",
   "type": "object",
   "category": "Product",
+  "relativePath": "src/mono/web-core/auditedWidgets/RecentlyViewedCatalogCards",
   "version": "1.0.0",
   "allOf": [
     {
@@ -137,11 +138,7 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the peek for the next slide"
             },
             "showArrows": {
@@ -150,12 +147,7 @@
             },
             "arrowPosition": {
               "type": "string",
-              "enum": [
-                "inside",
-                "outside",
-                "top",
-                "bottom"
-              ],
+              "enum": ["inside", "outside", "top", "bottom"],
               "description": "Position of the navigation arrows relative to the carousel content",
               "default": "inside"
             },
@@ -188,12 +180,8 @@
           "description": "SKU of the item currently being added to cart"
         }
       },
-      "required": [
-        "sliderConfig"
-      ]
+      "required": ["sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

@@ -4,6 +4,7 @@
   "description": "A grid layout of product cards with optional quantity indicators and empty state handling",
   "type": "object",
   "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/ProductCardGrid",
   "version": "1.0.0",
   "allOf": [
     {
@@ -53,11 +54,7 @@
               "description": "URL for the empty state image"
             }
           },
-          "required": [
-            "title",
-            "subtitle",
-            "image"
-          ]
+          "required": ["title", "subtitle", "image"]
         },
         "shouldOpenMiniPdp": {
           "type": "boolean",
@@ -113,12 +110,8 @@
           "description": "Function handler for updating cart items that takes a product object as argument"
         }
       },
-      "required": [
-        "products"
-      ]
+      "required": ["products"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

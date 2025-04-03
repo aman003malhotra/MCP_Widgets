@@ -4,6 +4,7 @@
   "description": "A widget that displays a product summary with name, pricing details, ratings, and highlights",
   "type": "object",
   "category": "Product",
+  "relativePath": "src/mono/web-core/auditedWidgets/ProductSummary",
   "version": "1.0.0",
   "allOf": [
     {
@@ -88,9 +89,7 @@
               "description": "A list of product highlights or key features",
               "items": {
                 "type": "object",
-                "required": [
-                  "text"
-                ],
+                "required": ["text"],
                 "properties": {
                   "text": {
                     "type": "string",
@@ -103,9 +102,7 @@
         },
         "onRatingsClick": {
           "type": "object",
-          "required": [
-            "actions"
-          ],
+          "required": ["actions"],
           "properties": {
             "slugUrl": {
               "type": "string",
@@ -121,13 +118,8 @@
           }
         }
       },
-      "required": [
-        "productSummary",
-        "onRatingsClick"
-      ]
+      "required": ["productSummary", "onRatingsClick"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

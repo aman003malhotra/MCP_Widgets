@@ -4,6 +4,7 @@
   "description": "A comparison table widget that displays two-column comparison data with customizable icons",
   "type": "object",
   "category": "content",
+  "relativePath": "src/mono/web-core/auditedWidgets/ComparisonTable",
   "version": "1.0.0",
   "allOf": [
     {
@@ -18,10 +19,7 @@
         "tableHeader": {
           "type": "object",
           "description": "Header text for the comparison columns",
-          "required": [
-            "us",
-            "others"
-          ],
+          "required": ["us", "others"],
           "properties": {
             "us": {
               "type": "string",
@@ -40,10 +38,7 @@
           "description": "Array of comparison data rows",
           "items": {
             "type": "object",
-            "required": [
-              "us",
-              "others"
-            ],
+            "required": ["us", "others"],
             "subProps": {
               "us": {
                 "type": "string",
@@ -59,10 +54,7 @@
         "icons": {
           "type": "object",
           "description": "Icons to be displayed next to the text in each column",
-          "required": [
-            "checkIcon",
-            "crossIcon"
-          ],
+          "required": ["checkIcon", "crossIcon"],
           "properties": {
             "checkIcon": {
               "type": "string",
@@ -75,14 +67,8 @@
           }
         }
       },
-      "required": [
-        "tableHeader",
-        "tableData",
-        "icons"
-      ]
+      "required": ["tableHeader", "tableData", "icons"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

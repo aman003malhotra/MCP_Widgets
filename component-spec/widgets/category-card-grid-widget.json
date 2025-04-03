@@ -1,9 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Category-card-grid Widget",
-  "description": "A grid of category cards that displays category information with images and actions",
+  "title": "Category Card Grid Widget",
+  "description": "A grid layout widget that displays category cards with images and labels",
   "type": "object",
-  "category": "navigation",
+  "category": "catalog",
+  "relativePath": "src/mono/web-core/auditedWidgets/CategoryCardGrid",
   "version": "1.0.0",
   "allOf": [
     {
@@ -38,9 +39,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "image"
-                        ],
+                        "options": ["image"],
                         "required": true,
                         "description": "Type of media"
                       },
@@ -57,10 +56,7 @@
                       "loading": {
                         "type": "enum",
                         "required": false,
-                        "options": [
-                          "lazy",
-                          "eager"
-                        ],
+                        "options": ["lazy", "eager"],
                         "description": "Loading behavior for the image"
                       }
                     }
@@ -71,9 +67,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "video"
-                        ],
+                        "options": ["video"],
                         "required": true,
                         "description": "Type of media"
                       },
@@ -120,9 +114,7 @@
                     "subProps": {
                       "mediaType": {
                         "type": "enum",
-                        "options": [
-                          "lottie"
-                        ],
+                        "options": ["lottie"],
                         "required": true,
                         "description": "Type of media"
                       },
@@ -216,7 +208,5 @@
       "required": true
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

@@ -4,6 +4,7 @@
   "description": "A slider of media items with product overlays and call-to-action buttons",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaWithProductOverlay",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,12 +21,7 @@
           "description": "Array of product items to display in the slider",
           "items": {
             "type": "object",
-            "required": [
-              "baseMedia",
-              "overlayMedia",
-              "name",
-              "cta"
-            ],
+            "required": ["baseMedia", "overlayMedia", "name", "cta"],
             "properties": {
               "baseMedia": {
                 "$ref": "./commonWidgets/media.json",
@@ -42,11 +38,7 @@
               "cta": {
                 "type": "object",
                 "description": "Call-to-action button configuration",
-                "required": [
-                  "label",
-                  "variant",
-                  "size"
-                ],
+                "required": ["label", "variant", "size"],
                 "properties": {
                   "label": {
                     "type": "string",
@@ -54,20 +46,12 @@
                   },
                   "variant": {
                     "type": "string",
-                    "enum": [
-                      "PRIMARY",
-                      "SECONDARY",
-                      "TERTIARY"
-                    ],
+                    "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
                     "description": "Visual style of the button"
                   },
                   "size": {
                     "type": "string",
-                    "enum": [
-                      "SMALL",
-                      "MEDIUM",
-                      "LARGE"
-                    ],
+                    "enum": ["SMALL", "MEDIUM", "LARGE"],
                     "description": "Size of the button"
                   },
                   "fullWidth": {
@@ -102,9 +86,7 @@
         "sliderConfig": {
           "type": "object",
           "description": "Configuration for the slider behavior",
-          "required": [
-            "aspectRatio"
-          ],
+          "required": ["aspectRatio"],
           "properties": {
             "aspectRatio": {
               "type": "number",
@@ -127,11 +109,7 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the peek for the next slide",
               "default": "LARGE"
             },
@@ -146,13 +124,8 @@
           }
         }
       },
-      "required": [
-        "items",
-        "sliderConfig"
-      ]
+      "required": ["items", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

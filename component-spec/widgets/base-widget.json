@@ -4,7 +4,7 @@
   "description": "Standard foundation for all widgets providing consistent layout and structure",
   "type": "object",
   "category": "base",
-  "version": "1.0.0",
+  "relativePath": "src/mono/web-core/auditedWidgets/Base",
   "allOf": [
     {
       "$ref": "./commonWidgets/common-props.json"

@@ -4,6 +4,7 @@
   "description": "A horizontal slider component displaying media items with labels underneath",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaLabeledSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,10 +21,7 @@
           "description": "Array of media items with labels to display in the slider",
           "items": {
             "type": "object",
-            "required": [
-              "media",
-              "label"
-            ],
+            "required": ["media", "label"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json"
@@ -59,11 +57,7 @@
             "peekVariant": {
               "type": "string",
               "description": "Size of the peek when showPeek is enabled",
-              "enum": [
-                "small",
-                "medium",
-                "large"
-              ]
+              "enum": ["small", "medium", "large"]
             },
             "showArrows": {
               "type": "boolean",
@@ -72,13 +66,8 @@
           }
         }
       },
-      "required": [
-        "items",
-        "sliderConfig"
-      ]
+      "required": ["items", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

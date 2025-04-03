@@ -1,9 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Product-call-to-action Widget",
-  "description": "A sticky product call-to-action widget with quantity selection and add to cart functionality",
+  "title": "Product Call To Action Widget",
+  "description": "A call-to-action widget specifically designed for product promotions",
   "type": "object",
   "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/ProductCallToAction",
   "version": "1.0.0",
   "allOf": [
     {
@@ -18,12 +19,7 @@
         "productInfo": {
           "type": "object",
           "description": "Product information for the call to action",
-          "required": [
-            "name",
-            "sku",
-            "actualPrice",
-            "priceLabel"
-          ],
+          "required": ["name", "sku", "actualPrice", "priceLabel"],
           "properties": {
             "name": {
               "type": "string",
@@ -58,10 +54,7 @@
               "description": "Original price of the product"
             },
             "discountedPrice": {
-              "type": [
-                "number",
-                "null"
-              ],
+              "type": ["number", "null"],
               "description": "Discounted price of the product, if applicable"
             },
             "priceLabel": {
@@ -69,10 +62,7 @@
               "description": "Formatted price label for display"
             },
             "discountedPriceLabel": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Formatted discounted price label for display, if applicable"
             },
             "urlKey": {
@@ -122,12 +112,8 @@
           }
         }
       },
-      "required": [
-        "productInfo"
-      ]
+      "required": ["productInfo"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

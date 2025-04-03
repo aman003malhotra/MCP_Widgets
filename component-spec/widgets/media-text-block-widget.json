@@ -4,6 +4,7 @@
   "description": "A widget displaying alternating media and text content blocks",
   "type": "object",
   "category": "content",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaTextBlock",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,10 +21,7 @@
           "description": "Array of media-text content blocks",
           "items": {
             "type": "object",
-            "required": [
-              "media",
-              "textContent"
-            ],
+            "required": ["media", "textContent"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json"
@@ -31,18 +29,11 @@
               "textContent": {
                 "type": "object",
                 "description": "Text content to display alongside the media",
-                "required": [
-                  "contentPosition",
-                  "heading",
-                  "info"
-                ],
+                "required": ["contentPosition", "heading", "info"],
                 "properties": {
                   "contentPosition": {
                     "type": "enum",
-                    "options": [
-                      "left",
-                      "right"
-                    ],
+                    "options": ["left", "right"],
                     "description": "Position of the text content relative to the media (on desktop)"
                   },
                   "heading": {
@@ -59,12 +50,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

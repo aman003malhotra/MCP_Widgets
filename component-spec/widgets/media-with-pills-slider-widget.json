@@ -4,6 +4,7 @@
   "description": "A carousel of media items with title and pill-style tags",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaWithPillsSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -51,10 +52,7 @@
             },
             "arrowPosition": {
               "type": "string",
-              "enum": [
-                "inside",
-                "outside"
-              ],
+              "enum": ["inside", "outside"],
               "description": "Position of the navigation arrows relative to the content",
               "default": "inside"
             },
@@ -80,11 +78,7 @@
           "description": "Array of media items with pills to display in the carousel",
           "items": {
             "type": "object",
-            "required": [
-              "media",
-              "title",
-              "pills"
-            ],
+            "required": ["media", "title", "pills"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json",
@@ -97,10 +91,7 @@
               "pills": {
                 "type": "object",
                 "description": "Configuration for pill-style tags",
-                "required": [
-                  "borderColor",
-                  "items"
-                ],
+                "required": ["borderColor", "items"],
                 "properties": {
                   "borderColor": {
                     "type": "string",
@@ -111,9 +102,7 @@
                     "description": "Array of pill items to display",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "label"
-                      ],
+                      "required": ["label"],
                       "properties": {
                         "label": {
                           "type": "string",
@@ -128,13 +117,8 @@
           }
         }
       },
-      "required": [
-        "items",
-        "carouselConfig"
-      ]
+      "required": ["items", "carouselConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

@@ -4,6 +4,7 @@
   "description": "A widget that displays rows of product options with different display modes for switching between product variants",
   "type": "object",
   "category": "Product",
+  "relativePath": "src/mono/web-core/auditedWidgets/ProductSwitcher",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,11 +21,7 @@
           "description": "An array of rows, each containing a title and options for product variants",
           "items": {
             "type": "object",
-            "required": [
-              "title",
-              "type",
-              "options"
-            ],
+            "required": ["title", "type", "options"],
             "properties": {
               "title": {
                 "type": "string",
@@ -92,13 +89,8 @@
           "description": "The URL key for the base product, used in analytics events"
         }
       },
-      "required": [
-        "rows",
-        "urlKey"
-      ]
+      "required": ["rows", "urlKey"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

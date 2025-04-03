@@ -4,6 +4,7 @@
   "description": "A widget that displays product testimonials with customer quotes and product details",
   "type": "object",
   "category": "Product",
+  "relativePath": "src/mono/web-core/auditedWidgets/ProductTestimonials",
   "version": "1.0.0",
   "allOf": [
     {
@@ -82,10 +83,7 @@
                 "description": "List of reasons why the product works well",
                 "items": {
                   "type": "object",
-                  "required": [
-                    "label",
-                    "text"
-                  ],
+                  "required": ["label", "text"],
                   "properties": {
                     "label": {
                       "type": "string",
@@ -182,24 +180,15 @@
             },
             "arrowPosition": {
               "type": "string",
-              "enum": [
-                "inside",
-                "outside",
-                "top",
-                "bottom"
-              ],
+              "enum": ["inside", "outside", "top", "bottom"],
               "description": "Position of the navigation arrows relative to the carousel content",
               "default": "outside"
             }
           }
         }
       },
-      "required": [
-        "products"
-      ]
+      "required": ["products"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

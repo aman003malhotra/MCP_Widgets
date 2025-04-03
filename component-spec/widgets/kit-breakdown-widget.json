@@ -4,6 +4,7 @@
   "description": "A slider widget displaying products that are part of a kit with their details",
   "type": "object",
   "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/KitBreakdown",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,12 +21,7 @@
           "description": "Array of products that are part of the kit",
           "items": {
             "type": "object",
-            "required": [
-              "name",
-              "urlKey",
-              "priceLabel",
-              "media"
-            ],
+            "required": ["name", "urlKey", "priceLabel", "media"],
             "subProps": {
               "name": {
                 "type": "string",
@@ -80,11 +76,7 @@
               "type": "string",
               "description": "Size of the peek to show",
               "default": "MEDIUM",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ]
+              "enum": ["SMALL", "MEDIUM", "LARGE"]
             },
             "showArrows": {
               "type": "boolean",
@@ -99,13 +91,8 @@
           }
         }
       },
-      "required": [
-        "products",
-        "sliderConfig"
-      ]
+      "required": ["products", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

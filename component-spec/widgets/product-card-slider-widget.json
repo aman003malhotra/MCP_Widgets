@@ -4,6 +4,7 @@
   "description": "A slider/carousel of product cards with configurable display options",
   "type": "object",
   "category": "Product",
+  "relativePath": "src/mono/web-core/auditedWidgets/ProductCardSlider",
   "version": "1.0.0",
   "allOf": [
     {
@@ -53,11 +54,7 @@
               "description": "URL for the empty state image"
             }
           },
-          "required": [
-            "title",
-            "subtitle",
-            "image"
-          ]
+          "required": ["title", "subtitle", "image"]
         },
         "shouldOpenMiniPdp": {
           "type": "boolean",
@@ -141,11 +138,7 @@
             },
             "peekVariant": {
               "type": "string",
-              "enum": [
-                "SMALL",
-                "MEDIUM",
-                "LARGE"
-              ],
+              "enum": ["SMALL", "MEDIUM", "LARGE"],
               "description": "Size of the peek for the next slide",
               "default": "MEDIUM"
             },
@@ -164,25 +157,15 @@
             },
             "arrowPosition": {
               "type": "string",
-              "enum": [
-                "inside",
-                "outside",
-                "top",
-                "bottom"
-              ],
+              "enum": ["inside", "outside", "top", "bottom"],
               "description": "Position of the navigation arrows relative to the carousel content",
               "default": "outside"
             }
           }
         }
       },
-      "required": [
-        "products",
-        "sliderConfig"
-      ]
+      "required": ["products", "sliderConfig"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

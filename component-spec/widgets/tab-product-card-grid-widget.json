@@ -1,9 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Tab Product Card Grid Widget",
-  "description": "A widget that displays product cards organized in tabs or categories",
+  "description": "A tabbed interface displaying product cards in a grid layout",
   "type": "object",
-  "category": "Product",
+  "category": "product",
+  "relativePath": "src/mono/web-core/auditedWidgets/TabProductCardGrid",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,10 +21,7 @@
           "description": "Array of tabs/categories to display as navigation",
           "items": {
             "type": "object",
-            "required": [
-              "name",
-              "keyName"
-            ],
+            "required": ["name", "keyName"],
             "properties": {
               "name": {
                 "type": "string",
@@ -41,9 +39,7 @@
           "description": "Map of category key names to their products",
           "additionalProperties": {
             "type": "object",
-            "required": [
-              "products"
-            ],
+            "required": ["products"],
             "properties": {
               "products": {
                 "type": "array",
@@ -118,10 +114,7 @@
                       "description": "List of reasons why the product works well",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "label",
-                          "text"
-                        ],
+                        "required": ["label", "text"],
                         "properties": {
                           "label": {
                             "type": "string",
@@ -144,12 +137,7 @@
                     },
                     "media": {
                       "type": "object",
-                      "required": [
-                        "mediaType",
-                        "source",
-                        "loading",
-                        "altText"
-                      ],
+                      "required": ["mediaType", "source", "loading", "altText"],
                       "properties": {
                         "mediaType": {
                           "type": "string",
@@ -163,10 +151,7 @@
                         "loading": {
                           "type": "string",
                           "description": "Loading behavior for the media (lazy, eager)",
-                          "enum": [
-                            "lazy",
-                            "eager"
-                          ]
+                          "enum": ["lazy", "eager"]
                         },
                         "altText": {
                           "type": "string",
@@ -180,9 +165,7 @@
                     },
                     "cta": {
                       "type": "object",
-                      "required": [
-                        "action"
-                      ],
+                      "required": ["action"],
                       "properties": {
                         "action": {
                           "type": "string",
@@ -232,11 +215,7 @@
               "format": "uri"
             }
           },
-          "required": [
-            "title",
-            "subtitle",
-            "image"
-          ]
+          "required": ["title", "subtitle", "image"]
         },
         "shouldOpenMiniPdp": {
           "type": "boolean",
@@ -292,13 +271,8 @@
           "description": "Function handler for updating cart items that takes a product object as argument"
         }
       },
-      "required": [
-        "tags",
-        "categoryProducts"
-      ]
+      "required": ["tags", "categoryProducts"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

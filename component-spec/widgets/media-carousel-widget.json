@@ -4,6 +4,7 @@
   "description": "A carousel widget that displays multiple media items with optional CTAs",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/MediaCarousel",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,9 +21,7 @@
           "description": "Array of media items to display in the carousel",
           "items": {
             "type": "object",
-            "required": [
-              "media"
-            ],
+            "required": ["media"],
             "properties": {
               "media": {
                 "$ref": "./commonWidgets/media.json"
@@ -41,20 +40,12 @@
                   },
                   "variant": {
                     "type": "enum",
-                    "options": [
-                      "PRIMARY",
-                      "SECONDARY",
-                      "TERTIARY"
-                    ],
+                    "options": ["PRIMARY", "SECONDARY", "TERTIARY"],
                     "description": "Visual style of the button"
                   },
                   "size": {
                     "type": "enum",
-                    "options": [
-                      "SMALL",
-                      "MEDIUM",
-                      "LARGE"
-                    ],
+                    "options": ["SMALL", "MEDIUM", "LARGE"],
                     "description": "Size of the button"
                   },
                   "fullWidth": {
@@ -149,20 +140,13 @@
               "type": "string",
               "description": "Position of the navigation arrows relative to the content",
               "default": "inside",
-              "enum": [
-                "inside",
-                "outside"
-              ]
+              "enum": ["inside", "outside"]
             }
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }

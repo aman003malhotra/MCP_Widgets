@@ -4,6 +4,7 @@
   "description": "A tabbed video component with parallax effects",
   "type": "object",
   "category": "media",
+  "relativePath": "src/mono/web-core/auditedWidgets/ParallaxVideo",
   "version": "1.0.0",
   "allOf": [
     {
@@ -20,11 +21,7 @@
           "description": "Array of video items with tab navigation",
           "items": {
             "type": "object",
-            "required": [
-              "tabName",
-              "video",
-              "color"
-            ],
+            "required": ["tabName", "video", "color"],
             "properties": {
               "tabName": {
                 "type": "string",
@@ -42,12 +39,8 @@
           }
         }
       },
-      "required": [
-        "items"
-      ]
+      "required": ["items"]
     }
   },
-  "required": [
-    "widgetData"
-  ]
+  "required": ["widgetData"]
 }
