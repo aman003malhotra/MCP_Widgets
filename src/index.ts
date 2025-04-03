@@ -24,6 +24,7 @@ import {
 // Define paths to component specs
 const COMPONENT_SPEC_DIR = path.resolve(process.cwd(), "component-spec");
 const ATOMIC_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "atomic-components.json");
+const MOLECULE_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "molecule-components.json");
 const WIDGETS_DIR = path.resolve(COMPONENT_SPEC_DIR, "widgets");
 const AUDITED_WIDGETS_DIR = path.resolve(process.cwd(), "src", "mono", "web-core", "auditedWidgets");
 
@@ -209,7 +210,7 @@ class PwaComponentMcpServer {
       "searchComponents",
       {
               query: z.string(),
-        type: z.enum(["atomic", "widget", "all"]).default("all")
+        type: z.enum(["atomic", "widget", "molecule", "all"]).default("all")
       },
       async ({ query, type }) => {
               try {
@@ -223,10 +224,31 @@ class PwaComponentMcpServer {
                     if (
                       component.name.toLowerCase().includes(searchTerm) ||
                       component.description.toLowerCase().includes(searchTerm) ||
-                      Object.keys(component.props).some(prop => prop.toLowerCase().includes(searchTerm))
+                      Object.keys(component.props || {}).some(prop => prop.toLowerCase().includes(searchTerm))
                     ) {
                       results.push({
                         type: "atomic",
+                        name: component.name,
+                        description: component.description,
+                        category: component.category,
+                      });
+                    }
+                  });
+                }
+                
+                if (type === "molecule" || type === "all") {
+                  const moleculeData = JSON.parse(fs.readFileSync(MOLECULE_COMPONENTS_PATH, "utf-8")) as AtomicComponentsData;
+                  
+                  moleculeData.components.forEach((component: Component) => {
+                    if (
+                      component.name.toLowerCase().includes(searchTerm) ||
+                      component.description.toLowerCase().includes(searchTerm) ||
+                      Object.keys(component.props || {}).some(prop => prop.toLowerCase().includes(searchTerm)) ||
+                      (component.atomicDependencies && 
+                        component.atomicDependencies.some(dep => dep.toLowerCase().includes(searchTerm)))
+                    ) {
+                      results.push({
+                        type: "molecule",
                         name: component.name,
                         description: component.description,
                         category: component.category,
@@ -240,25 +262,56 @@ class PwaComponentMcpServer {
                     .filter(file => file.endsWith(".json"));
                   
                   for (const file of widgetFiles) {
-                    const filePath = path.join(WIDGETS_DIR, file);
-                    const widgetData = JSON.parse(fs.readFileSync(filePath, "utf-8")) as WidgetData;
-                    
-                    if (Array.isArray(widgetData.widgets)) {
-                      widgetData.widgets.forEach((widget: Widget) => {
+                    try {
+                      const filePath = path.join(WIDGETS_DIR, file);
+                      const widgetData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+                      
+                      // Check if the file is a direct widget schema (not containing a widgets array)
+                      if (!Array.isArray(widgetData.widgets)) {
+                        // Extract widget info from the schema file
+                        const widgetName = file.replace('.json', '');
+                        const description = widgetData.description || widgetData.title || widgetName;
+                        const category = widgetData.category || 'other';
+                        
+                        // Check if this widget matches the search term
                         if (
-                          widget.name.toLowerCase().includes(searchTerm) ||
-                          widget.description.toLowerCase().includes(searchTerm) ||
-                          Object.keys(widget.props).some(prop => prop.toLowerCase().includes(searchTerm))
+                          widgetName.toLowerCase().includes(searchTerm) ||
+                          description.toLowerCase().includes(searchTerm) ||
+                          // Search in properties if they exist
+                          (widgetData.properties?.widgetData?.properties && 
+                            Object.keys(widgetData.properties.widgetData.properties).some(
+                              prop => prop.toLowerCase().includes(searchTerm)
+                            )
+                          )
                         ) {
                           results.push({
                             type: "widget",
-                            name: widget.name,
-                            description: widget.description,
-                            category: widget.category,
+                            name: widgetName,
+                            description: description,
+                            category: category,
                             file: file,
                           });
                         }
-                      });
+                      } else if (Array.isArray(widgetData.widgets)) {
+                        // Legacy format with widgets array
+                        widgetData.widgets.forEach((widget: Widget) => {
+                          if (
+                            widget.name.toLowerCase().includes(searchTerm) ||
+                            widget.description.toLowerCase().includes(searchTerm) ||
+                            Object.keys(widget.props || {}).some(prop => prop.toLowerCase().includes(searchTerm))
+                          ) {
+                            results.push({
+                              type: "widget",
+                              name: widget.name,
+                              description: widget.description,
+                              category: widget.category,
+                              file: file,
+                            });
+                          }
+                        });
+                      }
+                    } catch (e) {
+                      console.warn(`Error searching widget file ${file}:`, e);
                     }
                   }
                 }
@@ -286,47 +339,309 @@ class PwaComponentMcpServer {
       "getComponentProperties",
       {
               componentName: z.string(),
-        componentType: z.enum(["atomic", "widget"])
+        componentType: z.enum(["atomic", "widget", "molecule"])
       },
       async ({ componentName, componentType }) => {
               try {
+                // Load all component types to provide context
+                const atomicData = JSON.parse(fs.readFileSync(ATOMIC_COMPONENTS_PATH, "utf-8")) as AtomicComponentsData;
+                const moleculeData = JSON.parse(fs.readFileSync(MOLECULE_COMPONENTS_PATH, "utf-8")) as AtomicComponentsData;
+                const widgetFiles = fs.readdirSync(WIDGETS_DIR).filter(file => file.endsWith(".json"));
+                
+                // Gather related components to help client make decisions
+                const allAtomicComponents = atomicData.components.map((c: Component) => ({
+                  name: c.name,
+                  description: c.description,
+                  category: c.category,
+                  type: c.type,
+                  numProps: Object.keys(c.props || {}).length
+                }));
+                
+                // Get all molecule components
+                const allMoleculeComponents = moleculeData.components.map((c: Component) => ({
+                  name: c.name,
+                  description: c.description,
+                  category: c.category,
+                  type: c.type,
+                  atomicDependencies: c.atomicDependencies || [],
+                  numProps: Object.keys(c.props || {}).length
+                }));
+                
+                // Group atomic components by category for better reference
+                const atomicComponentsByCategory: Record<string, any[]> = {};
+                allAtomicComponents.forEach(comp => {
+                  if (!atomicComponentsByCategory[comp.category]) {
+                    atomicComponentsByCategory[comp.category] = [];
+                  }
+                  atomicComponentsByCategory[comp.category].push(comp);
+                });
+                
+                // Get all widget summaries
+                const allWidgetSummaries: any[] = [];
+                for (const file of widgetFiles) {
+                  try {
+                    const filePath = path.join(WIDGETS_DIR, file);
+                    const widgetData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+                    
+                    // Check if the file is a direct widget schema (not containing a widgets array)
+                    if (!Array.isArray(widgetData.widgets)) {
+                      // Extract widget info from the schema file
+                      const widgetName = file.replace('.json', '');
+                      const widget = {
+                        name: widgetName,
+                        description: widgetData.description || widgetData.title || widgetName,
+                        category: widgetData.category || 'other',
+                        type: widgetData.type || 'object',
+                        version: widgetData.version || '1.0.0',
+                        numProps: Object.keys(widgetData.properties?.widgetData?.properties || {}).length,
+                        file
+                      };
+                      
+                      allWidgetSummaries.push(widget);
+                    } else if (Array.isArray(widgetData.widgets)) {
+                      // Handle files with a widgets array (legacy format)
+                      widgetData.widgets.forEach((w: Widget) => {
+                        allWidgetSummaries.push({
+                          name: w.name,
+                          description: w.description,
+                          category: w.category,
+                          type: w.type,
+                          numProps: Object.keys(w.props || {}).length,
+                          file: file
+                        });
+                      });
+                    }
+                  } catch (e) {
+                    console.warn(`Error processing widget file ${file}:`, e);
+                  }
+                }
+                
+                // Now get specific component requested
                 if (componentType === "atomic") {
-                  const atomicData = JSON.parse(fs.readFileSync(ATOMIC_COMPONENTS_PATH, "utf-8")) as AtomicComponentsData;
                   const component = atomicData.components.find((c: Component) => c.name === componentName);
                   
                   if (!component) {
                     throw new Error(`Atomic component '${componentName}' not found`);
                   }
                   
-            return {
-              content: [{
-                type: "text",
-                text: JSON.stringify(component.props, null, 2)
-              }]
-            };
-                } else {
-                  const widgetFiles = fs.readdirSync(WIDGETS_DIR)
-                    .filter(file => file.endsWith(".json"));
+                  // Find widgets that use this atomic component
+                  const widgetsUsingComponent = allWidgetSummaries.filter(w => {
+                    const widgetPath = path.join(WIDGETS_DIR, w.file);
+                    try {
+                      const content = fs.readFileSync(widgetPath, 'utf-8');
+                      return content.includes(`"${componentName}"`) || content.includes(`'${componentName}'`);
+                    } catch {
+                      return false;
+                    }
+                  });
                   
-                  for (const file of widgetFiles) {
-                    const filePath = path.join(WIDGETS_DIR, file);
-                    const widgetData = JSON.parse(fs.readFileSync(filePath, "utf-8")) as WidgetData;
-                    
-                    if (Array.isArray(widgetData.widgets)) {
-                      const widget = widgetData.widgets.find((w: Widget) => w.name === componentName);
-                      
-                      if (widget) {
+                  // Find molecules that use this atomic component
+                  const moleculesUsingComponent = allMoleculeComponents.filter(m => 
+                    m.atomicDependencies.includes(componentName)
+                  );
+                  
+                  // Find similar atomic components that might be alternatives
+                  const similarComponents = allAtomicComponents
+                    .filter(c => c.category === component.category && c.name !== componentName)
+                    .slice(0, 5);
+                  
                   return {
                     content: [{
                       type: "text",
-                      text: JSON.stringify(widget.props, null, 2)
+                      text: JSON.stringify({
+                        component: {
+                          name: component.name,
+                          description: component.description,
+                          category: component.category,
+                          type: component.type,
+                          props: component.props
+                        },
+                        context: {
+                          usedByWidgets: widgetsUsingComponent,
+                          usedByMolecules: moleculesUsingComponent,
+                          similarComponents,
+                          recommendedCombinations: moleculesUsingComponent.map(m => m.name)
+                        },
+                        allAtomicComponents: {
+                          byCategory: atomicComponentsByCategory,
+                          total: allAtomicComponents.length
+                        },
+                        allMoleculeComponents: allMoleculeComponents,
+                        allWidgetSummaries: allWidgetSummaries
+                      }, null, 2)
                     }]
                   };
+                } else if (componentType === "molecule") {
+                  const component = moleculeData.components.find((c: Component) => c.name === componentName);
+                  
+                  if (!component) {
+                    throw new Error(`Molecule component '${componentName}' not found`);
+                  }
+                  
+                  // Find widgets that use this molecule component
+                  const widgetsUsingComponent = allWidgetSummaries.filter(w => {
+                    const widgetPath = path.join(WIDGETS_DIR, w.file);
+                    try {
+                      const content = fs.readFileSync(widgetPath, 'utf-8');
+                      return content.includes(`"${componentName}"`) || content.includes(`'${componentName}'`);
+                    } catch {
+                      return false;
+                    }
+                  });
+                  
+                  // Get atomic components used by this molecule
+                  const usedAtomicComponents = component.atomicDependencies || [];
+                  const atomicComponentDetails = usedAtomicComponents.map(name => {
+                    const comp = atomicData.components.find((c: Component) => c.name === name);
+                    return comp ? {
+                      name: comp.name,
+                      description: comp.description,
+                      category: comp.category,
+                      props: comp.props
+                    } : { name, error: "Component details not found" };
+                  });
+                  
+                  // Find similar molecules
+                  const similarMolecules = allMoleculeComponents
+                    .filter(c => c.category === component.category && c.name !== componentName)
+                    .slice(0, 5);
+                  
+                  return {
+                    content: [{
+                      type: "text",
+                      text: JSON.stringify({
+                        component: {
+                          name: component.name,
+                          description: component.description,
+                          category: component.category,
+                          type: component.type,
+                          atomicDependencies: component.atomicDependencies,
+                          props: component.props
+                        },
+                        context: {
+                          usedByWidgets: widgetsUsingComponent,
+                          usedAtomicComponents,
+                          atomicComponentDetails,
+                          similarMolecules
+                        },
+                        allAtomicComponents: {
+                          byCategory: atomicComponentsByCategory,
+                          total: allAtomicComponents.length
+                        },
+                        allMoleculeComponents: allMoleculeComponents,
+                        allWidgetSummaries: allWidgetSummaries
+                      }, null, 2)
+                    }]
+                  };
+                } else {
+                  // Handle widget component lookup
+                  let targetWidget = null;
+                  let widgetFile = null;
+                  
+                  for (const file of widgetFiles) {
+                    try {
+                      const filePath = path.join(WIDGETS_DIR, file);
+                      const widgetData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+                      
+                      const widgetName = file.replace('.json', '');
+                      
+                      // Check if this is the widget we're looking for
+                      if (widgetName === componentName) {
+                        targetWidget = {
+                          name: widgetName,
+                          description: widgetData.description || widgetData.title || widgetName,
+                          category: widgetData.category || 'other',
+                          type: widgetData.type || 'object',
+                          version: widgetData.version || '1.0.0',
+                          props: widgetData.properties?.widgetData?.properties || {}
+                        };
+                        widgetFile = file;
+                        break;
                       }
+                      
+                      // Also check legacy format with widgets array
+                      if (Array.isArray(widgetData.widgets)) {
+                        const widget = widgetData.widgets.find((w: Widget) => w.name === componentName);
+                        
+                        if (widget) {
+                          targetWidget = widget;
+                          widgetFile = file;
+                          break;
+                        }
+                      }
+                    } catch (e) {
+                      console.warn(`Error processing widget file ${file} for lookup:`, e);
                     }
                   }
                   
-                  throw new Error(`Widget '${componentName}' not found`);
+                  if (!targetWidget) {
+                    throw new Error(`Widget '${componentName}' not found`);
+                  }
+                  
+                  // Find atomic components used by this widget
+                  let usedAtomicComponents: string[] = [];
+                  try {
+                    const widgetPath = path.join(WIDGETS_DIR, widgetFile!);
+                    const content = fs.readFileSync(widgetPath, 'utf-8');
+                    // This is a simple extraction - a real implementation would do more sophisticated parsing
+                    const atomicMatches = content.match(/"atomicComponents":\s*\[(.*?)\]/s);
+                    if (atomicMatches && atomicMatches[1]) {
+                      usedAtomicComponents = atomicMatches[1]
+                        .replace(/"/g, '')
+                        .replace(/'/g, '')
+                        .split(',')
+                        .map(s => s.trim())
+                        .filter(s => s);
+                    }
+                  } catch (e) {
+                    console.warn(`Error extracting atomic components for ${componentName}:`, e);
+                  }
+                  
+                  // Find similar widgets by category
+                  const similarWidgets = allWidgetSummaries
+                    .filter(w => w.category === targetWidget.category && w.name !== componentName)
+                    .slice(0, 5);
+                  
+                  // Get detailed info about the atomic components this widget uses
+                  const atomicComponentDetails = usedAtomicComponents.map(name => {
+                    const comp = atomicData.components.find((c: Component) => c.name === name);
+                    return comp ? {
+                      name: comp.name,
+                      description: comp.description,
+                      category: comp.category,
+                      props: comp.props
+                    } : { name, error: "Component details not found" };
+                  });
+                  
+                  return {
+                    content: [{
+                      type: "text",
+                      text: JSON.stringify({
+                        widget: {
+                          name: targetWidget.name,
+                          description: targetWidget.description,
+                          category: targetWidget.category,
+                          type: targetWidget.type,
+                          props: targetWidget.props,
+                          file: widgetFile
+                        },
+                        context: {
+                          usedAtomicComponents,
+                          atomicComponentDetails,
+                          similarWidgets,
+                          recommendedAtomicComponents: allAtomicComponents
+                            .filter(c => c.category === targetWidget.category || usedAtomicComponents.includes(c.name))
+                            .map(c => c.name)
+                        },
+                        allAtomicComponents: {
+                          byCategory: atomicComponentsByCategory,
+                          total: allAtomicComponents.length
+                        },
+                        allMoleculeComponents: allMoleculeComponents,
+                        allWidgetSummaries: allWidgetSummaries
+                      }, null, 2)
+                    }]
+                  };
                 }
               } catch (error: unknown) {
                 const errorMessage = error instanceof Error ? error.message : String(error);
@@ -1991,6 +2306,211 @@ if (typeof module !== 'undefined') {
                 success: false,
                 message: `Failed to add widget type to WidgetMap.ts: ${errorMessage}`
               }, null, 2)
+            }],
+            isError: true
+          };
+        }
+      }
+    );
+
+    this.server.tool(
+      "getComponentLibrary",
+      {
+        includeDetails: z.boolean().optional().default(false)
+      },
+      async ({ includeDetails = false }) => {
+        includeDetails = false;
+        try {
+          console.log(`Retrieving component library ${includeDetails ? 'with' : 'without'} detailed information`);
+          
+          // Load atomic components data
+          const atomicData = JSON.parse(fs.readFileSync(ATOMIC_COMPONENTS_PATH, "utf-8")) as AtomicComponentsData;
+          
+          // Load molecule components data
+          const moleculeData = JSON.parse(fs.readFileSync(MOLECULE_COMPONENTS_PATH, "utf-8")) as AtomicComponentsData;
+          
+          // Load widget data from all widget files
+          const widgetFiles = fs.readdirSync(WIDGETS_DIR).filter(file => file.endsWith(".json"));
+          const allWidgets: any[] = [];
+          
+          for (const file of widgetFiles) {
+            try {
+              const filePath = path.join(WIDGETS_DIR, file);
+              const widgetData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+              
+              // Check if the file is a direct widget schema (not containing a widgets array)
+              if (!Array.isArray(widgetData.widgets)) {
+                // Extract widget info from the schema file
+                const widgetName = file.replace('.json', '');
+                const widget = {
+                  name: widgetName,
+                  description: widgetData.description || widgetData.title || widgetName,
+                  category: widgetData.category || 'other',
+                  type: widgetData.type || 'object',
+                  version: widgetData.version || '1.0.0',
+                  // props: widgetData.properties?.widgetData?.properties || {},
+                  file
+                };
+                
+                allWidgets.push(widget);
+              } else if (Array.isArray(widgetData.widgets)) {
+                // Handle files with a widgets array (legacy format)
+                widgetData.widgets.forEach((w: Widget) => {
+                  allWidgets.push({
+                    ...w,
+                    file
+                  });
+                });
+              }
+            } catch (e) {
+              console.warn(`Error loading widget from ${file}:`, e);
+            }
+          }
+          
+          // Get components by type
+          const atomicComponents = atomicData.components;
+          const moleculeComponents = moleculeData.components;
+          
+          // Create summaries
+          const atomicSummary = atomicComponents.map(c => ({
+            name: c.name,
+            description: c.description,
+            category: c.category,
+            type: c.type,
+            numProps: Object.keys(c.props || {}).length
+          }));
+          
+          const moleculeSummary = moleculeComponents.map(c => ({
+            name: c.name,
+            description: c.description, 
+            category: c.category,
+            type: c.type,
+            atomicDependencies: c.atomicDependencies || [],
+            numProps: Object.keys(c.props || {}).length
+          }));
+          
+          const widgetSummary = allWidgets.map(w => ({
+            name: w.name,
+            description: w.description,
+            category: w.category,
+            type: w.type,
+            version: w.version,
+            file: w.file,
+            numProps: Object.keys(w.props || {}).length
+          }));
+          
+          // Group components by category
+          const groupByCategory = (components: any[]) => {
+            const grouped: Record<string, any[]> = {};
+            components.forEach(comp => {
+              const category = comp.category || 'other';
+              if (!grouped[category]) {
+                grouped[category] = [];
+              }
+              grouped[category].push(comp);
+            });
+            return grouped;
+          };
+          
+          // Calculate stats
+          const componentStats = {
+            totalAtoms: atomicComponents.length,
+            totalMolecules: moleculeComponents.length,
+            totalWidgets: allWidgets.length,
+            categoryCounts: {
+              atomic: Object.entries(groupByCategory(atomicComponents)).map(([category, comps]) => ({
+                category,
+                count: comps.length
+              })),
+              molecules: Object.entries(groupByCategory(moleculeComponents)).map(([category, comps]) => ({
+                category, 
+                count: comps.length
+              })),
+              widgets: Object.entries(groupByCategory(allWidgets)).map(([category, comps]) => ({
+                category,
+                count: comps.length
+              }))
+            }
+          };
+          
+          // Find relationships between components
+          const componentRelationships = [];
+          
+          // Map which atomic components are used by which molecules
+          const atomicUsage: Record<string, string[]> = {};
+          
+          moleculeComponents.forEach(molecule => {
+            (molecule.atomicDependencies || []).forEach(atomName => {
+              if (!atomicUsage[atomName]) {
+                atomicUsage[atomName] = [];
+              }
+              atomicUsage[atomName].push(molecule.name);
+            });
+          });
+          
+          if (includeDetails) {
+            // Find complementary components (components often used together)
+            // This would require parsing actual usage patterns from the files
+            // For now, we'll use a simplified approach based on dependencies
+            
+            componentRelationships.push({
+              type: "atomic-to-molecule",
+              relationships: Object.entries(atomicUsage).map(([atom, molecules]) => ({
+                component: atom,
+                usedIn: molecules
+              }))
+            });
+          }
+          
+          // Create the response
+          const response = {
+            summary: {
+              atoms: atomicSummary.length,
+              molecules: moleculeSummary.length,
+              widgets: widgetSummary.length,
+              total: atomicSummary.length + moleculeSummary.length + widgetSummary.length
+            },
+            components: {
+              atoms: atomicSummary,
+              molecules: moleculeSummary,
+              widgets: widgetSummary
+            },
+            categorized: {
+              atoms: groupByCategory(atomicSummary),
+              molecules: groupByCategory(moleculeSummary),
+              widgets: groupByCategory(widgetSummary)
+            },
+            stats: componentStats,
+            relationships: includeDetails ? componentRelationships : undefined,
+            recommendations: {
+              popularAtoms: atomicSummary
+                .filter(a => Object.keys(atomicUsage).includes(a.name))
+                .sort((a, b) => 
+                  (atomicUsage[b.name]?.length || 0) - (atomicUsage[a.name]?.length || 0)
+                )
+                .slice(0, 5),
+              commonCombinations: includeDetails ? moleculeSummary
+                .filter(m => (m.atomicDependencies || []).length > 1)
+                .map(m => ({
+                  name: m.name,
+                  components: m.atomicDependencies
+                }))
+                .slice(0, 5) : []
+            }
+          };
+          
+          return {
+            content: [{
+              type: "text",
+              text: JSON.stringify(response, null, 2)
+            }]
+          };
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          return {
+            content: [{
+              type: "text",
+              text: `Failed to retrieve component library: ${errorMessage}`
             }],
             isError: true
           };

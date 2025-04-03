@@ -5,7 +5,7 @@
       "description": "A message component that displays an icon, title, and subtitle in an alert-style layout",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "message": {
           "type": "object",
           "required": true,
@@ -39,23 +39,12 @@
           "usage": "Renders the title and subtitle text with consistent styling"
         }
       ],
-      "implementation": {
-        "description": "A flexible alert message component that combines an icon with title and subtitle text",
-        "technology": "React functional component with styled-components"
-      },
       "usage": {
         "basic": "<AlertMessage message={{ title: 'Success', subtitle: 'Operation completed', icon: '/icons/success.svg' }} />",
         "examples": [
           "Basic alert: <AlertMessage message={{ title: 'Error', subtitle: 'Something went wrong' }} />",
           "With icon: <AlertMessage message={{ icon: '/icons/warning.svg', title: 'Warning', subtitle: 'Please check your input' }} />",
           "Title only: <AlertMessage message={{ title: 'Information' }} />"
-        ]
-      },
-      "accessibility": {
-        "considerations": [
-          "Uses semantic HTML structure",
-          "Icon should have appropriate alt text",
-          "Text uses Typography component for consistent styling and readability"
         ]
       }
     },
@@ -64,7 +53,7 @@
       "description": "A responsive carousel/slider component with support for multiple slides, autoplay, and navigation controls",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "children": {
           "type": "React.ReactNode",
           "required": true,
@@ -155,10 +144,6 @@
           "pauseOnHover": "Pauses on mouse hover"
         }
       },
-      "implementation": {
-        "description": "A feature-rich carousel component with touch support, responsive design, and customizable navigation",
-        "technology": "React functional component with styled-components and custom hooks"
-      },
       "usage": {
         "basic": "<Carousel><div>Slide 1</div><div>Slide 2</div></Carousel>",
         "examples": [
@@ -174,7 +159,7 @@
       "description": "A responsive modal dialog component with customizable content, backdrop, and close button",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "onClose": {
           "type": "function",
           "required": true,
@@ -227,7 +212,7 @@
       "description": "A comprehensive product card component displaying product information with add to cart functionality",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "product": {
           "type": "object",
           "required": true,
@@ -325,12 +310,11 @@
         }
       },
       "usage": {
-        "basic": "<ProductCard product={productData} handleCardClick={onCardClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={true} cartItems={cartItems} />",
+        "basic": "<ProductCard product={product} handleCardClick={handleCardClick} handleCtaClick={handleCtaClick} handleUpdateCartItem={handleUpdateCartItem} />",
         "examples": [
-          "Basic card: <ProductCard product={product} handleCardClick={onClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={false} cartItems={{}} />",
-          "With quantity controls: <ProductCard product={product} enableQuantityIndicator={true} cartItems={cartItems} {...handlers} />",
-          "Out of stock: <ProductCard product={{...product, outOfStock: true}} {...props} />",
-          "With overlay tag: <ProductCard product={{...product, overlayTag: {label: 'New', labelColor: '#fff', bgColor: '#000'}}} {...props} />"
+          "Basic: <ProductCard product={product} handleCardClick={handleCardClick} handleCtaClick={handleCtaClick} handleUpdateCartItem={handleUpdateCartItem} />",
+          "Out of stock: <ProductCard product={{...product, outOfStock: true}} {...properties} />",
+          "With overlay tag: <ProductCard product={{...product, overlayTag: {label: 'New', labelColor: '#fff', bgColor: '#000'}}} {...properties} />"
         ]
       }
     },
@@ -339,7 +323,7 @@
       "description": "A responsive slider/carousel component with customizable navigation, peek views, and slide controls",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "slidesToShow": {
           "type": "number",
           "defaultValue": 1,
@@ -439,17 +423,6 @@
           "aspectRatio": "Maintained aspect ratio for slides"
         }
       },
-      "implementation": {
-        "description": "A flexible slider component with rich navigation options and responsive design",
-        "technology": "React functional component with styled-components and custom hooks",
-        "features": [
-          "Smooth scrolling behavior",
-          "Touch device support",
-          "Responsive layout",
-          "Customizable navigation",
-          "Peek view options"
-        ]
-      },
       "usage": {
         "basic": "<Slider itemCount={5} showDots>{({imageDimensions}) => <div>Slide content</div>}</Slider>",
         "examples": [
@@ -465,7 +438,7 @@
       "description": "A responsive tabbed interface component with customizable tab content and styling",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "tabs": {
           "type": "array",
           "required": true,
@@ -506,7 +479,7 @@
       "description": "A product catalog card component that displays product information with quick add to cart functionality",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "product": {
           "type": "object",
           "required": true,
@@ -565,17 +538,6 @@
           "usage": "Loading indicator for cart updates"
         }
       ],
-      "implementation": {
-        "description": "A comprehensive catalog card component with quick add functionality",
-        "technology": "React functional component with styled-components",
-        "features": [
-          "Responsive design",
-          "Quick add to cart",
-          "Loading states",
-          "Price comparison display",
-          "Flexible media support"
-        ]
-      },
       "usage": {
         "basic": "<CatalogCard product={productData} />",
         "examples": [
@@ -591,7 +553,7 @@
       "description": "A component that displays a completion screen with an image or animation, title, and subtitle",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "title": {
           "type": "string",
           "required": true,
@@ -665,7 +627,7 @@
       "description": "A modal component that displays a confirmation dialog with optional input field, title, subtitle, and action buttons",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "title": {
           "type": "string",
           "required": true,
@@ -806,15 +768,6 @@
           "With input: <ConfirmationModalWIthInput title=\"Add Tags\" isInputEnabled inputData={inputConfig} footerCta={[cancelButton, submitButton]} />",
           "Without close button: <ConfirmationModalWIthInput title=\"Required Action\" showClose={false} footerCta={[confirmButton]} />"
         ]
-      },
-      "accessibility": {
-        "features": ["Semantic HTML structure", "Keyboard navigation support"],
-        "considerations": [
-          "Ensure sufficient color contrast for text",
-          "Make sure modal is properly announced to screen readers",
-          "Support keyboard navigation for closing and interacting with buttons",
-          "Trap focus within modal when open"
-        ]
       }
     },
     {
@@ -822,7 +775,7 @@
       "description": "A collapsible section component with header, expandable content, and optional subtitle",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "title": {
           "type": "string",
           "required": true,
@@ -906,51 +859,6 @@
           "usage": "Indicates collapsed/expanded state"
         }
       ],
-      "styles": {
-        "wrapper": {
-          "padding": "8px 10px",
-          "borderRadius": "4px",
-          "border": "1px solid divider-light-color"
-        },
-        "header": {
-          "display": "flex",
-          "justifyContent": "space-between",
-          "alignItems": "center",
-          "cursor": "pointer (when collapsible)"
-        },
-        "title": {
-          "maxWidth": "90%",
-          "color": "brand-light-secondary-text-color"
-        },
-        "subtitle": {
-          "color": "configurable or brand-primary-text-color"
-        }
-      },
-      "features": {
-        "interaction": {
-          "collapsible": "Can be toggled between expanded and collapsed states",
-          "alwaysOpen": "Can be configured to be always expanded"
-        },
-        "visual": {
-          "arrow": "Visual indicator of collapsed/expanded state",
-          "customizable": "Extensive style customization through CSS classes"
-        },
-        "content": {
-          "dynamic": "Can contain any React elements as children",
-          "responsive": "Adapts to different screen sizes"
-        }
-      },
-      "implementation": {
-        "description": "A flexible expandable section component with customizable styling",
-        "technology": "React functional component with styled-components and custom hooks",
-        "features": [
-          "Custom hook for state management",
-          "Memoized to prevent unnecessary re-renders",
-          "Configurable default state",
-          "Optional collapse functionality",
-          "Extensive CSS customization options"
-        ]
-      },
       "usage": {
         "basic": "<ExpandableSection title=\"FAQ\"><div>Content goes here</div></ExpandableSection>",
         "examples": [
@@ -959,18 +867,6 @@
           "Always expanded: <ExpandableSection title=\"Important Information\" isCollapsible={false}><p>This content is always visible</p></ExpandableSection>",
           "Open by default: <ExpandableSection title=\"Details\" openByDefault><p>Initially expanded content</p></ExpandableSection>"
         ]
-      },
-      "accessibility": {
-        "features": [
-          "Semantic HTML structure",
-          "Clear visual indicators for interactive elements"
-        ],
-        "considerations": [
-          "Ensure sufficient color contrast for text",
-          "Provide keyboard navigation for expanding/collapsing",
-          "Use ARIA attributes to indicate expanded state",
-          "Consider screen reader announcements for state changes"
-        ]
       }
     },
     {
@@ -978,7 +874,7 @@
       "description": "A flexible carousel component for displaying a collection of items with navigation controls",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "isInfinite": {
           "type": "boolean",
           "required": false,
@@ -1067,17 +963,6 @@
         }
       },
       "atomicComponents": [],
-      "implementation": {
-        "description": "A comprehensive carousel component with extensive customization options",
-        "technology": "React functional component with styled-components and custom hooks",
-        "features": [
-          "Custom hook for carousel state management",
-          "Touch and mouse event handling",
-          "Automatic slide cycling",
-          "Optimized rendering",
-          "Flexible layout configuration"
-        ]
-      },
       "usage": {
         "basic": "<GenericCarousel cardData={items} Component={CardComponent} />",
         "examples": [
@@ -1093,7 +978,7 @@
       "description": "A responsive slider component for displaying content with navigation arrows and custom layout",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "textAlign": {
           "type": "enum",
           "options": ["LEFT", "CENTER", "RIGHT"],
@@ -1185,7 +1070,7 @@
       "description": "A versatile component that can display either an image or a Lottie animation with configurable dimensions",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "imageUrl": {
           "type": "string",
           "required": false,
@@ -1237,7 +1122,7 @@
       "description": "A horizontal layout product card component displaying product information with add to cart functionality",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "product": {
           "type": "object",
           "required": true,
@@ -1327,24 +1212,13 @@
           "usage": "Displays overlay tags like 'Out of Stock'"
         }
       ],
-      "implementation": {
-        "description": "A horizontal product card component for efficient space usage with rich interaction features",
-        "technology": "React functional component with styled-components",
-        "features": [
-          "Horizontal layout for space efficiency",
-          "Cart integration",
-          "Quantity management",
-          "Loading states",
-          "Out of stock handling"
-        ]
-      },
       "usage": {
         "basic": "<HorizontalProductCard product={productData} handleCardClick={onCardClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={true} cartItems={cartItems} itemBeingAddedToCart=\"\" />",
         "examples": [
           "Basic card: <HorizontalProductCard product={product} handleCardClick={onClick} handleCtaClick={onCtaClick} handleUpdateCartItem={updateCart} enableQuantityIndicator={false} cartItems={{}} itemBeingAddedToCart=\"\" />",
-          "With quantity controls: <HorizontalProductCard product={product} enableQuantityIndicator={true} cartItems={cartItems} itemBeingAddedToCart=\"\" {...handlers} />",
-          "Out of stock: <HorizontalProductCard product={{...product, outOfStock: true}} itemBeingAddedToCart=\"\" {...props} />",
-          "With overlay tag: <HorizontalProductCard product={{...product, overlayTag: {label: 'New', labelColor: '#fff', bgColor: '#000', borderColor: '#000'}}} itemBeingAddedToCart=\"\" {...props} />"
+          "With quantity controls: <HorizontalProductCard product={product} enableQuantityIndicator={true} cartItems={cartItems} itemBeingAddedToCart=\"\" {...properties} />",
+          "Out of stock: <HorizontalProductCard product={{...product, outOfStock: true}} itemBeingAddedToCart=\"\" {...properties} />",
+          "With overlay tag: <HorizontalProductCard product={{...product, overlayTag: {label: 'New', labelColor: '#fff', bgColor: '#000', borderColor: '#000'}}} itemBeingAddedToCart=\"\" {...properties} />"
         ]
       }
     },
@@ -1353,7 +1227,7 @@
       "description": "A component that displays an informational or warning banner with title and subtitle",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "title": {
           "type": "string",
           "required": true,
@@ -1391,7 +1265,7 @@
       "description": "A dropdown component with a label that allows selecting from a list of options",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "label": {
           "type": "string",
           "required": true,
@@ -1469,7 +1343,7 @@
       "description": "A component that displays a group of radio buttons with a label",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "label": {
           "type": "string",
           "required": true,
@@ -1546,7 +1420,7 @@
       "description": "A search input component with a label that allows adding and removing tags",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "label": {
           "type": "string",
           "required": true,
@@ -1638,7 +1512,7 @@
       "description": "A text input component with a label and optional number controls",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "label": {
           "type": "string",
           "required": true,
@@ -1699,7 +1573,7 @@
       "description": "A component that displays a continuously scrolling set of text items",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "items": {
           "type": "array",
           "required": true,
@@ -1728,7 +1602,7 @@
       "description": "A versatile component for displaying different types of media (image, video, or lottie animation)",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "media": {
           "type": "object",
           "required": true,
@@ -1876,7 +1750,7 @@
       "description": "A modal component for previewing media items with zoom and carousel navigation",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "showModal": {
           "type": "boolean",
           "required": true,
@@ -2111,7 +1985,7 @@
       "description": "A component that displays media content with an optional call-to-action button overlay",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "data": {
           "type": "object",
           "required": true,
@@ -2214,7 +2088,7 @@
       "description": "A row item component for menus and lists with icon, title, subtitle, and optional navigation arrow",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "icon": {
           "type": "string",
           "required": false,
@@ -2273,7 +2147,7 @@
       "description": "A component that displays an empty state message when no products are available",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "emptyState": {
           "type": "object",
           "required": false,
@@ -2299,22 +2173,19 @@
       },
       "atomicComponents": [
         {
-          "name": "OptimizedImage",
-          "usage": "Displays the empty state image"
+          "name": "Typography",
+          "usage": "Renders title and description text with consistent styling"
         },
         {
-          "name": "Typography",
-          "usage": "Renders title and subtitle text with consistent styling"
+          "name": "OptimizedImage", 
+          "usage": "Displays the empty state image with optimized loading"
         }
       ],
-      "implementation": {
-        "description": "A simple empty state component for displaying when no products are found",
-        "technology": "React functional component with styled-components",
-        "features": [
-          "Customizable title and subtitle",
-          "Configurable image",
-          "Centered layout",
-          "Responsive design"
+      "usage": {
+        "basic": "<NoProductsFound emptyState={{ title: 'No Products Found', description: 'Try adjusting your filters' }} />",
+        "examples": [
+          "Basic: <NoProductsFound emptyState={{ title: 'No Results', description: 'We couldn\\'t find any products matching your criteria' }} />",
+          "With image: <NoProductsFound emptyState={{ title: 'Empty Cart', description: 'Your shopping cart is empty', image: '/images/empty-cart.svg' }} />"
         ]
       }
     },
@@ -2323,7 +2194,7 @@
       "description": "A component for collecting star-based rating feedback from users",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "title": {
           "type": "string",
           "required": false,
@@ -2408,13 +2279,6 @@
           "With initial rating: <RatingFeedback title=\"Product Rating\" subTitle=\"Rate this product\" rating={3} />",
           "Custom scale: <RatingFeedback title=\"Satisfaction\" subTitle=\"How satisfied are you?\" totalRating={10} />"
         ]
-      },
-      "accessibility": {
-        "considerations": [
-          "Ensure interactive stars are accessible via keyboard",
-          "Provide clear visual feedback for selected rating",
-          "Include appropriate ARIA labels for screen readers"
-        ]
       }
     },
     {
@@ -2422,7 +2286,7 @@
       "description": "A component for selecting and displaying star ratings",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "rating": {
           "type": "number",
           "required": false,
@@ -2502,7 +2366,7 @@
       "description": "A search input with dropdown suggestions component",
       "type": "component",
       "category": "molecule",
-      "props": {
+      "properties": {
         "inputData": {
           "type": "object",
           "required": true,
