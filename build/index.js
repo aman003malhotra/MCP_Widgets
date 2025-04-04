@@ -838,7 +838,7 @@ class PwaComponentMcpServer {
         this.server.tool("getWidgetBaseConfig", {
             widgetName: z.string().min(3),
             widgetType: z.string(),
-            category: z.enum(['product', 'media', 'layout', 'information', 'navigation', 'social']).default('information'),
+            category: z.enum(['product', 'media', 'layout', 'information', 'navigation', 'social', 'content']).default('information'),
             description: z.string().optional(),
             layoutType: z.enum(['CONTAINED', 'FLUID']).optional().default('FLUID'),
             verticalSpacingTop: z.enum(['NONE', 'COMPACT', 'GENEROUS']).optional().default('COMPACT'),
@@ -1005,6 +1005,29 @@ class PwaComponentMcpServer {
                             ],
                             showLabels: true,
                             iconSize: 'medium'
+                        };
+                        break;
+                    case 'content':
+                        baseConfig.widgetData = {
+                            title: 'Main Content Title',
+                            sections: [
+                                {
+                                    heading: 'Section Heading',
+                                    content: 'This is the main content text that provides valuable information to the reader.',
+                                    mediaPosition: 'right',
+                                    media: {
+                                        mediaType: 'image',
+                                        source: 'https://example.com/image1.jpg',
+                                        altText: 'Example image',
+                                        loading: 'lazy'
+                                    }
+                                }
+                            ],
+                            settings: {
+                                showBorder: false,
+                                backgroundColor: '#f7f7f7',
+                                textAlignment: 'left'
+                            }
                         };
                         break;
                 }
