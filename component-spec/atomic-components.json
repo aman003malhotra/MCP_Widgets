@@ -342,7 +342,7 @@
       }
     },
     {
-      "name": "RatingStars",
+      "name": "ReviewRatingStar",
       "description": "A component that displays rating in the form of stars with customizable appearance and optional interactive selection",
       "type": "component",
       "category": "atomic",
