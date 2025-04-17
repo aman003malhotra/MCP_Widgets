@@ -1,0 +1,1455 @@
+{
+  "description": "Listing of CSS custom properties available for theming, extracted from themeToUse.js.",
+  "variables": [
+    {
+      "name": "--brand-font-family-title",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-family-text",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-family",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-default-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-light",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-400",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-normal",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-medium",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-semiBold",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-700",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-bold",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-heavy",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-font-weight-black",
+      "inferredType": "font",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-text-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-secondary-text-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-light-secondary-text-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-neutral-text-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-disabled-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-border-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-white-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-white-color-1",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-black-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-black-light-color-o5",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-black-light-color-o1",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-black-light-color-o2",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-black-light-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-black-light-color-2",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-teal-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-teal-light-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-teal-light-color-2",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-green-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-orange-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-blue-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-error-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-light-error-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-grey-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-light-grey-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-light-divider-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-silver-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-silver-light-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-shadow-light-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-dark-blue-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-subtext-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-subheading-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-very-light-grey-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-very-dark-blue-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-light-dark-yellow-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-very-dark-yellow-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-filler-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-light-bg-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-red-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-red-dark-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-red-bg1-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-red-bg2-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-red-bg3-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-orange-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-orange-dark-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-orange-bg1-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-orange-bg2-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-orange-bg3-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-yellow-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-yellow-dark-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-yellow-bg1-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-yellow-bg2-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-yellow-bg3-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-green-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-green-dark-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-green-bg1-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-green-bg2-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-green-bg3-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-blue-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-blue-dark-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-blue-bg1-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-blue-bg2-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-blue-bg3-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-grey-very-light-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-fluid-layout-width",
+      "inferredType": "layout",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-contained-layout-width",
+      "inferredType": "layout",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-primary-select-blue-shadow",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-lighter-blue-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-consult-primary-button-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-product-deatils-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-upsell-top-container-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-cross-upsell-container-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--brand-navbar-boxshadow-color",
+      "inferredType": "color",
+      "prefix": "brand"
+    },
+    {
+      "name": "--category-primary-color-value",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-primary-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-primary-dark-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-light-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-primary-bg1-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-primary-bg2-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-primary-bg3-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-primary-color-value",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-primary-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-primary-dark-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-light-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-primary-bg1-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-primary-bg2-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--category-profile-primary-bg3-color",
+      "inferredType": "color",
+      "prefix": "category"
+    },
+    {
+      "name": "--checkout-modal-desc-bg-color",
+      "inferredType": "color",
+      "prefix": "checkout"
+    },
+    {
+      "name": "--checkout-modal-desc-text-color",
+      "inferredType": "color",
+      "prefix": "checkout"
+    },
+    {
+      "name": "--checkout-modal-title-text-color",
+      "inferredType": "color",
+      "prefix": "checkout"
+    },
+    {
+      "name": "--checkout-modal-positive-btn-color",
+      "inferredType": "color",
+      "prefix": "checkout"
+    },
+    {
+      "name": "--checkout-modal-negative-btn-color",
+      "inferredType": "color",
+      "prefix": "checkout"
+    },
+    {
+      "name": "--variation-outer-border-color",
+      "inferredType": "color",
+      "prefix": "variation"
+    },
+    {
+      "name": "--brand-tabs-carousel-left-icon-position",
+      "inferredType": "position",
+      "prefix": "brand"
+    },
+    {
+      "name": "--dls-brand-font-family",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-line-height",
+      "inferredType": "typography",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-primary-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-primary-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-primary-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-primary-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-primary-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-secondary-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-secondary-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-secondary-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-secondary-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-secondary-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-success-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-success-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-success-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-success-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-success-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-warning-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-warning-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-warning-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-warning-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-warning-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-error-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-error-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-error-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-error-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-error-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-background-selected-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-background-unselected-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-background-disabled-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-text-icon-selected",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-text-icon-unselected",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-text-icon-disabled",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-backgound-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-backgound-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-backgound-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-backgound-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-backgound-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-brand-text-colors",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-primary-text-colors",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-secondary-text-colors",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-disabled-text-colors",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-black-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-white-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-text-field-stroke-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-divider-dark-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-divider-light-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-rating-stars-dark-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-rating-stars-light-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-highlighted-tag-background-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-highlighted-tag-text-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-discount-tag-background-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-discount-tag-text-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-default-tag-background-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-default-tag-text-color",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-category-primary-color-500",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-category-primary-color-400",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-category-primary-color-300",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-category-primary-color-200",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-category-primary-color-100",
+      "inferredType": "color",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-0",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-1",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-2",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-4",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-8",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-12",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-16",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-24",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-32",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-40",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-48",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-56",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-64",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-72",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-80",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-88",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-96",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-104",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-112",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-120",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-128",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-136",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-144",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-152",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-160",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-168",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-176",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-184",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-192",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-200",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-208",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-216",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-224",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-232",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-240",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-248",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-256",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-264",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-272",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-280",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-288",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-296",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-304",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-312",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-320",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-328",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-336",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-344",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-352",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-size-360",
+      "inferredType": "size",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-x-small",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-tag-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-tag-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-cta-label-sm",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-cta-label-lg",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-body-base-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-body-base-light",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-body-base-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-subheading-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-subheading-light",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-subheading-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-sm-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-sm-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-md-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-md-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-lg-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-lg-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-2xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-2xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-3xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-size-heading-3xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-x-small",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-tag-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-tag-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-cta-label-sm",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-cta-label-lg",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-body-base-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-body-base-light",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-body-base-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-subheading-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-subheading-light",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-subheading-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-sm-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-sm-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-md-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-md-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-lg-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-lg-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-2xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-2xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-3xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-desktop-font-size-heading-3xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-x-small",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-tag-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-tag-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-cta-label-sm",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-cta-label-lg",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-body-base-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-body-base-light",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-body-base-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-subheading-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-subheading-light",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-subheading-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-sm-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-sm-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-md-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-md-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-lg-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-lg-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-2xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-2xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-3xl-regular",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-font-weight-heading-3xl-bold",
+      "inferredType": "font",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-line-height-147",
+      "inferredType": "typography",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-line-height-135",
+      "inferredType": "typography",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-line-height-121",
+      "inferredType": "typography",
+      "prefix": "dls"
+    },
+    {
+      "name": "--dls-line-height-125",
+      "inferredType": "typography",
+      "prefix": "dls"
+    }
+  ]
+} 

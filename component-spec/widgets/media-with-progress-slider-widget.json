@@ -96,5 +96,84 @@
       "required": ["items", "aspectRatio", "carouselConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_PROGRESS_SLIDER",
+    "id": "media-with-progress-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true,
+      "background": "#13523B",
+      "borderRadius": "0px"
+    },
+    "header": {
+      "subtitle": "HOW IT WORKS",
+      "label": "Small Habits. Lasting Results.",
+      "subtileType": "WHITE",
+      "labelType": "WHITE",
+      "desktopTextAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "cardTitle": "Short term effects",
+          "cardDescription": "In the first few months, David began noticing improved energy & performance. His stamina was up and he was sleeping better than before.",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/mwa_7zglb3.jpg?tr=w-600",
+            "aspectWidth": "600",
+            "aspectHeight": "400",
+            "desktopViewWidth": "FULL",
+            "mobileViewWidth": "FULL",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "animationText": "Months: 1-3"
+        },
+        {
+          "cardTitle": "Short term effects",
+          "cardDescription": "In the first few months, David began noticing improved energy & performance. His stamina was up and he was sleeping better than before.",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/mwa_7zglb3.jpg?tr=w-600",
+            "aspectWidth": "600",
+            "aspectHeight": "400",
+            "desktopViewWidth": "FULL",
+            "mobileViewWidth": "FULL",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "animationText": "Months: 1-3"
+        },
+        {
+          "cardTitle": "Short term effects",
+          "cardDescription": "In the first few months, David began noticing improved energy & performance. His stamina was up and he was sleeping better than before.",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/mwa_7zglb3.jpg?tr=w-600",
+            "aspectWidth": "600",
+            "aspectHeight": "400",
+            "desktopViewWidth": "FULL",
+            "mobileViewWidth": "FULL",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "animationText": "Months: 1-3"
+        }
+      ],
+      "aspectRatio": 1.5,
+      "carouselConfig": {
+        "showDots": false,
+        "showArrows": true,
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 2,
+        "infinite": true,
+        "autoSlide": false
+      }
+    }
+  }
 }

@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Tabby Promo Widget",
-  "description": "A widget that displays Tabby payment promotion information for a product",
+  "title": "Sticky Cart Summary Widget",
+  "description": "A widget that displays a sticky summary of the cart with product image, details, and CTA button",
   "type": "object",
-  "category": "Payment",
-  "relativePath": "src/mono/web-core/auditedWidgets/TabbyPromo",
+  "category": "Cart",
+  "relativePath": "src/mono/web-core/auditedWidgets/StickyCartSummary",
   "version": "1.0.0",
   "allOf": [
     {
@@ -16,30 +16,28 @@
       "type": "object",
       "description": "Widget-specific data and configuration",
       "properties": {
-        "price": {
-          "type": "number",
-          "description": "The product price used to calculate the Tabby payment installments"
+        "showSubTitle": {
+          "type": "boolean",
+          "description": "Whether to show the subtitle",
+          "default": true
         }
       },
-      "required": ["price"]
+      "required": ["showSubTitle"]
     }
   },
   "required": ["widgetData"],
   "exampleJson": {
-    "type": "TABBY_PROMO",
-    "id": "tabby-promo",
+    "type": "STICKY_CART_SUMMARY",
+    "id": "sticky-cart-summary",
     "layout": {
-      "type": "CONTAINED",
+      "type": "FLUID",
       "verticalSpacing": {
         "top": "COMPACT",
         "bottom": "COMPACT"
       }
     },
-    "header": {
-      "title": "Payment Options"
-    },
     "widgetData": {
-      "price": 499
+      "showSubTitle": true
     }
   }
 }

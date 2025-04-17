@@ -122,5 +122,81 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "INFO_CARDS",
+    "id": "info-cards",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Why Choose Us"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "title": "Natural Ingredients",
+          "content": "All our products are made with 100% natural ingredients, carefully selected for maximum effectiveness.",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/natural_ingredients.jpg?tr=w-600",
+            "altText": "Natural Ingredients",
+            "loading": "lazy"
+          },
+          "slug": "/about/ingredients",
+          "cta": {
+            "label": "Learn More",
+            "variant": "PRIMARY",
+            "size": "SMALL",
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/about/ingredients"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "title": "Expert Formulation",
+          "content": "Our products are formulated by leading dermatologists and hair care experts for proven results.",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/expert_formulation.jpg?tr=w-600",
+            "altText": "Expert Formulation",
+            "loading": "lazy"
+          },
+          "slug": "/about/experts",
+          "cta": {
+            "label": "Meet Our Experts",
+            "variant": "PRIMARY",
+            "size": "SMALL",
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/about/experts"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "sliderConfig": {
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 3,
+        "aspectRatio": 2,
+        "showPeek": true,
+        "peekVariant": "MEDIUM",
+        "showArrows": true,
+        "showDots": false,
+        "arrowPosition": "outside"
+      }
+    }
+  }
 }

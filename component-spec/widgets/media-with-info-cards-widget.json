@@ -113,5 +113,74 @@
       "required": ["items", "carouselConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_INFO_CARDS",
+    "id": "media-with-info-cards",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true,
+      "borderRadius": "0px",
+      "background": "#13523B"
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+      "subtileType": "BLACK",
+      "labelType": "BLACK",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/testimonials/user1.jpg?tr=w-200",
+            "altText": "Customer Testimonial 1",
+            "loading": "lazy"
+          },
+          "content": {
+            "info": "I've been using this product for 3 months and the results are amazing! My hair fall has reduced significantly and I can see new hair growth.",
+            "bottomContent": {
+              "name": "Sarah Johnson",
+              "designation": "Verified Customer",
+              "number": "01"
+            }
+          }
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/testimonials/user2.jpg?tr=w-200",
+            "altText": "Customer Testimonial 2",
+            "loading": "lazy"
+          },
+          "content": {
+            "info": "The natural ingredients in this product make it gentle on my sensitive scalp. I love how it's made my hair stronger and healthier.",
+            "bottomContent": {
+              "name": "Michael Chen",
+              "designation": "Verified Customer",
+              "number": "02"
+            }
+          }
+        }
+      ],
+      "carouselConfig": {
+        "aspectRatio": 1,
+        "showDots": true,
+        "showArrows": true,
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 3,
+        "autoSlide": true,
+        "autoSlideInterval": 5000,
+        "infinite": true,
+        "slidesToScroll": 1,
+        "arrowPosition": "inside"
+      }
+    }
+  }
 }

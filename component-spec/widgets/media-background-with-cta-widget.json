@@ -68,5 +68,42 @@
       "required": ["title", "media", "aspectRatio", "cta"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_BACKGROUND_WITH_CTA",
+    "id": "media-background-with-cta",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true
+    },
+    "widgetData": {
+      "title": "Transform Your Hair<br>With Natural Care",
+      "altText": "Natural Hair Care Products",
+      "media": {
+        "mediaType": "image",
+        "source": "https://i.mscwlns.co/media/misc/others/hair_banner.jpg?tr=w-600",
+        "altText": "Hair Care Banner",
+        "loading": "lazy"
+      },
+      "aspectRatio": 1.5,
+      "cta": {
+        "label": "Shop Now",
+        "variant": "PRIMARY",
+        "icon": "arrow-right",
+        "slugUrl": "/category/hair-care",
+        "actions": [
+          {
+            "actionName": "SPA_LINK",
+            "params": {
+              "link": "/category/hair-care"
+            }
+          }
+        ]
+      }
+    }
+  }
 }

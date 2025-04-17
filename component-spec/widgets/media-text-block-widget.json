@@ -53,5 +53,53 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_TEXT_BLOCK",
+    "id": "media-text-block",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+      "subtileType": "BLACK",
+      "labelType": "BLACK",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://rootlabs.co/cdn/shop/files/Haldi-on-spoon_1_1.png?v=1734350242",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "textContent": {
+            "heading": "Harnessing the Power of Ancient Remedies",
+            "info": "After experiencing the power of herbal and natural medicine personally, we knew that people across the US could benefit from these ancient remedies. Having grown up around Eastern medicine passed down through generations, we were confident this was something we had to share.",
+            "contentPosition": "right"
+          }
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://rootlabs.co/cdn/shop/files/Haldi-on-spoon_1_1.png?v=1734350242",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "textContent": {
+            "heading": "Harnessing the Power of Ancient Remedies",
+            "info": "After experiencing the power of herbal and natural medicine personally, we knew that people across the US could benefit from these ancient remedies. Having grown up around Eastern medicine passed down through generations, we were confident this was something we had to share.",
+            "contentPosition": "left"
+          }
+        }
+      ]
+    }
+  }
 }

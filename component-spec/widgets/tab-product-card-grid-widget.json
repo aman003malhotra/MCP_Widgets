@@ -274,5 +274,125 @@
       "required": ["tags", "categoryProducts"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "TAB_PRODUCT_CARD_GRID",
+    "id": "tab-product-card-grid",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Choose your hairfall stage"
+    },
+    "widgetData": {
+      "tags": [
+        {
+          "name": "All",
+          "keyName": "all"
+        },
+        {
+          "name": "Body Acne",
+          "keyName": "bodyAcne"
+        }
+      ],
+      "categoryProducts": {
+        "all": {
+          "products": [
+            {
+              "source": "",
+              "name": "Millet Choco Crunch - Pack of 2",
+              "urlKey": "chocos-pack-of-2",
+              "rating": "4.5",
+              "price": 598,
+              "discountedPrice": 538,
+              "priceLabel": "₹598",
+              "discountedPriceLabel": "₹538",
+              "discountPriceLabel": "₹538",
+              "sku": "MWLJNTK.00567.B0_N",
+              "alttext": "",
+              "whyThisWorks": [
+                {
+                  "label": "FOR",
+                  "text": "Healthy Snacking"
+                },
+                {
+                  "label": "WITH",
+                  "text": "Zero Refined Sugar"
+                }
+              ],
+              "id": "656",
+              "reviewCount": "39",
+              "media": {
+                "mediaType": "image",
+                "source": "https://i.mscwlns.co/media/misc/pdp/chocos-pack-of-2/%28Pack%20of%202%29_1s9frf.jpg?tr=w-600",
+                "loading": "lazy",
+                "altText": "Millet Choco Crunch - Pack of 2"
+              },
+              "ctaLabel": "Add to Cart",
+              "cta": {
+                "action": "ADD_TO_CART"
+              },
+              "outOfStock": false
+            }
+          ]
+        },
+        "bodyAcne": {
+          "products": [
+            {
+              "source": "",
+              "name": "NutriMix Nutrition Powder (350g)",
+              "urlKey": "nutrimix-nutrition-powder",
+              "rating": "4.5",
+              "price": 649,
+              "discountedPrice": 599,
+              "priceLabel": "₹649",
+              "discountedPriceLabel": "₹599",
+              "discountPriceLabel": "₹599",
+              "sku": "MWLJNTP.0003.B0_N",
+              "alttext": "",
+              "whyThisWorks": [
+                {
+                  "label": "FOR",
+                  "text": "Growth & Development"
+                },
+                {
+                  "label": "WITH",
+                  "text": "Ragi, Bajra & Oats"
+                }
+              ],
+              "id": "3",
+              "reviewCount": "1799",
+              "media": {
+                "mediaType": "image",
+                "source": "https://i.mscwlns.co/media/misc/pdp/nutrimix-nutrition-powder/chocolate_5vavcx.jpg?tr=w-600",
+                "loading": "lazy",
+                "altText": "NutriMix Nutrition Powder (350g)"
+              },
+              "ctaLabel": "Add to Cart",
+              "cta": {
+                "action": "ADD_TO_CART"
+              },
+              "outOfStock": false
+            }
+          ]
+        }
+      },
+      "enableQuantityIndicator": false,
+      "source": "CATEGORY_PAGE",
+      "showEmptyState": true,
+      "emptyState": {
+        "title": "No Products Found",
+        "subtitle": "Please try a different selection",
+        "image": "https://i.mscwlns.co/media/misc/empty_state.png?tr=w-200"
+      },
+      "shouldOpenMiniPdp": false,
+      "productImageAspectRatio": 1,
+      "showMobileViewOnDesktop": false,
+      "isCartUpdating": false
+    }
+  }
 }

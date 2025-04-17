@@ -92,5 +92,93 @@
       "required": ["rows", "urlKey"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PRODUCT_SWITCHER",
+    "id": "product-switcher",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "widgetData": {
+      "rows": [
+        {
+          "title": "Choose Your Size",
+          "type": "TEXT",
+          "options": [
+            {
+              "imageUrl": "https://i.mscwlns.co/media/misc/products/size_100ml.jpg?tr=w-100",
+              "label": "100ml",
+              "description": "1 month supply",
+              "isSelected": true,
+              "slug": "/product/hair-serum-100ml",
+              "actions": [
+                {
+                  "actionName": "SELECT_VARIANT",
+                  "params": {
+                    "sku": "MWMMHRK.6456.100ML"
+                  }
+                }
+              ]
+            },
+            {
+              "imageUrl": "https://i.mscwlns.co/media/misc/products/size_200ml.jpg?tr=w-100",
+              "label": "200ml",
+              "description": "2 month supply",
+              "isSelected": false,
+              "slug": "/product/hair-serum-200ml",
+              "actions": [
+                {
+                  "actionName": "SELECT_VARIANT",
+                  "params": {
+                    "sku": "MWMMHRK.6456.200ML"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Choose Your Pack",
+          "type": "IMAGE_WITH_TEXT",
+          "options": [
+            {
+              "imageUrl": "https://i.mscwlns.co/media/misc/products/single_pack.jpg?tr=w-200",
+              "label": "Single Pack",
+              "description": "Best for first-time users",
+              "isSelected": true,
+              "slug": "/product/hair-serum-single",
+              "actions": [
+                {
+                  "actionName": "SELECT_VARIANT",
+                  "params": {
+                    "sku": "MWMMHRK.6456.SINGLE"
+                  }
+                }
+              ]
+            },
+            {
+              "imageUrl": "https://i.mscwlns.co/media/misc/products/combo_pack.jpg?tr=w-200",
+              "label": "Combo Pack",
+              "description": "Save 20% on combo",
+              "isSelected": false,
+              "slug": "/product/hair-serum-combo",
+              "actions": [
+                {
+                  "actionName": "SELECT_VARIANT",
+                  "params": {
+                    "sku": "MWMMHRK.6456.COMBO"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "urlKey": "hair-growth-serum"
+    }
+  }
 }

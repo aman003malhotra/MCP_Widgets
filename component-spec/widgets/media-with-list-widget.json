@@ -62,5 +62,64 @@
       "required": ["media", "items", "tickIcon", "aspectRatio"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_LIST",
+    "id": "media-with-list",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "media": {
+        "mediaType": "image",
+        "source": "https://i.mscwlns.co/media/misc/features/product_benefits.jpg?tr=w-600",
+        "altText": "Product Benefits",
+        "loading": "lazy"
+      },
+      "aspectRatio": 1.5,
+      "tickIcon": "https://i.mscwlns.co/media/misc/icons/check_circle.png?tr=w-20",
+      "items": [
+        {
+          "label": "Reduces Hair Fall",
+          "slug": "/benefits/hair-fall",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/benefits/hair-fall"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Promotes Hair Growth",
+          "slug": "/benefits/hair-growth",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/benefits/hair-growth"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Strengthens Hair Follicles",
+          "slug": "/benefits/hair-strength",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/benefits/hair-strength"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

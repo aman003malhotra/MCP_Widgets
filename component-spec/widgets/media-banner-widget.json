@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Media Banner Widget",
+  "title": "Banner Widget",
   "description": "A banner widget that displays media content with an optional call-to-action button",
   "type": "object",
   "category": "media",
@@ -63,5 +63,40 @@
       "required": ["media"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "BANNER",
+    "id": "banner",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "media": {
+        "mediaType": "image",
+        "source": "https://i.mscwlns.co/media/misc/others/special_offer_banner.jpg?tr=w-600",
+        "altText": "Special Offer Banner",
+        "loading": "lazy"
+      },
+      "slug": "/special-offers",
+      "aspectRatio": 2.5,
+      "cta": {
+        "label": "Shop Now",
+        "variant": "PRIMARY",
+        "size": "LARGE",
+        "fullWidth": false,
+        "actions": [
+          {
+            "actionName": "SPA_LINK",
+            "params": {
+              "link": "/special-offers"
+            }
+          }
+        ]
+      }
+    }
+  }
 }

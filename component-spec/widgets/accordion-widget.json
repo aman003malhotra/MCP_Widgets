@@ -60,5 +60,42 @@
       "required": true
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "ACCORDION",
+    "id": "accordion",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      },
+      "isSupportedOnlyForMobile": true,
+      "bottomBorder": "https://i.mscwlns.co/media/misc/others/Divider%20image_8h9wg0.png?tr=w-600"
+    },
+    "header": {
+      "title": "Got Questions?"
+    },
+    "widgetData": {
+      "iconVariant": "plus-minus",
+      "titleFontWeight": "light",
+      "list": [
+        {
+          "title": "Will this product work on active acne?",
+          "content": "Yes, 10% niacinamide serum is antioxidant highly effective against active acne.",
+          "image": "https://i.mscwlns.co/media/misc/others/energy_h30ucq.jpg?tr=w-600"
+        },
+        {
+          "title": "Are ManMatters products clinically tested and medically approved?",
+          "content": "Yes, our products are clinically tested and Doctor Recommended. You will receive a Plan along with the product with the name, signature and medical license numbers of the doctors who recommended it.",
+          "image": "https://i.mscwlns.co/media/misc/others/energy_h30ucq.jpg?tr=w-600"
+        },
+        {
+          "title": "Are there any Side Effects of the treatment?",
+          "content": "Our Solution doesn't make your scalp dry & hair brittle. Hair shedding, if any, is not a side effect but a part of the hair regrowth process. In any case, our doctors & coaches are there to guide you through the entire process.",
+          "image": "https://i.mscwlns.co/media/misc/others/energy_h30ucq.jpg?tr=w-600"
+        }
+      ]
+    }
+  }
 }

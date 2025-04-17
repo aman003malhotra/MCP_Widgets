@@ -121,5 +121,54 @@
       "required": ["productSummary", "onRatingsClick"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PRODUCT_SUMMARY",
+    "id": "product-summary",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "widgetData": {
+      "productSummary": {
+        "name": "Hair Growth Serum Pro",
+        "rating": "4.8",
+        "reviewCount": "2.4K",
+        "unitsSold": "10K+",
+        "actualPrice": 1399,
+        "actualPriceLabel": "₹1,399",
+        "discountedPrice": 999,
+        "discountedPriceLabel": "₹999",
+        "showTaxesLabel": true,
+        "taxesLabel": "Inclusive of all taxes",
+        "discountText": "30% OFF",
+        "discountTagImage": "https://i.mscwlns.co/media/misc/icons/discount_tag.png?tr=w-50",
+        "highlights": [
+          {
+            "text": "Clinically proven to reduce hair fall by 88%"
+          },
+          {
+            "text": "Made with natural ingredients and biotin"
+          },
+          {
+            "text": "Suitable for all hair types"
+          }
+        ]
+      },
+      "onRatingsClick": {
+        "slugUrl": "/product/hair-growth-serum-pro/reviews",
+        "actions": [
+          {
+            "actionName": "SPA_LINK",
+            "params": {
+              "link": "/product/hair-growth-serum-pro/reviews"
+            }
+          }
+        ]
+      }
+    }
+  }
 }

@@ -178,5 +178,105 @@
       "required": ["leftSection", "centerSection", "rightSection"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "IMAGE_CTA_GRID",
+    "id": "image-cta-grid",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "leftSection": {
+        "card1": {
+          "imageUrl": "https://i.mscwlns.co/media/misc/others/hair_care_1.jpg?tr=w-600",
+          "label": "Hair Care",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/hair-care"
+              }
+            }
+          ]
+        },
+        "card2": {
+          "imageUrl": "https://i.mscwlns.co/media/misc/others/skin_care_1.jpg?tr=w-600",
+          "label": "Skin Care",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/skin-care"
+              }
+            }
+          ]
+        },
+        "card3": {
+          "imageUrl": "https://i.mscwlns.co/media/misc/others/beard_care_1.jpg?tr=w-600",
+          "label": "Beard Care",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/beard-care"
+              }
+            }
+          ]
+        }
+      },
+      "centerSection": {
+        "imageUrl": "https://i.mscwlns.co/media/misc/others/main_banner.jpg?tr=w-600",
+        "actions": [
+          {
+            "actionName": "SPA_LINK",
+            "params": {
+              "link": "/special-offers"
+            }
+          }
+        ]
+      },
+      "rightSection": {
+        "card1": {
+          "imageUrl": "https://i.mscwlns.co/media/misc/others/nutrition_1.jpg?tr=w-600",
+          "label": "Nutrition",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/nutrition"
+              }
+            }
+          ]
+        },
+        "card2": {
+          "imageUrl": "https://i.mscwlns.co/media/misc/others/wellness_1.jpg?tr=w-600",
+          "label": "Wellness",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/wellness"
+              }
+            }
+          ]
+        },
+        "card3": {
+          "imageUrl": "https://i.mscwlns.co/media/misc/others/performance_1.jpg?tr=w-600",
+          "label": "Performance",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/performance"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
 }

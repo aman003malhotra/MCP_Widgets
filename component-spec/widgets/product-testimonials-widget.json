@@ -190,5 +190,86 @@
       "required": ["products"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PRODUCT_TESTIMONIALS",
+    "id": "product-testimonials",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      },
+      "desktopFullWidth": true,
+      "background": "rgb(213, 230, 222)"
+    },
+    "header": {
+      "title": "Happy Kids, Honest Reviews",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "products": [
+        {
+          "personQuote": "I've been using this product for 3 months and my hair fall has reduced significantly!",
+          "personName": "Sarah Johnson",
+          "personDesignation": "Verified Buyer",
+          "urlKey": "26166973",
+          "name": "Hair Growth Serum",
+          "rating": "4.8",
+          "discountText": "30% OFF",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp_rcl/26166973/hair-growth-serum_k0zji2.jpg?tr=w-600",
+            "altText": "Hair Growth Serum",
+            "loading": "lazy"
+          },
+          "discountedPrice": 899,
+          "whyThisWorks": [
+            {
+              "label": "INGREDIENTS",
+              "text": "Contains biotin and natural extracts"
+            },
+            {
+              "label": "BENEFITS",
+              "text": "Reduces hair fall and promotes growth"
+            }
+          ],
+          "price": 1299,
+          "discountedPriceLabel": "₹899",
+          "source": "VERIFIED_PURCHASE",
+          "priceLabel": "₹1299",
+          "discountPriceLabel": "Save ₹400",
+          "sku": "MWMMHRK.6456.AAAA.B0_N",
+          "id": "1008",
+          "reviewCount": "2.4K",
+          "ctaLabel": "Add to Cart",
+          "cardClickActions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/product/26166973"
+              }
+            }
+          ],
+          "ctaActions": [
+            {
+              "actionName": "ADD_TO_CART",
+              "params": {
+                "sku": "MWMMHRK.6456.AAAA.B0_N"
+              }
+            }
+          ],
+          "currency": "INR"
+        }
+      ],
+      "carouselConfig": {
+        "showArrows": true,
+        "showDots": true,
+        "autoSlide": true,
+        "autoSlideInterval": 5000,
+        "infinite": true,
+        "arrowPosition": "outside"
+      }
+    }
+  }
 }

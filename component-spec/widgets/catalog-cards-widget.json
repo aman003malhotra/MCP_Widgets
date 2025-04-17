@@ -321,5 +321,61 @@
       "required": true
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "CATALOG_CARDS",
+    "id": "catalog-cards",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "header": {
+      "subtitle": "OUR PRODUCTS",
+      "label": "Expand Your Roots"
+    },
+    "widgetData": {
+      "products": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/00SS_Combo__1_g1kt2z.jpg?tr=w-600",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "title": "Immunity Combo",
+          "urlKey": "26166973",
+          "rating": "4.1",
+          "price": 1398,
+          "discountedPrice": 899,
+          "priceLabel": "₹1398",
+          "discountedPriceLabel": "₹899",
+          "id": "1008",
+          "reviewCount": "2.4K",
+          "sku": "MWMMHRK.6456.AAAA.B0_N",
+          "cta": {
+            "ctaIcon": "https://i.mscwlns.co/media/misc/others/add_aw2ak2.png?tr=w-600",
+            "ctaActions": [
+              {
+                "actionName": "ADD_TO_CART",
+                "params": {
+                  "path": "#"
+                }
+              }
+            ]
+          },
+          "cardClickActions": [
+            {
+              "actionName": "ADD_TO_CART",
+              "params": {
+                "path": "#"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

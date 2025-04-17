@@ -180,5 +180,88 @@
       ]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "RATINGS_AND_REVIEWS",
+    "id": "ratings-and-reviews",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "widgetData": {
+      "topReviews": [
+        {
+          "id": "rev123",
+          "rating": 5,
+          "author": "John Smith",
+          "title": "Amazing Results!",
+          "body": "I've been using this product for a month and the results are incredible. My skin looks much clearer and brighter.",
+          "dateCreated": "2024-03-15",
+          "images": [
+            {
+              "image": "https://i.mscwlns.co/media/misc/reviews/review1_full.jpg?tr=w-600",
+              "altText": "Before and after using the product",
+              "thumbnail": "https://i.mscwlns.co/media/misc/reviews/review1_thumb.jpg?tr=w-100"
+            }
+          ],
+          "verifiedIcon": "https://i.mscwlns.co/media/misc/icons/verified_purchase.png?tr=w-20"
+        }
+      ],
+      "ratingOverview": {
+        "overAllRating": 4.5,
+        "ratingsStats": [
+          {
+            "fillerColor": "#4CAF50",
+            "numberOfReviews": 1250,
+            "numberOfReviewsLabel": "1.2K",
+            "rating": 5
+          },
+          {
+            "fillerColor": "#8BC34A",
+            "numberOfReviews": 750,
+            "numberOfReviewsLabel": "750",
+            "rating": 4
+          },
+          {
+            "fillerColor": "#FFC107",
+            "numberOfReviews": 250,
+            "numberOfReviewsLabel": "250",
+            "rating": 3
+          },
+          {
+            "fillerColor": "#FF9800",
+            "numberOfReviews": 100,
+            "numberOfReviewsLabel": "100",
+            "rating": 2
+          },
+          {
+            "fillerColor": "#F44336",
+            "numberOfReviews": 50,
+            "numberOfReviewsLabel": "50",
+            "rating": 1
+          }
+        ],
+        "totalNumberOfReviews": 2400
+      },
+      "allReviewsCtaLabel": "View All Reviews",
+      "allReviewsCta": {
+        "variant": "PRIMARY",
+        "size": "MEDIUM",
+        "label": "View All Reviews",
+        "actions": [
+          {
+            "actionName": "SPA_LINK",
+            "params": {
+              "link": "/product/26166973/reviews"
+            }
+          }
+        ]
+      },
+      "showAllReviewCta": true,
+      "topReviewsLabel": "Top Customer Reviews"
+    }
+  }
 }

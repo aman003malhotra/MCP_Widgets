@@ -39,5 +39,23 @@
       "required": ["text"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "CALLOUT_WITH_IMAGE",
+    "id": "callout-with-image",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "GENEROUS"
+      },
+      "isSupportedOnlyForMobile": true
+    },
+    "widgetData": {
+      "image": "https://i.mscwlns.co/media/misc/others/Rectangle%204812665_79epd2.png?tr=w-600",
+      "text": "Don't Stress!\nWe've got the Right Solution for You.",
+      "altText": "icon",
+      "variant": "INFO"
+    }
+  }
 }

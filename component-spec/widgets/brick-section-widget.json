@@ -112,5 +112,63 @@
       ]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "BRICK_SECTION",
+    "id": "brick-section",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true
+    },
+    "widgetData": {
+      "title": "OUR SCIENCE",
+      "heading": "<i>Bioavailability</i><br> Made Available",
+      "media": {
+        "mediaType": "video",
+        "source": "https://rootlabs.co/cdn/shop/videos/c/vp/46d2235dfef04502a678f8c58ea93cf8/46d2235dfef04502a678f8c58ea93cf8.HD-1080p-3.3Mbps-39427871.mp4?v=0",
+        "altText": "Example Image",
+        "loading": "lazy"
+      },
+      "aspectRatio": 1,
+      "variant": "PRIMARY",
+      "items": [
+        {
+          "label": "Carefully crafted",
+          "icon": {
+            "source": "https://i.mscwlns.co/media/misc/others/%E2%80%94Pngtree%E2%80%94vector%20tick%20icon_4190811_j5qceb.png?tr=w-600",
+            "altText": "Example Image"
+          }
+        },
+        {
+          "label": "Maximum absorption",
+          "icon": {
+            "source": "https://i.mscwlns.co/media/misc/others/%E2%80%94Pngtree%E2%80%94vector%20tick%20icon_4190811_j5qceb.png?tr=w-600",
+            "altText": "Example Image"
+          }
+        },
+        {
+          "label": "Science-backed",
+          "icon": {
+            "source": "https://i.mscwlns.co/media/misc/others/%E2%80%94Pngtree%E2%80%94vector%20tick%20icon_4190811_j5qceb.png?tr=w-600",
+            "altText": "Example Image"
+          }
+        }
+      ],
+      "cta": {
+        "label": "Our Science",
+        "actions": [
+          {
+            "actionName": "APP_NAV",
+            "params": {
+              "path": "#"
+            }
+          }
+        ]
+      }
+    }
+  }
 }

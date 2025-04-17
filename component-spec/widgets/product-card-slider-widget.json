@@ -167,5 +167,168 @@
       "required": ["products", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PRODUCT_CARD_SLIDER",
+    "id": "product-card-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Top-Selling Favorites",
+      "subtitle": "",
+      "textAlign": "center",
+      "titleType": "PRIMARY",
+      "subtileType": "SECONDARY",
+      "headingSubtitleGap": "2"
+    },
+    "widgetData": {
+      "products": [
+        {
+          "source": "",
+          "name": "NutriMix Nutrition Powder (350g)",
+          "urlKey": "nutrimix-nutrition-powder",
+          "rating": "4.5",
+          "price": 649,
+          "discountedPrice": 599,
+          "priceLabel": "₹649",
+          "discountedPriceLabel": "₹599",
+          "discountPriceLabel": "₹599",
+          "sku": "MWLJNTP.0003.B0_N",
+          "alttext": "",
+          "whyThisWorks": [
+            {
+              "label": "FOR",
+              "text": "Growth & Development"
+            },
+            {
+              "label": "WITH",
+              "text": "Ragi, Bajra & Oats"
+            }
+          ],
+          "id": "3",
+          "reviewCount": "1799",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/nutrimix-nutrition-powder/chocolate_5vavcx.jpg?tr=w-600",
+            "loading": "lazy",
+            "altText": "NutriMix Nutrition Powder (350g)"
+          },
+          "ctaLabel": "Add to Cart",
+          "cta": {
+            "action": "ADD_TO_CART"
+          },
+          "outOfStock": false
+        },
+        {
+          "source": "",
+          "name": "Immunity Boosting Kit",
+          "urlKey": "multivitamin-gummies-nutrimix-300",
+          "rating": "4.4",
+          "price": 1198,
+          "discountedPrice": 999,
+          "priceLabel": "₹1198",
+          "discountedPriceLabel": "₹999",
+          "discountPriceLabel": "₹999",
+          "sku": "MWLJNTK.00142.B0_N",
+          "alttext": "",
+          "whyThisWorks": [
+            {
+              "label": "FOR",
+              "text": "Immunity & Growth"
+            },
+            {
+              "label": "WITH",
+              "text": "Ragi, Spinach, Apples"
+            }
+          ],
+          "id": "215",
+          "reviewCount": "837",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/multivitamin-gummies-nutrimix-300/Slide-1-Nutrimix_6ik6h1.jpg?tr=w-600",
+            "loading": "lazy",
+            "altText": "Immunity Boosting Kit"
+          },
+          "ctaLabel": "Add to Cart",
+          "cta": {
+            "action": "ADD_TO_CART"
+          },
+          "outOfStock": false
+        },
+        {
+          "source": "",
+          "name": "Multivitamin Gummies 2+ (30 Days Pack)",
+          "urlKey": "multivitamin-gummies",
+          "rating": "4.5",
+          "price": 549,
+          "discountedPrice": 499,
+          "priceLabel": "₹549",
+          "discountedPriceLabel": "₹499",
+          "discountPriceLabel": "₹499",
+          "sku": "MWLJNTP.0002.B0_N",
+          "alttext": "",
+          "whyThisWorks": [
+            {
+              "label": "FOR",
+              "text": "Picky Eaters"
+            },
+            {
+              "label": "WITH",
+              "text": "Spinach, Carrots, Apples"
+            }
+          ],
+          "id": "1",
+          "reviewCount": "959",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/multivitamin-gummies/MVG7%2B_WBG_5nli98.jpg?tr=w-600",
+            "loading": "lazy",
+            "altText": "Multivitamin Gummies 2+ (30 Days Pack)"
+          },
+          "ctaLabel": "Add to Cart",
+          "cta": {
+            "action": "ADD_TO_CART"
+          },
+          "outOfStock": false
+        }
+      ],
+      "enableQuantityIndicator": true,
+      "source": "RECOMMENDED_PRODUCTS",
+      "showEmptyState": true,
+      "emptyState": {
+        "title": "No Products Found",
+        "subtitle": "Please try a different selection",
+        "image": "https://i.mscwlns.co/media/misc/empty_state.png?tr=w-200"
+      },
+      "shouldOpenMiniPdp": true,
+      "miniPdpCta": {
+        "actions": [
+          {
+            "actionName": "OPEN_MINI_PDP",
+            "params": {
+              "sku": "MWMMHRK.6456.AAAA.B0_N"
+            }
+          }
+        ]
+      },
+      "productImageAspectRatio": 1,
+      "isCartUpdating": false,
+      "sliderConfig": {
+        "aspectRatio": 1,
+        "slidesToShow": 2,
+        "slidesToShowDesktop": 4,
+        "showPeek": true,
+        "peekVariant": "MEDIUM",
+        "showArrows": true,
+        "showDots": false,
+        "infinite": true,
+        "arrowPosition": "outside"
+      }
+    }
+  }
 }

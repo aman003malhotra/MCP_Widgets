@@ -94,5 +94,70 @@
       "required": ["products", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "KIT_BREAKDOWN",
+    "id": "kit-breakdown",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "What's in the Kit"
+    },
+    "widgetData": {
+      "products": [
+        {
+          "name": "Hair Growth Serum",
+          "urlKey": "hair-growth-serum",
+          "priceLabel": "₹599",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/serum_1.jpg?tr=w-600",
+            "altText": "Hair Growth Serum",
+            "loading": "lazy"
+          },
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/product/hair-growth-serum"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Biotin Tablets",
+          "urlKey": "biotin-tablets",
+          "priceLabel": "₹499",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/tablets_1.jpg?tr=w-600",
+            "altText": "Biotin Tablets",
+            "loading": "lazy"
+          },
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/product/biotin-tablets"
+              }
+            }
+          ]
+        }
+      ],
+      "sliderConfig": {
+        "slidesToShow": 2,
+        "slidesToShowDesktop": 3,
+        "aspectRatio": 1.34,
+        "showPeek": true,
+        "peekVariant": "MEDIUM",
+        "showArrows": true,
+        "showDots": false
+      }
+    }
+  }
 }

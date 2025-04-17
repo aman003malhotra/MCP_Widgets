@@ -148,5 +148,82 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_CAROUSEL",
+    "id": "media-carousel",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/banners/hair_care_banner.jpg?tr=w-1200",
+            "altText": "Hair Care Collection",
+            "loading": "lazy"
+          },
+          "slug": "/collections/hair-care",
+          "cta": {
+            "label": "Shop Now",
+            "variant": "PRIMARY",
+            "size": "MEDIUM",
+            "fullWidth": false,
+            "disabled": false,
+            "loading": false,
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/collections/hair-care"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "media": {
+            "mediaType": "video",
+            "source": "https://i.mscwlns.co/media/misc/videos/skin_care_routine.mp4",
+            "altText": "Skin Care Routine",
+            "loading": "lazy"
+          },
+          "slug": "/collections/skin-care",
+          "cta": {
+            "label": "Discover More",
+            "variant": "SECONDARY",
+            "size": "MEDIUM",
+            "fullWidth": false,
+            "disabled": false,
+            "loading": false,
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/collections/skin-care"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "carouselConfig": {
+        "aspectRatio": 1.78,
+        "showDots": true,
+        "showArrows": true,
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 1,
+        "autoSlide": true,
+        "autoSlideInterval": 5000,
+        "infinite": true,
+        "slidesToScroll": 1,
+        "arrowPosition": "inside"
+      }
+    }
+  }
 }

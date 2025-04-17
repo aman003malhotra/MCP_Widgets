@@ -74,5 +74,87 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_TEXT_GRID_TABS",
+    "id": "media-text-grid-tabs",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+      "subtileType": "BLACK",
+      "labelType": "BLACK",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "tabName": "Hair Care",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/landing/hair_care_benefits.jpg?tr=w-600",
+            "altText": "Hair Care Benefits",
+            "loading": "lazy"
+          },
+          "content": {
+            "heading": "Transform Your Hair Care Routine",
+            "info": "Discover the power of natural ingredients combined with advanced technology",
+            "items": [
+              {
+                "image": "https://i.mscwlns.co/media/misc/icons/natural.svg",
+                "title": "Natural Ingredients",
+                "description": "Made with carefully selected natural ingredients"
+              },
+              {
+                "image": "https://i.mscwlns.co/media/misc/icons/science.svg",
+                "title": "Science-backed",
+                "description": "Formulated with proven scientific methods"
+              },
+              {
+                "image": "https://i.mscwlns.co/media/misc/icons/results.svg",
+                "title": "Visible Results",
+                "description": "See transformation in just 4 weeks"
+              }
+            ]
+          }
+        },
+        {
+          "tabName": "Skin Care",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/landing/skin_care_benefits.jpg?tr=w-600",
+            "altText": "Skin Care Benefits",
+            "loading": "lazy"
+          },
+          "content": {
+            "heading": "Advanced Skin Care Solutions",
+            "info": "Experience the perfect blend of nature and science for your skin",
+            "items": [
+              {
+                "image": "https://i.mscwlns.co/media/misc/icons/hydration.svg",
+                "title": "Deep Hydration",
+                "description": "24-hour moisture lock technology"
+              },
+              {
+                "image": "https://i.mscwlns.co/media/misc/icons/protection.svg",
+                "title": "UV Protection",
+                "description": "Shield against harmful sun rays"
+              },
+              {
+                "image": "https://i.mscwlns.co/media/misc/icons/glow.svg",
+                "title": "Natural Glow",
+                "description": "Enhance your skin's natural radiance"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
 }

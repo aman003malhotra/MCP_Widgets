@@ -208,5 +208,44 @@
       "required": true
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "CATEGORY_CARD_GRID",
+    "id": "category-card-grid",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Helping men live confidently"
+    },
+    "widgetData": {
+      "aspectRatio": 1,
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/PNG%201_3nxqzy.png",
+            "altText": "Hair",
+            "loading": "lazy"
+          },
+          "backgroundColor": "#E8F4FF",
+          "categoryName": "Hair",
+          "description": "Hair Fall | Hair Growth | Dandruff",
+          "slug": "https://manmatters.com/wellness-assessment-form?main=category&utm_source=HairCategoryCard&skipHome=true&wacategory=hair",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "https://manmatters.com/wellness-assessment-form?main=category&utm_source=HairCategoryCard&skipHome=true&wacategory=hair"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

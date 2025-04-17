@@ -107,5 +107,36 @@
       "required": ["reviews", "cta"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "SOCIAL_REVIEW_LIST",
+    "id": "social-review-list",
+    "layout": {
+      "type": "FLUID"
+    },
+    "header": {
+      "title": "Google reviews"
+    },
+    "widgetData": {
+      "reviews": [
+        {
+          "rating": 4,
+          "title": "Hair fall controlled",
+          "subTitle": "ManMatters has truly transformed my hair fall problem! hve been using their Hairfall Kit for a 3 months now, and the results are amazing. My hair fall has stopped and I am getting baby hair growth. Free doctor consultation & Coach guidance are a treat",
+          "publishDetails": {
+            "author": "Pravesh",
+            "verifiedIcon": "https://i.mscwlns.co/media/misc/others/material-symbols_verified-rounded_hln6ci.png?tr=w-600",
+            "publishTime": "20/12/2023",
+            "text": "Posted on",
+            "sourceOfPublishImage": "https://i.mscwlns.co/media/misc/others/image%20470_327oro.png?tr=w-600"
+          }
+        }
+      ],
+      "cta": {
+        "label": "Shop Now",
+        "variant": "SECONDARY",
+        "size": "LARGE"
+      }
+    }
+  }
 }

@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pincode Box Widget",
+  "description": "A widget that displays pincode information with delivery details and analytics",
+  "type": "object",
+  "category": "utility",
+  "relativePath": "src/mono/web-core/auditedWidgets/PincodeBox",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "headingLevel": {
+          "type": "number",
+          "description": "The heading level for accessibility (h1, h2, etc.)",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "subTitle": {
+          "type": "string",
+          "description": "Subtitle text for the pincode box"
+        },
+        "title": {
+          "type": "string",
+          "description": "Main title text for the pincode box"
+        },
+        "userPincode": {
+          "type": "string",
+          "description": "User's current pincode"
+        },
+        "pincodeBox": {
+          "type": "array",
+          "description": "Array of delivery information items",
+          "items": {
+            "type": "object",
+            "required": ["image", "text", "label"],
+            "properties": {
+              "image": {
+                "type": "string",
+                "description": "URL of the icon or image"
+              },
+              "text": {
+                "type": "string",
+                "description": "Description text for the item"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label text for the item"
+              }
+            }
+          }
+        },
+        "toastText": {
+          "type": "string",
+          "description": "Text to display in the toast notification"
+        },
+        "pincodeAnalytics": {
+          "type": "string",
+          "description": "Analytics identifier for pincode events"
+        },
+        "analyticsEvents": {
+          "type": "object",
+          "description": "Analytics event data",
+          "properties": {
+            "deliveryType": {
+              "type": "string",
+              "description": "Type of delivery service"
+            },
+            "quickDeliveryDate": {
+              "type": "string",
+              "description": "Expected quick delivery date"
+            },
+            "servedPincode": {
+              "type": "string",
+              "description": "Pincode being served"
+            },
+            "detectedPincode": {
+              "type": "string",
+              "description": "Automatically detected pincode"
+            },
+            "detectedCity": {
+              "type": "string",
+              "description": "Automatically detected city"
+            }
+          },
+          "required": [
+            "deliveryType",
+            "quickDeliveryDate",
+            "servedPincode",
+            "detectedPincode",
+            "detectedCity"
+          ]
+        },
+        "cartMessage": {
+          "type": "string",
+          "description": "Message to display related to cart"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category identifier for the pincode box"
+        },
+        "endpointData": {
+          "type": "object",
+          "description": "API endpoint configuration",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint URL"
+            },
+            "payload": {
+              "type": "object",
+              "description": "Payload data for the API call"
+            }
+          },
+          "required": ["endpoint"]
+        }
+      },
+      "required": [
+        "headingLevel",
+        "title",
+        "userPincode",
+        "pincodeBox",
+        "toastText",
+        "analyticsEvents",
+        "endpointData"
+      ]
+    }
+  },
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PINCODE_BOX",
+    "id": "pincode-box",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "headingLevel": 2,
+      "title": "Delivery Information",
+      "subTitle": "Check delivery options for your location",
+      "userPincode": "400001",
+      "pincodeBox": [
+        {
+          "image": "https://i.mscwlns.co/media/misc/icons/delivery-truck.svg",
+          "text": "Standard Delivery in 2-3 days"
+        },
+        {
+          "image": "https://i.mscwlns.co/media/misc/icons/express-delivery.svg",
+          "text": "Express Delivery Available"
+        }
+      ],
+      "toastText": "Delivery available to your location",
+      "pincodeAnalytics": "pincode_check",
+      "cartMessage": "Free delivery on orders above ₹499",
+      "category": "all",
+      "endpointData": {
+        "endpoint": "/api/check-pincode",
+        "payload": {
+          "pincode": "400001"
+        }
+      }
+    }
+  }
+}

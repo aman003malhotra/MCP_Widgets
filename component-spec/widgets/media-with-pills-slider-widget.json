@@ -120,5 +120,85 @@
       "required": ["items", "carouselConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_PILLS_SLIDER",
+    "id": "media-with-pills-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "header": {
+      "subtitle": "OUR INGREDIENTS",
+      "label": "Driving Peak Performance",
+      "desktopTextAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/products/hair_serum_benefits.jpg?tr=w-600",
+            "altText": "Hair Serum Benefits",
+            "loading": "lazy",
+            "desktopViewWidth": "FULL",
+            "mobileViewWidth": "FULL"
+          },
+          "title": "Hair Growth Serum",
+          "pills": {
+            "borderColor": "#4CAF50",
+            "items": [
+              {
+                "label": "Natural Ingredients"
+              },
+              {
+                "label": "Clinically Tested"
+              },
+              {
+                "label": "Dermatologist Approved"
+              }
+            ]
+          }
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/products/shampoo_benefits.jpg?tr=w-600",
+            "altText": "Shampoo Benefits",
+            "loading": "lazy",
+            "desktopViewWidth": "FULL",
+            "mobileViewWidth": "FULL"
+          },
+          "title": "Anti-Hair Fall Shampoo",
+          "pills": {
+            "borderColor": "#2196F3",
+            "items": [
+              {
+                "label": "Sulfate Free"
+              },
+              {
+                "label": "pH Balanced"
+              },
+              {
+                "label": "Color Safe"
+              }
+            ]
+          }
+        }
+      ],
+      "carouselConfig": {
+        "showDots": false,
+        "showArrows": true,
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 3,
+        "infinite": true,
+        "slidesToScroll": 1,
+        "arrowPosition": "inside",
+        "aspectRatio": 1.5
+      }
+    }
+  }
 }

@@ -106,5 +106,118 @@
       "required": ["products", "cta"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MULTI_PRODUCT_SELECTOR",
+    "id": "multi-product-selector",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Top-Selling Favorites",
+      "subtitle": "",
+      "textAlign": "center",
+      "titleType": "PRIMARY",
+      "subtileType": "SECONDARY",
+      "headingSubtitleGap": "2"
+    },
+    "widgetData": {
+      "source": "Home Page",
+      "products": [
+        {
+          "source": "",
+          "name": "NutriMix Nutrition Powder (350g)",
+          "urlKey": "nutrimix-nutrition-powder",
+          "rating": "4.5",
+          "price": 649,
+          "discountedPrice": 599,
+          "priceLabel": "₹649",
+          "discountedPriceLabel": "₹599",
+          "discountPriceLabel": "₹599",
+          "sku": "MWLJNTP.0003.B0_N",
+          "alttext": "",
+          "whyThisWorks": [
+            {
+              "label": "FOR",
+              "text": "Growth & Development"
+            },
+            {
+              "label": "WITH",
+              "text": "Ragi, Bajra & Oats"
+            }
+          ],
+          "id": "3",
+          "reviewCount": "1799",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/nutrimix-nutrition-powder/chocolate_5vavcx.jpg?tr=w-600",
+            "loading": "lazy",
+            "altText": "NutriMix Nutrition Powder (350g)"
+          },
+          "ctaLabel": "Add to Cart",
+          "cta": {
+            "action": "ADD_TO_CART"
+          },
+          "outOfStock": false
+        },
+        {
+          "source": "",
+          "name": "Immunity Boosting Kit",
+          "urlKey": "multivitamin-gummies-nutrimix-300",
+          "rating": "4.4",
+          "price": 1198,
+          "discountedPrice": 999,
+          "priceLabel": "₹1198",
+          "discountedPriceLabel": "₹999",
+          "discountPriceLabel": "₹999",
+          "sku": "MWLJNTK.00142.B0_N",
+          "alttext": "",
+          "whyThisWorks": [
+            {
+              "label": "FOR",
+              "text": "Immunity & Growth"
+            },
+            {
+              "label": "WITH",
+              "text": "Ragi, Spinach, Apples"
+            }
+          ],
+          "id": "215",
+          "reviewCount": "837",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/multivitamin-gummies-nutrimix-300/Slide-1-Nutrimix_6ik6h1.jpg?tr=w-600",
+            "loading": "lazy",
+            "altText": "Immunity Boosting Kit"
+          },
+          "ctaLabel": "Add to Cart",
+          "cta": {
+            "action": "ADD_TO_CART"
+          },
+          "outOfStock": false
+        }
+      ],
+      "totalPriceText": "Total Price",
+      "cta": {
+        "label": "Add Selected to Cart",
+        "variant": "PRIMARY",
+        "size": "MEDIUM",
+        "fullWidth": true,
+        "disabled": false,
+        "loading": false,
+        "actions": [
+          {
+            "actionName": "MULTI_ATC",
+            "params": {
+              "skus": ["MWLJNTP.0003.B0_N", "MWLJNTK.00142.B0_N"]
+            }
+          }
+        ]
+      }
+    }
+  }
 }

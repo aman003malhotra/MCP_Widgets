@@ -76,5 +76,76 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_READ_MORE",
+    "id": "media-with-read-more",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true,
+      "borderRadius": "0px"
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/blog/hair_care_tips.jpg?tr=w-600",
+            "altText": "Hair Care Tips",
+            "loading": "lazy"
+          },
+          "content": {
+            "title": "Essential Hair Care Tips",
+            "info": "Discover the secrets to maintaining healthy, lustrous hair with our expert-recommended care routine.",
+            "cta": {
+              "label": "READ MORE",
+              "actions": [
+                {
+                  "actionName": "SPA_LINK",
+                  "params": {
+                    "link": "/blog/hair-care-tips"
+                  }
+                }
+              ]
+            }
+          },
+          "slug": "/blog/hair-care-tips"
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/blog/skin_care_routine.jpg?tr=w-600",
+            "altText": "Skin Care Routine",
+            "loading": "lazy"
+          },
+          "content": {
+            "title": "Perfect Skin Care Routine",
+            "info": "Learn how to build an effective skin care routine that works for your skin type.",
+            "cta": {
+              "label": "READ MORE",
+              "actions": [
+                {
+                  "actionName": "SPA_LINK",
+                  "params": {
+                    "link": "/blog/skin-care-routine"
+                  }
+                }
+              ]
+            }
+          },
+          "slug": "/blog/skin-care-routine"
+        }
+      ]
+    }
+  }
 }

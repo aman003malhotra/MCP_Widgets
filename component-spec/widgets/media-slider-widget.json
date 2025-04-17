@@ -96,5 +96,51 @@
       "required": ["items", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_SLIDER",
+    "id": "media-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "MINUTE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/slide1.jpg?tr=w-600",
+            "altText": "Special Offer",
+            "loading": "lazy"
+          },
+          "slug": "/special-offers",
+          "cta": {
+            "label": "Shop Now",
+            "variant": "PRIMARY",
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/special-offers"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "sliderConfig": {
+        "aspectRatio": 1.5,
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 1,
+        "showPeek": true,
+        "peekVariant": "SMALL",
+        "showArrows": true,
+        "showDots": true
+      },
+      "showBorder": true
+    }
+  }
 }

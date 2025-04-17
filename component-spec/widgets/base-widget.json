@@ -28,5 +28,22 @@
       "description": "Widget-specific data and configuration"
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "BASE_WIDGET",
+    "id": "base-widget-example",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Base Widget Example"
+    },
+    "widgetData": {
+      "content": "This is a generic base widget example"
+    }
+  }
 }

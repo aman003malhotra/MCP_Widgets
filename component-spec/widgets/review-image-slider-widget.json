@@ -157,5 +157,64 @@
       "required": ["customerRating", "items", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "REVIEW_IMAGE_SLIDER",
+    "id": "review-image-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true
+    },
+    "header": {
+      "label": "Our Customers Speak"
+    },
+    "widgetData": {
+      "customerRating": {
+        "avatarItems": [
+          {
+            "source": "https://i.mscwlns.co/media/misc/others/Avatar_4_3gk6l8.jpg?tr=w-600",
+            "aspectRatio": 1,
+            "altText": "Example Image",
+            "loading": "lazy"
+          }
+        ],
+        "ratingStarCount": 5,
+        "ratingStarValue": 5,
+        "ratingNumber": "5.0",
+        "bottomText": "Loved by 9875 Customers"
+      },
+      "items": [
+        {
+          "quoteImage": "https://i.mscwlns.co/media/misc/others/quotationMark-removebg-preview_jai0ff.png?tr=w-600",
+          "media": {
+            "mediaType": "image",
+            "source": "https://rootlabs.co/cdn/shop/files/WhatsApp_Image_2024-10-13_at_8.59.20_AM.jpg?v=1733134769&width=592",
+            "desktopViewWidth": "FULL",
+            "mobileViewWidth": "FULL",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "content": {
+            "info": "As a physician, I appreciate the importance of identifying the key components responsible for specific mechanisms of action to establish ingredient and product efficacy for targeted clinical outcomes.",
+            "bottomContent": {
+              "name": "Dr. Kristy Appelhans",
+              "designation": "NMD, MSRA"
+            }
+          }
+        }
+      ],
+      "aspectRatio": 1,
+      "sliderConfig": {
+        "slidesToShow": 1.2,
+        "aspectRatio": 1,
+        "peekVariant": "SMALL",
+        "showArrows": false,
+        "slidesToShowDesktop": 3
+      }
+    }
+  }
 }

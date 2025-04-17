@@ -194,5 +194,64 @@
       "required": ["items", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "EXPANDED_MEDIA",
+    "id": "expanded-media",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "GENEROUS",
+        "bottom": "COMPACT"
+      }
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/nutrimix-nutrition-powder/chocolate_5vavcx.jpg?tr=w-600",
+            "altText": "Product Image 1",
+            "loading": "lazy"
+          },
+          "aspectRatio": 1
+        },
+        {
+          "media": {
+            "mediaType": "video",
+            "source": "https://rootlabs.co/cdn/shop/videos/c/vp/46d2235dfef04502a678f8c58ea93cf8/46d2235dfef04502a678f8c58ea93cf8.HD-1080p-3.3Mbps-39427871.mp4",
+            "autoplay": true,
+            "loop": true,
+            "muted": true,
+            "controls": true,
+            "playsInline": true
+          },
+          "aspectRatio": 1
+        },
+        {
+          "media": {
+            "mediaType": "lottie",
+            "source": "https://example.com/animation.json",
+            "autoplay": true,
+            "loop": true
+          },
+          "aspectRatio": 1
+        }
+      ],
+      "sliderConfig": {
+        "aspectRatio": 1,
+        "slidesToShow": 1,
+        "slidesToShowDesktop": 3,
+        "showPeek": true,
+        "peekVariant": "MEDIUM",
+        "showArrows": true,
+        "showDots": true
+      },
+      "previewModal": {
+        "headerTitle": "Product Gallery",
+        "carouselConfig": {},
+        "sliderConfig": {}
+      }
+    }
+  }
 }

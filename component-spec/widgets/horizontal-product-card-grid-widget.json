@@ -128,5 +128,83 @@
       ]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "HORIZONTAL_PRODUCT_CARD_GRID",
+    "id": "horizontal-product-card-grid",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "widgetData": {
+      "products": [
+        {
+          "name": "Hair Growth Gummies",
+          "priceLabel": "₹899",
+          "rating": "4.5",
+          "ctaLabel": "Add to Cart",
+          "category": "Hair Care",
+          "For": "Hair Growth",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/pdp/nutrimix-nutrition-powder/chocolate_5vavcx.jpg?tr=w-600",
+            "altText": "Hair Growth Gummies",
+            "loading": "lazy"
+          },
+          "cta": {
+            "actions": [
+              {
+                "actionName": "ADD_TO_CART",
+                "params": {
+                  "sku": "HAIR001"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Biotin Tablets",
+          "priceLabel": "₹599",
+          "rating": "4.3",
+          "ctaLabel": "Add to Cart",
+          "category": "Supplements",
+          "For": "Hair Health",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/00SS_Combo__1_g1kt2z.jpg?tr=w-600",
+            "altText": "Biotin Tablets",
+            "loading": "lazy"
+          },
+          "cta": {
+            "actions": [
+              {
+                "actionName": "ADD_TO_CART",
+                "params": {
+                  "sku": "BIOT001"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "enableQuantityIndicator": true,
+      "isCartUpdating": false,
+      "itemBeingAddedToCart": "",
+      "cartItems": {
+        "HAIR001": {
+          "qty": 1
+        }
+      },
+      "source": "home_page",
+      "showEmptyState": true,
+      "emptyState": {
+        "title": "No Products Found",
+        "subtitle": "Please try a different category",
+        "image": "https://i.mscwlns.co/media/misc/others/empty_state.png?tr=w-600"
+      }
+    }
+  }
 }

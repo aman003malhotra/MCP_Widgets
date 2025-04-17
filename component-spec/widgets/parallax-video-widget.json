@@ -42,5 +42,42 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PARALLAX_VIDEO",
+    "id": "parallax-video",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true,
+      "borderRadius": "0px",
+      "background": "#13523B"
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+      "subtileType": "WHITE",
+      "labelType": "WHITE",
+      "desktopTextAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "tabName": "Hair Care",
+          "video": "https://i.mscwlns.co/media/misc/videos/hair_care_routine.mp4"
+        },
+        {
+          "tabName": "Skin Care",
+          "video": "https://i.mscwlns.co/media/misc/videos/skin_care_routine.mp4"
+        },
+        {
+          "tabName": "Body Care",
+          "video": "https://i.mscwlns.co/media/misc/videos/body_care_routine.mp4"
+        }
+      ]
+    }
+  }
 }

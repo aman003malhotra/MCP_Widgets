@@ -1,3 +1,6 @@
+// Load environment variables from .env file
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { z } from "zod";
@@ -6,39 +9,11 @@ import * as path from "path";
 import express from "express";
 import cors from "cors";
 import { BASE_WIDGET_MAP_TYPES } from "./WidgetMap.js";
-import { FigmaComponentInputSchema } from './FigmaSchemas.js';
 // Define paths to component specs
 const COMPONENT_SPEC_DIR = path.resolve(process.cwd(), "component-spec");
 const ATOMIC_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "atomic-components.json");
 const MOLECULE_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "molecule-components.json");
 const WIDGETS_DIR = path.resolve(COMPONENT_SPEC_DIR, "widgets");
-const AUDITED_WIDGETS_DIR = path.resolve(process.cwd(), "src", "mono", "web-core", "auditedWidgets");
-// Component schemas
-const ComponentPropSchema = z.object({
-    type: z.string(),
-    description: z.string().optional(),
-    required: z.boolean().optional(),
-    defaultValue: z.any().optional(),
-    options: z.array(z.any()).optional(),
-    subProps: z.record(z.any()).optional(),
-});
-const ComponentSchema = z.object({
-    name: z.string(),
-    description: z.string(),
-    type: z.string(),
-    category: z.string(),
-    properties: z.record(ComponentPropSchema),
-    styles: z.record(z.any()).optional(),
-    variantStyles: z.record(z.any()).optional(),
-});
-const WidgetSchema = z.object({
-    name: z.string(),
-    description: z.string(),
-    type: z.string(),
-    category: z.string(),
-    version: z.string(),
-    properties: z.record(ComponentPropSchema),
-});
 // Add new schema for widget configuration
 const MediaConfigSchema = z.object({
     mediaType: z.enum(['image', 'video']),
@@ -113,8 +88,9 @@ class PwaComponentMcpServer {
                 throw new Error(`Failed to load widgets: ${errorMessage}`);
             }
         });
-        this.server.resource("widget", new ResourceTemplate("components://widgets/{widgetName}", { list: undefined }), async (uri, { widgetName }) => {
+        this.server.resource("widget", new ResourceTemplate("components://widgets/{widgetName}", { list: undefined }), async (uri, variables, extra) => {
             try {
+                const widgetName = variables.widgetName;
                 const filePath = path.join(WIDGETS_DIR, `${widgetName}.json`);
                 if (!fs.existsSync(filePath)) {
                     throw new Error(`Widget '${widgetName}' not found`);
@@ -135,46 +111,316 @@ class PwaComponentMcpServer {
         // Register tools
         this.server.tool("searchComponents", {
             query: z.string(),
-            type: z.enum(["atomic", "widget", "molecule", "all"]).default("all")
-        }, async ({ query, type }) => {
+            type: z.enum(["atomic", "widget", "molecule", "all"]).default("all"),
+            propertySearch: z.string().optional(),
+            fuzzyMatch: z.boolean().optional().default(true),
+            includeSnippets: z.boolean().optional().default(false),
+            includePopularity: z.boolean().optional().default(false)
+        }, async ({ query, type, propertySearch, fuzzyMatch = true, includeSnippets = false, includePopularity = false }) => {
             try {
                 const results = [];
                 const searchTerm = query.toLowerCase();
+                // Usage metrics for popularity data
+                const componentUsage = new Map();
+                // Helper function for fuzzy matching
+                function performFuzzyMatch(text, pattern) {
+                    if (!pattern || !text)
+                        return { match: false, score: 0 };
+                    text = text.toLowerCase();
+                    pattern = pattern.toLowerCase();
+                    // Exact match gets highest score
+                    if (text === pattern)
+                        return { match: true, score: 1 };
+                    // Contains match
+                    if (text.includes(pattern))
+                        return { match: true, score: 0.8 };
+                    // Check for partial matches (start of word)
+                    const words = text.split(/\s+/);
+                    for (const word of words) {
+                        if (word.startsWith(pattern))
+                            return { match: true, score: 0.7 };
+                    }
+                    // Allow for typos and transposed letters
+                    let matchCount = 0;
+                    const patternChars = pattern.split('');
+                    let lastIndex = -1;
+                    for (const char of patternChars) {
+                        const index = text.indexOf(char, lastIndex + 1);
+                        if (index > lastIndex) {
+                            matchCount++;
+                            lastIndex = index;
+                        }
+                    }
+                    const score = matchCount / pattern.length;
+                    return { match: score > 0.6, score };
+                }
+                // Helper function to generate a code snippet
+                function generateSnippet(component, componentType) {
+                    try {
+                        switch (componentType) {
+                            case 'atomic':
+                                return `import { ${component.name} } from "${component.importPath || '@components/atomic'}";
+
+// Example usage
+<${component.name} ${Object.entries(component.properties || {})
+                                    .filter(([_, prop]) => prop.required)
+                                    .map(([key, prop]) => `${key}={${prop.defaultValue !== undefined ? JSON.stringify(prop.defaultValue) : getExampleValueForType(prop.type)}}`)
+                                    .join(' ')} />`;
+                            case 'molecule':
+                                return `import { ${component.name} } from "${component.importPath || '@components/molecules'}";
+
+// Example usage with required props
+<${component.name} ${Object.entries(component.properties || {})
+                                    .filter(([_, prop]) => prop.required)
+                                    .slice(0, 3) // Limit to first 3 properties for readability
+                                    .map(([key, prop]) => `${key}={${prop.defaultValue !== undefined ? JSON.stringify(prop.defaultValue) : getExampleValueForType(prop.type)}}`)
+                                    .join(' ')} />`;
+                            case 'widget':
+                                return `// Widget: ${component.name}
+{
+  "widgetType": "${component.type || 'CUSTOM_WIDGET'}",
+  "id": "${component.name.toLowerCase().replace(/\s+/g, '-')}",
+  "properties": {
+    ${Object.entries(component.properties || {})
+                                    .slice(0, 3) // Limit to first 3 properties for readability
+                                    .map(([key, prop]) => `"${key}": ${prop.defaultValue !== undefined ? JSON.stringify(prop.defaultValue) : getExampleValueForType(prop.type)}`)
+                                    .join(',\n    ')}
+  }
+}`;
+                            default:
+                                return `// No snippet available for ${component.name}`;
+                        }
+                    }
+                    catch (error) {
+                        return `// Error generating snippet: ${error}`;
+                    }
+                }
+                // Helper function to get example values for different property types
+                function getExampleValueForType(type) {
+                    switch (type.toLowerCase()) {
+                        case 'string':
+                            return '"example"';
+                        case 'number':
+                            return '42';
+                        case 'boolean':
+                            return 'true';
+                        case 'array':
+                            return '[]';
+                        case 'object':
+                            return '{}';
+                        case 'function':
+                            return '() => {}';
+                        case 'node':
+                        case 'element':
+                        case 'reactnode':
+                            return '<div>Example</div>';
+                        default:
+                            return '{}';
+                    }
+                }
+                // Helper function to check if component's properties match the property search query
+                function matchesPropertySearch(component, propertySearchQuery) {
+                    if (!propertySearchQuery || !component.properties)
+                        return { match: false, properties: [] };
+                    const propertyMatches = [];
+                    const searchTerms = propertySearchQuery.toLowerCase().split(',').map(term => term.trim());
+                    for (const [key, prop] of Object.entries(component.properties)) {
+                        for (const term of searchTerms) {
+                            if (key.toLowerCase().includes(term) ||
+                                prop.description?.toLowerCase().includes(term) ||
+                                prop.type?.toLowerCase().includes(term)) {
+                                propertyMatches.push(key);
+                                break;
+                            }
+                        }
+                    }
+                    return { match: propertyMatches.length > 0, properties: propertyMatches };
+                }
                 if (type === "atomic" || type === "all") {
                     const atomicData = JSON.parse(fs.readFileSync(ATOMIC_COMPONENTS_PATH, "utf-8"));
+                    // Gather usage statistics for popularity if needed
+                    if (includePopularity) {
+                        // Count usage in molecules
+                        const moleculeData = JSON.parse(fs.readFileSync(MOLECULE_COMPONENTS_PATH, "utf-8"));
+                        moleculeData.components.forEach((molecule) => {
+                            (molecule.atomicDependencies || []).forEach(dep => {
+                                componentUsage.set(dep, (componentUsage.get(dep) || 0) + 1);
+                            });
+                        });
+                        // Count usage in widgets
+                        const widgetFiles = fs.readdirSync(WIDGETS_DIR).filter(file => file.endsWith(".json"));
+                        for (const file of widgetFiles) {
+                            try {
+                                const filePath = path.join(WIDGETS_DIR, file);
+                                const content = fs.readFileSync(filePath, 'utf-8');
+                                atomicData.components.forEach(component => {
+                                    if (content.includes(`"${component.name}"`) || content.includes(`'${component.name}'`)) {
+                                        componentUsage.set(component.name, (componentUsage.get(component.name) || 0) + 1);
+                                    }
+                                });
+                            }
+                            catch (e) {
+                                // Ignore file reading errors
+                            }
+                        }
+                    }
                     atomicData.components.forEach((component) => {
-                        if (component.name.toLowerCase().includes(searchTerm) ||
-                            component.description.toLowerCase().includes(searchTerm) ||
-                            Object.keys(component.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
-                            results.push({
+                        let includeComponent = false;
+                        let matchScore = 0;
+                        if (fuzzyMatch) {
+                            // Use fuzzy matching for component name and description
+                            const nameMatch = performFuzzyMatch(component.name, searchTerm);
+                            const descMatch = performFuzzyMatch(component.description, searchTerm);
+                            if (nameMatch.match || descMatch.match) {
+                                includeComponent = true;
+                                matchScore = Math.max(nameMatch.score, descMatch.score * 0.8); // Name matches are weighted higher
+                            }
+                        }
+                        else {
+                            // Use basic includes matching
+                            if (component.name.toLowerCase().includes(searchTerm) ||
+                                component.description.toLowerCase().includes(searchTerm) ||
+                                Object.keys(component.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
+                                includeComponent = true;
+                            }
+                        }
+                        // Check property-based search
+                        const propertyMatch = propertySearch
+                            ? matchesPropertySearch(component, propertySearch)
+                            : { match: false, properties: [] };
+                        if (propertySearch && propertyMatch.match) {
+                            includeComponent = true;
+                        }
+                        if (includeComponent) {
+                            const result = {
                                 type: "atomic",
                                 name: component.name,
                                 description: component.description,
                                 category: component.category,
-                            });
+                                matchScore: matchScore
+                            };
+                            // Add popularity metrics if requested
+                            if (includePopularity) {
+                                const usageCount = componentUsage.get(component.name) || 0;
+                                const totalComponents = atomicData.components.length;
+                                result.usageCount = usageCount;
+                                result.popularity = usageCount > 0 ? usageCount / totalComponents : 0;
+                            }
+                            // Add code snippet if requested
+                            if (includeSnippets) {
+                                result.codeSnippet = generateSnippet(component, "atomic");
+                            }
+                            // Add matched properties if there are any
+                            if (propertyMatch.properties.length > 0) {
+                                result.matchedProperties = propertyMatch.properties;
+                            }
+                            results.push(result);
                         }
                     });
                 }
                 if (type === "molecule" || type === "all") {
                     const moleculeData = JSON.parse(fs.readFileSync(MOLECULE_COMPONENTS_PATH, "utf-8"));
+                    // Gather usage statistics for popularity if needed
+                    if (includePopularity) {
+                        // Count usage in widgets
+                        const widgetFiles = fs.readdirSync(WIDGETS_DIR).filter(file => file.endsWith(".json"));
+                        for (const file of widgetFiles) {
+                            try {
+                                const filePath = path.join(WIDGETS_DIR, file);
+                                const content = fs.readFileSync(filePath, 'utf-8');
+                                moleculeData.components.forEach(component => {
+                                    if (content.includes(`"${component.name}"`) || content.includes(`'${component.name}'`)) {
+                                        componentUsage.set(component.name, (componentUsage.get(component.name) || 0) + 1);
+                                    }
+                                });
+                            }
+                            catch (e) {
+                                // Ignore file reading errors
+                            }
+                        }
+                    }
                     moleculeData.components.forEach((component) => {
-                        if (component.name.toLowerCase().includes(searchTerm) ||
-                            component.description.toLowerCase().includes(searchTerm) ||
-                            Object.keys(component.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm)) ||
-                            (component.atomicDependencies &&
-                                component.atomicDependencies.some(dep => dep.toLowerCase().includes(searchTerm)))) {
-                            results.push({
+                        let includeComponent = false;
+                        let matchScore = 0;
+                        if (fuzzyMatch) {
+                            // Use fuzzy matching for component name and description
+                            const nameMatch = performFuzzyMatch(component.name, searchTerm);
+                            const descMatch = performFuzzyMatch(component.description, searchTerm);
+                            const atomicDepsMatches = (component.atomicDependencies || []).map(dep => performFuzzyMatch(dep, searchTerm));
+                            const bestAtomicMatch = atomicDepsMatches.length > 0
+                                ? atomicDepsMatches.reduce((best, current) => current.score > best.score ? current : best, { match: false, score: 0 })
+                                : { match: false, score: 0 };
+                            if (nameMatch.match || descMatch.match || bestAtomicMatch.match) {
+                                includeComponent = true;
+                                matchScore = Math.max(nameMatch.score, descMatch.score * 0.8, bestAtomicMatch.score * 0.6);
+                            }
+                        }
+                        else {
+                            // Use basic includes matching
+                            if (component.name.toLowerCase().includes(searchTerm) ||
+                                component.description.toLowerCase().includes(searchTerm) ||
+                                Object.keys(component.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm)) ||
+                                (component.atomicDependencies &&
+                                    component.atomicDependencies.some(dep => dep.toLowerCase().includes(searchTerm)))) {
+                                includeComponent = true;
+                            }
+                        }
+                        // Check property-based search
+                        const propertyMatch = propertySearch
+                            ? matchesPropertySearch(component, propertySearch)
+                            : { match: false, properties: [] };
+                        if (propertySearch && propertyMatch.match) {
+                            includeComponent = true;
+                        }
+                        if (includeComponent) {
+                            const result = {
                                 type: "molecule",
                                 name: component.name,
                                 description: component.description,
                                 category: component.category,
-                            });
+                                matchScore: matchScore
+                            };
+                            // Add popularity metrics if requested
+                            if (includePopularity) {
+                                const usageCount = componentUsage.get(component.name) || 0;
+                                const totalComponents = moleculeData.components.length;
+                                result.usageCount = usageCount;
+                                result.popularity = usageCount > 0 ? usageCount / totalComponents : 0;
+                            }
+                            // Add code snippet if requested
+                            if (includeSnippets) {
+                                result.codeSnippet = generateSnippet(component, "molecule");
+                            }
+                            // Add matched properties if there are any
+                            if (propertyMatch.properties.length > 0) {
+                                result.matchedProperties = propertyMatch.properties;
+                            }
+                            results.push(result);
                         }
                     });
                 }
                 if (type === "widget" || type === "all") {
                     const widgetFiles = fs.readdirSync(WIDGETS_DIR)
                         .filter(file => file.endsWith(".json"));
+                    // Gather usage statistics for popularity if needed
+                    if (includePopularity) {
+                        // Count widget usage from audit logs or any tracking data if available
+                        // For demonstration, we'll use file modification time as a proxy for popularity
+                        for (const file of widgetFiles) {
+                            try {
+                                const filePath = path.join(WIDGETS_DIR, file);
+                                const stats = fs.statSync(filePath);
+                                const widgetName = file.replace('.json', '');
+                                // Recent modifications get higher usage score (simple proxy)
+                                const ageInDays = (Date.now() - stats.mtime.getTime()) / (1000 * 60 * 60 * 24);
+                                const usageScore = Math.max(1, 30 - ageInDays); // Higher for more recent changes
+                                componentUsage.set(widgetName, usageScore);
+                            }
+                            catch (e) {
+                                // Ignore file stats errors
+                            }
+                        }
+                    }
                     for (const file of widgetFiles) {
                         try {
                             const filePath = path.join(WIDGETS_DIR, file);
@@ -185,34 +431,145 @@ class PwaComponentMcpServer {
                                 const widgetName = file.replace('.json', '');
                                 const description = widgetData.description || widgetData.title || widgetName;
                                 const category = widgetData.category || 'other';
-                                // Check if this widget matches the search term
-                                if (widgetName.toLowerCase().includes(searchTerm) ||
-                                    description.toLowerCase().includes(searchTerm) ||
-                                    // Search in properties if they exist
-                                    (widgetData.properties?.widgetData?.properties &&
-                                        Object.keys(widgetData.properties.widgetData.properties).some(prop => prop.toLowerCase().includes(searchTerm)))) {
-                                    results.push({
+                                let includeWidget = false;
+                                let matchScore = 0;
+                                if (fuzzyMatch) {
+                                    // Use fuzzy matching for widget name and description
+                                    const nameMatch = performFuzzyMatch(widgetName, searchTerm);
+                                    const descMatch = performFuzzyMatch(description, searchTerm);
+                                    if (nameMatch.match || descMatch.match) {
+                                        includeWidget = true;
+                                        matchScore = Math.max(nameMatch.score, descMatch.score * 0.8);
+                                    }
+                                    // Also check property names with fuzzy matching
+                                    if (widgetData.properties?.widgetData?.properties) {
+                                        const propMatches = Object.keys(widgetData.properties.widgetData.properties).map(prop => performFuzzyMatch(prop, searchTerm));
+                                        const bestPropMatch = propMatches.length > 0
+                                            ? propMatches.reduce((best, current) => current.score > best.score ? current : best, { match: false, score: 0 })
+                                            : { match: false, score: 0 };
+                                        if (bestPropMatch.match) {
+                                            includeWidget = true;
+                                            matchScore = Math.max(matchScore, bestPropMatch.score * 0.7);
+                                        }
+                                    }
+                                }
+                                else {
+                                    // Use basic includes matching
+                                    if (widgetName.toLowerCase().includes(searchTerm) ||
+                                        description.toLowerCase().includes(searchTerm) ||
+                                        // Search in properties if they exist
+                                        (widgetData.properties?.widgetData?.properties &&
+                                            Object.keys(widgetData.properties.widgetData.properties).some(prop => prop.toLowerCase().includes(searchTerm)))) {
+                                        includeWidget = true;
+                                    }
+                                }
+                                // Check property-based search
+                                const propertyMatch = propertySearch && widgetData.properties?.widgetData?.properties
+                                    ? matchesPropertySearch({ properties: widgetData.properties.widgetData.properties }, propertySearch)
+                                    : { match: false, properties: [] };
+                                if (propertySearch && propertyMatch.match) {
+                                    includeWidget = true;
+                                }
+                                if (includeWidget) {
+                                    const result = {
                                         type: "widget",
                                         name: widgetName,
                                         description: description,
                                         category: category,
                                         file: file,
-                                    });
+                                        matchScore: matchScore
+                                    };
+                                    // Add popularity metrics if requested
+                                    if (includePopularity) {
+                                        const usageScore = componentUsage.get(widgetName) || 0;
+                                        const maxScore = Math.max(...Array.from(componentUsage.values()));
+                                        result.usageCount = usageScore;
+                                        result.popularity = maxScore > 0 ? usageScore / maxScore : 0;
+                                    }
+                                    // Add code snippet if requested
+                                    if (includeSnippets) {
+                                        result.codeSnippet = generateSnippet({
+                                            name: widgetName,
+                                            type: widgetData.type,
+                                            properties: widgetData.properties?.widgetData?.properties
+                                        }, "widget");
+                                    }
+                                    // Add matched properties if there are any
+                                    if (propertyMatch.properties.length > 0) {
+                                        result.matchedProperties = propertyMatch.properties;
+                                    }
+                                    results.push(result);
                                 }
                             }
                             else if (Array.isArray(widgetData.widgets)) {
                                 // Legacy format with widgets array
                                 widgetData.widgets.forEach((widget) => {
-                                    if (widget.name.toLowerCase().includes(searchTerm) ||
-                                        widget.description.toLowerCase().includes(searchTerm) ||
-                                        Object.keys(widget.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
-                                        results.push({
+                                    let includeWidget = false;
+                                    let matchScore = 0;
+                                    if (fuzzyMatch) {
+                                        // Use fuzzy matching for widget name and description
+                                        const nameMatch = performFuzzyMatch(widget.name, searchTerm);
+                                        const descMatch = performFuzzyMatch(widget.description, searchTerm);
+                                        if (nameMatch.match || descMatch.match) {
+                                            includeWidget = true;
+                                            matchScore = Math.max(nameMatch.score, descMatch.score * 0.8);
+                                        }
+                                        // Also check property names with fuzzy matching
+                                        if (widget.properties) {
+                                            const propMatches = Object.keys(widget.properties).map(prop => performFuzzyMatch(prop, searchTerm));
+                                            const bestPropMatch = propMatches.length > 0
+                                                ? propMatches.reduce((best, current) => current.score > best.score ? current : best, { match: false, score: 0 })
+                                                : { match: false, score: 0 };
+                                            if (bestPropMatch.match) {
+                                                includeWidget = true;
+                                                matchScore = Math.max(matchScore, bestPropMatch.score * 0.7);
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        // Use basic includes matching
+                                        if (widget.name.toLowerCase().includes(searchTerm) ||
+                                            widget.description.toLowerCase().includes(searchTerm) ||
+                                            Object.keys(widget.properties || {}).some(prop => prop.toLowerCase().includes(searchTerm))) {
+                                            includeWidget = true;
+                                        }
+                                    }
+                                    // Check property-based search
+                                    const propertyMatch = propertySearch && widget.properties
+                                        ? matchesPropertySearch({ properties: widget.properties }, propertySearch)
+                                        : { match: false, properties: [] };
+                                    if (propertySearch && propertyMatch.match) {
+                                        includeWidget = true;
+                                    }
+                                    if (includeWidget) {
+                                        const result = {
                                             type: "widget",
                                             name: widget.name,
                                             description: widget.description,
                                             category: widget.category,
                                             file: file,
-                                        });
+                                            matchScore: matchScore
+                                        };
+                                        // Add popularity metrics if requested
+                                        if (includePopularity) {
+                                            const usageScore = componentUsage.get(widget.name) || 0;
+                                            const maxScore = Math.max(...Array.from(componentUsage.values()));
+                                            result.usageCount = usageScore;
+                                            result.popularity = maxScore > 0 ? usageScore / maxScore : 0;
+                                        }
+                                        // Add code snippet if requested
+                                        if (includeSnippets) {
+                                            result.codeSnippet = generateSnippet({
+                                                name: widget.name,
+                                                type: widget.type,
+                                                properties: widget.properties
+                                            }, "widget");
+                                        }
+                                        // Add matched properties if there are any
+                                        if (propertyMatch.properties.length > 0) {
+                                            result.matchedProperties = propertyMatch.properties;
+                                        }
+                                        results.push(result);
                                     }
                                 });
                             }
@@ -222,10 +579,43 @@ class PwaComponentMcpServer {
                         }
                     }
                 }
+                // Sort results by match score if using fuzzy search
+                if (fuzzyMatch) {
+                    results.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+                }
+                // If popularity is included, provide ordering options based on popularity as well
+                if (includePopularity) {
+                    const resultsByPopularity = [...results].sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+                    return {
+                        content: [{
+                                type: "text",
+                                text: JSON.stringify({
+                                    results,
+                                    resultsByPopularity: resultsByPopularity.slice(0, 10), // Top 10 by popularity
+                                    totalResults: results.length,
+                                    searchOptions: {
+                                        fuzzyMatch,
+                                        propertySearch: propertySearch || null,
+                                        includeSnippets,
+                                        includePopularity
+                                    }
+                                }, null, 2)
+                            }]
+                    };
+                }
                 return {
                     content: [{
                             type: "text",
-                            text: JSON.stringify(results, null, 2)
+                            text: JSON.stringify({
+                                results,
+                                totalResults: results.length,
+                                searchOptions: {
+                                    fuzzyMatch,
+                                    propertySearch: propertySearch || null,
+                                    includeSnippets,
+                                    includePopularity
+                                }
+                            }, null, 2)
                         }]
                 };
             }
@@ -408,6 +798,8 @@ class PwaComponentMcpServer {
                     // Handle widget component lookup
                     let targetWidget = null;
                     let widgetFile = null;
+                    // Get exampleJson for this widget using the helper function
+                    let widgetExampleJson = readWidgetExampleJson(componentName);
                     for (const file of widgetFiles) {
                         try {
                             const filePath = path.join(WIDGETS_DIR, file);
@@ -425,6 +817,10 @@ class PwaComponentMcpServer {
                                     relativePath: widgetData.relativePath,
                                 };
                                 widgetFile = file;
+                                // Extract exampleJson directly from the widget file if available
+                                if (widgetData.exampleJson) {
+                                    widgetExampleJson = widgetData.exampleJson;
+                                }
                                 break;
                             }
                             // Also check legacy format with widgets array
@@ -433,6 +829,14 @@ class PwaComponentMcpServer {
                                 if (widget) {
                                     targetWidget = widget;
                                     widgetFile = file;
+                                    // Check if there's an exampleJson at widget level
+                                    if (widget.exampleJson) {
+                                        widgetExampleJson = widget.exampleJson;
+                                    }
+                                    else if (widgetData.exampleJson) {
+                                        // Fallback to file level exampleJson
+                                        widgetExampleJson = widgetData.exampleJson;
+                                    }
                                     break;
                                 }
                             }
@@ -449,6 +853,11 @@ class PwaComponentMcpServer {
                     try {
                         const widgetPath = path.join(WIDGETS_DIR, widgetFile);
                         const content = fs.readFileSync(widgetPath, 'utf-8');
+                        const widgetData = JSON.parse(content);
+                        // Extract exampleJson from the widget file if not already set
+                        if (!widgetExampleJson && widgetData.exampleJson) {
+                            widgetExampleJson = widgetData.exampleJson;
+                        }
                         // This is a simple extraction - a real implementation would do more sophisticated parsing
                         const atomicMatches = content.match(/"atomicComponents":\s*\[(.*?)\]/s);
                         if (atomicMatches && atomicMatches[1]) {
@@ -487,7 +896,8 @@ class PwaComponentMcpServer {
                                         properties: targetWidget.properties,
                                         relativePath: targetWidget.relativePath,
                                         importPath: targetWidget.importPath,
-                                        file: widgetFile
+                                        file: widgetFile,
+                                        exampleJson: widgetExampleJson // Include exampleJson in response
                                     },
                                     context: {
                                         usedAtomicComponents,
@@ -608,15 +1018,51 @@ class PwaComponentMcpServer {
                 // Try to find widget specification in component-spec folder
                 const widgetSpecPath = path.join(COMPONENT_SPEC_DIR, 'widgets', `${widgetType.toLowerCase()}-widget.json`);
                 let widgetData = {};
+                let enhancedConfig;
                 if (fs.existsSync(widgetSpecPath)) {
                     // If widget spec exists, use it as template
                     const widgetSpec = JSON.parse(fs.readFileSync(widgetSpecPath, 'utf-8'));
-                    widgetData = {
-                        ...widgetSpec.widgetData,
-                        // Override with provided values if any
-                        ...(mediaItems && { items: mediaItems.map(media => ({ media })) }),
-                        ...(sliderConfig && { sliderConfig })
-                    };
+                    // Check if the widget has an exampleJson we can use as a starting point
+                    if (widgetSpec.exampleJson) {
+                        // Use example as the basis, but ensure it has the correct ID and custom configurations
+                        enhancedConfig = {
+                            ...widgetSpec.exampleJson,
+                            id: baseConfig.id,
+                            ...(header && { header: { ...widgetSpec.exampleJson.header, ...header } }),
+                            ...(layout && { layout: { ...widgetSpec.exampleJson.layout, ...layout } })
+                        };
+                        // Handle specific overrides for the widget data
+                        if (mediaItems || sliderConfig) {
+                            enhancedConfig.widgetData = {
+                                ...enhancedConfig.widgetData,
+                                ...(mediaItems && { items: mediaItems.map((media) => ({ media })) }),
+                                ...(sliderConfig && { sliderConfig })
+                            };
+                        }
+                    }
+                    else {
+                        // No example, use standard approach
+                        widgetData = {
+                            ...widgetSpec.widgetData,
+                            // Override with provided values if any
+                            ...(mediaItems && { items: mediaItems.map((media) => ({ media })) }),
+                            ...(sliderConfig && { sliderConfig })
+                        };
+                        // Create the config based on the base config and widget data
+                        enhancedConfig = {
+                            id: baseConfig.id,
+                            type: widgetType,
+                            header: {
+                                ...baseConfig.header,
+                                ...header
+                            },
+                            layout: {
+                                ...baseConfig.layout,
+                                ...layout
+                            },
+                            widgetData
+                        };
+                    }
                 }
                 else {
                     // For new widgets, provide base structure
@@ -626,21 +1072,21 @@ class PwaComponentMcpServer {
                             showBorder: false
                         }
                     };
+                    // Create the config based on the base config and widget data
+                    enhancedConfig = {
+                        id: baseConfig.id,
+                        type: widgetType,
+                        header: {
+                            ...baseConfig.header,
+                            ...header
+                        },
+                        layout: {
+                            ...baseConfig.layout,
+                            ...layout
+                        },
+                        widgetData
+                    };
                 }
-                // Enhance the base config with provided parameters
-                const enhancedConfig = {
-                    id: baseConfig.id,
-                    type: widgetType,
-                    header: {
-                        ...baseConfig.header,
-                        ...header
-                    },
-                    layout: {
-                        ...baseConfig.layout,
-                        ...layout
-                    },
-                    widgetData
-                };
                 // Create widget-configs directory if it doesn't exist
                 const configDir = path.join(COMPONENT_SPEC_DIR, 'widget-configs');
                 if (!fs.existsSync(configDir)) {
@@ -665,171 +1111,6 @@ class PwaComponentMcpServer {
                     content: [{
                             type: "text",
                             text: `Failed to create widget config: ${errorMessage}`
-                        }],
-                    isError: true
-                };
-            }
-        });
-        this.server.tool("validateWidgetConfig", {
-            widgetName: z.string(),
-            widgetSpec: z.record(z.any()).optional()
-        }, async ({ widgetName, widgetSpec }) => {
-            try {
-                let config;
-                if (widgetSpec) {
-                    config = widgetSpec;
-                }
-                else {
-                    const configPath = path.join(COMPONENT_SPEC_DIR, 'widget-configs', `${widgetName}.json`);
-                    if (!fs.existsSync(configPath)) {
-                        throw new Error(`Widget config '${widgetName}' not found`);
-                    }
-                    config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-                }
-                const validationResults = [];
-                if (!config.name || !config.widgets || !Array.isArray(config.widgets)) {
-                    validationResults.push("Invalid basic structure: must have 'name' and 'widgets' array");
-                }
-                config.widgets.forEach((widget, index) => {
-                    if (!widget.type || !Object.values(BASE_WIDGET_MAP_TYPES).includes(widget.type)) {
-                        validationResults.push(`Widget ${index}: Invalid or missing type`);
-                    }
-                    if (widget.layout && !LayoutConfigSchema.safeParse(widget.layout).success) {
-                        validationResults.push(`Widget ${index}: Invalid layout configuration`);
-                    }
-                    if (widget.header && !HeaderConfigSchema.safeParse(widget.header).success) {
-                        validationResults.push(`Widget ${index}: Invalid header configuration`);
-                    }
-                    if (widget.widgetData?.sliderConfig &&
-                        !SliderConfigSchema.safeParse(widget.widgetData.sliderConfig).success) {
-                        validationResults.push(`Widget ${index}: Invalid slider configuration`);
-                    }
-                    if (widget.widgetData?.items) {
-                        widget.widgetData.items.forEach((item, itemIndex) => {
-                            if (!MediaConfigSchema.safeParse(item.media).success) {
-                                validationResults.push(`Widget ${index}, Item ${itemIndex}: Invalid media configuration`);
-                            }
-                        });
-                    }
-                });
-                return {
-                    content: [{
-                            type: "text",
-                            text: JSON.stringify({
-                                isValid: validationResults.length === 0,
-                                validationErrors: validationResults,
-                                config: validationResults.length === 0 ? config : undefined,
-                                savePath: `${COMPONENT_SPEC_DIR}/widgets/${widgetName}-widget.json`
-                            }, null, 2)
-                        }]
-                };
-            }
-            catch (error) {
-                const errorMessage = error instanceof Error ? error.message : String(error);
-                return {
-                    content: [{
-                            type: "text",
-                            text: `Validation failed: ${errorMessage}`
-                        }],
-                    isError: true
-                };
-            }
-        });
-        this.server.tool("updateWidgetConfig", {
-            widgetName: z.string(),
-            updates: z.object({
-                layout: LayoutConfigSchema.optional(),
-                header: HeaderConfigSchema.optional(),
-                sliderConfig: SliderConfigSchema.optional(),
-                mediaItems: z.array(MediaConfigSchema).optional()
-            })
-        }, async ({ widgetName, updates }) => {
-            try {
-                const configPath = path.join(COMPONENT_SPEC_DIR, 'widget-configs', `${widgetName}.json`);
-                if (!fs.existsSync(configPath)) {
-                    throw new Error(`Widget config '${widgetName}' not found`);
-                }
-                const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-                if (!config.widgets?.[0]) {
-                    throw new Error('Invalid widget configuration structure');
-                }
-                const widget = config.widgets[0];
-                if (updates.layout)
-                    widget.layout = updates.layout;
-                if (updates.header)
-                    widget.header = updates.header;
-                if (updates.sliderConfig || updates.mediaItems) {
-                    widget.widgetData = widget.widgetData || {};
-                    if (updates.sliderConfig)
-                        widget.widgetData.sliderConfig = updates.sliderConfig;
-                    if (updates.mediaItems) {
-                        widget.widgetData.items = updates.mediaItems.map(media => ({ media }));
-                    }
-                }
-                fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-                return {
-                    content: [{
-                            type: "text",
-                            text: JSON.stringify(config, null, 2)
-                        }]
-                };
-            }
-            catch (error) {
-                const errorMessage = error instanceof Error ? error.message : String(error);
-                return {
-                    content: [{
-                            type: "text",
-                            text: `Failed to update widget config: ${errorMessage}`
-                        }],
-                    isError: true
-                };
-            }
-        });
-        this.server.tool("convertFigmaToWidget", {
-            figmaInput: FigmaComponentInputSchema
-        }, async ({ figmaInput }) => {
-            try {
-                const { node, componentName } = figmaInput;
-                // Detect widget type
-                const detectedType = detectWidgetTypeFromFigma(node);
-                // Extract common configurations
-                const layout = convertFigmaToLayout(node);
-                const header = extractHeaderFromFigma(node);
-                const widgetData = extractWidgetDataFromFigma(node, detectedType);
-                // Construct widget configuration
-                const widgetConfig = {
-                    name: componentName,
-                    type: detectedType,
-                    layout,
-                    header,
-                    ...widgetData
-                };
-                // Validate configuration
-                const validationResult = validateWidgetConfig(widgetConfig, detectedType);
-                if (validationResult.isValid) {
-                    return {
-                        content: [{
-                                type: "text",
-                                text: JSON.stringify(widgetConfig, null, 2)
-                            }]
-                    };
-                }
-                else {
-                    return {
-                        content: [{
-                                type: "text",
-                                text: `Validation failed: ${validationResult.errors.join(', ')}`
-                            }],
-                        isError: true
-                    };
-                }
-            }
-            catch (error) {
-                const errorMessage = error instanceof Error ? error.message : String(error);
-                return {
-                    content: [{
-                            type: "text",
-                            text: `Failed to convert Figma to widget: ${errorMessage}`
                         }],
                     isError: true
                 };
@@ -1125,14 +1406,6 @@ export interface ${widgetName.replace(/\s+/g, '')}Props extends BaseWidgetProps<
                                 success: true,
                                 message: `Widget type ${normalizedType} successfully added to WidgetMap.ts`,
                                 widgetType: normalizedType,
-                                nextStep: {
-                                    tool: "generateWidget",
-                                    params: {
-                                        name: widgetName,
-                                        type: normalizedType
-                                    },
-                                    description: "Now you can generate widget files with the updated widget type"
-                                }
                             }, null, 2)
                         }]
                 };
@@ -1333,6 +1606,84 @@ export interface ${widgetName.replace(/\s+/g, '')}Props extends BaseWidgetProps<
                 };
             }
         });
+        this.server.tool("listThemeVariables", {
+            variableType: z.enum(["color", "size", "font", "typography", "spacing", "layout", "all"]).optional().default("all"),
+            groupBy: z.enum(["prefix", "none"]).optional().default("prefix"),
+            // Optional: Add a parameter for the theme file path if it's not constant
+            // themeFilePath: z.string().optional() 
+        }, async ({ variableType = "all", groupBy = "prefix" }) => {
+            try {
+                const themeSpecPath = path.resolve(COMPONENT_SPEC_DIR, 'theme-variables.json');
+                if (!fs.existsSync(themeSpecPath)) {
+                    throw new Error(`Theme specification file not found at: ${themeSpecPath}`);
+                }
+                const specContent = fs.readFileSync(themeSpecPath, "utf-8");
+                const themeSpec = JSON.parse(specContent);
+                if (!themeSpec || !Array.isArray(themeSpec.variables)) {
+                    throw new Error(`Invalid format in theme specification file: ${themeSpecPath}`);
+                }
+                const allVariables = themeSpec.variables;
+                // Filter variables based on type requested by the user
+                const filteredVariables = allVariables.filter(variable => {
+                    if (variableType === "all")
+                        return true;
+                    // Use the inferredType from the JSON spec for filtering
+                    if (variableType === "color")
+                        return variable.inferredType === "color";
+                    if (variableType === "size")
+                        return variable.inferredType === "size";
+                    if (variableType === "font")
+                        return variable.inferredType === "font";
+                    if (variableType === "typography")
+                        return variable.inferredType === "typography";
+                    if (variableType === "spacing")
+                        return variable.inferredType === "spacing";
+                    if (variableType === "layout")
+                        return variable.inferredType === "layout";
+                    // Add more types here if needed
+                    return variable.inferredType === variableType; // Allow filtering by other inferred types
+                });
+                let resultData;
+                if (groupBy === "prefix") {
+                    const groupedVariables = {};
+                    filteredVariables.forEach(variable => {
+                        // Use the prefix from the JSON spec for grouping
+                        const prefix = variable.prefix || "other";
+                        if (!groupedVariables[prefix]) {
+                            groupedVariables[prefix] = [];
+                        }
+                        groupedVariables[prefix].push(variable.name);
+                    });
+                    resultData = groupedVariables;
+                }
+                else {
+                    // Return flat list of names if no grouping
+                    resultData = filteredVariables.map(v => v.name);
+                }
+                return {
+                    content: [{
+                            type: "text",
+                            text: JSON.stringify({
+                                success: true,
+                                variableTypeFilter: variableType,
+                                grouping: groupBy,
+                                variables: resultData,
+                                sourceFile: themeSpecPath // Point to the JSON spec file now
+                            }, null, 2)
+                        }]
+                };
+            }
+            catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                return {
+                    content: [{
+                            type: "text",
+                            text: `Failed to list theme variables: ${errorMessage}`
+                        }],
+                    isError: true
+                };
+            }
+        });
     }
     async getWidgetBaseConfig(params) {
         try {
@@ -1398,27 +1749,6 @@ export interface ${widgetName.replace(/\s+/g, '')}Props extends BaseWidgetProps<
             console.log(`Message endpoint available at http://localhost:${port}/messages`);
         });
     }
-}
-async function main() {
-    const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3002;
-    const server = new PwaComponentMcpServer();
-    await server.startHttpServer(port);
-}
-main().catch((error) => {
-    console.error("Fatal error in main():", error);
-    process.exit(1);
-});
-// Helper functions for Figma conversion
-function detectWidgetTypeFromFigma(node) {
-    // Detect widget type based on node structure and naming
-    if (node.name.toLowerCase().includes('slider')) {
-        return 'MEDIA_SLIDER';
-    }
-    if (node.name.toLowerCase().includes('grid')) {
-        return 'PRODUCT_CARD_GRID';
-    }
-    // Add more detection logic
-    return 'MEDIA_SLIDER'; // Default fallback
 }
 // Helper function to generate TypeScript interface from a structure object
 function generateInterfaceFromStructure(structure, indent = "  ") {
@@ -1492,238 +1822,28 @@ function generateInterfaceFromStructure(structure, indent = "  ") {
     }
     return result;
 }
-// Helper function to create default structure based on category
-function createDefaultStructureByCategory(category) {
-    switch (category) {
-        case 'product':
-            return {
-                items: [{
-                        title: "Product Title",
-                        description: "Product description...",
-                        imageUrl: "https://example.com/image.jpg",
-                        price: 99.99,
-                        currency: "USD"
-                    }],
-                layout: {
-                    columns: 3,
-                    gap: 16
-                }
-            };
-        case 'media':
-            return {
-                items: [{
-                        mediaType: "image",
-                        source: "https://example.com/image.jpg",
-                        altText: "Media description",
-                        caption: "Optional caption"
-                    }],
-                sliderConfig: {
-                    aspectRatio: 1.78,
-                    slidesToShow: 1,
-                    slidesToShowDesktop: 3,
-                    showPeek: true,
-                    showDots: true
-                }
-            };
-        case 'navigation':
-            return {
-                items: [{
-                        label: "Navigation Link",
-                        url: "/page",
-                        isExternal: false,
-                        icon: "arrow-right"
-                    }],
-                layout: {
-                    direction: "horizontal",
-                    alignment: "center"
-                }
-            };
-        default:
-            return {
-                // Generic structure for other categories
-                content: "Widget content goes here",
-                settings: {
-                    showBorder: false
-                }
-            };
-    }
-}
-// Helper function to convert string to Title Case
-function toTitleCase(str) {
-    return str
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-}
-// Helper function to generate default value based on prop type
-function getDefaultValueForType(type) {
-    switch (type.toLowerCase()) {
-        case 'string':
-            return '"value"';
-        case 'number':
-            return '0';
-        case 'boolean':
-            return 'true';
-        case 'function':
-            return '() => {}';
-        case 'array':
-            return '[]';
-        case 'object':
-            return '{}';
-        case 'enum':
-            return '"option"';
-        case 'react.reactnode':
-            return '<div>Content</div>';
-        default:
-            return '{}';
-    }
-}
-function convertFigmaToLayout(node) {
-    if (!node.layout)
-        return null;
-    return {
-        type: node.layout.layoutMode === 'NONE' ? 'FIXED' : 'FLUID',
-        verticalSpacing: {
-            top: convertFigmaSpacing(node.layout.padding?.top),
-            bottom: convertFigmaSpacing(node.layout.padding?.bottom)
+function readWidgetExampleJson(widgetName) {
+    try {
+        // Convert widget name to kebab case for file lookup
+        const widgetFileName = `${widgetName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}-widget.json`;
+        const widgetPath = path.join(WIDGETS_DIR, widgetFileName);
+        if (fs.existsSync(widgetPath)) {
+            const content = fs.readFileSync(widgetPath, 'utf-8');
+            const widgetData = JSON.parse(content);
+            return widgetData.exampleJson || null;
         }
-    };
-}
-function convertFigmaSpacing(spacing) {
-    if (!spacing)
-        return 'NORMAL';
-    if (spacing <= 16)
-        return 'COMPACT';
-    if (spacing >= 32)
-        return 'LOOSE';
-    return 'NORMAL';
-}
-function extractHeaderFromFigma(node) {
-    // Look for text nodes that might be headers
-    const textNodes = findTextNodes(node);
-    if (textNodes.length === 0)
-        return null;
-    const header = {};
-    // Find subtitle and label
-    textNodes.forEach(textNode => {
-        if (textNode.textStyle?.fontSize >= 24) {
-            header.label = textNode.characters;
-        }
-        else if (textNode.textStyle?.fontSize >= 16) {
-            header.subtitle = textNode.characters;
-        }
-    });
-    if (Object.keys(header).length === 0)
-        return null;
-    // Get text alignment
-    const mainTextNode = textNodes[0];
-    header.desktopTextAlign = convertFigmaTextAlign(mainTextNode.textStyle?.textAlignHorizontal);
-    return header;
-}
-function extractWidgetDataFromFigma(node, widgetType) {
-    switch (widgetType) {
-        case 'MEDIA_SLIDER':
-            return extractMediaSliderData(node);
-        case 'PRODUCT_CARD_GRID':
-            return extractProductGridData(node);
-        // Add more widget type handlers
-        default:
-            return null;
     }
-}
-function extractMediaSliderData(node) {
-    const imageNodes = findImageNodes(node);
-    const aspectRatio = imageNodes[0]?.width / imageNodes[0]?.height || 1;
-    return {
-        sliderConfig: {
-            aspectRatio,
-            slidesToShow: 1,
-            slidesToShowDesktop: Math.min(imageNodes.length, 3),
-            showPeek: true,
-            showDots: imageNodes.length > 3
-        },
-        showBorder: false,
-        items: imageNodes.map(imgNode => ({
-            media: {
-                mediaType: 'image',
-                source: extractImageUrl(imgNode),
-                altText: imgNode.name,
-                loading: 'lazy'
-            }
-        }))
-    };
-}
-function findTextNodes(node) {
-    const textNodes = [];
-    if (node.type === 'TEXT') {
-        textNodes.push(node);
+    catch (e) {
+        console.warn(`Error reading exampleJson for widget ${widgetName}:`, e);
     }
-    if (node.children) {
-        node.children.forEach((child) => {
-            textNodes.push(...findTextNodes(child));
-        });
-    }
-    return textNodes;
+    return null;
 }
-function findImageNodes(node) {
-    const imageNodes = [];
-    if (node.type === 'RECTANGLE' && node.style?.fills?.some((fill) => fill.type === 'IMAGE')) {
-        imageNodes.push(node);
-    }
-    if (node.children) {
-        node.children.forEach((child) => {
-            imageNodes.push(...findImageNodes(child));
-        });
-    }
-    return imageNodes;
+async function main() {
+    const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3002;
+    const server = new PwaComponentMcpServer();
+    await server.startHttpServer(port);
 }
-function convertFigmaTextAlign(align) {
-    switch (align) {
-        case 'LEFT':
-            return 'left';
-        case 'CENTER':
-            return 'center';
-        case 'RIGHT':
-            return 'right';
-        default:
-            return 'left';
-    }
-}
-function extractImageUrl(node) {
-    const imageFill = node.style?.fills?.find((fill) => fill.type === 'IMAGE');
-    return imageFill?.imageRef || '';
-}
-function validateWidgetConfig(config, widgetType) {
-    // Add validation logic based on widget type
-    const errors = [];
-    if (!config.name) {
-        errors.push('Widget name is required');
-    }
-    if (!config.widgets || !Array.isArray(config.widgets) || config.widgets.length === 0) {
-        errors.push('Widget configuration must contain at least one widget');
-    }
-    return {
-        isValid: errors.length === 0,
-        errors
-    };
-}
-function extractProductGridData(node) {
-    const items = findImageNodes(node).map(imageNode => {
-        const textNodes = findTextNodes(imageNode.parent);
-        return {
-            title: textNodes[0]?.characters || '',
-            description: textNodes[1]?.characters,
-            imageUrl: extractImageUrl(imageNode),
-            price: parseFloat(textNodes.find(n => n.name.toLowerCase().includes('price'))?.characters || '0'),
-            currency: textNodes.find(n => n.name.toLowerCase().includes('currency'))?.characters,
-            link: imageNode.parent.link?.url
-        };
-    });
-    return {
-        items,
-        layout: {
-            columns: Math.min(4, items.length),
-            gap: node.itemSpacing || 16
-        }
-    };
-}
+main().catch((error) => {
+    console.error("Fatal error in main():", error);
+    process.exit(1);
+});

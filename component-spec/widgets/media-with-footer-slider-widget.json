@@ -102,5 +102,76 @@
       "required": ["items", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_FOOTER_SLIDER",
+    "id": "media-with-footer-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "items": [
+        {
+          "header": "Natural Ingredients",
+          "description": "Our products are made with 100% natural ingredients, carefully selected for maximum effectiveness.",
+          "readMoreLabel": "Read More",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/natural_ingredients.jpg?tr=w-600",
+            "altText": "Natural Ingredients",
+            "loading": "lazy"
+          },
+          "miniCtas": [
+            {
+              "icon": "https://i.mscwlns.co/media/misc/others/share_icon.png?tr=w-600",
+              "actions": [
+                {
+                  "actionName": "SHARE",
+                  "params": {
+                    "url": "/about/ingredients"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "header": "Expert Formulation",
+          "description": "Developed by leading dermatologists and hair care experts for proven results.",
+          "readMoreLabel": "Read More",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/expert_formulation.jpg?tr=w-600",
+            "altText": "Expert Formulation",
+            "loading": "lazy"
+          },
+          "miniCtas": [
+            {
+              "icon": "https://i.mscwlns.co/media/misc/others/share_icon.png?tr=w-600",
+              "actions": [
+                {
+                  "actionName": "SHARE",
+                  "params": {
+                    "url": "/about/experts"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sliderConfig": {
+        "aspectRatio": 1,
+        "slidesToShow": 1,
+        "showPeek": true,
+        "peekVariant": "LARGE",
+        "showDots": true
+      },
+      "modalEnabled": true
+    }
+  }
 }

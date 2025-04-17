@@ -28,5 +28,26 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MARQUEE",
+    "id": "marquee",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true
+    },
+    "widgetData": {
+      "items": [
+        "Free Shipping on Orders Above ₹499",
+        "100% Natural Ingredients",
+        "Doctor Recommended Products",
+        "30-Day Money Back Guarantee",
+        "24/7 Customer Support"
+      ]
+    }
+  }
 }

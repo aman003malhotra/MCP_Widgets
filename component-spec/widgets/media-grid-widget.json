@@ -68,5 +68,83 @@
       "required": ["items", "noOfColumnsForMobile", "noOfColumnsForDesktop"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "TILES",
+    "id": "media-grid",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Our Investors",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/categories/hair_care.jpg?tr=w-400",
+            "altText": "Hair Care",
+            "loading": "lazy"
+          },
+          "slug": "/category/hair-care",
+          "label": "Hair Care",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/hair-care"
+              }
+            }
+          ]
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/categories/skin_care.jpg?tr=w-400",
+            "altText": "Skin Care",
+            "loading": "lazy"
+          },
+          "slug": "/category/skin-care",
+          "label": "Skin Care",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/skin-care"
+              }
+            }
+          ]
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/categories/body_care.jpg?tr=w-400",
+            "altText": "Body Care",
+            "loading": "lazy"
+          },
+          "slug": "/category/body-care",
+          "label": "Body Care",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/category/body-care"
+              }
+            }
+          ]
+        }
+      ],
+      "noOfColumnsForMobile": 2,
+      "noOfColumnsForDesktop": 3,
+      "aspectRatio": 1,
+      "scaleFullWidthDesktop": true
+    }
+  }
 }

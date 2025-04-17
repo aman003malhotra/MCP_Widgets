@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Custom Widget",
+  "description": "A flexible widget that allows for rendering custom node structures with various component types",
+  "type": "object",
+  "category": "Custom",
+  "relativePath": "src/mono/web-core/auditedWidgets/CustomWidget",
+  "version": "1.0.0",
+  "allOf": [
+    {
+      "$ref": "./commonWidgets/common-props.json"
+    }
+  ],
+  "definitions": {
+    "baseNode": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of component to render (e.g., 'View', 'Text', 'Button', 'Link', 'Image')"
+            },
+            "props": {
+              "type": "object",
+              "description": "Properties to pass to the component"
+            },
+            "children": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Child nodes to render inside this component",
+                  "items": {
+                    "$ref": "#/definitions/baseNode"
+                  }
+                },
+                {
+                  "type": "string",
+                  "description": "Text content for the component"
+                }
+              ]
+            }
+          },
+          "required": ["type"]
+        }
+      ]
+    }
+  },
+  "properties": {
+    "widgetData": {
+      "type": "object",
+      "description": "Widget-specific data and configuration",
+      "properties": {
+        "style": {
+          "type": "object",
+          "description": "CSS styles to apply to the widget container"
+        },
+        "nodes": {
+          "$ref": "#/definitions/baseNode"
+        }
+      },
+      "required": ["nodes"]
+    }
+  },
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "CUSTOM_WIDGET",
+    "id": "custom-widget",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      }
+    },
+    "header": {
+      "title": "Custom Content Section"
+    },
+    "widgetData": {
+      "style": {
+        "padding": "20px",
+        "backgroundColor": "#f7f7f7"
+      },
+      "nodes": {
+        "type": "View",
+        "props": {
+          "style": {
+            "display": "flex",
+            "flexDirection": "column",
+            "gap": "16px"
+          }
+        },
+        "children": [
+          {
+            "type": "Text",
+            "props": {
+              "variant": "HEADING_LARGE"
+            },
+            "children": "Welcome to our Custom Section"
+          },
+          {
+            "type": "Text",
+            "props": {
+              "variant": "BODY_BASE"
+            },
+            "children": "This section is built using our custom component renderer."
+          },
+          {
+            "type": "View",
+            "props": {
+              "style": {
+                "display": "flex",
+                "gap": "12px",
+                "alignItems": "center"
+              }
+            },
+            "children": [
+              {
+                "type": "Image",
+                "props": {
+                  "src": "https://i.mscwlns.co/media/misc/others/icon.png?tr=w-100",
+                  "width": 48,
+                  "height": 48,
+                  "alt": "Feature icon"
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "variant": "BODY_BASE_BOLD"
+                },
+                "children": "Flexible content structure"
+              }
+            ]
+          },
+          {
+            "type": "Button",
+            "props": {
+              "variant": "PRIMARY",
+              "size": "LARGE",
+              "label": "Learn More",
+              "onClick": {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/about"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

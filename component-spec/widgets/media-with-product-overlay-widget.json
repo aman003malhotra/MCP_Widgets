@@ -127,5 +127,87 @@
       "required": ["items", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_PRODUCT_OVERLAY",
+    "id": "media-with-product-overlay",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "GENEROUS"
+      }
+    },
+    "widgetData": {
+      "items": [
+        {
+          "baseMedia": {
+            "mediaType": "video",
+            "source": "https://i.mscwlns.co/media/misc/videos/hair_care_routine.mp4",
+            "altText": "Hair Care Routine",
+            "loading": "lazy"
+          },
+          "overlayMedia": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/products/hair_serum_overlay.png?tr=w-300",
+            "altText": "Hair Growth Serum",
+            "loading": "lazy"
+          },
+          "name": "Hair Growth Serum",
+          "cta": {
+            "label": "Shop Now",
+            "variant": "PRIMARY",
+            "size": "MEDIUM",
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/product/hair-growth-serum"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "baseMedia": {
+            "mediaType": "video",
+            "source": "https://i.mscwlns.co/media/misc/videos/skin_care_routine.mp4",
+            "altText": "Skin Care Routine",
+            "loading": "lazy"
+          },
+          "overlayMedia": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/products/face_serum_overlay.png?tr=w-300",
+            "altText": "Vitamin C Serum",
+            "loading": "lazy"
+          },
+          "name": "Vitamin C Serum",
+          "cta": {
+            "label": "Shop Now",
+            "variant": "PRIMARY",
+            "size": "MEDIUM",
+            "actions": [
+              {
+                "actionName": "SPA_LINK",
+                "params": {
+                  "link": "/product/vitamin-c-serum"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "videoMutedIcon": "https://i.mscwlns.co/media/misc/icons/muted.png?tr=w-20",
+      "videoUnMutedIcon": "https://i.mscwlns.co/media/misc/icons/unmuted.png?tr=w-20",
+      "sliderConfig": {
+        "aspectRatio": 0.56,
+        "slidesToShow": 2,
+        "slidesToShowDesktop": 3,
+        "showPeek": true,
+        "peekVariant": "LARGE",
+        "showArrows": true,
+        "showDots": false
+      }
+    }
+  }
 }

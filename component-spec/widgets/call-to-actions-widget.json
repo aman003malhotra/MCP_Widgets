@@ -96,5 +96,50 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "CTA_BUTTON",
+    "id": "cta-button",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "GENEROUS"
+      },
+      "isSupportedOnlyForMobile": true
+    },
+    "widgetData": {
+      "isStickyFooter": true,
+      "items": [
+        {
+          "label": "Take Hair Test",
+          "variant": "PRIMARY",
+          "size": "LARGE",
+          "fullWidth": true,
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/checkout-v2"
+              }
+            }
+          ]
+        },
+        {
+          "label": "BUY NOW",
+          "variant": "SECONDARY",
+          "size": "LARGE",
+          "fullWidth": true,
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/checkout-v2"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

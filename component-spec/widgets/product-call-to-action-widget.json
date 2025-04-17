@@ -57,6 +57,46 @@
               "type": ["number", "null"],
               "description": "Discounted price of the product, if applicable"
             },
+            "currentlyViewing": {
+              "type": "object",
+              "description": "Information about current views of the product",
+              "properties": {
+                "currentlyViewingBase": {
+                  "type": "string",
+                  "description": "Base number of current viewers"
+                },
+                "noiseRange": {
+                  "type": "string",
+                  "description": "Range of noise to add to viewing count"
+                }
+              }
+            },
+            "preorder": {
+              "type": "object",
+              "description": "Preorder information for the product",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "description": "Whether the product is available for preorder"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label text for preorder button"
+                },
+                "subtitle": {
+                  "type": "string",
+                  "description": "Subtitle text for preorder information"
+                }
+              }
+            },
+            "headingLevel": {
+              "type": "number",
+              "description": "Heading level for the product name"
+            },
+            "subHeadingLevel": {
+              "type": "number",
+              "description": "Heading level for the product subtitle"
+            },
             "priceLabel": {
               "type": "string",
               "description": "Formatted price label for display"
@@ -81,6 +121,10 @@
               "type": "string",
               "description": "Number of units sold"
             },
+            "stampedId": {
+              "type": "string",
+              "description": "Identifier for Stamped.io reviews"
+            },
             "concern": {
               "type": "string",
               "description": "Health concern addressed by the product"
@@ -97,6 +141,20 @@
               "type": "string",
               "description": "Product category"
             },
+            "types": {
+              "type": "object",
+              "description": "Product type categorization",
+              "properties": {
+                "kits": {
+                  "type": "boolean",
+                  "description": "Whether the product is part of a kit"
+                },
+                "single": {
+                  "type": "boolean",
+                  "description": "Whether the product is a single item"
+                }
+              }
+            },
             "isRx": {
               "type": "boolean",
               "description": "Whether the product requires a prescription"
@@ -105,15 +163,114 @@
               "type": "string",
               "description": "URL slug for the product"
             },
+            "productUrl": {
+              "type": "string",
+              "description": "Full URL for the product page"
+            },
+            "allReviewsUrl": {
+              "type": "string",
+              "description": "URL for all product reviews"
+            },
+            "diagnosisConcern": {
+              "type": "string",
+              "description": "Diagnosis concern category"
+            },
+            "diagnosisStage": {
+              "type": "string",
+              "description": "Stage of diagnosis"
+            },
+            "diagnosisSeverity": {
+              "type": "string",
+              "description": "Severity of diagnosis"
+            },
             "outOfStock": {
               "type": "boolean",
               "description": "Whether the product is out of stock"
+            },
+            "isVirtual": {
+              "type": "boolean",
+              "description": "Whether the product is virtual"
+            },
+            "cashbackInfo": {
+              "type": ["object", "null"],
+              "description": "Information about cashback offers"
+            },
+            "availableDays": {
+              "type": ["string", "null"],
+              "description": "Number of days the product is available"
             }
           }
+        },
+        "sku": {
+          "type": "string",
+          "description": "Stock keeping unit identifier for the product"
         }
       },
-      "required": ["productInfo"]
+      "required": ["productInfo", "sku"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PRODUCT_CALL_TO_ACTION",
+    "id": "product-call-to-action",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true
+    },
+    "widgetData": {
+      "productInfo": {
+        "name": "Biotin Hair Gummies (30)",
+        "subtitle": "100% Vegan Hair Vitamins with No Added Sugar",
+        "rating": "4.5",
+        "sku": "MWBWHFP.0021.B0_N",
+        "recommendation": "97%",
+        "reviews": "1.1K",
+        "discountText": "",
+        "actualPrice": 499,
+        "discountedPrice": null,
+        "currentlyViewing": {
+          "currentlyViewingBase": "",
+          "noiseRange": ""
+        },
+        "preorder": {
+          "status": false,
+          "label": "Pre-order today",
+          "subtitle": "Get delivery after 27th August."
+        },
+        "headingLevel": 1,
+        "subHeadingLevel": 3,
+        "priceLabel": "₹499",
+        "discountedPriceLabel": null,
+        "urlKey": "hair-health-gummies",
+        "id": "19",
+        "reviewCount": "1.1K",
+        "unitsSold": "1K",
+        "stampedId": "hair-health-gummies",
+        "concern": "For androgenic alopecia (hair loss)",
+        "rxType": "Essential",
+        "productFor": "Stage 1 Hair Loss",
+        "category": "hair",
+        "types": {
+          "kits": false,
+          "single": true
+        },
+        "isRx": false,
+        "slugUrl": "/product/hair-health-gummies",
+        "productUrl": "https://stg.bebodywise.com/product/hair-health-gummies",
+        "allReviewsUrl": "/product/hair-health-gummies/all-reviews",
+        "diagnosisConcern": "Hairfall",
+        "diagnosisStage": "Grade 1",
+        "diagnosisSeverity": "",
+        "outOfStock": false,
+        "isVirtual": false,
+        "cashbackInfo": null,
+        "availableDays": null
+      },
+      "sku": "MWBWHFP.0021.B0_N"
+    }
+  }
 }

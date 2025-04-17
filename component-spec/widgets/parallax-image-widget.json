@@ -105,5 +105,70 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PARALLAX_IMAGE",
+    "id": "parallax-image",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true,
+      "borderRadius": "0px",
+      "background": "#13523B"
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+      "subtileType": "WHITE",
+      "labelType": "WHITE",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "tabName": "Hair Care",
+          "color": "#4CAF50",
+          "item1": {
+            "img": "https://i.mscwlns.co/media/misc/images/hair_care_1.jpg?tr=w-600",
+            "text": "Gentle Cleansing"
+          },
+          "item2": {
+            "img": "https://i.mscwlns.co/media/misc/images/hair_care_2.jpg?tr=w-600",
+            "text": "Deep Conditioning"
+          },
+          "item3": {
+            "img": "https://i.mscwlns.co/media/misc/images/hair_care_3.jpg?tr=w-600",
+            "text": "Scalp Treatment"
+          },
+          "item4": {
+            "img": "https://i.mscwlns.co/media/misc/images/hair_care_4.jpg?tr=w-600",
+            "text": "Hair Protection"
+          }
+        },
+        {
+          "tabName": "Skin Care",
+          "color": "#2196F3",
+          "item1": {
+            "img": "https://i.mscwlns.co/media/misc/images/skin_care_1.jpg?tr=w-600",
+            "text": "Cleansing"
+          },
+          "item2": {
+            "img": "https://i.mscwlns.co/media/misc/images/skin_care_2.jpg?tr=w-600",
+            "text": "Toning"
+          },
+          "item3": {
+            "img": "https://i.mscwlns.co/media/misc/images/skin_care_3.jpg?tr=w-600",
+            "text": "Moisturizing"
+          },
+          "item4": {
+            "img": "https://i.mscwlns.co/media/misc/images/skin_care_4.jpg?tr=w-600",
+            "text": "Sun Protection"
+          }
+        }
+      ]
+    }
+  }
 }

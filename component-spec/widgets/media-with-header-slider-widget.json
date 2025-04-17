@@ -107,5 +107,72 @@
       "required": ["items", "sliderConfig", "slidesUiType"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_HEADER_SLIDER",
+    "id": "media-with-header-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "GENEROUS"
+      }
+    },
+    "widgetData": {
+      "items": [
+        {
+          "header": "Transform Your Hair",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/hair_care_1.jpg?tr=w-600",
+            "altText": "Hair Care",
+            "loading": "lazy"
+          },
+          "topCalloutLabel": "NEW ARRIVAL",
+          "title": "Hair Growth Serum",
+          "subtitle": "With Natural Extracts",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/product/hair-growth-serum"
+              }
+            }
+          ]
+        },
+        {
+          "header": "Healthy Skin",
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/skin_care_1.jpg?tr=w-600",
+            "altText": "Skin Care",
+            "loading": "lazy"
+          },
+          "topCalloutLabel": "BESTSELLER",
+          "title": "Vitamin C Serum",
+          "subtitle": "For Glowing Skin",
+          "actions": [
+            {
+              "actionName": "SPA_LINK",
+              "params": {
+                "link": "/product/vitamin-c-serum"
+              }
+            }
+          ]
+        }
+      ],
+      "sliderConfig": {
+        "aspectRatio": 1.5,
+        "slidesToShow": 1,
+        "showPeek": true,
+        "peekVariant": "MEDIUM",
+        "showDots": true
+      },
+      "titleColor": "#333333",
+      "subtitleColor": "#666666",
+      "checkIcon": "https://i.mscwlns.co/media/misc/others/check_icon.png?tr=w-600",
+      "slidesUiType": "FLAT",
+      "cardBackground": "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)"
+    }
+  }
 }

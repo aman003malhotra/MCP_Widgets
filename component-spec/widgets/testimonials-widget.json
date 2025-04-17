@@ -124,5 +124,34 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "TESTIMONIALS",
+    "id": "testimonials",
+    "layout": {
+      "type": "FLUID",
+      "isSupportedOnlyForMobile": true
+    },
+    "widgetData": {
+      "sliderConfig": {
+        "aspectRatio": 1,
+        "slidesToShow": 1,
+        "showPeek": true,
+        "peekVariant": "LARGE"
+      },
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/others/B_A%20copy%203_28rybg.jpg?tr=w-1080,c-at_max",
+            "altText": "Example Image",
+            "loading": "lazy"
+          },
+          "pill": "Stage 1",
+          "testimonialBody": "I have been noticing hairfall on my pilliow and scalp. I have been using gummies for 90 days and there is a visible difference on my scalp and my hair fall has stopped almost completely. Kudos Man Matters",
+          "title": "Reduced Hair fall completely"
+        }
+      ]
+    }
+  }
 }

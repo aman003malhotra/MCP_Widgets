@@ -54,5 +54,24 @@
       ]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "OFFER_COUPON_CARD",
+    "id": "offer-coupon-card",
+    "layout": {
+      "type": "CONTAINED",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "widgetData": {
+      "offerText": "Get 30% OFF on your first order!",
+      "subText": "Valid on all products. Limited time offer.",
+      "couponCode": "WELCOME30",
+      "useCodeText": "Use Code:",
+      "buttonText": "COPY",
+      "copiedButtonText": "COPIED !"
+    }
+  }
 }

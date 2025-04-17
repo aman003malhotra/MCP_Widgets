@@ -307,5 +307,96 @@
       "required": ["productInfo", "subscriptionInfo"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "PRODUCT_SUBSCRIPTION",
+    "id": "product-subscription",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true
+    },
+    "widgetData": {
+      "productInfo": {
+        "name": "Biotin Hair Gummies (30)",
+        "subtitle": "100% Vegan Hair Vitamins with No Added Sugar",
+        "rating": "4.5",
+        "sku": "MWBWHFP.0021.B0_N",
+        "recommendation": "97%",
+        "reviews": "1.1K",
+        "discountText": "",
+        "actualPrice": 499,
+        "discountedPrice": null,
+        "currentlyViewing": {
+          "currentlyViewingBase": "",
+          "noiseRange": ""
+        },
+        "preorder": {
+          "status": false,
+          "label": "Pre-order today",
+          "subtitle": "Get delivery after 27th August."
+        },
+        "headingLevel": 1,
+        "subHeadingLevel": 3,
+        "priceLabel": "₹499",
+        "discountedPriceLabel": null,
+        "urlKey": "hair-health-gummies",
+        "id": "19",
+        "reviewCount": "1.1K",
+        "unitsSold": "1K",
+        "stampedId": "hair-health-gummies",
+        "concern": "For androgenic alopecia (hair loss)",
+        "rxType": "Essential",
+        "productFor": "Stage 1 Hair Loss",
+        "category": "hair",
+        "types": {
+          "kits": false,
+          "single": true
+        },
+        "isRx": false,
+        "slugUrl": "/product/hair-health-gummies",
+        "productUrl": "https://stg.bebodywise.com/product/hair-health-gummies",
+        "allReviewsUrl": "/product/hair-health-gummies/all-reviews",
+        "diagnosisConcern": "Hairfall",
+        "diagnosisStage": "Grade 1",
+        "diagnosisSeverity": "",
+        "outOfStock": false,
+        "isVirtual": false,
+        "cashbackInfo": null,
+        "availableDays": null
+      },
+      "subscriptionInfo": {
+        "title": "Subscribe and Save",
+        "options": {
+          "inputLabel": "Frequency",
+          "items": [
+            {
+              "text": "Delivery every 1 month",
+              "frequency": "STATIC_ID",
+              "discountLabel": "Save 10%",
+              "price": "$45.00"
+            },
+            {
+              "text": "Delivery every 2 month",
+              "frequency": "STATIC_ID_2",
+              "discountLabel": "Save 5%",
+              "price": "$47.50"
+            }
+          ]
+        },
+        "toolTip": {
+          "label": "Subscription details",
+          "content": {
+            "title": "How subscriptions work",
+            "textItems": [
+              "Products are automatically delivered on your schedule. No obligation, modify or cancel your subscription anytime. It is a minimum of 3 month cycle."
+            ]
+          }
+        }
+      }
+    }
+  }
 }

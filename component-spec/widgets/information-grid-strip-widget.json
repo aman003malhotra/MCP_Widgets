@@ -43,5 +43,37 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "INFORMATION_GRID_STRIP",
+    "id": "information-grid-strip",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "GENEROUS"
+      }
+    },
+    "widgetData": {
+      "category": "hair",
+      "items": [
+        {
+          "label": "Clinically Tested",
+          "value": "Proven Results"
+        },
+        {
+          "label": "Natural Ingredients",
+          "value": "Safe for Daily Use"
+        },
+        {
+          "label": "Doctor Recommended",
+          "value": "Expert Approved"
+        },
+        {
+          "label": "Customer Rating",
+          "value": "4.5/5 (2000+ Reviews)"
+        }
+      ]
+    }
+  }
 }

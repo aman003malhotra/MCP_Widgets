@@ -156,5 +156,137 @@
       "required": ["items"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "MEDIA_WITH_INFO_PANEL",
+    "id": "media-with-info-panel",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      },
+      "desktopFullWidth": true,
+      "borderRadius": "0px",
+      "background": "#13523B"
+    },
+    "header": {
+      "subtitle": "OUR SCIENCE",
+      "label": "From Experts We Trust",
+      "subtileType": "BLACK",
+      "labelType": "BLACK",
+      "textAlign": "center"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "tabName": "Hair Growth Serum",
+          "imageUrl": "https://i.mscwlns.co/media/misc/products/hair_serum_details.jpg?tr=w-600",
+          "content": {
+            "heading": {
+              "title": "Advanced Hair Growth Formula",
+              "info": "Clinically proven to reduce hair fall and promote new growth"
+            },
+            "details": [
+              {
+                "label": "Suitable For",
+                "info": "All Hair Types"
+              },
+              {
+                "label": "Key Benefits",
+                "info": "Reduces Hair Fall, Promotes Growth, Strengthens Follicles"
+              }
+            ],
+            "iconListContent": {
+              "title": "Key Ingredients",
+              "items": [
+                {
+                  "icon": "https://i.mscwlns.co/media/misc/icons/biotin.png?tr=w-30",
+                  "label": "Biotin"
+                },
+                {
+                  "icon": "https://i.mscwlns.co/media/misc/icons/redensyl.png?tr=w-30",
+                  "label": "Redensyl"
+                }
+              ]
+            },
+            "accordionContent": [
+              {
+                "data": {
+                  "title": "How It Works",
+                  "content": "The serum works by nourishing hair follicles and promoting healthy hair growth cycle.",
+                  "image": "https://i.mscwlns.co/media/misc/info/how_it_works.jpg?tr=w-300"
+                },
+                "iconVariant": "plus-minus",
+                "titleFontWeight": "bold",
+                "initiallyOpen": true
+              },
+              {
+                "data": {
+                  "title": "How to Use",
+                  "content": "Apply 2-3 drops directly to scalp and massage gently. Use twice daily for best results."
+                },
+                "iconVariant": "chevron",
+                "titleFontWeight": "bold",
+                "initiallyOpen": false
+              }
+            ]
+          }
+        },
+        {
+          "tabName": "Anti-Dandruff Shampoo",
+          "imageUrl": "https://i.mscwlns.co/media/misc/products/shampoo_details.jpg?tr=w-600",
+          "content": {
+            "heading": {
+              "title": "Advanced Anti-Dandruff Formula",
+              "info": "Effectively controls dandruff and soothes scalp"
+            },
+            "details": [
+              {
+                "label": "Suitable For",
+                "info": "All Scalp Types"
+              },
+              {
+                "label": "Key Benefits",
+                "info": "Controls Dandruff, Soothes Scalp, Prevents Recurrence"
+              }
+            ],
+            "iconListContent": {
+              "title": "Key Ingredients",
+              "items": [
+                {
+                  "icon": "https://i.mscwlns.co/media/misc/icons/zinc.png?tr=w-30",
+                  "label": "Zinc Pyrithione"
+                },
+                {
+                  "icon": "https://i.mscwlns.co/media/misc/icons/tea_tree.png?tr=w-30",
+                  "label": "Tea Tree Oil"
+                }
+              ]
+            },
+            "accordionContent": [
+              {
+                "data": {
+                  "title": "How It Works",
+                  "content": "The active ingredients work together to eliminate dandruff-causing fungi and soothe the scalp."
+                },
+                "iconVariant": "plus-minus",
+                "titleFontWeight": "bold",
+                "initiallyOpen": true
+              },
+              {
+                "data": {
+                  "title": "How to Use",
+                  "content": "Apply to wet hair, massage gently, and rinse thoroughly. Use 2-3 times per week."
+                },
+                "iconVariant": "chevron",
+                "titleFontWeight": "bold",
+                "initiallyOpen": false
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
 }

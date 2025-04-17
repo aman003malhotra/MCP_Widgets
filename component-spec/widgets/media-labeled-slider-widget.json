@@ -69,5 +69,59 @@
       "required": ["items", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "ICON_WITH_LABEL_SLIDER",
+    "id": "icon-with-label-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      },
+      "isSupportedOnlyForMobile": true
+    },
+    "header": {
+      "title": "Certification & awards"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/ingredients/biotin.jpg?tr=w-300",
+            "altText": "Biotin",
+            "loading": "lazy"
+          },
+          "label": "Biotin<br><small>Promotes Hair Growth</small>"
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/ingredients/redensyl.jpg?tr=w-300",
+            "altText": "Redensyl",
+            "loading": "lazy"
+          },
+          "label": "Redensyl<br><small>Reduces Hair Fall</small>"
+        },
+        {
+          "media": {
+            "mediaType": "image",
+            "source": "https://i.mscwlns.co/media/misc/ingredients/keratin.jpg?tr=w-300",
+            "altText": "Keratin",
+            "loading": "lazy"
+          },
+          "label": "Keratin<br><small>Strengthens Hair</small>"
+        }
+      ],
+      "sliderConfig": {
+        "slidesToShow": 2,
+        "slidesToShowDesktop": 4,
+        "aspectRatio": 1,
+        "showPeek": true,
+        "peekVariant": "medium",
+        "showArrows": true
+      }
+    }
+  }
 }

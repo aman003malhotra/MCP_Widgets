@@ -98,5 +98,66 @@
       "required": ["items", "variant", "sliderConfig"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "REELS_SLIDER",
+    "id": "reels-slider",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "NONE",
+        "bottom": "NONE"
+      }
+    },
+    "header": {
+      "subtitle": "OUR INFLUNCERS",
+      "label": "Influencing Our Voice"
+    },
+    "widgetData": {
+      "items": [
+        {
+          "media": {
+            "mediaType": "video",
+            "source": "https://i.mscwlns.co/media/misc/reels/hair_care_routine.mp4",
+            "altText": "Hair Care Routine Video",
+            "loading": "lazy"
+          },
+          "modalMedia": {
+            "mediaType": "video",
+            "source": "https://i.mscwlns.co/media/misc/reels/hair_care_routine_full.mp4",
+            "altText": "Full Hair Care Routine Video",
+            "loading": "lazy"
+          }
+        },
+        {
+          "media": {
+            "mediaType": "video",
+            "source": "https://i.mscwlns.co/media/misc/reels/skin_care_tips.mp4",
+            "altText": "Skin Care Tips Video",
+            "loading": "lazy"
+          }
+        }
+      ],
+      "variant": "3D",
+      "sliderConfig": {
+        "slidesToShow": 1.2,
+        "slidesToShowDesktop": 3,
+        "aspectRatio": 0.5625,
+        "peekVariant": "MEDIUM",
+        "showArrows": true,
+        "showDots": true
+      },
+      "bottomCta": {
+        "label": "View All Videos",
+        "actions": [
+          {
+            "actionName": "SPA_LINK",
+            "params": {
+              "link": "/videos"
+            }
+          }
+        ]
+      }
+    }
+  }
 }

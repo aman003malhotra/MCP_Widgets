@@ -70,5 +70,64 @@
       "required": ["tableHeader", "tableData", "icons"]
     }
   },
-  "required": ["widgetData"]
+  "required": ["widgetData"],
+  "exampleJson": {
+    "type": "COMPARISON_TABLE",
+    "id": "comparison-table",
+    "layout": {
+      "type": "FLUID",
+      "verticalSpacing": {
+        "top": "COMPACT",
+        "bottom": "COMPACT"
+      },
+      "isSupportedOnlyForMobile": true
+    },
+    "header": {
+      "title": "Healthy Hair? Just a Chew Away"
+    },
+    "widgetData": {
+      "tableHeader": {
+        "us": "Us",
+        "others": "Others"
+      },
+      "icons": {
+        "checkIcon": "https://i.mscwlns.co/mosaic-wellness/image/upload/v1623908014/Man%20Matters/Hair%20Gummies%20Sugar/9_1_1.png?tr=w-150,c-at_max",
+        "crossIcon": "https://i.mscwlns.co/mosaic-wellness/image/upload/v1598394816/Man%20Matters/ACV%20Gummies/10.png?tr=w-150,c-at_max"
+      },
+      "tableData": [
+        {
+          "us": "No Sugar Added",
+          "others": "Contains Sugar"
+        },
+        {
+          "us": "Vegan",
+          "others": "Non-veg ingredients"
+        },
+        {
+          "us": "GMO Free",
+          "others": "GMO"
+        },
+        {
+          "us": "Gluten Free",
+          "others": "Gluten"
+        },
+        {
+          "us": "Gelatin Free",
+          "others": "Gelatin"
+        },
+        {
+          "us": "No Artificial Colours",
+          "others": "Artificial Colours"
+        },
+        {
+          "us": "No Side Effects",
+          "others": "No Side Effects"
+        },
+        {
+          "us": "Lab Tested",
+          "others": "Not Lab tested"
+        }
+      ]
+    }
+  }
 }
