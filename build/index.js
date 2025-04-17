@@ -2,18 +2,24 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import * as fs from "fs";
 import * as path from "path";
-import express from "express";
-import cors from "cors";
+import { fileURLToPath } from 'url'; // Import necessary function for ES modules
 import { BASE_WIDGET_MAP_TYPES } from "./WidgetMap.js";
-// Define paths to component specs
-const COMPONENT_SPEC_DIR = path.resolve(process.cwd(), "component-spec");
+// --- Path Resolution Setup (using __dirname) ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Determine the package root directory relative to the compiled script file
+// Assumes the compiled output is in a 'build' directory at the project root
+const PACKAGE_ROOT = path.resolve(__dirname, '..');
+// Define paths relative to the package root
+const COMPONENT_SPEC_DIR = path.resolve(PACKAGE_ROOT, "component-spec");
 const ATOMIC_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "atomic-components.json");
 const MOLECULE_COMPONENTS_PATH = path.resolve(COMPONENT_SPEC_DIR, "molecule-components.json");
 const WIDGETS_DIR = path.resolve(COMPONENT_SPEC_DIR, "widgets");
+// Note: THEME_SPEC_PATH is defined later but uses COMPONENT_SPEC_DIR
 // Add new schema for widget configuration
 const MediaConfigSchema = z.object({
     mediaType: z.enum(['image', 'video']),
@@ -42,7 +48,7 @@ const SliderConfigSchema = z.object({
     showDots: z.boolean()
 });
 class PwaComponentMcpServer {
-    sseTransport = null;
+    stdioServerTransport = null;
     server;
     constructor() {
         this.server = new McpServer({
@@ -1369,7 +1375,7 @@ export interface ${widgetName.replace(/\s+/g, '')}Props extends BaseWidgetProps<
                 // Normalize widget type to uppercase with underscores
                 const normalizedType = widgetType.toUpperCase().replace(/-/g, '_');
                 // Check if the widget type already exists in WidgetMap.ts
-                const widgetMapPath = path.resolve(process.cwd(), "src", "WidgetMap.ts");
+                const widgetMapPath = path.resolve(PACKAGE_ROOT, "src", "WidgetMap.ts");
                 if (!fs.existsSync(widgetMapPath)) {
                     throw new Error("WidgetMap.ts file not found at " + widgetMapPath);
                 }
@@ -1723,31 +1729,8 @@ export interface ${widgetName.replace(/\s+/g, '')}Props extends BaseWidgetProps<
     }
     async connect(transport) {
         await this.server.connect(transport);
-        this.sseTransport = transport;
+        this.stdioServerTransport = transport;
         console.log("Server connected and ready to process requests");
-    }
-    async startHttpServer(port) {
-        const app = express();
-        app.use(cors());
-        // SSE endpoint
-        app.get("/sse", async (req, res) => {
-            console.log("New SSE connection established");
-            const transport = new SSEServerTransport("/messages", res);
-            await this.connect(transport);
-        });
-        // Message endpoint for handling client messages
-        app.post("/messages", async (req, res) => {
-            if (!this.sseTransport) {
-                res.sendStatus(400);
-                return;
-            }
-            await this.sseTransport.handlePostMessage(req, res);
-        });
-        app.listen(port, () => {
-            console.log(`HTTP server listening on port ${port}`);
-            console.log(`SSE endpoint available at http://localhost:${port}/sse`);
-            console.log(`Message endpoint available at http://localhost:${port}/messages`);
-        });
     }
 }
 // Helper function to generate TypeScript interface from a structure object
@@ -1839,9 +1822,16 @@ function readWidgetExampleJson(widgetName) {
     return null;
 }
 async function main() {
-    const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3002;
+    const transport = new StdioServerTransport();
     const server = new PwaComponentMcpServer();
-    await server.startHttpServer(port);
+    try {
+        await server.connect(transport);
+        console.error("Widget Config Generator MCP Server running and waiting for tool calls via stdin.");
+    }
+    catch (error) {
+        console.error("Failed to start server:", error);
+        process.exit(1);
+    }
 }
 main().catch((error) => {
     console.error("Fatal error in main():", error);
